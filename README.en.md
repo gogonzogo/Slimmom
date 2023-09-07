@@ -1,9 +1,3 @@
-testing the repo
-
-2nd test
-
-3rd test
-
 # React homework template
 
 This project was created with
