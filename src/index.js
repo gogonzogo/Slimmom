@@ -8,7 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     {/* delete basename for development but replace prior to your commit*/}
-    <BrowserRouter basename=''>
+    <BrowserRouter basename='Final-Team-Project/'>
       <App />
     </BrowserRouter>
   </React.StrictMode>
