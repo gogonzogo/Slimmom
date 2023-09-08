@@ -5,9 +5,8 @@ import { IconButton } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import SelfImprovementIcon from '@mui/icons-material/SelfImprovement';
 import Typography from '@mui/material/Typography';
-
+import Logo from './logo/Logo.jsx';
 // internal
 import useViewPort from 'hooks/useViewport';
 
@@ -22,15 +21,14 @@ const Header = () => {
                 <Toolbar>
                     {width > breakpoint
                         ? (
-                        <IconButton>
-                            <SelfImprovementIcon />
-                            <Typography>FitMom</Typography>
-                        </IconButton>
-                        )
-                        : (
-                        <IconButton>
-                            <SelfImprovementIcon />
-                        </IconButton>       
+                        <div>
+              <Logo /> 
+              <Typography>FitMom</Typography>
+            </div>
+          ) : (
+            <IconButton>
+              <Logo />
+            </IconButton>
                     )}
                 </Toolbar>  
             </AppBar>

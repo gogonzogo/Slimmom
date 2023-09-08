@@ -1,12 +1,17 @@
 import React from 'react';
-import LogoSVG from '../logo/logo.svg';
-
+import { ReactComponent as LogoSVG } from '../logo/logo.svg';
+import styles from './header.module.css';
 const Logo = () => {
   return (
-    <div>
-      <LogoSVG />
+    <div className={styles['logo-container']}>
+      <LogoSVG className={styles.logo} />
     </div>
   );
 };
 
 export default Logo;
+
+
+
+
+
