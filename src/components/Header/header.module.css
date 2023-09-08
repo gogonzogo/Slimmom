@@ -1,0 +1,19 @@
+.headerToolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logoTextContainer {
+    display: flex;
+    align-items: center;
+}
+
+.fitMomText {
+    margin-left: 10px;
+    /* Adjust the margin as needed */
+}
+
+.mlAuto {
+    margin-left: auto;
+}
