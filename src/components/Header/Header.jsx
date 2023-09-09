@@ -17,7 +17,7 @@ const Header = () => {
   const breakpoint = 320;
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ width: "100%" }}>
       <AppBar position="static">
         <Toolbar className={styles.headerToolbar}>
           {width > breakpoint ? (

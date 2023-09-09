@@ -43,6 +43,7 @@ const CaloriesCalc = () => {
     console.log(desiredWeight);
     console.log(bloodType);
     console.log(totalCalories);
+    < ModalContainer />
 
     handleOpen(); //open modal when data was set to redux
   };
