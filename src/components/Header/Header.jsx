@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import styles from './Header.module.css';
+import Logo from '../Logo/Logo'
 // internal
 import useViewPort from 'hooks/useViewport';
 import Navigation from '../Navigation/Navigation.jsx';
@@ -21,10 +22,12 @@ const Header = () => {
         <Toolbar className={styles.headerToolbar}>
           {width > breakpoint ? (
             <div className={styles.logoTextContainer}>
+              < Logo />
               <Typography className={styles.fitMomText}>FitMom</Typography>
             </div>
           ) : (
-            <IconButton>
+              <IconButton>
+                <Logo/>
             </IconButton>
           )}
 
