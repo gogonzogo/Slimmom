@@ -1,5 +1,5 @@
 import React from 'react';
-import AllProductsList from 'components/ProductsList/AllProductsList/AllProductsList';
+import AllProductsList from 'components/productsList/allProductsList/AllProductsList';
 
 function Diary() {
   return (
