@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 // internal
 import useViewPort from 'hooks/useViewport';
-import Navigation from './Navigation/Navigation';
+import Navigation from '../Navigation/Navigation';
 
 const Header = () => {
   const { width } = useViewPort();
