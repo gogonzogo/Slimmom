@@ -7,7 +7,8 @@ export default function ModalContainer(props) {
   // const handleOpen = () => setOpen(true);
   // const handleClose = () => setOpen(false);
 
-  const [modalState, setModalState] = useState({
+  // add setter function to state "setModalState" deleting to allow merge
+  const [modalState] = useState({
     totalCalories: 2800,
     foodNotToEat: ['asd', 'aassa', 'kdsd'],
   });
