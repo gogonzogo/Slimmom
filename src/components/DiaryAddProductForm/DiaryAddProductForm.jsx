@@ -36,14 +36,36 @@ export default function DiaryAddProduct({products, setProducts}) {
     <div className={css.section}>
             <form className={css.diaryform} onSubmit={handleSubmit}>
                 <div className={css.formdiv}>
-                <TextField id="standard-basic"
+                    <TextField
+                        sx={{fontFamily: "Verdana",
+       fontSize: '14px',
+       fontWeight: "700",
+       lineHeight: "17px",
+       letterSpacing: "0.04em",
+       textAlign: "left",
+       width: "240px",
+       paddingRight: "32px",
+
+       }}
+                        id="standard-basic"
                     label="Enter product name"
                     variant="standard"
                     value={productName}
                         onChange={handleProductNameChange} />
                 </div>
                   <div className={css.formdiv}>
-                <TextField id="standard-basic"
+                    <TextField
+                        sx={{fontFamily: "Verdana",
+       fontSize: '14px',
+       fontWeight: "700",
+       lineHeight: "17px",
+       letterSpacing: "0.04em",
+       textAlign: "left",
+       width: "240px",
+       paddingRight: "32px",
+
+       }}
+                        id="standard-basic"
                     label="Grams"
                     variant="standard"
                 value={grams}
