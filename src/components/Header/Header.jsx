@@ -31,7 +31,6 @@ const Header = () => {
             </IconButton>
           )}
 
-          {/* Navigation Component */}
           <div className={styles.mlAuto}>
             <Navigation />
           </div>
