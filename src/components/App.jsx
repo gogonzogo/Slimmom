@@ -15,6 +15,7 @@ const Login = lazy(() => import('pages/Login/Login'));
 
 export const App = () => {
   return (
+    <div className='app'>
     <ThemeProvider theme={lightTheme}>
       <Header />
       <Suspense fallback={<Loader />}>
@@ -29,5 +30,6 @@ export const App = () => {
         </Routes>
       </Suspense>
     </ThemeProvider>
-  );
+</div>
+      );
 };

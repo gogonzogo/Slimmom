@@ -40,7 +40,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         margin-top: 68px;
-
+margin-right: 32px;
     }
 
     .heading{
@@ -59,6 +59,7 @@
     .section{
         width: 608px;
         margin-top: 144px;
+        margin-left: 16px;
     }   
     .calcform{
         display: flex;
@@ -70,7 +71,7 @@
 
     .heading{
         font-size: 34px;
-        width: 704px;
+        width: 608px;
          
     }
 
