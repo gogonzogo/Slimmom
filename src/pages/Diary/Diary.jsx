@@ -1,12 +1,13 @@
 import React from 'react';
-import AllProductsList from '../../components/productsList/allProductsList/AllProductsList';
+import AllProductsList from '../../components/ProductsList/AllProductsList/AllProductsList';
 
 function Diary() {
   return (
-    <div>Diary
+    <div>
+      Diary
       <AllProductsList />
     </div>
-  )
+  );
 }
 
-export default Diary
+export default Diary;
