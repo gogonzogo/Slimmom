@@ -1,4 +1,4 @@
-import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
+import CaloriesCalc from 'components/caloriesCalc/caloriesCalc';
 import React from 'react'
 import {  Outlet } from 'react-router-dom';
 // import { lazy, Suspense } from 'react';

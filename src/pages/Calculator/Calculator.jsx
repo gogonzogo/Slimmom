@@ -1,13 +1,12 @@
 import React from 'react';
-import NotAllowedProducts from '../../components/ProductsList/NotAllowedProducts/NotAllowedProducts';
+import NotAllowedProducts from '../../components/productsList/notAllowedProducts/NotAllowedProducts';
 
 function Calculator() {
   return (
-    <div>
-      Calculator
+    <div>Calculator
       <NotAllowedProducts />
     </div>
-  );
+  )
 }
 
-export default Calculator;
+export default Calculator
