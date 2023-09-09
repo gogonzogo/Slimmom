@@ -19,10 +19,11 @@ export const App = () => {
       <Header />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path='/' element={<Home />}>
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          {/* needs to be wrapped around PublicRoute */}
+          <Route path="register" element={<Register />} />
+           {/* needs to be wrapped around PublicRoute  */}
+          <Route path="login" element={<Login />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/calculator" element={<Calculator />} />
           <Route path="*" element={<h1>404</h1>} />
