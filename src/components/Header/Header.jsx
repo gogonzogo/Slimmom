@@ -6,7 +6,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import Logo from '../Logo/Logo.jsx';
+import Logo from '../Logo/Logo.jsx';
 import styles from './Header.module.css';
 // internal
 import useViewPort from 'hooks/useViewport';
@@ -22,12 +22,12 @@ const Header = () => {
         <Toolbar className={styles.headerToolbar}>
           {width > breakpoint ? (
             <div className={styles.logoTextContainer}>
-              {/* <Logo className={styles.logo} /> */}
+              <Logo className={styles.logo} />
               <Typography className={styles.fitMomText}>FitMom</Typography>
             </div>
           ) : (
             <IconButton>
-              {/* <Logo className={styles.logo} /> */}
+              <Logo className={styles.logo} />
             </IconButton>
           )}
 
