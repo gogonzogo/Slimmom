@@ -22,12 +22,12 @@ const Header = () => {
         <Toolbar className={styles.headerToolbar}>
           {width > breakpoint ? (
             <div className={styles.logoTextContainer}>
-              < Logo />
+              < Logo className={styles.logo}/>
               <Typography className={styles.fitMomText}>FitMom</Typography>
             </div>
           ) : (
               <IconButton>
-                <Logo/>
+                <Logo className={styles.logo}/>
             </IconButton>
           )}
 
