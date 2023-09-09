@@ -1,8 +1,11 @@
 import React from 'react'
+import LoginForm from '../../components/LoginForm/LoginForm'
+
 
 function Login() {
   return (
-    <div>Login</div>
+    // imported my form here to see it get rendered 
+    <div><LoginForm /></div>
   )
 }
 
