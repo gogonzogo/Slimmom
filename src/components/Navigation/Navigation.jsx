@@ -6,10 +6,10 @@ function Navigation() {
   return (
     <div className={css.navContainer}>
       <NavLink to="/login" className={css.navLink} style={{marginRight: 14, fontSize: 14}}>
-        LOG IN
+        log in
       </NavLink>
       <NavLink to="/register" className={css.navLink}>
-        REGISTER
+        registration
       </NavLink>
     </div>
   );
