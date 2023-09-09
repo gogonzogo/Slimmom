@@ -1,6 +1,5 @@
 .headerToolbar {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -14,5 +13,5 @@
 }
 
 .mlAuto {
-    margin-left: auto;
+    margin-left: 20px;
 }
