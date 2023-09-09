@@ -1,11 +1,13 @@
 import React from 'react';
 import NotAllowedProducts from 'components/productsList/notAllowedProducts/NotAllowedProducts';
+import { Container } from '@mui/material';
 
 function Calculator() {
   return (
-    <div>Calculator
+    <Container>
+      Calculator
       <NotAllowedProducts />
-    </div>
+    </Container>
   )
 }
 
