@@ -16,6 +16,16 @@
     background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
 }
 
+.Calc-DairyBackground {
+
+    background-image: url(../images/desktop-diary-leaves.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 518px 846px;
+}
+
+
+
 @media (min-device-pixel-ratio: 2),
 (min-resolution: 192dpi),
 (min-resolution: 2dppx) {
@@ -28,7 +38,13 @@
             background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
         }
     }
+    .Calc-DairyBackground {
 
+    background-image: url(../images/desktop-diary-leaves.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 518px 846px;
+}
 }
 
 
@@ -42,9 +58,20 @@
         background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
     }
 
+.Calc-DairyBackground {
+
+    background-image: url(../images/tablet-dairy-leaves.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 518px 846px;
+}
+
+
     @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
+    
+    
         .mainBackground {
 
             background-image: url(../images/tablet-leaves@2x.png), url(../images/tablet-babana@2x.png), url(../images/tablet-strawberry@2x.png),
@@ -53,6 +80,16 @@
             background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
             background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
         }
+
+.Calc-DairyBackground {
+
+    background-image: url(../images/tablet-dairy-leaves@2x.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+    background-size: 518px 846px;
+}
+
+
     }
 
 }

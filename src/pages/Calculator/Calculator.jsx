@@ -3,7 +3,8 @@ import NotAllowedProducts from 'components/productsList/notAllowedProducts/NotAl
 
 function Calculator() {
   return (
-    <div>Calculator
+    <div div className=" background mainBackground">
+      Calculator
       <NotAllowedProducts />
     </div>
   )

@@ -3,7 +3,8 @@ import AllProductsList from 'components/productsList/allProductsList/AllProducts
 
 function Diary() {
   return (
-    <div>Diary
+    <div div className=" background Calc-DairyBackground">
+      Diary
       <AllProductsList />
     </div>
   )
