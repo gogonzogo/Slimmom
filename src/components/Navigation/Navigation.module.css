@@ -1,3 +1,18 @@
+
+.navContainer {
+  display: flex;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: flex-end;
+  /* Align links to the right */
+}
+
 .navLink {
   color: #9B9FAA;
+}
+
+.mlAuto {
+  margin-left: auto;
 }
