@@ -1,5 +1,5 @@
 import React from "react";
-import css from './CaloriesCalc.module.css'
+import css from './caloriesCalc.module.css'
 import { useState } from 'react';
 
 import Radio from '@mui/material/Radio';
