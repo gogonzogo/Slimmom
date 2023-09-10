@@ -3,7 +3,6 @@ import React from 'react'
 import {  Outlet } from 'react-router-dom';
 // import { lazy, Suspense } from 'react';
 // import Loader from 'components/Loader/Loader';
-import '../../backgroundStyle/background.css';
 // const Register = lazy(() => import('../Register/Register'));
 // const Login = lazy(() => import('../Login/Login'));
 
