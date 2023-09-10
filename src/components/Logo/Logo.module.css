@@ -8,11 +8,10 @@ display: flex;
   gap: 5px;
   margin-top: 40px;
   margin-left: -15px;
+  cursor: pointer;
 }
 
-.vector-container {
-  /* You can leave this empty or add any specific styles you need */
-}
+
 
 .svg-link {
   display: block;

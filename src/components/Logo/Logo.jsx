@@ -3,22 +3,23 @@ import { ReactComponent as LogoSVG } from '../Logo/slimmom.svg';
 import { ReactComponent as SlimSVG } from "../Logo/slim.svg";
 import { ReactComponent as MomSVG } from "../Logo/mom.svg";
 import styles from './Logo.module.css';
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+
 const Logo = ({ className }) => { 
   return (
     <div className={className || styles['logo-container']}>
       <div className={styles['vector-container']}>
-        <Link to='../../pages/Diary'>
+        <NavLink to='/Diary'>
           <LogoSVG className={styles.logo} />
-        </Link>
+        </NavLink>
       </div>
       <div className={styles['text-container']}>
-        <Link to='../../pages/Diary' className={styles['svg-link']}>
+        <NavLink to='/Diary' className={styles['svg-link']}>
           <SlimSVG className={styles.logo} />
-        </Link>
-        <Link to='../../pages/Diary' className={styles['svg-link']}>
+        </NavLink>
+        <NavLink to='/Diary' className={styles['svg-link']}>
           <MomSVG className={styles.logo} />
-        </Link>
+        </NavLink>
       </div>
     </div>
   );
