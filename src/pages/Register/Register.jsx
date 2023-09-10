@@ -1,8 +1,9 @@
+import { Container } from '@mui/material'
 import React from 'react'
 
 function Register() {
   return (
-    <div>Register</div>
+    <Container>Register</Container>
   )
 }
 

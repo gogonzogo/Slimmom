@@ -1,0 +1,118 @@
+.modalBox {
+  text-align: center;
+  color: #212121;
+  position: absolute;
+  padding: 40px 20px;
+  height: 100vh;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0px 22px 40px 0px rgba(0, 0, 0, 0.1);
+}
+.modalBox * {
+  width: 100%;
+}
+.closeButton {
+  display: none;
+  position: absolute;
+  width: auto;
+  height: 16px;
+  padding: 8px;
+  top: 2%;
+  right: 2%;
+  border-radius: 50%;
+  transition-duration: 200ms;
+}
+.closeButton:hover {
+  cursor: pointer;
+  background-color: #e7e7e7;
+}
+.backButtonMobbile {
+  height: 40px;
+  width: 100%;
+  background-color: #eff1f3;
+}
+.back {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  font-size: 16px;
+}
+.modalTitle {
+  margin-top: 0;
+  text-align: left;
+  font: 700 18px/25px Verdana;
+}
+.totalCaloriesNumber {
+  font: 700 48px/58px Verdana;
+}
+.totalCalories {
+  color: #264061;
+  margin: 20px 0;
+}
+.notEat {
+  padding: 0;
+  text-align: left;
+}
+.hr {
+  margin: 32px auto 12px;
+  width: calc(100%-40px);
+  color: #9b9faa;
+}
+.text2 {
+  font: 700 14px/17px;
+  text-align: none;
+}
+ol {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.notEatItem {
+  font: 400 14p/17px Verdana;
+  color: #9b9faa;
+}
+@media screen and (min-width: 480px) {
+  .closeButton {
+    display: block;
+  }
+  .backButtonMobbile {
+    display: none;
+  }
+  .modalBox {
+    height: auto;
+    min-width: 400px;
+    width: auto;
+    padding: 64px 48px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .modalTitle {
+    margin-top: auto;
+    font: 700 26px/36px Verdana;
+    text-align: center;
+  }
+  .notEat {
+    margin: auto;
+    max-width: 330px;
+  }
+  .totalCalories {
+    margin: 20px 0;
+    font: 700 48px/58px Verdana;
+  }
+}
+@media screen and (min-width: 768px) {
+  .closeButton {
+    height: 32px;
+    top: 4%;
+    right: 4%;
+    padding: 12px;
+    font-size: 22px;
+    border-radius: 50%;
+  }
+  .modalBox {
+    padding: 64px 82px;
+  }
+}
