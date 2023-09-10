@@ -3,7 +3,9 @@ import React from 'react'
 
 function Register() {
   return (
-    <Container>Register</Container>
+        <div className=" background mainBackground">
+      Register
+    </div>
   )
 }
 

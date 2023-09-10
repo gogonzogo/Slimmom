@@ -6,9 +6,9 @@ import { Container } from '@mui/material'
 function Login() {
   return (
     // imported my form here to see it get rendered 
-    <Container>
+    <div className=" background mainBackground">
       <LoginForm />
-    </Container>
+    </div>
   )
 }
 

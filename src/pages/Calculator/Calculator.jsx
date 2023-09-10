@@ -4,10 +4,10 @@ import { Container } from '@mui/material';
 
 function Calculator() {
   return (
-    <Container>
+    <div className=" background mainBackground">
       Calculator
       <NotAllowedProducts />
-    </Container>
+    </div>
   )
 }
 
