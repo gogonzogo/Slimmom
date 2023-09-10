@@ -1,5 +1,5 @@
 import React from 'react';
-// import AllProductsList from 'components/productsList/allProductsList/AllProductsList';
+import AllProductsList from 'components/ProductsList/AllProductsList/AllProductsList';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 
@@ -8,7 +8,7 @@ function Diary() {
     <div className="background Calc-DairyBackground">
       <DiaryCalendar />
       <DiaryAddProductForm />
-      {/* <AllProductsList /> */}
+      <AllProductsList />
     </div>
   )
 }
