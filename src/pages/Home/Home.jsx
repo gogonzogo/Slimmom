@@ -1,4 +1,4 @@
-// import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
+import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
 import React from 'react'
 import {  Outlet } from 'react-router-dom';
 // import { lazy, Suspense } from 'react';
@@ -10,7 +10,7 @@ function Home() {
   return (
     <div className=" background mainBackground">
       <p>Home</p>
-      {/* <CaloriesCalc /> */}
+      <CaloriesCalc />
       <Outlet />
       {/* <Suspense fallback={<Loader />}>
         <Routes>
