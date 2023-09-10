@@ -4,9 +4,9 @@ import { Container } from '@mui/material';
 
 function Diary() {
   return (
-    <Container>Diary
+    <div div className=" background Calc-DairyBackground">
       <AllProductsList />
-    </Container>
+    </div>
   )
 }
 
