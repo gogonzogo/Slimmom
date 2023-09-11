@@ -4,7 +4,7 @@ import css from './Navigation.module.css';
 
 function Navigation() {
   return (
-    <div className={css.navContainer}>
+    <div>
       <NavLink to="/login" className={css.navLink} style={{marginRight: 14, fontSize: 14}}>
         log in
       </NavLink>

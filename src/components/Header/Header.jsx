@@ -5,7 +5,6 @@ import { IconButton, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo'
 // internal
@@ -14,7 +13,7 @@ import Navigation from '../Navigation/Navigation.jsx';
 
 const Header = () => {
   const { width } = useViewPort();
-  const breakpoint = 320;
+  const breakpoint = 319;
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   return (
     <Box sx={{ width: "100%" }}>
@@ -24,23 +23,28 @@ const Header = () => {
           borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
 
         }}>
-        <Toolbar className={styles.headerToolbar}
-          sx={{justifyContent: isLargeScreen ? 'unset' : 'space-between'}}
+        <Toolbar disableGutters={true} className={styles.headerToolbar}
+          sx={{
+            justifyContent: isLargeScreen ? 'unset' : 'space-between',
+          }}
         >
           {width > breakpoint ? (
-            <div className={styles.logoTextContainer}>
+            <div>
               < Logo className={styles.logo}/>
-              <Typography className={styles.fitMomText}>FitMom</Typography>
             </div>
           ) : (
-              <IconButton>
+              <IconButton sx={{padding: 0,}}>
                 <Logo className={styles.logo}/>
             </IconButton>
           )}
 
-          <div className={styles.mlAuto}>
+          <Box sx={{
+            paddingLeft: isLargeScreen ? 3 : 0,
+            borderLeft: isLargeScreen ? '2px solid #E0E0E0' : 'none',
+            marginLeft: isLargeScreen ? 3 : 0,
+          }}>
             <Navigation />
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
