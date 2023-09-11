@@ -9,12 +9,34 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import ModalContainer from 'components/Modal/ModalContainer';
+import Modal from 'components/Modal/Modal';
 
 const CaloriesCalc = () => {
-  const [open, setOpen] = useState(false); //modal state and setters
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [modalState, setModalState] = useState({
+    open: false,
+    totalCalories: null,
+    foodNotToEat: [],
+  }); //modal state and setters
+
+  const handleOpen = totalCalories => {
+    setModalState({
+      open: true,
+      totalCalories: totalCalories,
+      foodNotToEat: ['give', 'me', 'food'], //  change me
+    });
+  };
+  const handleClose = () => {
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+    setTimeout(() => {
+      // fixing effect, when during closing modal you see 0 kcal recommended daily calorie intake
+      setModalState({ open: false, totalCalories: null, foodNotToEat: [] });
+    }, 250);
+  };
 
   const [stats, setStats] = useState({
     height: '',
@@ -44,7 +66,7 @@ const CaloriesCalc = () => {
     console.log(bloodType);
     console.log(totalCalories);
 
-    handleOpen(); //open modal when data was set to redux
+    handleOpen(totalCalories); // give me food
   };
 
   return (
@@ -259,7 +281,7 @@ const CaloriesCalc = () => {
           </Button>
         </form>
       </div>
-      <ModalContainer handleClose={handleClose} open={open} />
+      <Modal handleClose={handleClose} modalState={modalState} />
     </>
   );
 };

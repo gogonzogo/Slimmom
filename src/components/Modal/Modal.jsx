@@ -1,13 +1,18 @@
-import { Backdrop, Box, Fade, Modal as MaterialModal } from '@mui/material';
+import {
+  Backdrop,
+  Box,
+  Button,
+  Fade,
+  Modal as MaterialModal,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 import s from './modal.module.css';
 
 const Modal = props => {
-  console.log(props);
-
-  const { handleClose, open, modalState } = props;
+  const { handleClose, modalState } = props;
   return (
     <MaterialModal
-      open={open}
+      open={modalState.open}
       onClose={handleClose}
       closeAfterTransition
       slots={{ backdrop: Backdrop }}
@@ -18,7 +23,7 @@ const Modal = props => {
         },
       }}
     >
-      <Fade in={open}>
+      <Fade in={modalState.open}>
         <Box>
           <div className={s.backButtonMobbile}>
             <span className={s.back} onClick={handleClose}>
@@ -35,7 +40,7 @@ const Modal = props => {
             </p>
             <b className={s.totalCalories}>
               <span className={s.totalCaloriesNumber}>
-                {modalState.totalCalories}{' '}
+                {Math.round(modalState.totalCalories)}{' '}
               </span>
               kcal
             </b>
@@ -49,6 +54,11 @@ const Modal = props => {
                   </li>
                 ))}
               </ol>
+              <Link to="Login" className={s.buttonWrapper}>
+                <Button className={s.button} variant="contained">
+                  Start losing weight
+                </Button>
+              </Link>
             </div>
           </div>
         </Box>
