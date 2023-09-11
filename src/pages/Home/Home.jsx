@@ -9,7 +9,6 @@ import {  Outlet } from 'react-router-dom';
 function Home() {
   return (
     <div className=" background mainBackground">
-      <p>Home</p>
       <CaloriesCalc />
       <Outlet />
       {/* <Suspense fallback={<Loader />}>
