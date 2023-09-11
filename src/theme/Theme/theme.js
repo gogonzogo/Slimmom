@@ -50,6 +50,8 @@ const lightTheme = createTheme({
       main: '#ffffff',
       light: '#9b9faa',
       dark: '#FC842D',
+      hover: '#fffff',
+      checked: '#FC842D'
     },
     background: {
       default: '#e0e0e0',

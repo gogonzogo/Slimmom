@@ -15,6 +15,8 @@ const Header = () => {
   const { width } = useViewPort();
   const breakpoint = 319;
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
+  //const isSmallScreen = useMediaQuery('min-width: 320px')
+  
   return (
     <Box sx={{ width: "100%" }}>
       <AppBar position="static"
@@ -26,6 +28,8 @@ const Header = () => {
         <Toolbar disableGutters={true} className={styles.headerToolbar}
           sx={{
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
+            backgroundColor: 'var(--primary-background-color)',
+            padding: isLargeScreen ? '80px 20px 0 20px' : '20px',
           }}
         >
           {width > breakpoint ? (
