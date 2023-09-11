@@ -1,0 +1,48 @@
+.login_color {
+    color: #E0E0E0;
+}
+
+.login_button {
+    width: 182px;
+    padding: 1;
+    margin: 2;
+    height: 44px;
+    background-color: #FC842D;
+    border-radius: 30px;
+    color: #FFFFFF;
+    font-family: 'Verdana';
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.register_button {
+    width: 182px;
+    background-color: #FFFFFF;
+    height: 44px;
+    color: #FC842D;
+    border: solid #FC842D;
+    border-radius: 30px;
+    border-width: 2px;
+    font-family: 'Verdana';
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+
+.register_button {
+    width: 182px;
+
+}
+
+@media (max-width: 600px) {
+    .form_container {
+        padding: 20px;
+    }
+
+    .form_container form {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+}
