@@ -1,4 +1,18 @@
 @import-normalize; /* bring in normalize.css styles */
+:root {
+  --primary-background-color: #ffffff;
+  --secondary-background-color: #F0F1F3;
+  --accent-bright-color: #FC842D;
+  --accent-dark-color: #264061;
+
+  --primary-font-color: #9B9FAA;
+  --secondary-font-dark: #212121;
+  --secondary-font-light: #ffffff;
+
+  --font-weight-bold: 700;
+  --font-weight-light: 400;
+  --primary-font-size: 14px;
+}
 
 body {
   margin: 0;
@@ -52,7 +66,7 @@ a {
 .background {
   width: 100%;
   flex-grow: 1;
-  padding: 1rem;
+  padding: 0 1rem 1rem 1rem;
   overflow-y: auto;
 }
 
