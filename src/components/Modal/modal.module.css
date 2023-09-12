@@ -7,6 +7,7 @@
   width: 100%;
   background-color: #fff;
   box-shadow: 0px 22px 40px 0px rgba(0, 0, 0, 0.1);
+  overflow: scroll;
 }
 .modalBox * {
   width: 100%;
@@ -79,7 +80,6 @@ ol {
     display: none;
   }
   .modalBox {
-    height: auto;
     min-width: 400px;
     width: auto;
     padding: 64px 48px;
@@ -114,6 +114,7 @@ ol {
   }
   .modalBox {
     padding: 64px 82px;
+    min-width: 600px;
   }
 }
 .buttonWrapper {
