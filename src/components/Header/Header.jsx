@@ -39,14 +39,13 @@ const Header = () => {
           ) : (
               <IconButton sx={{padding: 0,}}>
                 <Logo className={styles.logo}/>
-            </IconButton>
+              </IconButton>
           )}
 
           <Box sx={{
-            paddingLeft: isLargeScreen ? 3 : 0,
-            borderLeft: isLargeScreen ? '2px solid #E0E0E0' : 'none',
-            marginLeft: isLargeScreen ? 3 : 0,
-          }}>
+             marginTop: isLargeScreen ? 4 : 0,
+          }}
+          >
             <Navigation />
           </Box>
         </Toolbar>
