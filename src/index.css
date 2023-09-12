@@ -1,11 +1,11 @@
 @import-normalize; /* bring in normalize.css styles */
 :root {
   --primary-background-color: #ffffff;
-  --secondary-background-color: #F0F1F3;
-  --accent-bright-color: #FC842D;
+  --secondary-background-color: #f0f1f3;
+  --accent-bright-color: #fc842d;
   --accent-dark-color: #264061;
 
-  --primary-font-color: #9B9FAA;
+  --primary-font-color: #9b9faa;
   --secondary-font-dark: #212121;
   --secondary-font-light: #ffffff;
 
@@ -66,7 +66,6 @@ a {
 .background {
   width: 100%;
   flex-grow: 1;
-  padding: 0 1rem 1rem 1rem;
   overflow-y: auto;
 }
 

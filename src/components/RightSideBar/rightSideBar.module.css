@@ -1,0 +1,30 @@
+.sideBarContainer {
+  grid-area: rightSideBar;
+  width: 100%;
+  padding: 20px;
+  background-color: #f0f1f3;
+}
+.statsTitle {
+  font: 700 14px Verdana;
+}
+.statsBox {
+  max-width: 300px;
+  font: 500 14px Verdana;
+  color: #9b9faa;
+  margin-top: 20px;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+}
+.statsBoxItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 1280px) {
+  .sideBarContainer {
+    height: 100%;
+  }
+}
