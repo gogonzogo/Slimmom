@@ -50,13 +50,17 @@
 }
 
 @media screen and (min-width: 1280px) {
+  .positionWrapper {
+    width: 100%;
+    display: grid;
+    place-items: center;
+  }
   .section {
-    width: 1600px;
+    width: 1280px;
     margin-top: 144px;
     margin-left: 16px;
     display: grid;
     grid-template-columns: 3fr 2fr;
-    place-items: center;
     grid-template-areas: 'calculator rightSideBar';
   }
 
