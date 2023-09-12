@@ -25,7 +25,11 @@ const AllProductsList = () => {
             size='small'
           options={uniqueTitle}
           sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params}
+            renderInput={(params) => <TextField sx={{
+       width: "240px",
+       paddingRight: "32px",
+
+       }}{...params}
             variant="standard"
             label="Enter product name*"
             placeholder="" />}
