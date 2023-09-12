@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import RegistrationForm from 'components/RegistrationForm/RegistrationForm';
 
 function Register() {
   return (
         <div className=" background mainBackground">
-      Register
+      <RegistrationForm></RegistrationForm>
     </div>
   )
 }
