@@ -46,3 +46,7 @@
         margin: 0 auto;
     }
 }
+.error-message {
+    color: red !important;
+    font-size: 12px !important;
+}
