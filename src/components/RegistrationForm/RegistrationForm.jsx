@@ -25,6 +25,8 @@ const RegistrationForm = () => {
   };
 
   const validationReqs = useSelector((state) => state.registration.validationReqs);
+  // bring text field validation state to form and use where needed
+  const isEmailValid = useSelector((state) => state.registration.isEmailValid);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -35,12 +37,14 @@ const RegistrationForm = () => {
   const [isFormValid, setIsFormValid] = useState(false);
 
   const checkFormValidity = () => {
-    const isNameValid = validationReqs.name.every((req) => req.met);
-    const isEmailValid = validationReqs.email.every((req) => req.met);
+    const isNameValid = validationReqs.name.every((req) => console.log(req));
+    // console.log(isNameValid)
+    // const isEmailValid = validationReqs.email.every((req) => req.met);
+    console.log(isEmailValid);
     const isPasswordValid = validationReqs.password.every((req) => req.met);
-
+    // console.log(isPasswordValid);
     setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
-    console.log('isFormValid:', isFormValid);
+    // console.log('isFormValid:', isFormValid);
   };
 
  // useEffect(() => {checkFormValidity();}, [validationReqs])// 
@@ -67,6 +71,7 @@ const RegistrationForm = () => {
     }
     setFocusedField(name);
     toggleValidationPopup(name, true);
+    checkFormValidity();
   };
 
   const handleSubmit = (e) => {
@@ -83,9 +88,9 @@ const RegistrationForm = () => {
     );
   };
 
-  console.log('formData:', formData);
-  console.log('validationReqs:', validationReqs); 
-  console.log('isFormValid:', isFormValid); 
+  // console.log('formData:', formData);
+  // console.log('validationReqs:', validationReqs); 
+  // console.log('isFormValid:', isFormValid); 
 
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
