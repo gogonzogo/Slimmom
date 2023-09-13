@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
