@@ -5,7 +5,7 @@ import CirclePlus from '../Button/CirclePlus';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
 import { fetchFoods, addFood } from 'redux/productStore/productStoreOperations';
-
+import ProductList from '../../components/DiaryList/DiaryList/DiaryList';
 import jsonData from '../ProductsList/data/products.json';
 
 
@@ -138,7 +138,7 @@ export default function DiaryAddProduct() {
                 <CirclePlus />
                 
             </form>
-         
+         <ProductList/>
         </div>
     );
 }

@@ -13,17 +13,17 @@ const initialState = {
 export const foodsSlice = createSlice({
   name: 'foods',
   initialState,
-  reducers: {
+   reducers: {
     filterFoods: (state, action) => {
       state.filter = action.payload;
     },
     clearFoods: (state) => {
       state.foods.items = [];
-    },
+     },
   },
   extraReducers: builder => {
     builder
-      .addCase(fetchFoods.pending, (state) => {
+      .addCase(fetchFoods.pending, state => {
         state.foods.isLoading = true;
       })
       .addCase(fetchFoods.fulfilled, (state, action) => {
@@ -37,10 +37,10 @@ export const foodsSlice = createSlice({
         state.foods.items = [];
         console.log('Server Error!');
       })
-      .addCase(addFood.pending, (state) => {
+      .addCase(addFood.pending, state => {
         state.foods.isLoading = true;
       })
-      .addCase(addFood.fulfilled, (state, action) => {
+      .addCase(addFood.fulfilled, state => {
         state.foods.isLoading = false;
         state.foods.error = null;
       })
