@@ -60,3 +60,9 @@
         display: none;
     }
 }
+
+/* text logo component*/
+
+.text-logo-container {
+    display: flex;
+}

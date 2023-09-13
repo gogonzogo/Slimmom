@@ -1,10 +1,9 @@
 // external
+import { useState } from 'react';
 //import { useDispatch } from 'react-redux';
 //import { useSelector } from 'react-redux';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import { IconButton, Toolbar } from '@mui/material';
-import { Box, Typography } from '@mui/material';
+import { AppBar, IconButton, Toolbar } from '@mui/material';
 
 //internal
 /* import { selectUser } from '../../redux/auth/authSelectors';
@@ -12,34 +11,50 @@ import { logOut } from '../../redux/auth/authOperations';
 import useViewPort from 'utils/hooks';*/
 
 import Navigation from 'components/Navigation/Navigation';
+import { TextLogo } from 'components/Logo/Logo';
 import s from './UserInfo.module.css'
 
+
 const UserInfo = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleNavbar = () => {
+      setIsOpen(!isOpen);
+    };
     /*const dispatch = useDispatch();
     const userName = useSelector(selectUser);
      const { width } = useViewPort();
      const breakpoint = 767; */
     return (
-        <Box>
-            <Toolbar>
-                <IconButton>
-                    <CompareArrowsIcon/>
-                </IconButton>
-                <div className={s.links}>
-                    <Navigation/>
+        <AppBar position="static"
+            sx={{boxShadow: 'none',}}
+        >
+            <Toolbar disableGutters={true}
+                sx={{
+                    padding: '0',
+                }}
+            >
+            {!isOpen &&
+                <div className={s.leftContent}>
+                    <TextLogo />
+                </div>}
+                <div className={s.rightContent}>
+                    <IconButton
+                        className={s.arrowButton}
+                        onClick={toggleNavbar}
+                        sx={{
+                        padding: '0',
+                    }}
+                    >
+                       <CompareArrowsIcon/>
+                    </IconButton>
+                </div>
+                <div>
+                    <div>
+                    {isOpen && <Navigation />} 
+                    </div>
                 </div>
             </Toolbar>
-            <Toolbar>
-            <Typography>UserName
-                {/* {userName} */}
-            </Typography>
-            <IconButton
-                // onClick={() => dispatch(logOut())}
-                // aria-label="logout"
-            >
-                <LogoutRoundedIcon/>
-            </IconButton></Toolbar>
-        </Box>
+        </AppBar>   
     )
 };
 
