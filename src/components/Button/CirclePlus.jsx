@@ -1,7 +1,7 @@
 import css from './CirclePlus.module.css';
 
-export default function CirclePlus({ buttonClick }) {
+export default function CirclePlus() {
     return (
-        <button className={css.CirclePlus} type="button" onClick={buttonClick}> + </button>
+        <button className={css.CirclePlus} type="submit" > + </button>
     );
 }
