@@ -1,43 +1,27 @@
-import css from './ValidationPopup.module.css';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
+import React from 'react';
+import { Paper, List, ListItem, ListItemText } from '@mui/material';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import { Paper } from '@mui/material';
+import css from './ValidationPopup.module.css';
 
-const ValidationPopup = ({ validationData }) => {
-
+const ValidationPopup = ({ validationData, visible }) => {
   return (
     <Paper elevation={8} className={css.validationPopup}>
-      <List
-        className={css.validationPopupList}
-        sx={{ width: '100%', maxWidth: 360 }}
-      >
-        {validationData.map((item, index) => {
-          const reqKey = Object.keys(item)[0];
-          const { id, message, met } = item[reqKey];
-          const IconComponent = met ? CheckCircleOutlineIcon : ErrorOutlineIcon;
-          const iconColor = met ? 'green' : 'red';
-
-          return (
-            <ListItem
-              className={css.validationPopupItem}
-              key={id}
-              disableGutters
-            >
-              <IconComponent
-                className={css.validationPopupIcon}
-                style={{ color: iconColor }}
-              />
-              <ListItemText
-                disableTypography
-                primary={message}
-                sx={{ fontSize: '12px' }}
-              />
-            </ListItem>
-          );
-        })}
+      <List className={css.validationPopupList} sx={{ width: '100%', maxWidth: 360 }}>
+        {visible && validationData
+          ? validationData.map((item, index) => {
+              const reqKey = Object.keys(item)[0];
+              const { id, message, met } = item[reqKey];
+              const IconComponent = met ? CheckCircleOutlineIcon : ErrorOutlineIcon;
+              const iconColor = met ? 'green' : 'red';
+              return (
+                <ListItem className={css.validationPopupItem} key={id} disableGutters>
+                  <IconComponent className={css.validationPopupIcon} style={{ color: iconColor }} />
+                  <ListItemText disableTypography primary={message} sx={{ fontSize: '12px' }} />
+                </ListItem>
+              );
+            })
+          : null}
       </List>
     </Paper>
   );

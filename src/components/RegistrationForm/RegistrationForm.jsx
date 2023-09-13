@@ -1,22 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  updateFormData,
-} from '../../redux/validation/validationSlice'; // Import Redux actions
+  validateEmail,
+  validateName,
+  validatePassword,
+} from '../../redux/validation/registrationSlice';
 
-import {
-  getValidationReqs,
-} from '../../redux/validation/validationSelectors'; // Import Redux selectors
- // Import Redux actions and selectors
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
+  const [validationPopups, setValidationPopups] = useState({
+    name: false,
+    email: false,
+    password: false,
+  });
+  const [focusedField, setFocusedField] = useState(null);
 
-  const validationReqs = useSelector(getValidationReqs);
+  const toggleValidationPopup = (fieldName, visible) => {
+    setValidationPopups({ ...validationPopups, [fieldName]: visible });
+  };
+
+  const validationReqs = useSelector((state) => state.registration.validationReqs);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -24,74 +32,66 @@ const RegistrationForm = () => {
     password: '',
   });
 
-  const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const checkFormValidity = () => {
+    const isNameValid = validationReqs.name.every((req) => req.met);
+    const isEmailValid = validationReqs.email.every((req) => req.met);
+    const isPasswordValid = validationReqs.password.every((req) => req.met);
+
+    setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
+    console.log('isFormValid:', isFormValid);
+  };
+
+  useEffect(() => {
+    checkFormValidity();
+  }, [validationReqs]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    dispatch(updateFormData({ [name]: value })); // Dispatch the action to update Redux store
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
+    switch (name) {
+      case 'name':
+        dispatch(validateName({ fieldValue: value }));
+        break;
+      case 'email':
+        dispatch(validateEmail({ fieldValue: value }));
+        break;
+      case 'password':
+        dispatch(validatePassword({ fieldValue: value }));
+        break;
+      default:
+        break;
+    }
+    setFocusedField(name);
+    toggleValidationPopup(name, true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    let hasErrors = false;
-    const newErrors = { ...errors };
-
-    // Validate form fields based on Redux validation requirements
-    // Example validation based on validationReqs - modify this based on your actual validation requirements
-    if (validationReqs.name.some((req) => !req.met)) {
-      newErrors.name = 'Name validation failed';
-      hasErrors = true;
-    } else {
-      newErrors.name = '';
-    }
-
-    if (validationReqs.email.some((req) => !req.met)) {
-      newErrors.email = 'Email validation failed';
-      hasErrors = true;
-    } else {
-      newErrors.email = '';
-    }
-
-    if (validationReqs.password.some((req) => !req.met)) {
-      newErrors.password = 'Password validation failed';
-      hasErrors = true;
-    } else {
-      newErrors.password = '';
-    }
-
-    setErrors(newErrors);
-
-    if (!hasErrors) {
-      // Validation passed; perform actions with the form data here
-      // For example, send it to a server for registration
-
-      setFormData({ name: '', email: '', password: '' });
-
-      // Show a success message
-      // toast.success('Registration successful!');
-    }
+    checkFormValidity();
   };
 
   const renderValidationPopup = () => {
-    return <ValidationPopup validationData={validationReqs.name} />;
-  };
-  const areAllValidationFieldsValid = () => {
     return (
-      validationReqs.name.every((req) => req.meet) &&
-      validationReqs.email.every((req) => req.meet) &&
-      validationReqs.password.every((req) => req.meet)
-    )
+      <ValidationPopup
+        validationData={validationReqs[focusedField]}
+        visible={!!focusedField}
+      />
+    );
   };
+
+  console.log('formData:', formData);
+  console.log('validationReqs:', validationReqs); 
+  console.log('isFormValid:', isFormValid); 
+
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
       <Grid align="center">
-        {/* registration form */}
         <h2
           style={{
             color: '#FC842D',
@@ -114,8 +114,9 @@ const RegistrationForm = () => {
               margin="normal"
               value={formData.name}
               onChange={handleChange}
-              error={!!errors.name}
-              helperText={errors.name ? errors.name : ''}
+              onFocus={() => setFocusedField('name')}
+              onBlur={() => setFocusedField(null)}
+              error={!!formData.name && validationReqs.name.some((req) => !req.met)}
             />
 
             <TextField
@@ -127,8 +128,9 @@ const RegistrationForm = () => {
               margin="normal"
               value={formData.email}
               onChange={handleChange}
-              error={!!errors.email}
-              helperText={errors.email ? errors.email : ''}
+              onFocus={() => setFocusedField('email')}
+              onBlur={() => setFocusedField(null)}
+              error={!!formData.email && validationReqs.email.some((req) => !req.met)}
             />
 
             <TextField
@@ -140,16 +142,16 @@ const RegistrationForm = () => {
               margin="normal"
               value={formData.password}
               onChange={handleChange}
-              error={!!errors.password}
-              helperText={errors.password ? errors.password : ''}
+              onFocus={() => setFocusedField('password')}
+              onBlur={() => setFocusedField(null)}
+              error={!!formData.password && validationReqs.password.some((req) => !req.met)}
             />
-
             <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
               <Button
                 variant="contained"
                 type="submit"
                 className={style.register_button}
-                disabled={!areAllValidationFieldsValid()}
+                disabled={!isFormValid}
               >
                 Register
               </Button>
@@ -157,8 +159,7 @@ const RegistrationForm = () => {
           </form>
         </FormControl>
 
-        {/* Render ValidationPopup component */}
-        {renderValidationPopup()}
+        {renderValidationPopup()} 
 
         <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
           <Link to="/Login">
