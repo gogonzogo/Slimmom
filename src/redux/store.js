@@ -1,13 +1,11 @@
+// store.js
+
 import { configureStore } from '@reduxjs/toolkit';
-import { foodsReducer } from './productStore/productStoreSlice';
-import { validationReducer } from './validation/validationSlice';
-import { authReducer } from './auth/authSlice';
+import registrationReducer from '../redux/validation/registrationSlice';
 
 const store = configureStore({
   reducer: {
-    auth: authReducer,
-    foods: foodsReducer,
-    validation: validationReducer,
+    registration: registrationReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

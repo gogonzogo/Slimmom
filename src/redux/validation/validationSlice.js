@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   validationReqs: {
     name: [
-      { req1: { id: 1, message: 'Between 7-20 alphanumeric characters', met: false } },
+      { req1: { id: 1, message: 'Between 3-20 alphanumeric characters', met: false } },
       { req2: { id: 2, message: 'No special characters', met: true } },
     ],
     password: [
@@ -28,35 +28,19 @@ export const validationSlice = createSlice({
   name: 'validation',
   initialState,
   reducers: {
-    updateFormData: (state, action) => {
-      const formField = Object.keys(action.payload)[0];
-      const fieldValue = Object.values(action.payload)[0];
-
-      state.formData = {
-        ...state.formData,
-        [formField]: fieldValue,
-      };
-    },
-    clearFormData: (state, action) => {
-      state.formData = {
-        name: '',
-        password: '',
-        email: '',
-      }
-    },
     updateValidationReqs: (state, action) => {
       const formField = Object.keys(action.payload)[0];
       const fieldValue = Object.values(action.payload)[0];
 
       switch (formField) {
         case 'name':
-          state.validationReqs.name.forEach(item => {
+          state.validationReqs.name.forEach((item) => {
             const reqKey = Object.keys(item)[0];
             const req = item[reqKey];
 
             switch (reqKey) {
               case 'req1':
-                req.met = fieldValue.length >= 7 && fieldValue.length <= 20;
+                req.met = fieldValue.trim().length >= 3 && fieldValue.trim().length <= 20;
                 break;
               case 'req2':
                 req.met = !/[^\w\s]/.test(fieldValue);
@@ -64,11 +48,12 @@ export const validationSlice = createSlice({
               default:
                 break;
             }
+            console.log(`Name requirement ${reqKey} met: ${req.met}`);
           });
           break;
 
         case 'password':
-          state.validationReqs.password.forEach(item => {
+          state.validationReqs.password.forEach((item) => {
             const reqKey = Object.keys(item)[0];
             const req = item[reqKey];
 
@@ -83,22 +68,24 @@ export const validationSlice = createSlice({
                 req.met = /\d/.test(fieldValue);
                 break;
               case 'req4':
-                req.met = /[^A-Za-z0-9]/.test(fieldValue);
+                req.met = fieldValue.trim() !== '' && !/\s/.test(fieldValue);
                 break;
               case 'req5':
-                req.met = !/\s/.test(fieldValue);
+                req.met = !/\s/.test(fieldValue); // Disallow spaces
                 break;
               default:
                 break;
             }
+            console.log(`Password requirement ${reqKey} met: ${req.met}`);
           });
           break;
 
         case 'email':
-          state.validationReqs.email.forEach(item => {
+          state.validationReqs.email.forEach((item) => {
             const reqKey = Object.keys(item)[0];
             const req = item[reqKey];
             req.met = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue);
+            console.log(`Email requirement ${reqKey} met: ${req.met}`);
           });
           break;
         default:

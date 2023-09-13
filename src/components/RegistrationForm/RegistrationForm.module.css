@@ -37,9 +37,9 @@
 }
 
 @media (max-width: 600px) {
-        .form_container {
-                padding: 0 20px;
-            }
+    .form_container {
+        padding: 0 20px;
+    }
 
 
     .form_container form {
@@ -47,6 +47,7 @@
         margin: 0 auto;
     }
 }
+
 .error-message {
     color: red !important;
     font-size: 12px !important;
