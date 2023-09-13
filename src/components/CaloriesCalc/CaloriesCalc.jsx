@@ -10,13 +10,8 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Modal from 'components/Modal/Modal';
-import RightSideBar from 'components/RightSideBar/RightSideBar';
-import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 
 const CaloriesCalc = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
   const [modalState, setModalState] = useState({
     open: false,
     totalCalories: null,
@@ -289,7 +284,6 @@ const CaloriesCalc = () => {
               </Button>
             </form>
           </div>
-          {isLoggedIn && <RightSideBar />}
         </div>
       </div>
 
