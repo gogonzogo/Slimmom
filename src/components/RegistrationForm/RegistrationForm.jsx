@@ -5,15 +5,10 @@ import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   updateFormData,
-  clearValidationReqs,
 } from '../../redux/validation/validationSlice'; // Import Redux actions
 
 import {
   getValidationReqs,
-  getFormData,
-  getFormDataName,
-  getFormDataPassword,
-  getFormDataEmail,
 } from '../../redux/validation/validationSelectors'; // Import Redux selectors
  // Import Redux actions and selectors
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
