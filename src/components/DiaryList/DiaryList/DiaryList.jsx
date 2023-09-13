@@ -10,7 +10,7 @@ import List from '@mui/material/List';
 
 
 
-function ProductList({ handleDelete }) {
+function ProductList() {
   const products = useSelector(getfoods);
   const dispatch = useDispatch();
   
