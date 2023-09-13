@@ -2,15 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import style from '../LoginForm/login.module.css';
 
-import {
-  Box,
-  FormControl,
-  TextField,
-  Button,
-  Grid
-} from '@mui/material';
-
-
+import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -24,13 +16,15 @@ const LoginForm = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }} className={style.form_container}>
-      <Grid align="center">
+    <Box className={style.form_container}>
+      <h2 className={style.form_title}>LOG IN</h2>
+      <Grid className={style.form_grid}>
         {/* login form */}
-        <h2 style={{ color: '#FC842D', margin: '40px', fontFamily: 'Verdana', fontSize: '14px', fontWeight: '700'}}>LOG IN</h2>
+
         <FormControl variant="standard">
           <form>
             <TextField
+              className={style.email_input}
               variant="standard"
               label="Email"
               type="email"
@@ -42,6 +36,7 @@ const LoginForm = () => {
               onChange={handleChange}
             />
             <TextField
+              className={style.password_input}
               variant="standard"
               label="Password"
               type="password"
@@ -53,13 +48,12 @@ const LoginForm = () => {
               onChange={handleChange}
             />
 
-            <Box sx={{ marginTop: '60px', paddingBottom: '20px' }}>
+            <Box className={style.button_container}>
               <Button variant="contained" className={style.login_button}>
                 Log In
               </Button>
-            </Box>
-            <Box>
-              <Button variant="contained" className={style.register_button} >
+            
+              <Button variant="contained" className={style.register_button}>
                 Register
               </Button>
             </Box>
