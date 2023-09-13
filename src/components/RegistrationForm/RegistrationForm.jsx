@@ -43,9 +43,7 @@ const RegistrationForm = () => {
     console.log('isFormValid:', isFormValid);
   };
 
-  useEffect(() => {
-    checkFormValidity();
-  }, [validationReqs]);
+ // useEffect(() => {checkFormValidity();}, [validationReqs])// 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
