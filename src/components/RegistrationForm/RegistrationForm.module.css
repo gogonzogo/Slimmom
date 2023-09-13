@@ -37,9 +37,10 @@
 }
 
 @media (max-width: 600px) {
-    .form_container {
-        padding: 20px;
-    }
+        .form_container {
+                padding: 0 20px;
+            }
+
 
     .form_container form {
         max-width: 300px;
