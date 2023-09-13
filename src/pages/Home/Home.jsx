@@ -1,6 +1,7 @@
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
-import React from 'react'
-import {  Outlet } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+
 // import { lazy, Suspense } from 'react';
 // import Loader from 'components/Loader/Loader';
 // const Register = lazy(() => import('../Register/Register'));
@@ -21,4 +22,4 @@ function Home() {
   );
 }
 
-export default Home
+export default Home;

@@ -4,7 +4,7 @@
   padding: 20px;
   background-color: #f0f1f3;
 }
-.statsTitle {
+.sideBarTitle {
   font: 700 14px Verdana;
 }
 .statsBox {
@@ -22,9 +22,22 @@
   margin-bottom: 12px;
 }
 @media screen and (min-width: 768px) {
+  .sideBarContainer {
+    position: fixed;
+    bottom: 0;
+  }
 }
 @media screen and (min-width: 1280px) {
   .sideBarContainer {
-    height: 100%;
+    padding-left: 94px;
+    position: absolute;
+    left: 60%;
+    top: 0%;
+    width: 40%;
+    height: 100vh;
+  }
+  .sideBarContent {
+    position: relative;
+    top: 280px;
   }
 }
