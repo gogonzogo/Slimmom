@@ -19,6 +19,10 @@ const registrationSlice = createSlice({
         { req1: { id: 1, message: 'Valid email address', met: false } },
       ],
     },
+    // add text field check to state
+    isEmailValid: false,
+    isNameValid: false,
+    isPaswswordValid: false,
   },
   reducers: {
     // Action reducers for validation
@@ -26,6 +30,9 @@ const registrationSlice = createSlice({
       const { fieldValue } = action.payload;
       const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue);
       state.validationReqs.email[0].req1.met = isEmailValid;
+      // set text field validation in state
+      state.isEmailValid = isEmailValid;
+      console.log(state.isEmailValid);
     },
 
     validateName: (state, action) => {
