@@ -13,7 +13,7 @@ const Logo = ({ className }) => {
     <div className={className || styles['logo-container']}>
       <div className={styles['vector-container']}>
         <NavLink to='/Diary'>
-          <LogoSVG className={styles.logo} />
+          <LogoSVG className={styles.logo} width="100" height="100" alt="A waistline with a green measuring tape"/>
         </NavLink>
       </div>
       <Box sx={{
