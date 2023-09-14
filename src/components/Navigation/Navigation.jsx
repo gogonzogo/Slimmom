@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 import css from './Navigation.module.css';
 //import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
 
-function Navigation({className}) {
+function Navigation() {
   //const loggedIn = useSelector(selectIsLoggedIn);
   return (
   <>
     {/* {loggedIn
       ?
-      <div className={`${css.navContainer} ${className}`}>
+      <div className={css.navContainer}>
         <NavLink to="/diary" className={css.navLink}>
           diary
          </NavLink>
@@ -20,7 +20,7 @@ function Navigation({className}) {
         </NavLink>
       </div>
       : */}
-      <div className={`${css.navContainer} ${className}`}>
+      <div className={css.navContainer}>
           <NavLink to="/login" className={css.navLink}>
             log in
           </NavLink>
