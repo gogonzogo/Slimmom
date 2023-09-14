@@ -1,7 +1,6 @@
 .section {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   margin-top: 32px;
 }
 .calcWrapper {
@@ -30,6 +29,9 @@
 }
 
 @media screen and (min-width: 768px) {
+  .positionWrapper {
+    flex-grow: 1;
+  }
   .section {
     margin-top: 100px;
   }
@@ -52,6 +54,7 @@
 
 @media screen and (min-width: 1280px) {
   .positionWrapper {
+    flex-grow: 0;
     width: 100%;
     display: grid;
     place-items: center;
