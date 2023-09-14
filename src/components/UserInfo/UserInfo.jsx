@@ -1,61 +1,65 @@
-// external
 import { useState } from 'react';
-//import { useDispatch } from 'react-redux';
-//import { useSelector } from 'react-redux';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { AppBar, IconButton, Toolbar } from '@mui/material';
-
-//internal
-/* import { selectUser } from '../../redux/auth/authSelectors';
-import { logOut } from '../../redux/auth/authOperations';
-import useViewPort from 'utils/hooks';*/
-
 import Navigation from 'components/Navigation/Navigation';
-import { TextLogo } from 'components/Logo/Logo';
-import s from './UserInfo.module.css'
+import useViewPort from '../../hooks/useViewport';
 
+import s from './UserInfo.module.css';
+import TextLogo from 'components/Logo/TextLogo';
+import ImageLogo from 'components/Logo/ImageLogo';
+import Logo from 'components/Logo/Logo';
 
 const UserInfo = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleNavbar = () => {
-      setIsOpen(!isOpen);
-    };
-    /*const dispatch = useDispatch();
-    const userName = useSelector(selectUser);
-     const { width } = useViewPort();
-     const breakpoint = 767; */
-    return (
-        <AppBar position="static"
-            sx={{boxShadow: 'none',}}
-        >
-            <Toolbar disableGutters={true}
-                sx={{
-                    padding: '0',
-                }}
-            >
-            {!isOpen &&
-                <div className={s.leftContent}>
-                    <TextLogo />
-                </div>}
-                <div className={s.rightContent}>
-                    <IconButton
-                        className={s.arrowButton}
-                        onClick={toggleNavbar}
-                        sx={{
-                        padding: '0',
-                    }}
-                    >
-                       <CompareArrowsIcon/>
-                    </IconButton>
+  const [isOpen, setIsOpen] = useState(false);
+  const [showTextLogo, setShowTextLogo] = useState(true); // Initially show TextLogo
+  const [showNavigation, setShowNavigation] = useState(false);
+    
+  const { width } = useViewPort();
+    const breakpoint = 321;
+  const isSmallScreen = width < breakpoint;
+
+  const toggleNavbar = () => {
+    setIsOpen(!isOpen);
+    setShowTextLogo(!isOpen);
+    setShowNavigation(isOpen);
+  };
+
+  return (
+    <AppBar position="static" sx={{ boxShadow: 'none' }}>
+      <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative' }}>
+        <div>
+          {isSmallScreen ? (
+            <>
+              {/* Initially, both ImageLogo and TextLogo */}
+            <div className={s.smallScreenIcons}>
+                <div className={s.logoContainer}>
+                    <ImageLogo />
+                    <TextLogo className={`${showTextLogo ? s.showTextLogo : s.hideTextLogo} ${s.textLogo}`} />
                 </div>
-                <div>
-                    <div>
-                    {isOpen && <Navigation />} 
-                    </div>
-                </div>
-            </Toolbar>
-        </AppBar>   
-    )
+            </div>
+            </>
+          ) : (
+            <div className={`${s.largeScreenContent}`}>
+              <Logo />
+              <Navigation className={s.Navigation} />
+            </div>
+          )}
+        </div>
+        {isSmallScreen && (
+          <div>
+            <IconButton className={s.IconButton} onClick={toggleNavbar} sx={{ padding: '0', position: 'absolute', bottom: -15, right: 0 }}>
+              <CompareArrowsIcon />
+            </IconButton>
+          </div>
+        )}
+        {isSmallScreen && showNavigation && (
+          <div className={`${s.smallScreenNavigationContainer} ${showNavigation ? 'show' : ''}`}>
+            <Navigation />
+          </div>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default UserInfo;
