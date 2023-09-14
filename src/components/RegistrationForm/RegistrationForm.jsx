@@ -10,8 +10,10 @@ import {
 } from '../../redux/validation/registrationSlice';
 
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
+import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
 
 const RegistrationForm = () => {
+  const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
   const [validationPopups, setValidationPopups] = useState({
     name: false,
@@ -25,29 +27,12 @@ const RegistrationForm = () => {
   };
 
   const validationReqs = useSelector((state) => state.registration.validationReqs);
-  // bring text field validation state to form and use where needed
-  const isEmailValid = useSelector((state) => state.registration.isEmailValid);
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
-
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const checkFormValidity = () => {
-    const isNameValid = validationReqs.name.every((req) => console.log(req));
-    // console.log(isNameValid)
-    // const isEmailValid = validationReqs.email.every((req) => req.met);
-    console.log(isEmailValid);
-    const isPasswordValid = validationReqs.password.every((req) => req.met);
-    // console.log(isPasswordValid);
-    setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
-    // console.log('isFormValid:', isFormValid);
-  };
-
- // useEffect(() => {checkFormValidity();}, [validationReqs])// 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,12 +56,10 @@ const RegistrationForm = () => {
     }
     setFocusedField(name);
     toggleValidationPopup(name, true);
-    checkFormValidity();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    checkFormValidity();
   };
 
   const renderValidationPopup = () => {
@@ -87,10 +70,6 @@ const RegistrationForm = () => {
       />
     );
   };
-
-  // console.log('formData:', formData);
-  // console.log('validationReqs:', validationReqs); 
-  // console.log('isFormValid:', isFormValid); 
 
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
@@ -162,7 +141,7 @@ const RegistrationForm = () => {
           </form>
         </FormControl>
 
-        {renderValidationPopup()} 
+        {renderValidationPopup()}
 
         <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
           <Link to="/Login">
