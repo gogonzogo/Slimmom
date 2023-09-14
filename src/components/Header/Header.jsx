@@ -6,68 +6,74 @@ import { IconButton, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-
+import { Typography } from '@mui/material';
+import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import styles from './Header.module.css';
+import { Logo } from '../Logo/Logo'
 // internal
 import useViewPort from 'hooks/useViewport';
-import styles from './Header.module.css';
-import Logo from '../Logo/Logo'
 import UserInfo from 'components/UserInfo/UserInfo';
-import Navigation from 'components/Navigation/Navigation';
-import VectorLogo from 'components/Logo/ImageLogo';
-import UserToolBar from 'components/UserInfo/UserToolBar';
 //import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 
 const Header = () => {
   //const loggedIn = useSelector(selectIsLoggedIn);
   const { width } = useViewPort();
-  const breakpoint = 349;
+  const breakpoint = 319;
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
-  const isMediumScreen = useMediaQuery('(max-width: 768px)');
   const isSmallScreen = useMediaQuery('(max-width: 319px)');
-  const isLoggedIn = false;
+  
   return (
     
     <Box sx={{ width: "100%" }}>
       <AppBar position="static"
         sx={{
           boxShadow: 'none',
-          borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0'
+          borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
+
         }}>
         <Toolbar disableGutters={true} className={styles.headerToolbar}
           sx={{
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'var(--primary-background-color)',
             padding: isSmallScreen ? '15px' : (isLargeScreen ? '80px 20px 0 20px' : '20px'),
-          }}>
-          {isLoggedIn ? (
-            <UserInfo/>
-          ) :
-            width > breakpoint ? (
+          }}
+        >
+          {width > breakpoint ? (
+            <div>
+              < Logo className={styles.logo}/>
+            </div>
+          ) : (
               <IconButton sx={{padding: 0,}}>
                 <Logo className={styles.logo}/>
               </IconButton>
-          ) : (
-              <div>
-              < VectorLogo className={styles.logo}/>
-              </div>
           )}
-          
-          {!isLoggedIn &&(
-            <Box sx={{
-              marginTop: isLargeScreen ? 4 : 0,
-            }}>
-              <Navigation />
-            </Box>
-          )}
-        </Toolbar>
 
-        {isLoggedIn && isLargeScreen &&(
-          <UserToolBar/>
-        )}
+          <Box sx={{
+             marginTop: isLargeScreen ? 4 : 0,
+          }}
+          >
+            <UserInfo/>
+            {/* <Navigation /> */}
+          </Box>
+        </Toolbar>
       </AppBar>
-      {isLoggedIn && isMediumScreen && (
-        <UserToolBar/>
-      )}
+      <Toolbar sx={{
+        display: 'flex',
+        justifyContent: 'flex-end',
+      }}>
+        <Typography sx={{
+          paddingRight: '10px',
+          borderRight: '2px solid #E0E0E0'
+        }}>UserName
+          {/* {userName} */}
+        </Typography>
+        <IconButton
+          // onClick={() => dispatch(logOut())}
+          // aria-label="logout"
+        >
+          <LogoutRoundedIcon/>
+          </IconButton>
+      </Toolbar>
     </Box>
   );
 };

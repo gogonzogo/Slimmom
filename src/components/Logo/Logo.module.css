@@ -11,22 +11,12 @@
     display: flex;
     gap: 5px;
     /* margin-top: 40px; */
-    margin-left: -35px;
+    margin-left: -15px;
     cursor: pointer;
-}
-
-.image-container {
-    width: 71px;
 }
 
 .svg-link {
     display: block;
-    width: 55px;
-    height: 16px;
-}
-
-.text-container .svg-link {
-    margin-right: -21px;
 }
 
 .logo {
