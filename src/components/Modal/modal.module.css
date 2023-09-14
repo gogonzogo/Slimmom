@@ -81,6 +81,7 @@ ol {
   }
   .modalBox {
     min-width: 400px;
+    height: auto;
     width: auto;
     padding: 64px 48px;
 
@@ -113,7 +114,7 @@ ol {
     border-radius: 50%;
   }
   .modalBox {
-    padding: 64px 82px;
+    padding: 82px;
     min-width: 600px;
   }
 }
