@@ -7,6 +7,7 @@ import RightSideBar from 'components/RightSideBar/RightSideBar';
 // mocking user login to retireve token
 import { login } from 'redux/auth/authOperations';
 import { useDispatch } from 'react-redux';
+import { Summery } from 'components/RightSideBar/Summery';
 
 function Diary() {
   const dispatch = useDispatch();
@@ -31,7 +32,9 @@ function Diary() {
         <DiaryCalendar />
         <DiaryAddProductForm />
       </div>
-      <RightSideBar />
+      <RightSideBar>
+        <Summery />
+      </RightSideBar>
     </div>
   );
 }

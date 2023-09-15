@@ -3,6 +3,7 @@ import React from 'react';
 
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
+import { Stats } from 'components/RightSideBar/Stats';
 
 function Calculator() {
   return (
@@ -13,7 +14,9 @@ function Calculator() {
       <CaloriesCalc />
       {/* <NotAllowedProducts />
        */}
-      <RightSideBar />
+      <RightSideBar>
+        <Stats />
+      </RightSideBar>
     </div>
   );
 }
