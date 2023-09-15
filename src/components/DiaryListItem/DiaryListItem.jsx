@@ -1,9 +1,10 @@
-//import style from "./style.module.css";
+import style from "./style.module.css";
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 
 
 
@@ -11,37 +12,27 @@ import Divider from '@mui/material/Divider';
 
 function ProductListItem({ product , handleDelete }) {
   return (
-    <ListItem
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete" onClick={() => handleDelete(product.productId)}>
+    <ListItem  className={style.productListItem} >
+
+      
+
+      <ListItemText className={style.title}
+        primary={<Typography className={style.titlePrimary}>{product.title}</Typography>} 
+        />
+      
+      <ListItemText className={style.weight}
+                     primary={<Typography className={style.titlePrimary}>{product.weight} g</Typography>}  
+        />
+                  
+      <ListItemText  className={style.calories} 
+                     primary={<Typography className={style.caloriesPrimary}>{product.calories}</Typography>} 
+                   secondary={<Typography className={style.caloriesSecondary}>kcal</Typography>}
+      />
+      
+      
+      <IconButton  className={style.productDeleteButton}  aria-label="delete" onClick={() => handleDelete(product.productId)}>
                       <DeleteIcon  />
                     </IconButton>
-                  }
-    >
-
-      <ListItemText sx={{mr:6, px:3}} >
-      <ListItemText
-                     primary={product.title} 
-      />
-      </ListItemText>
-      <Divider variant="insert"  />
-
-
-      
-      <ListItemText sx={{ mr: 4, px: 2 }}>
-      <ListItemText
-                     primary={product.weight} 
-      />
-      </ListItemText>
-      <Divider variant="insert"  />
-
-      
-                  <ListItemText sx={{mr:4, px:2}} >
-      <ListItemText
-                     primary={product.calories} 
-      />
-      </ListItemText>
-      <Divider variant="insert"  />
         
                 </ListItem>
     // <li  className={style.productListItem}>
