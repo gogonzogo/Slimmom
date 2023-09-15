@@ -44,7 +44,7 @@ const registrationSlice = createSlice({
 
 validatePassword: (state, action) => {
   const { fieldValue } = action.payload;
-  const hasSpecialCharacter = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(fieldValue);
+  const hasSpecialCharacter = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(fieldValue);
 
   console.log('Field Value:', fieldValue);
   console.log('Has Special Character:', hasSpecialCharacter);
