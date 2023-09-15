@@ -28,6 +28,7 @@ const registrationSlice = createSlice({
     validateEmail: (state, action) => {
       const { fieldValue } = action.payload;
       const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue);
+      //removed wrong character
       state.validationReqs.email[0].req1.met = isEmailValid;
       // set text field validation in state
       state.isEmailValid = isEmailValid;
