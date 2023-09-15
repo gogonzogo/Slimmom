@@ -35,17 +35,4 @@ const Logo = ({ className }) => {
   );
 };
 
-const TextLogo = () => {
-  return (
-    <div className={styles['text-logo-container']}>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <SlimSVG />
-        </NavLink>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <MomSVG />
-        </NavLink>
-        </div>
-  );
-};
-
-export {Logo, TextLogo};
+export default Logo;
