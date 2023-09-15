@@ -34,13 +34,18 @@ const registrationSlice = createSlice({
 
     },
 
-    validateName: (state, action) => {
-      const { fieldValue } = action.payload;
-      const isNameValid = fieldValue.trim().length >= 3 && fieldValue.trim().length <= 20;
-      state.validationReqs.name[0].req1.met = isNameValid;
-      // Set text field validation in state
-      state.isNameValid = isNameValid;
-    },
+validateName: (state, action) => {
+  const { fieldValue } = action.payload;
+  const isNameValid = fieldValue.length >= 3 &&
+    fieldValue.length <= 20 &&
+    /^[a-zA-Z0-9]+$/.test(fieldValue); 
+  
+  state.validationReqs.name[0].req1.met = fieldValue.length >= 3 &&
+    fieldValue.length <= 20;
+    state.validationReqs.name[1].req2.met = /^[a-zA-Z0-9]+$/.test(fieldValue);
+
+  state.isNameValid = isNameValid;
+},
 
 validatePassword: (state, action) => {
   const { fieldValue } = action.payload;
@@ -59,7 +64,8 @@ validatePassword: (state, action) => {
 
   console.log('Is Password Valid:', isPasswordValid);
 
-  state.validationReqs.password[0].req1.met = isPasswordValid;
+  state.validationReqs.password[0].req1.met =    fieldValue.length >= 8 &&
+    fieldValue.length <= 20;
   state.validationReqs.password[1].req2.met = /[A-Z]/.test(fieldValue);
   state.validationReqs.password[2].req3.met = /\d/.test(fieldValue);
   state.validationReqs.password[3].req4.met = hasSpecialCharacter;

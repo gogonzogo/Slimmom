@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+//import { selectNameValidationReqs, selectEmailValidationReqs, selectPasswordValidationReqs } from '../../redux/validation/registrationSelectors';
 import {
   validateEmail,
   validateName,
@@ -15,6 +16,9 @@ import { selectFormIsValid } from '../../redux/validation/registrationSelectors'
 const RegistrationForm = () => {
   const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
+    //const nameValidationReqs = useSelector(selectNameValidationReqs);
+  //const emailValidationReqs = useSelector(selectEmailValidationReqs);
+  //const passwordValidationReqs = useSelector(selectPasswordValidationReqs);
   const [validationPopups, setValidationPopups] = useState({
     name: false,
     email: false,
@@ -87,7 +91,8 @@ const RegistrationForm = () => {
         </h2>
         <FormControl variant="standard">
           <form onSubmit={handleSubmit} noValidate>
-            <TextField
+<TextField
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Name *'}
               type="text"
@@ -98,10 +103,11 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.name && validationReqs.name.some((req) => !req.met)}
+              //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
             />
 
             <TextField
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Email *'}
               type="email"
@@ -112,10 +118,11 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.email && validationReqs.email.some((req) => !req.met)}
+              //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
 
             <TextField
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Password *'}
               type="password"
@@ -126,8 +133,9 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.password && validationReqs.password.some((req) => !req.met)}
+              //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             />
+
             <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
               <Button
                 variant="contained"

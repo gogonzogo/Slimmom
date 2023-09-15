@@ -52,3 +52,7 @@
     color: red !important;
     font-size: 12px !important;
 }
+.labelRoot.Mui-focused {
+    color: #9B9FAA;
+    /* Change the text color when focused */
+}
