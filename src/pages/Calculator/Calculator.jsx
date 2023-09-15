@@ -6,7 +6,10 @@ import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
 
 function Calculator() {
   return (
-    <div className="background mainBackground">
+    <div
+      className="background mainBackground"
+      style={{ display: 'flex', flexDirection: 'column' }}
+    >
       <CaloriesCalc />
       {/* <NotAllowedProducts />
        */}

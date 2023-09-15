@@ -11,12 +11,22 @@
     display: flex;
     gap: 5px;
     /* margin-top: 40px; */
-    margin-left: -15px;
+    margin-left: -35px;
     cursor: pointer;
+}
+
+.image-container {
+    width: 71px;
 }
 
 .svg-link {
     display: block;
+    width: 55px;
+    height: 16px;
+}
+
+.text-container .svg-link {
+    margin-right: -21px;
 }
 
 .logo {
@@ -33,12 +43,12 @@
  
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     .logo {
-        max-width: 68%;
+        max-width: 85%;
     }
 
     .text-container {
         display: flex;
-        margin-top: 0px;
+        margin-top: 10px;
     }
 
     .text-container .svg-link {
@@ -57,8 +67,18 @@
     }
 
     .text-container {
-        display: none;
+            display: flex;
+                margin-top: 0px;
+                    margin-left: -35px;
     }
+        .text-container .svg-link {
+            margin-right: -21px;
+        }
+    
+        .svg-link {
+            width: 55px;
+            height: 16px;
+        }
 }
 
 /* text logo component*/

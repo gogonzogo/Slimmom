@@ -22,10 +22,6 @@
   margin-bottom: 12px;
 }
 @media screen and (min-width: 768px) {
-  .sideBarContainer {
-    position: fixed;
-    bottom: 0;
-  }
 }
 @media screen and (min-width: 1280px) {
   .sideBarContainer {
@@ -38,6 +34,6 @@
   }
   .sideBarContent {
     position: relative;
-    top: 280px;
+    top: 360px;
   }
 }

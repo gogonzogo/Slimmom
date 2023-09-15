@@ -22,9 +22,10 @@ const registrationSlice = createSlice({
     // add text field check to state
     isEmailValid: false,
     isNameValid: false,
-    isPasswordValid: false,
+    isPaswswordValid: false,
   },
   reducers: {
+    // Action reducers for validation
     validateEmail: (state, action) => {
       const { fieldValue } = action.payload;
       const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue);
@@ -32,46 +33,48 @@ const registrationSlice = createSlice({
       state.validationReqs.email[0].req1.met = isEmailValid;
       // set text field validation in state
       state.isEmailValid = isEmailValid;
-
+      console.log(state.isEmailValid);
     },
 
     validateName: (state, action) => {
       const { fieldValue } = action.payload;
-      const isNameValid = fieldValue.trim().length >= 3 && fieldValue.trim().length <= 20;
-      state.validationReqs.name[0].req1.met = isNameValid;
-      // Set text field validation in state
-      state.isNameValid = isNameValid;
+      state.validationReqs.name[0].req1.met =
+        fieldValue.trim().length >= 3 && fieldValue.trim().length <= 20;
     },
 
-validatePassword: (state, action) => {
+    validatePassword : (state, action) => {
   const { fieldValue } = action.payload;
+
   const hasSpecialCharacter = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(fieldValue);
 
   console.log('Field Value:', fieldValue);
   console.log('Has Special Character:', hasSpecialCharacter);
-
   const isPasswordValid =
     fieldValue.length >= 8 &&
     fieldValue.length <= 20 &&
-    /[A-Z]/.test(fieldValue) &&    // At least 1 capital letter
-    /\d/.test(fieldValue) &&        // At least 1 number
-    hasSpecialCharacter &&          // At least 1 special character
-    !/\s/.test(fieldValue);         // No spaces
+    /[A-Z]/.test(fieldValue) &&
+    /\d/.test(fieldValue) &&
+    !/^\s/.test(fieldValue) && 
+    !/\s/.test(fieldValue);
 
-  console.log('Is Password Valid:', isPasswordValid);
-
-  state.validationReqs.password[0].req1.met = isPasswordValid;
+     state.validationReqs.password[0].req1.met = isPasswordValid;
   state.validationReqs.password[1].req2.met = /[A-Z]/.test(fieldValue);
   state.validationReqs.password[2].req3.met = /\d/.test(fieldValue);
-  state.validationReqs.password[3].req4.met = hasSpecialCharacter;
+  state.validationReqs.password[3].req4.met = !/^\s/.test(fieldValue);
   state.validationReqs.password[4].req5.met = !/\s/.test(fieldValue);
+  state.validationReqs.password[4].req5.message = 'No spaces'; // Update the message
+      },
+    checkFormValidity: (state) => {
+      const isNameValid = state.validationReqs.name.every((req) => req.met);
+      const isEmailValid = state.validationReqs.email.every((req) => req.met);
+      const isPasswordValid = state.validationReqs.password.every((req) => req.met);
 
-  state.isPasswordValid = isPasswordValid;
-},
-
+      state.isFormValid = isNameValid && isEmailValid && isPasswordValid;
+    },
   },
-});
+}
+);
 
-export const { validateEmail, validateName, validatePassword } = registrationSlice.actions;
+export const { validateEmail, validateName, validatePassword, checkFormValidity } = registrationSlice.actions;
 
 export default registrationSlice.reducer;
