@@ -19,13 +19,13 @@ const NotAllowedProducts = () => {
 
   return (
     <div>
-      <Stack spacing={2} sx={{ width: 300 }}>
+      <Stack spacing={2} sx={{ width: 280 }}>
         <Autocomplete
           id="size-small-standard"
           freeSolo
           size="small"
           options={uniqueProducts}
-          sx={{ width: 300 }}
+          sx={{ maxWidth: '280px' }}
           renderInput={params => (
             <TextField
               {...params}
