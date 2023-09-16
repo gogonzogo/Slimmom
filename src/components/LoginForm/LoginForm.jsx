@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import style from '../LoginForm/login.module.css';
-
+import { Link } from 'react-router-dom'
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 
 const LoginForm = () => {
@@ -52,10 +52,11 @@ const LoginForm = () => {
               <Button variant="contained" className={style.login_button}>
                 Log In
               </Button>
-            
+            <Link to="/Register">
               <Button variant="contained" className={style.register_button}>
                 Register
-              </Button>
+                </Button>
+            </Link>
             </Box>
           </form>
         </FormControl>
