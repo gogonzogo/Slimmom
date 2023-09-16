@@ -68,10 +68,6 @@ a {
   overflow-y: auto;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
-    border: none,
-}
-
 @media screen and (min-width: 1280px) {
   .mainBackground {
     background-image: url(./images/desktop-leaves.png),
