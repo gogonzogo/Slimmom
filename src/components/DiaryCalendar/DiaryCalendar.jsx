@@ -9,7 +9,7 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
