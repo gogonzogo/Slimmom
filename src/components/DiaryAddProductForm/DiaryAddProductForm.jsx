@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 // import { fetchFoods, addFood } from 'redux/productStore/productStoreOperations';
 import ProductList from '../DiaryList/DiaryList';
 import jsonData from '../ProductsList/data/products.json';
-// import { useDiaryStore } from 'hooks/useDiary';
+// import { useDiaryStore } from 'hooks/useDiary/useDiaryStore';
 import { updateDiary } from 'redux/diary/diarySlice';
 
 export default function DiaryAddProduct() {
@@ -26,30 +26,24 @@ export default function DiaryAddProduct() {
     setGrams(event.target.value);
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
     const foodItem = jsonData.find(item => item.title === productName);
 
-    if (foodItem) {
+    if (productName) {
       const calculatedCalories = (foodItem.calories / 100) * grams;
       setCalories(calculatedCalories);
-    } else {
-      setCalories(0);
+      const diaryEntry = {
+        productName,
+        grams,
+        calories: calculatedCalories,
+      };
+      dispatch(updateDiary(diaryEntry));
     }
-
     // dispatch(addFood({ productName, grams, calories })).then(() => {
     //   dispatch(fetchFoods());
     // });
-
-    const diaryEntry = {
-      productName,
-      grams,
-      calories,
-    };
-
-    dispatch(updateDiary(diaryEntry));
-
     setProductName('');
     setGrams('');
   };
