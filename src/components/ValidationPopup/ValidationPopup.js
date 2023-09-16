@@ -14,7 +14,6 @@ const ValidationPopup = ({ validationData, visible }) => {
               const { id, message, met } = item[reqKey];
               const IconComponent = met ? CheckCircleOutlineIcon : ErrorOutlineIcon;
               const iconColor = met ? 'green' : 'red';
-              console.log(`reqKey: ${reqKey}, met: ${met}, character: ${item[reqKey]}`);
               return (
                 <ListItem className={css.validationPopupItem} key={id} disableGutters>
                   <IconComponent className={css.validationPopupIcon} style={{ color: iconColor }} />
