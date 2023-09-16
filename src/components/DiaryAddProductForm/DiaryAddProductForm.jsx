@@ -22,30 +22,33 @@ export default function DiaryAddProduct() {
     setData(jsonData);
   }, []);
 
+  useEffect(() => {
+    if (productName && grams) {
+      const foodItem = jsonData.find(item => item.title === productName);
+      if (foodItem) {
+        const calculatedCalories = (foodItem.calories / 100) * grams;
+        setCalories(calculatedCalories);
+      }
+    }
+  }, [productName, grams]);
+
   const handleGramsChange = event => {
     setGrams(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-
-    const foodItem = jsonData.find(item => item.title === productName);
-
     if (productName) {
-      const calculatedCalories = (foodItem.calories / 100) * grams;
-      setCalories(calculatedCalories);
       const diaryEntry = {
         productName,
         grams,
-        calories: calculatedCalories,
+        calories,
       };
       dispatch(updateDiary(diaryEntry));
+      setProductName('');
+      setGrams('');
+      setCalories('');
     }
-    // dispatch(addFood({ productName, grams, calories })).then(() => {
-    //   dispatch(fetchFoods());
-    // });
-    setProductName('');
-    setGrams('');
   };
 
   const uniqueTitle = Array.from(new Set(data.map(item => item.title)));
