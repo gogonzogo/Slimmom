@@ -77,21 +77,14 @@ const RegistrationForm = () => {
 
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
-      <Grid align="center">
-        <h2
-          style={{
-            color: '#FC842D',
-            margin: '40px',
-            fontFamily: 'Verdana',
-            fontSize: '14px',
-            fontWeight: '700',
-          }}
-        >
-          REGISTER
-        </h2>
+      <h2 className={style.form_title}>REGISTER</h2>
+      <Grid className={style.form_grid}>
         <FormControl variant="standard">
-          <form onSubmit={handleSubmit} noValidate>
-<TextField
+          <form
+            onSubmit={handleSubmit}
+            noValidate>
+            <TextField
+              className={style.name_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Name *'}
@@ -107,6 +100,7 @@ const RegistrationForm = () => {
             />
 
             <TextField
+              className={style.email_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Email *'}
@@ -122,6 +116,7 @@ const RegistrationForm = () => {
             />
 
             <TextField
+              className={style.password_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Password *'}
@@ -135,29 +130,25 @@ const RegistrationForm = () => {
               onBlur={() => setFocusedField(null)}
               //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             />
-
-            <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
+{renderValidationPopup()}
+            <Box className={style.button_container}>
               <Button
                 variant="contained"
                 type="submit"
-                className={style.register_button}
+                className={style.login_button}
                 disabled={!isFormValid}
               >
                 Register
               </Button>
+            <Link to="/Login">
+            <Button variant="contained" className={style.register_button}>
+              Log In
+            </Button>
+          </Link>
             </Box>
           </form>
         </FormControl>
 
-        {renderValidationPopup()}
-
-        <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
-          <Link to="/Login">
-            <Button variant="contained" className={style.login_button}>
-              Log In
-            </Button>
-          </Link>
-        </Box>
       </Grid>
     </Box>
   );
