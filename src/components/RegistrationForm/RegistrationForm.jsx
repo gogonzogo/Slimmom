@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-//import { selectNameValidationReqs, selectEmailValidationReqs, selectPasswordValidationReqs } from '../../redux/validation/registrationSelectors';
+import { selectNameValidationReqs, selectEmailValidationReqs, selectPasswordValidationReqs } from '../../redux/validation/registrationSelectors';
 import {
   validateEmail,
-  validateName,
+ validateName,
   validatePassword,
 } from '../../redux/validation/registrationSlice';
-
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
 import { toast } from 'react-toastify';
@@ -47,7 +46,7 @@ const RegistrationForm = () => {
       [name]: value,
     });
 
-    switch (name) {
+    switch (name) { // dispatches validation reducers from the slice on change
       case 'name':
         dispatch(validateName({ fieldValue: value }));
         break;
@@ -85,7 +84,7 @@ const RegistrationForm = () => {
   }
 };
 
-  const renderValidationPopup = () => {
+  const renderValidationPopup = () => { // popup function needed for validation
     return (
       <ValidationPopup
         validationData={validationReqs[focusedField]}
@@ -136,7 +135,7 @@ const RegistrationForm = () => {
 
             <TextField
               className={style.password_input}
-              InputLabelProps={{ style: { color: "#9B9FAA" } }}
+              InputLabelProps={{ style: { color: "#9B9FAA" } }} // input field styles
               variant="standard"
               label={'Password *'}
               type="password"
@@ -144,13 +143,13 @@ const RegistrationForm = () => {
               fullWidth
               margin="normal"
               value={formData.password}
-              onChange={handleChange}
-              onFocus={() => setFocusedField('password')}
-              onBlur={() => setFocusedField(null)}
+              onChange={handleChange}// add to track each keystroke
+              onFocus={() => setFocusedField('password')}// needed for validation
+              onBlur={() => setFocusedField(null)}// needed for validation
               //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
-            />
-{renderValidationPopup()}
-            <Box className={style.button_container}>
+            /> 
+{renderValidationPopup()} {/** render the popup  */}
+            <Box className={style.button_container}> 
               <Button
                 variant="contained"
                 type="submit"
