@@ -15,13 +15,17 @@ const LoginForm = () => {
     email: '',
     password: '',
   });
+
+
   // listens to input change
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   // listens to form submission and looks for errors
   const [loginError, setLoginError] = useState(null);
+
 
   // handles login
   async function handleLogin() {
