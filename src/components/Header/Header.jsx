@@ -8,23 +8,27 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 // internal
+//import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 import useViewPort from 'hooks/useViewport';
+
+//styles
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo'
 import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
 import VectorLogo from 'components/Logo/ImageLogo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
-//import { selectIsLoggedIn } from 'redux/auth/authSelectors';
+
 
 const Header = () => {
-  //const loggedIn = useSelector(selectIsLoggedIn);
+  //const isLoggedIn = useSelector(selectIsLoggedIn);
+  
   const { width } = useViewPort();
   const breakpoint = 349;
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
   const isSmallScreen = useMediaQuery('(max-width: 319px)');
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     
     <Box sx={{ width: "100%" }}>

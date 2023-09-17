@@ -1,16 +1,19 @@
+//external
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 //import { useSelector } from 'react-redux';
 
-import css from './Navigation.module.css';
+//internal
 //import { selectIsLoggedIn } from '../../redux/auth/authSelectors';
+import css from './Navigation.module.css';
 
 function Navigation({className}) {
-  //const loggedIn = useSelector(selectIsLoggedIn);
+  //const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = true
   return (
   <>
-    {/* {loggedIn
-      ?
+    {isLoggedIn
+      ? (
       <div className={`${css.navContainer} ${className}`}>
         <NavLink to="/diary" className={css.navLink}>
           diary
@@ -18,8 +21,8 @@ function Navigation({className}) {
         <NavLink to="/calculator" className={css.navLink}>
           calculator
         </NavLink>
-      </div>
-      : */}
+        </div> 
+    ) : (
       <div className={`${css.navContainer} ${className}`}>
           <NavLink to="/login" className={css.navLink}>
             log in
@@ -28,7 +31,7 @@ function Navigation({className}) {
             registration
           </NavLink>
       </div >
-    {/* } */}
+    )}
   </>
   );
 };
