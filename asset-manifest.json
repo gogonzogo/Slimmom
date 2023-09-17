@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Final-Team-Project/static/css/main.ba35ae53.css",
-    "main.js": "/Final-Team-Project/static/js/main.3fa36521.js",
+    "main.css": "/Final-Team-Project/static/css/main.91fc5dfc.css",
+    "main.js": "/Final-Team-Project/static/js/main.aa3b4a40.js",
     "static/css/544.e8dcdb0f.chunk.css": "/Final-Team-Project/static/css/544.e8dcdb0f.chunk.css",
     "static/js/544.4f3cad98.chunk.js": "/Final-Team-Project/static/js/544.4f3cad98.chunk.js",
     "static/css/696.e86dae40.chunk.css": "/Final-Team-Project/static/css/696.e86dae40.chunk.css",
@@ -29,18 +29,18 @@
     "static/media/tablet-babana.png": "/Final-Team-Project/static/media/tablet-babana.fd46f50bbb046bbc1dd3.png",
     "static/media/tablet-strawberry.png": "/Final-Team-Project/static/media/tablet-strawberry.e9570bd0e5d3965cfb8e.png",
     "static/media/desktop-leaves.png": "/Final-Team-Project/static/media/desktop-leaves.6594c140e7b671a5a24c.png",
-    "static/media/slimmom.svg": "/Final-Team-Project/static/media/slimmom.03980e0907d2ea33f6c6d552e95aaa34.svg",
+    "static/media/slimmom.svg": "/Final-Team-Project/static/media/slimmom.1e702f0539455368183695f27fc04e1f.svg",
     "static/media/tablet-dairy-leaves@2x.png": "/Final-Team-Project/static/media/tablet-dairy-leaves@2x.62981e8093a5234a4645.png",
     "static/media/tablet-leaves.png": "/Final-Team-Project/static/media/tablet-leaves.d487383fc8f64fe776c2.png",
     "static/media/desktop-diary-leaves.png": "/Final-Team-Project/static/media/desktop-diary-leaves.725d97c18a4e5e38848a.png",
     "static/media/desktop-shape@2x.png": "/Final-Team-Project/static/media/desktop-shape@2x.d2cb43d0fdf60e0e0b8b.png",
     "static/media/tablet-dairy-leaves.png": "/Final-Team-Project/static/media/tablet-dairy-leaves.7887c12ec4fc572fe392.png",
     "static/media/tablet-shape@2x.png": "/Final-Team-Project/static/media/tablet-shape@2x.889e3a64552804317009.png",
-    "static/media/slim.svg": "/Final-Team-Project/static/media/slim.7f71bfa11d039971dd637fa84dc03174.svg",
-    "static/media/mom.svg": "/Final-Team-Project/static/media/mom.827f3d1c6c85a573fc4c945da6440651.svg",
+    "static/media/slim.svg": "/Final-Team-Project/static/media/slim.99566354f098178820c3b3692170357f.svg",
+    "static/media/mom.svg": "/Final-Team-Project/static/media/mom.44b3082021f2075af88260b947389fc5.svg",
     "index.html": "/Final-Team-Project/index.html",
-    "main.ba35ae53.css.map": "/Final-Team-Project/static/css/main.ba35ae53.css.map",
-    "main.3fa36521.js.map": "/Final-Team-Project/static/js/main.3fa36521.js.map",
+    "main.91fc5dfc.css.map": "/Final-Team-Project/static/css/main.91fc5dfc.css.map",
+    "main.aa3b4a40.js.map": "/Final-Team-Project/static/js/main.aa3b4a40.js.map",
     "544.e8dcdb0f.chunk.css.map": "/Final-Team-Project/static/css/544.e8dcdb0f.chunk.css.map",
     "544.4f3cad98.chunk.js.map": "/Final-Team-Project/static/js/544.4f3cad98.chunk.js.map",
     "696.e86dae40.chunk.css.map": "/Final-Team-Project/static/css/696.e86dae40.chunk.css.map",
@@ -58,7 +58,7 @@
     "270.3fed0556.chunk.js.map": "/Final-Team-Project/static/js/270.3fed0556.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.ba35ae53.css",
-    "static/js/main.3fa36521.js"
+    "static/css/main.91fc5dfc.css",
+    "static/js/main.aa3b4a40.js"
   ]
 }
