@@ -1,5 +1,17 @@
 .login_color {
-    color: #E0E0E0;
+    color: #e0e0e0;
+}
+
+.form_title {
+    color: #fc842d;
+    font-family: 'Verdana';
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.form_grid {
+    text-align: center;
 }
 
 .login_button {
@@ -7,9 +19,9 @@
     padding: 1;
     margin: 2;
     height: 44px;
-    background-color: #FC842D;
+    background-color: #fc842d;
     border-radius: 30px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-family: 'Verdana';
     font-size: 14px;
     font-weight: 700;
@@ -18,10 +30,10 @@
 
 .register_button {
     width: 182px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     height: 44px;
-    color: #FC842D;
-    border: solid #FC842D;
+    color: #fc842d;
+    border: solid #fc842d;
     border-radius: 30px;
     border-width: 2px;
     font-family: 'Verdana';
@@ -30,25 +42,83 @@
     text-transform: capitalize;
 }
 
-
 .register_button {
     width: 182px;
-
 }
 
-@media (max-width: 600px) {
+/* styles for mobile */
+@media screen and (min-width: 320px) {
     .form_container {
-        padding: 0 20px;
+        padding: 20px;
     }
-
 
     .form_container form {
         max-width: 300px;
         margin: 0 auto;
     }
+
+    .form_title {
+        padding-bottom: 55px;
+        padding-top: 40px;
+    }
+
+    .button_container {
+        padding: 60px 0px;
+    }
+
+    .button_container button {
+        margin-bottom: 20px;
+    }
+
+
 }
 
-.error-message {
-    color: red !important;
-    font-size: 12px !important;
+/* styles for tablet */
+
+@media screen and (min-width: 768px) {
+    .form_title {
+        text-align: left;
+        padding-bottom: 20px;
+        padding-top: 176px;
+    }
+
+    .form_container {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+
+    }
+
+    .form_grid {
+        text-align: left;
+    }
+
+    .email_input {
+        text-align: left;
+    }
+
+    .button_container {
+        display: inline-flex;
+        justify-content: space-between;
+        padding-top: 60px;
+    }
+
+    .button_container button {
+        margin-right: 32px;
+    }
+
+
+}
+
+/* styles for desktop */
+@media screen and (min-width: 1280px) {
+    .form_container {
+        padding: 16px;
+    }
+
+    .form_container {
+        width: 40%;
+    }
+
 }

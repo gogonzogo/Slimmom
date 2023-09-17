@@ -4,6 +4,16 @@
   padding: 20px;
   background-color: #f0f1f3;
 }
+.sideBarContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 0px;
+}
+.sideBarContent {
+  width: 100%;
+  max-width: 288px;
+}
 .sideBarTitle {
   font: 700 14px Verdana;
 }
@@ -21,14 +31,16 @@
   justify-content: space-between;
   margin-bottom: 12px;
 }
+
 @media screen and (min-width: 768px) {
-  .sideBarContainer {
-    position: fixed;
-    bottom: 0;
+  .sideBarContentWrapper {
+    flex-direction: row;
+    justify-content: space-around;
   }
 }
 @media screen and (min-width: 1280px) {
   .sideBarContainer {
+    max-width: 1280px;
     padding-left: 94px;
     position: absolute;
     left: 60%;
@@ -36,8 +48,9 @@
     width: 40%;
     height: 100vh;
   }
-  .sideBarContent {
+  .sideBarContentWrapper {
+    flex-direction: column;
     position: relative;
-    top: 280px;
+    top: 360px;
   }
 }

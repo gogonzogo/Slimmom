@@ -4,8 +4,8 @@ import Button from '../Button/Button';
 import CirclePlus from '../Button/CirclePlus';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
-import { fetchFoods, addFood } from 'redux/productStore/productStoreOperations';
-import ProductList from '../../components/DiaryList/DiaryList/DiaryList';
+import { fetchFoods, addFood } from '../../redux/productStore/productStoreOperations';
+import ProductList from '../DiaryList/DiaryList';
 import jsonData from '../ProductsList/data/products.json';
 
 
@@ -23,16 +23,16 @@ export default function DiaryAddProduct() {
     setData(jsonData);
   }, []);
   
-         useEffect(() => {
-            const storedProducts = JSON.parse(localStorage.getItem('products') || '[]');
-             setProductName(storedProducts.productName || '');
-             setGrams(storedProducts.grams || '');
-             setCalories(storedProducts.calories || '');
-            }, []);
+        //  useEffect(() => {
+        //     const storedProducts = JSON.parse(localStorage.getItem('products') || '[]');
+        //      setProductName(storedProducts.productName || '');
+        //      setGrams(storedProducts.grams || '');
+        //      setCalories(storedProducts.calories || '');
+        //     }, []);
 
-        useEffect(() => {
-            localStorage.setItem('products', JSON.stringify({ productName, grams, calories }));
-            }, [productName, grams, calories]);
+        // useEffect(() => {
+        //     localStorage.setItem('products', JSON.stringify({ productName, grams, calories }));
+        //     }, [productName, grams, calories]);
 
 
     
@@ -55,6 +55,7 @@ export default function DiaryAddProduct() {
       
       const calculatedCalories = (foodItem.calories / 100) * grams;
         setCalories(calculatedCalories);
+        console.log(calculatedCalories);
         }
         
     else {
@@ -74,7 +75,7 @@ export default function DiaryAddProduct() {
     };
 
     const uniqueTitle = Array.from(new Set(data.map((item) => item.title)));
-    const [value, setValue] = useState('uniqueTitle');
+    const [value, setValue] = useState('');
     
     return (
         

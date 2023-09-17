@@ -1,12 +1,11 @@
 import DiaryListItem from '../DiaryListItem/DiaryListItem';
-//import style from './style.module.css';
+import style from './style.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getfoods} from '../../../redux/productStore/productStoreSelectors';
-import { fetchFoods, deleteFood } from '../../../redux/productStore/productStoreOperations';
+import { getfoods} from '../../redux/productStore/productStoreSelectors';
+import { fetchFoods, deleteFood } from '../../redux/productStore/productStoreOperations';
 import { useEffect } from 'react';
 import * as React from 'react';
 import List from '@mui/material/List';
-
 
 
 
@@ -25,14 +24,16 @@ function ProductList() {
   };
 
   return (
-     <List >
+    
+     <List className={style.productList}>
               
                 {products.length > 0 &&
                    products.map((product) => (
                     <DiaryListItem key={product.productId} product={product} handleDelete={handleDelete} />
                   ))}
               
-            </List>
+      </List>
+      
 
     // <ul className={style.productList}>
     //   {products.length > 0 &&

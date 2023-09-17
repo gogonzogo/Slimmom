@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
+//import { selectNameValidationReqs, selectEmailValidationReqs, selectPasswordValidationReqs } from '../../redux/validation/registrationSelectors';
 import {
   validateEmail,
   validateName,
@@ -10,9 +11,16 @@ import {
 } from '../../redux/validation/registrationSlice';
 
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
+import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
+import { toast } from 'react-toastify';
+import { register } from 'redux/auth/authOperations';
 
 const RegistrationForm = () => {
+  const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
+    //const nameValidationReqs = useSelector(selectNameValidationReqs);
+  //const emailValidationReqs = useSelector(selectEmailValidationReqs);
+  //const passwordValidationReqs = useSelector(selectPasswordValidationReqs);
   const [validationPopups, setValidationPopups] = useState({
     name: false,
     email: false,
@@ -25,29 +33,12 @@ const RegistrationForm = () => {
   };
 
   const validationReqs = useSelector((state) => state.registration.validationReqs);
-  // bring text field validation state to form and use where needed
-  const isEmailValid = useSelector((state) => state.registration.isEmailValid);
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
   });
-
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const checkFormValidity = () => {
-    const isNameValid = validationReqs.name.every((req) => console.log(req));
-    // console.log(isNameValid)
-    // const isEmailValid = validationReqs.email.every((req) => req.met);
-    console.log(isEmailValid);
-    const isPasswordValid = validationReqs.password.every((req) => req.met);
-    // console.log(isPasswordValid);
-    setIsFormValid(isNameValid && isEmailValid && isPasswordValid);
-    // console.log('isFormValid:', isFormValid);
-  };
-
- // useEffect(() => {checkFormValidity();}, [validationReqs])// 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -71,13 +62,28 @@ const RegistrationForm = () => {
     }
     setFocusedField(name);
     toggleValidationPopup(name, true);
-    checkFormValidity();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    checkFormValidity();
+
+  const userData = {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
   };
+  
+  try {
+    const response = await dispatch(register(userData));
+      toast.success('Registration successful!', {
+      position: 'top-right', // Choose the position where the toast should appear
+      autoClose: 3000, // Auto-close the toast after 3 seconds (optional)
+    });
+    console.log('Registration successful', response.payload);
+  } catch (error) {
+    console.error('Registration failed', error.message);
+  }
+};
 
   const renderValidationPopup = () => {
     return (
@@ -88,27 +94,17 @@ const RegistrationForm = () => {
     );
   };
 
-  // console.log('formData:', formData);
-  // console.log('validationReqs:', validationReqs); 
-  // console.log('isFormValid:', isFormValid); 
-
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
-      <Grid align="center">
-        <h2
-          style={{
-            color: '#FC842D',
-            margin: '40px',
-            fontFamily: 'Verdana',
-            fontSize: '14px',
-            fontWeight: '700',
-          }}
-        >
-          REGISTER
-        </h2>
+      <h2 className={style.form_title}>REGISTER</h2>
+      <Grid className={style.form_grid}>
         <FormControl variant="standard">
-          <form onSubmit={handleSubmit} noValidate>
+          <form
+            onSubmit={handleSubmit}
+            noValidate>
             <TextField
+              className={style.name_input}
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Name *'}
               type="text"
@@ -119,10 +115,12 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.name && validationReqs.name.some((req) => !req.met)}
+              //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
             />
 
             <TextField
+              className={style.email_input}
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Email *'}
               type="email"
@@ -133,10 +131,12 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.email && validationReqs.email.some((req) => !req.met)}
+              //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
 
             <TextField
+              className={style.password_input}
+              InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Password *'}
               type="password"
@@ -147,30 +147,27 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              error={!!formData.password && validationReqs.password.some((req) => !req.met)}
+              //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             />
-            <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
+{renderValidationPopup()}
+            <Box className={style.button_container}>
               <Button
                 variant="contained"
                 type="submit"
-                className={style.register_button}
+                className={style.login_button}
                 disabled={!isFormValid}
               >
                 Register
               </Button>
+            <Link to="/Login">
+            <Button variant="contained" className={style.register_button}>
+              Log In
+            </Button>
+          </Link>
             </Box>
           </form>
         </FormControl>
 
-        {renderValidationPopup()} 
-
-        <Box sx={{ marginTop: '20px', paddingBottom: '20px' }}>
-          <Link to="/Login">
-            <Button variant="contained" className={style.login_button}>
-              Log In
-            </Button>
-          </Link>
-        </Box>
       </Grid>
     </Box>
   );

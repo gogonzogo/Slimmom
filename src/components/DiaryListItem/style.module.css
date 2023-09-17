@@ -1,0 +1,150 @@
+.productListItem {
+        display: flex;
+        -webkit-box-pack: start;
+         justify-content: flex-start;
+        -webkit-box-align: center;
+        position: relative;
+        text-decoration: none;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: left;
+        align-items: flex-end;
+        padding: 0px;
+        margin: 0px;
+}
+.productDeleteButton {
+    cursor: pointer;
+}
+
+
+.title{
+        flex: 0 1 auto;
+        min-width: 0px;
+        margin: 0px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.22);
+        -webkit-box-flex: 0;
+}
+
+.titlePrimary{
+        font-family: Verdana;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.1;
+        letter-spacing: 0.04em;
+}
+
+.weight{
+    flex: 0 1 auto;
+    min-width: 0px;
+    margin: 0px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.22);
+    -webkit-box-flex: 0;
+}
+
+
+.calories{
+    flex: 0 1 auto;
+    min-width: 0px;
+    margin: 0px;
+    text-align: right;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.22);
+    -webkit-box-flex: 0;
+    line-height: 0.9;
+}
+.caloriesPrimary{
+        display: inline-block;
+        margin-right: 3px;
+        font-family: Verdana;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.1;
+    }
+.caloriesSecondary{
+        display: inline-block;
+        color: rgb(33, 33, 33);
+        font-family: Verdana;
+        font-weight: 400;
+        line-height: 1.1;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 768px)  {
+
+.title {
+    padding-bottom: 20px;
+    padding-top: 16px;
+    width: 270px;
+    margin-right: 48px;
+}
+
+.weight{
+    padding-bottom: 20px;
+    padding-top: 16px;
+    width: 107px;
+    margin-right: 32px;
+}
+
+.calories{
+    padding-bottom: 20px;
+    padding-top: 16px;
+    width: 106px;
+    margin-right: 18px;
+}
+.caloriesPrimary{
+    letter-spacing: 0.04em;
+}
+.caloriesSecondary {
+    font-size: 14px;
+    letter-spacing: 0.04em;
+}
+.productDeleteButton{
+    margin-bottom: 8px;
+        padding: 9px;
+}
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+    .title {
+        padding-bottom: 8px;
+        padding-top: 20px;
+        width: 130px;
+        margin-right: 8px;
+    }
+
+    .weight{
+        padding-bottom: 8px;
+        padding-top: 20px;
+        width: 49px;
+        margin-right: 8px;
+    }
+    .calories{
+        padding-bottom: 8px;
+        padding-top: 20px;
+        width: 58px;
+        margin-right: 1px;
+    }
+    .caloriesPrimary {
+            letter-spacing: 0.1px;
+        }
+    .caloriesSecondary {
+            font-size: 9px;
+            letter-spacing: 0.1px;
+        }
+    .productDeleteButton{
+        margin-bottom: 4px;
+            padding: 4px;
+            
+    }
+
+
+}

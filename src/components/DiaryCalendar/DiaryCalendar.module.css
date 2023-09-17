@@ -1,8 +1,9 @@
-.calendar {
-    width: 320px;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    margin-top: 32px;
-    margin-left: 32px;
+.calendarPopperContainer {
+  margin-top: 80px;
+}
+
+.btnPopperContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
 }

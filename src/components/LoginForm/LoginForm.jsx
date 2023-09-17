@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import style from '../LoginForm/login.module.css';
+import { Link } from 'react-router-dom'
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
@@ -95,12 +96,11 @@ const LoginForm = () => {
               <Button variant="contained" className={style.login_button}>
                 Log In
               </Button>
-              {/* links back to registration page */}
-              <Link to="/register" className={style.register_link}>
-                <Button variant="contained" className={style.register_button}>
-                  Register
+            <Link to="/Register">
+              <Button variant="contained" className={style.register_button}>
+                Register
                 </Button>
-              </Link>
+            </Link>
             </Box>
           </form>
         </FormControl>

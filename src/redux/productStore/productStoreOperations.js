@@ -27,9 +27,10 @@ export const addFood = createAsyncThunk(
   };
     try {
       const response = await axios.post(
-      'product',
-      newProduct
+        'product',
+        newProduct
       );
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);

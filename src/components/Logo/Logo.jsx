@@ -13,7 +13,7 @@ const Logo = ({ className }) => {
     <div className={className || styles['logo-container']}>
       <div className={styles['vector-container']}>
         <NavLink to='/Diary'>
-          <LogoSVG className={styles.logo} />
+          <LogoSVG className={styles.logo} width="100" height="100" alt="A waistline with a green measuring tape"/>
         </NavLink>
       </div>
       <Box sx={{
@@ -24,10 +24,10 @@ const Logo = ({ className }) => {
           }}>
       <div className={styles['text-container']}>
         <NavLink to='/Diary' className={styles['svg-link']}>
-          <SlimSVG className={styles.logo} />
+          <SlimSVG className={styles.text} />
         </NavLink>
         <NavLink to='/Diary' className={styles['svg-link']}>
-          <MomSVG className={styles.logo} />
+          <MomSVG className={styles.text} />
         </NavLink>
         </div>
       </Box>
@@ -35,17 +35,4 @@ const Logo = ({ className }) => {
   );
 };
 
-const TextLogo = () => {
-  return (
-    <div className={styles['text-logo-container']}>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <SlimSVG />
-        </NavLink>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <MomSVG />
-        </NavLink>
-        </div>
-  );
-};
-
-export {Logo, TextLogo};
+export default Logo;
