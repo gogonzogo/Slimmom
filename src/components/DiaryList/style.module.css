@@ -1,6 +1,46 @@
 .productList {
-    list-style: none;
-    padding: 0;
-    margin: 20px;
+        display: block;
+        margin-top: 44px;
+        padding: 0px;
+        position: relative;
+        overflow: auto;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+
+        }
+        
+
+
+.productList::-webkit-scrollbar {
+    width: 6px;
+    background: rgb(240, 241, 243);
 }
 
+.productList::-webkit-scrollbar-thumb {
+    background: rgb(38, 64, 97);
+    border-radius: 6px;
+}
+
+@media (min-width: 768px){
+
+.productList{
+    margin-left: 20px;
+    width: 650px;
+    min-height: 271px;
+    max-height: 271px;
+}
+}
+
+@media (min-width: 0px) and (max-width:767px) {
+
+    .productList {
+            margin-left: 0px;
+            margin-top: 12px;
+            width: 292px;
+            min-height: 280px;
+            max-height: 280px;
+        }
+    }
