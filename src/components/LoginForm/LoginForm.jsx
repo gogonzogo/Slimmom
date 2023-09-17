@@ -30,7 +30,6 @@ const LoginForm = () => {
       await dispatch(login(formData));
       console.log('Login successful');
       nav('/');
-      await dispatch(login(formData));
     } catch (err) {
       console.err('Login error', loginError);
       setLoginError('An eroor occured. Please try again.');
@@ -40,9 +39,19 @@ const LoginForm = () => {
   // handles form submission
   function handleSubmit(e) {
     e.preventDefault();
-    handleLogin();
+    
     // clear the form data after submission
     setFormData({ email: '', password: '' });
+  }
+
+  // function handleValidation() 
+  function handleValidation() {
+    // check if email is valid
+    if(!formData.email.value.match(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/)) {
+      setLoginError('Email is required')
+    }
+    // check if password is valid
+    // check if both are valid
   }
 
   return (
@@ -51,7 +60,7 @@ const LoginForm = () => {
       <Grid className={style.form_grid}>
         {/* login form */}
 
-        <FormControl variant="standard" onSubmit={handleSubmit}>
+        <FormControl variant="standard" >
           <form onSubmit={handleSubmit}>
             <TextField
               className={style.email_input}
