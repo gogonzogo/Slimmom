@@ -24,10 +24,10 @@ const Logo = ({ className }) => {
           }}>
       <div className={styles['text-container']}>
         <NavLink to='/Diary' className={styles['svg-link']}>
-          <SlimSVG className={styles.logo} />
+          <SlimSVG className={styles.text} />
         </NavLink>
         <NavLink to='/Diary' className={styles['svg-link']}>
-          <MomSVG className={styles.logo} />
+          <MomSVG className={styles.text} />
         </NavLink>
         </div>
       </Box>
