@@ -17,6 +17,7 @@ const registrationSlice = createSlice({
       ],
       email: [
         { req1: { id: 1, message: 'Valid email address', met: false } },
+        
       ],
     },
     // add text field check to state
@@ -28,9 +29,13 @@ const registrationSlice = createSlice({
     validateEmail: (state, action) => {
       const { fieldValue } = action.payload;
       const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fieldValue);
+      const domainExtension = fieldValue.split('@')[1]?.split('.')[1];
+      const validDomainExtensions = ['com', 'net', 'org', 'edu', 'gov', 'us'];
+       const isDomainValid = validDomainExtensions.includes(domainExtension);
       state.validationReqs.email[0].req1.met = isEmailValid;
+      state.validationReqs.email[0].req1.met = isDomainValid
       // set text field validation in state
-      state.isEmailValid = isEmailValid;
+        state.isEmailValid = isEmailValid && isDomainValid;
 
     },
 
@@ -51,8 +56,6 @@ validatePassword: (state, action) => {
   const { fieldValue } = action.payload;
   const hasSpecialCharacter = /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(fieldValue);
 
-  console.log('Field Value:', fieldValue);
-  console.log('Has Special Character:', hasSpecialCharacter);
 
   const isPasswordValid =
     fieldValue.length >= 8 &&
@@ -62,7 +65,6 @@ validatePassword: (state, action) => {
     hasSpecialCharacter &&          // At least 1 special character
     !/\s/.test(fieldValue);         // No spaces
 
-  console.log('Is Password Valid:', isPasswordValid);
 
   state.validationReqs.password[0].req1.met =    fieldValue.length >= 8 &&
     fieldValue.length <= 20;

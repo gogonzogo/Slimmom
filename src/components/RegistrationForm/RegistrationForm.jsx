@@ -12,6 +12,8 @@ import {
 
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
+import { toast } from 'react-toastify';
+import { register } from 'redux/auth/authOperations';
 
 const RegistrationForm = () => {
   const isFormValid = useSelector(selectFormIsValid);
@@ -62,9 +64,26 @@ const RegistrationForm = () => {
     toggleValidationPopup(name, true);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+
+  const userData = {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
   };
+  
+  try {
+    const response = await dispatch(register(userData));
+      toast.success('Registration successful!', {
+      position: 'top-right', // Choose the position where the toast should appear
+      autoClose: 3000, // Auto-close the toast after 3 seconds (optional)
+    });
+    console.log('Registration successful', response.payload);
+  } catch (error) {
+    console.error('Registration failed', error.message);
+  }
+};
 
   const renderValidationPopup = () => {
     return (
