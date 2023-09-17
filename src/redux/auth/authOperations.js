@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-//axios.defaults.baseURL = "http://localhost:3030/api";
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 export const token = {
   set(token) {
@@ -16,7 +16,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/auth/signup", credentials);
+      const { data } = await axios.post("/users/register", credentials);
       token.set(data.token);
       return data;
     } catch (error) {
