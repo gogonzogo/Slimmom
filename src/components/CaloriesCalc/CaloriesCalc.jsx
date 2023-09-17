@@ -250,9 +250,6 @@ const { name, value } = e.target;
                   value={formData.bloodType}
                   name="bloodType"
                   sx={{
-                    '&, &.Mui-checked': {
-                      color: '#FC842D',
-                    },
                     flexDirection: 'row',
                   }}
                   onChange={changeHandler}
@@ -261,47 +258,39 @@ const { name, value } = e.target;
                 >
                   <FormControlLabel
                     value="A"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
                     label="A"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="B"
-                    control={<Radio />}
+                    control={<Radio sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
                     label="B"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="AB"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
                     label="AB"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="O"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
                     label="O"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: 'rgba(252, 132, 45, 1)',
-                      },
-                    }}
                   />
                 </RadioGroup>
               </div>
