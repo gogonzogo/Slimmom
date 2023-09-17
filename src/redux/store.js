@@ -3,6 +3,7 @@ import registrationReducer from './validation/registrationSlice';
 import { foodsReducer } from './productStore/productStoreSlice';
 import { diaryReducer } from './diary/diarySlice';
 import CaloriesReducer from './validation/calculateCalsSlice'
+import calCalories from "../redux/Calc/calcSlice"
   
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     registration: registrationReducer,
     diary: diaryReducer,
     calculate: CaloriesReducer,
+calCalories: calCalories
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
