@@ -43,11 +43,11 @@ validateName: (state, action) => {
   const { fieldValue } = action.payload;
   const isNameValid = fieldValue.length >= 3 &&
     fieldValue.length <= 20 &&
-    /^[a-zA-Z0-9]+$/.test(fieldValue); 
-  
+    /^[a-zA-Z0-9]+(([a-zA-Z0-9 ])?[a-zA-Z0-9]*)*$/.test(fieldValue); 
+
   state.validationReqs.name[0].req1.met = fieldValue.length >= 3 &&
     fieldValue.length <= 20;
-    state.validationReqs.name[1].req2.met = /^[a-zA-Z0-9]+$/.test(fieldValue);
+    state.validationReqs.name[1].req2.met = /^[a-zA-Z0-9]+(([a-zA-Z0-9 ])?[a-zA-Z0-9]*)*$/.test(fieldValue);
 
   state.isNameValid = isNameValid;
 },

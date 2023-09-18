@@ -3,36 +3,27 @@ import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectNameValidationReqs, selectEmailValidationReqs, selectPasswordValidationReqs } from '../../redux/validation/registrationSelectors';
-import {
-  validateEmail,
- validateName,
-  validatePassword,
-} from '../../redux/validation/registrationSlice';
+import {validateEmail,validateName,validatePassword} from '../../redux/validation/registrationSlice';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
-import { toast } from 'react-toastify';
 import { register } from 'redux/auth/authOperations';
+//import { useAuthStore } from 'hooks/useAuth';
 
 const RegistrationForm = () => {
+ // const { loading, user, refreshing, error, token } = useAuthStore();
   const isFormValid = useSelector(selectFormIsValid);
+  const validationReqs = useSelector((state) => state.registration.validationReqs);
+
   const dispatch = useDispatch();
-    //const nameValidationReqs = useSelector(selectNameValidationReqs);
-  //const emailValidationReqs = useSelector(selectEmailValidationReqs);
-  //const passwordValidationReqs = useSelector(selectPasswordValidationReqs);
   const [validationPopups, setValidationPopups] = useState({
     name: false,
     email: false,
     password: false,
   });
   const [focusedField, setFocusedField] = useState(null);
-
   const toggleValidationPopup = (fieldName, visible) => {
     setValidationPopups({ ...validationPopups, [fieldName]: visible });
   };
-
-  const validationReqs = useSelector((state) => state.registration.validationReqs);
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -65,23 +56,20 @@ const RegistrationForm = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-
-  const userData = {
+    setFormData({
     name: formData.name,
     email: formData.email,
     password: formData.password,
-  };
-  
-  try {
-    const response = await dispatch(register(userData));
-      toast.success('Registration successful!', {
-      position: 'top-right', // Choose the position where the toast should appear
-      autoClose: 3000, // Auto-close the toast after 3 seconds (optional)
-    });
-    console.log('Registration successful', response.payload);
+  })
+    try {
+      const response = await dispatch(register(formData));
+            
+
+      return response;
   } catch (error) {
-    console.error('Registration failed', error.message);
-  }
+    console.error('Registration failed:', error.message);
+    }
+    
 };
 
   const renderValidationPopup = () => { // popup function needed for validation
