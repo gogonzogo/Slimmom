@@ -95,6 +95,9 @@ export const validationSlice = createSlice({
     clearValidationReqs: (state, action) => {
       state.validationReqs = initialState.validationReqs;
     },
+        clearFormData: (state, action) => {
+      state.formData = initialState.formData;
+    },
   }
 });
 

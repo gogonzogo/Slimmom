@@ -7,13 +7,15 @@ import {validateEmail,validateName,validatePassword} from '../../redux/validatio
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
 import { register } from 'redux/auth/authOperations';
+import { useNavigate } from 'react-router-dom';
 //import { useAuthStore } from 'hooks/useAuth';
 
+
 const RegistrationForm = () => {
- // const { loading, user, refreshing, error, token } = useAuthStore();
+//const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isFormValid = useSelector(selectFormIsValid);
   const validationReqs = useSelector((state) => state.registration.validationReqs);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [validationPopups, setValidationPopups] = useState({
     name: false,
@@ -29,6 +31,13 @@ const RegistrationForm = () => {
     email: '',
     password: '',
   });
+const resetForm = () => {
+  setFormData({
+    name: '',
+    email: '',
+    password: '',
+  });
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,23 +65,14 @@ const RegistrationForm = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    setFormData({
-    name: formData.name,
-    email: formData.email,
-    password: formData.password,
-  })
-    try {
       const response = await dispatch(register(formData));
-            
-
-      return response;
-  } catch (error) {
-    console.error('Registration failed:', error.message);
-    }
-    
+      if (response.payload.code === 201) {
+      resetForm()
+        navigate('/calculator')
+      }
 };
 
-  const renderValidationPopup = () => { // popup function needed for validation
+  const renderValidationPopup = () => { 
     return (
       <ValidationPopup
         validationData={validationReqs[focusedField]}
@@ -89,7 +89,7 @@ const RegistrationForm = () => {
           <form
             onSubmit={handleSubmit}
             noValidate>
-            <TextField
+            <TextField 
               className={style.name_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }}
               variant="standard"
@@ -102,6 +102,7 @@ const RegistrationForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
+              helperText={formData.name.length > 5 && renderValidationPopup()}
               //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
             />
 
@@ -136,7 +137,7 @@ const RegistrationForm = () => {
               onBlur={() => setFocusedField(null)}// needed for validation
               //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             /> 
-{renderValidationPopup()} {/** render the popup  */}
+ {renderValidationPopup()} {/** render the popup  */}
             <Box className={style.button_container}> 
               <Button
                 variant="contained"
