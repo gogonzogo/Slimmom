@@ -14,6 +14,7 @@ import Modal from 'components/Modal/Modal';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { validateHeight, validateAge, validateCurrent, validateDesired, validateBlood }
 from '../../redux/validation/calculateCalsSlice'
+import  { storeCalulator } from '../../redux/Calc/calcSlice'
 
 const CaloriesCalc = () => {
   const dispatch = useDispatch();
@@ -22,11 +23,9 @@ const CaloriesCalc = () => {
   const validcurrent = useSelector(state => state.calculate.isCurrentValid)
   const validDesired = useSelector(state => state.calculate.isDesiredValid)
   const validBlood = useSelector(state => state.calculate.isBloodValid)
-
-
   const isFormValid = validHeight && validAge && validcurrent && validDesired && validBlood ? true : false 
 
-
+  const returnedCal = useSelector((state) => state.calCalories.value);
   
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
@@ -72,11 +71,11 @@ const CaloriesCalc = () => {
   };
 
   const [formData, setFormData] = useState({
-    height: '',
-    age: '',
-    currentWeight: '',
-    desiredWeight: '',
-    bloodType: '',
+     height: returnedCal.height,
+    age: returnedCal.age,
+    currentWeight: returnedCal.currentWeight,
+    desiredWeight: returnedCal.desiredWeight,
+    bloodType: returnedCal.bloodType,
   });
 
   const changeHandler = e => {
@@ -121,19 +120,15 @@ const { name, value } = e.target;
 
   const submitHandler = e => {
     e.preventDefault();
-    const {height, age, currentWeight, desiredWeight, } = formData
+    const {height, age, currentWeight, desiredWeight, bloodType} = formData
     const totalCalories =
       10 * currentWeight +
       6.25 * height -
       5 * age -
       161 -
       10 * (currentWeight - desiredWeight);
-    // console.log(height);
-    // console.log(age);
-    // console.log(currentWeight);
-    // console.log(desiredWeight);
-    // console.log(bloodType);
-    // console.log(totalCalories);
+    
+dispatch(storeCalulator({height: height, age: age, currentWeight: currentWeight, desiredWeight: desiredWeight, bloodType: bloodType }) )
 
     handleOpen(totalCalories); // give me food
   };
@@ -250,9 +245,6 @@ const { name, value } = e.target;
                   value={formData.bloodType}
                   name="bloodType"
                   sx={{
-                    '&, &.Mui-checked': {
-                      color: '#FC842D',
-                    },
                     flexDirection: 'row',
                   }}
                   onChange={changeHandler}
@@ -261,47 +253,39 @@ const { name, value } = e.target;
                 >
                   <FormControlLabel
                     value="A"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
                     label="A"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="B"
-                    control={<Radio />}
+                    control={<Radio sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
                     label="B"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="AB"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
                     label="AB"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: '#FC842D',
-                      },
-                    }}
                   />
                   <FormControlLabel
                     value="O"
-                    control={<Radio />}
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
                     label="O"
-                    sx={{
-                      color: '#E0E0E0',
-                      '&.Mui-checked': {
-                        color: 'rgba(252, 132, 45, 1)',
-                      },
-                    }}
                   />
                 </RadioGroup>
               </div>
