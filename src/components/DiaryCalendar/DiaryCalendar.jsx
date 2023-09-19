@@ -13,10 +13,10 @@ import { useState } from 'react';
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
-  const [formattedCalValue, setFormattedCalValue] = useState(dayjs().format(`DD/MM/YYYY`));
+  const [formattedCalValue, setFormattedCalValue] = useState(dayjs().format(`MM/DD/YYYY`));
 
   const formatCalValue = value => {
-    const newValue = dayjs(`${value}`).format(`DD/MM/YYYY`);
+    const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(newValue);
   };
 
