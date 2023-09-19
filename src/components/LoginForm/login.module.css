@@ -1,6 +1,4 @@
-.login_color {
-  color: #e0e0e0;
-}
+
 
 .form_title {
   color: #fc842d;
@@ -44,6 +42,20 @@
 
 .register_button {
   width: 182px;
+}
+
+.error_message {
+  color: red;
+  font-family: 'Verdana';
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.error_message_valid {
+  color: green;
+  font-family: 'Verdana';
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* styles for mobile */
