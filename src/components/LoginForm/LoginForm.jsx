@@ -5,22 +5,21 @@ import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFormIsValid, selectEmailValidationReqs, selectIsEmailValid, selectIsPasswordValid } from '../../redux/validation/registrationSelectors';
+import { selectIsEmailValid, selectIsPasswordValid, selectFormIsValid } from '../../redux/validation/registrationSelectors';
 import {
   validateEmail,
   validatePassword,
-  validateName,
+
 } from '../../redux/validation/registrationSlice';
 import { toast } from 'react-toastify';
-import { updateValidationReqs } from '../../redux/validation/validationSlice';
-import { getFormDataEmail, getValidationReqs } from 'redux/validation/validationSelectors';
-import ValidationPopup from '../ValidationPopup/ValidationPopup';
+
 
 
 
 const LoginForm = () => {
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
+  const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
   const nav = useNavigate(); // react router hook
   const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
@@ -56,7 +55,7 @@ const LoginForm = () => {
     
     switch (name) { // dispatches validation reducers from the slice on change
       case 'email':
-        console.log(dispatch(validateEmail({ fieldValue: value })));
+       dispatch(validateEmail({ fieldValue: value }));
         break;
       case 'password':
         dispatch(validatePassword({ fieldValue: value }));
@@ -72,20 +71,21 @@ const LoginForm = () => {
 
   // handles login
   async function handleLogin() {
-    const userData = {
-      email: formData.email,
-      password: formData.password,
-    };
+ 
 
     try {
-      console.log('login information', userData);
-      await dispatch(login(userData));
-      toast.success('Login successful');
+      // console.log('login information', userData);
+      const response = await dispatch(login(formData));
+      toast.success('Login successful!' , {
+        icon: "🚀"
+      });
       console.log('Login successful');
+      console.log('Login information', response.payload)
       nav('/');
     } catch (err) {
       console.err('Login error', loginError);
-      setLoginError('An eroor occured. Please try again.');
+      setLoginError('An error occured. Please try again.');
+      toast.error('An error occured. Please try again.');
     }
   }
 
@@ -140,7 +140,7 @@ const LoginForm = () => {
               onFocus={() => setFocusedField('password')}
             />
             {/* if password is not longer than 5 number and email is not longer than 5 chars then disable button  */}
-            {isEmailValid && isPasswordValid ? (
+            {/* {isEmailValid && isPasswordValid ? (
               <Box className={style.button_container}>
                 <Button variant="contained" className={style.login_button}>
                   Log In
@@ -151,11 +151,12 @@ const LoginForm = () => {
                   </Button>
                 </Link>
               </Box>
-            ) : (
+            ) : ( */}
               <Box className={style.button_container}>
                 <Button
                   variant="contained"
-                  disabled
+                  type='submit'
+                  disabled={!isEmailValid || !isPasswordValid}
                   className={style.login_button}
                 >
                   Log In
@@ -166,7 +167,7 @@ const LoginForm = () => {
                   </Button>
                 </Link>
               </Box>
-            )}
+            
           </form>
         </FormControl>
       </Grid>
