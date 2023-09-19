@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Loader from './Loader/Loader';
 import Header from './Header/Header';
-import { ToastContainer } from 'react-toastify'; // Import ToastContainer from react-toastify
-import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for Toastify
+import { ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Diary = lazy(() => import('pages/Diary/Diary'));
@@ -16,7 +16,6 @@ export const App = () => {
   return (
     <div className='app'>
       <Header />
-      {/* Add the ToastContainer here */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <Suspense fallback={<Loader />}>
         <Routes>

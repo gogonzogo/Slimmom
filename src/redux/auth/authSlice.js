@@ -25,8 +25,8 @@ const authSlice = createSlice({
       })
       .addCase(register.rejected, (state, action) => {
         state.isRefreshing = false;
-        if (action.payload.includes('400')) {
-          console.log('Email already exists');
+        if (action.payload.includes('409')) {
+          console.log('Email or name already exists');
         } else {
           console.log('Server error, please try again');
         }

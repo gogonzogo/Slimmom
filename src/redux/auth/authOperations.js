@@ -1,7 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-
+import { toast } from 'react-toastify';
 axios.defaults.baseURL = "http://localhost:3030/api";
+
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 export const token = {
   set(token) {
@@ -18,10 +20,19 @@ export const register = createAsyncThunk(
     try {
       const { data } = await axios.post("/users/register", credentials);
       token.set(data.token);
+      toast.success(data.data.message, {
+      position: 'top-right',
+      autoClose: 3000,
+    });
       return data;
     } catch (error) {
+      toast.error(error.response.data.data.message, {
+      position: 'top-right',
+      autoClose: 3000,
+    });
       return rejectWithValue(error.message);
     }
+    
   }
 );
 
