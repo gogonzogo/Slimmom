@@ -5,7 +5,7 @@ import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsEmailValid, selectIsPasswordValid, selectFormIsValid } from '../../redux/validation/registrationSelectors';
+import { selectIsEmailValid, selectIsPasswordValid } from '../../redux/validation/registrationSelectors';
 import {
   validateEmail,
   validatePassword,
