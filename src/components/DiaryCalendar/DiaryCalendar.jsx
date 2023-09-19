@@ -10,10 +10,6 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchFoods } from 'redux/productStore/productStoreOperations';
-import { addDiary, fetchDiary } from 'redux/diary/diaryOperations';
-
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
@@ -24,19 +20,6 @@ export default function DiaryCalendar() {
     setFormattedCalValue(newValue);
   };
 
-  const [diary, setDiary] = useState();
-     const dispatch = useDispatch();
-    const handleDiaryChange = () => {
-      //setDiary(event.target.value);
-     // dispatch(fetchFoods())
-    //.then(() => {
-      dispatch(addDiary({ foodsList: [fetchFoods()] }))
-    //})
-    .then(() => {
-      dispatch(fetchDiary())
-    });
-    };
-
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -44,7 +27,7 @@ export default function DiaryCalendar() {
           <PopupState variant="popper" popupId="demo-popup-popper">
             {popupState => (
               <div className={css.btnPopperContainer}>
-                <h2 className={css.dateText}>{formattedCalValue}</h2>
+                <p className={css.dateText}>{formattedCalValue}</p>
                 <IconButton aria-label="delete" {...bindToggle(popupState)}>
                   <DateRangeIcon />
                 </IconButton>
@@ -57,7 +40,6 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
-                            setDiary(handleDiaryChange);
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}
