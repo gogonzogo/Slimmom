@@ -1,7 +1,7 @@
  import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "http://localhost:3030/api/";
+axios.defaults.baseURL = "https://64ff0e2df8b9eeca9e298036.mockapi.io/";
 
 export const fetchFoods = createAsyncThunk(
   'foods/fetchfoods', async (rejectWithValue) => {
@@ -23,7 +23,7 @@ export const addFood = createAsyncThunk(
     title: data.title,
     weight: data.weight,
     calories: data.calories,
-    date: Date.now(),
+    createdAt: Date.now(),
   };
     try {
       const response = await axios.post(
