@@ -19,10 +19,10 @@ import { toast } from 'react-toastify';
 const LoginForm = () => {
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
-  const isFormValid = useSelector(selectFormIsValid);
+ // const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
   const nav = useNavigate(); // react router hook
-  const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
+ // const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
 
   // listens to validation changes
   const toggleValidationPopup = (fieldName, visible) => {
