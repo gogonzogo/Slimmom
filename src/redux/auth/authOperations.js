@@ -1,9 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
-axios.defaults.baseURL = "http://localhost:3030/api";
 
-axios.defaults.baseURL = "http://localhost:5000/api";
+axios.defaults.baseURL = "http://localhost:3030/api";
 
 export const token = {
   set(token) {
