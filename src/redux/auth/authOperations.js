@@ -38,13 +38,23 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
-    console.log('login called')
+    // console.log('login called')
     try {
-      const { data } = await axios.post("/auth/login", credentials);
+      const { data } = await axios.post("/users/login", credentials);
       token.set(data.token);
-      console.log(data)
+      toast.success(data.data.message, {
+        icon: "🚀",
+        theme: "colored",
+      });
+      // console.log(data)
       return data;
     } catch (error) {
+      toast.error(error.response.data.data.message, {
+        position: 'top-right',
+        autoClose: 3000,
+        theme: "colored",
+        icon: true,
+      });
       return rejectWithValue(error.message);
     }
   }
@@ -54,7 +64,7 @@ export const logOut = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/auth/logout");
+      await axios.post("/users/logout");
       token.set(null);
     } catch (error) {
       return rejectWithValue(error.message);
@@ -66,7 +76,7 @@ export const refresh = createAsyncThunk(
   "auth/refresh",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/auth/logout");
+      await axios.post("/users/logout");
       token.set(null);
     } catch (error) {
       return rejectWithValue(error.message);
