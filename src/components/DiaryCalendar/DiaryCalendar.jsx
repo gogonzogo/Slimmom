@@ -19,6 +19,16 @@ export default function DiaryCalendar() {
     const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(newValue);
   };
+  
+     const dispatch = useDispatch();
+    const handleDiaryChange = () => {
+      
+      dispatch(addDiary({ foodsList: [fetchFoods()] }))
+    
+    .then(() => {
+      dispatch(fetchDiary())
+    });
+    };
 
   return (
     <>
@@ -40,6 +50,7 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
+                            handleDiaryChange();
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}
