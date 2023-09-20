@@ -24,24 +24,14 @@ const LoginForm = () => {
   const nav = useNavigate(); // react router hook
  // const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
 
-  // listens to validation changes
-  const toggleValidationPopup = (fieldName, visible) => {
-    setValidationPopups({ ...validationPopups, [fieldName]: visible });
-  };
 
-
-  const [validationPopups, setValidationPopups] = useState({
-    name: false,
-    email: false,
-    password: false,
-  });
 
   // form data state
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
-
+  // used to set the focused text field
   const [focusedField, setFocusedField] = useState('');
  
 
@@ -63,7 +53,7 @@ const LoginForm = () => {
       default:
         break;
     }
-    toggleValidationPopup(name, true);
+    
   };
 
   // listens to form submission and looks for errors
@@ -71,17 +61,12 @@ const LoginForm = () => {
 
   // handles login
   async function handleLogin() {
- 
-
     try {
-      // console.log('login information', userData);
       const response = await dispatch(login(formData));
-      toast.success('Login successful!' , {
-        icon: "🚀"
-      });
-      console.log('Login successful');
-      console.log('Login information', response.payload)
-      nav('/');
+      if(response.payload.code === 200) {
+        nav('/calculator');
+      }
+      // nav('/');
     } catch (err) {
       console.err('Login error', loginError);
       setLoginError('An error occured. Please try again.');
@@ -92,7 +77,7 @@ const LoginForm = () => {
   // handles form submission
   function handleSubmit(e) {
     e.preventDefault();
-    handleLogin();
+    handleLogin(); // calls the login function
     // clear the form data after submission
     setFormData({ email: '', password: '' });
   }
