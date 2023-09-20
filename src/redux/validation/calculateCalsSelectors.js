@@ -27,6 +27,28 @@ export const selectHBloodReqs = createSelector(
   (calculate) => calculate.validationReqs.blood
 );
 
+export const selectHeightFeetValidationReqs = createSelector(
+  [selectCalculation],
+  (calculate) => calculate.validationReqs.heightFeet
+);
+
+export const selectHeightInchValidationReqs = createSelector(
+  [selectCalculation],
+  (calculate) => calculate.validationReqs.heightInch
+);
+
+export const selectCurrentLbsValidationReqs = createSelector(
+  [selectCalculation],
+  (calculate) => calculate.validationReqs.currentWeightLbs
+);
+
+export const selectDesiredLbsValidationReqs = createSelector(
+  [selectCalculation],
+  (calculate) => calculate.validationReqs.desiredWeightLbs
+);
+
+
+
 export const selectAgeValid = createSelector(
   [selectCalculation],
   (calculate) => calculate.isAgeValid
