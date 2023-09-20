@@ -19,7 +19,7 @@ export const selectPasswordValidationReqs = createSelector(
   (registration) => registration.validationReqs.password
 );
 
-// Select individual field validation states
+// Select individual field validation states - this works then?
 export const selectIsNameValid = createSelector(
   [selectRegistration],
   (registration) => registration.isNameValid
