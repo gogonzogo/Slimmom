@@ -24,14 +24,12 @@ export default function DiaryCalendar() {
     setFormattedCalValue(newValue);
   };
 
-  const [diary, setDiary] = useState();
+  
      const dispatch = useDispatch();
     const handleDiaryChange = () => {
-      //setDiary(event.target.value);
-     // dispatch(fetchFoods())
-    //.then(() => {
+      
       dispatch(addDiary({ foodsList: [fetchFoods()] }))
-    //})
+    
     .then(() => {
       dispatch(fetchDiary())
     });
@@ -57,7 +55,7 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
-                            setDiary(handleDiaryChange);
+                            handleDiaryChange();
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}
