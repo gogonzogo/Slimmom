@@ -2,7 +2,7 @@ import React from 'react';
 import css from './CaloriesCalc.module.css';
 import { useState } from 'react';
 import {useSelector, useDispatch } from 'react-redux';
-
+import { Tab, Tabs } from "@mui/material";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -13,17 +13,25 @@ import Button from '@mui/material/Button';
 import Modal from 'components/Modal/Modal';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { validateHeight, validateAge, validateCurrent, validateDesired, validateBlood }
+  from '../../redux/validation/calculateCalsSlice'
+import { validateHeightFeet, validateHeightInch, validateCurrentLbs, validateDesiredLbs }
 from '../../redux/validation/calculateCalsSlice'
 import  { storeCalulator } from '../../redux/Calc/calcSlice'
 
 const CaloriesCalc = () => {
   const dispatch = useDispatch();
-  const validHeight = useSelector((state) => state.calculate.isHeightValid)
+  const validHeight = useSelector(state => state.calculate.isHeightValid)
   const validAge = useSelector(state => state.calculate.isAgeValid)
   const validcurrent = useSelector(state => state.calculate.isCurrentValid)
   const validDesired = useSelector(state => state.calculate.isDesiredValid)
   const validBlood = useSelector(state => state.calculate.isBloodValid)
   const isFormValid = validHeight && validAge && validcurrent && validDesired && validBlood ? true : false 
+
+  const validHeightFeet = useSelector(state => state.calculate.isHeightFeetValid)
+  const validHeightInch = useSelector(state => state.calculate.isHeightInchValid)
+  const validcurrentLbs = useSelector(state => state.calculate.isCurrentLbsValid)
+  const validDesiredLbs = useSelector(state => state.calculate.isDesiredLbsValid)
+  const isStandardFormValid = validHeightFeet && validHeightInch && validAge && validcurrentLbs && validDesiredLbs && validBlood ? true : false 
 
   const returnedCal = useSelector((state) => state.calCalories.value);
   
@@ -34,11 +42,17 @@ const CaloriesCalc = () => {
     desiredWeight: false,
     bloodType: false
   });
+
+  const [currentTabIndex, setCurrentTabIndex] = useState(0);
+ 
+  const handleTabChange = (e, tabIndex) => {
+    setCurrentTabIndex(tabIndex);
+  };
   const [focusedField, setFocusedField] = useState(null);
 
   const toggleValidationPopup = (fieldName, visible) => {
     setValidationPopups({ ...validationPopups, [fieldName]: visible });
-    console.log('isFormValid', isFormValid)
+   
   };
 
     const validationReqs = useSelector((state) => state.calculate.validationReqs);
@@ -76,6 +90,10 @@ const CaloriesCalc = () => {
     currentWeight: returnedCal.currentWeight,
     desiredWeight: returnedCal.desiredWeight,
     bloodType: returnedCal.bloodType,
+    heightFeet: returnedCal.heightFeet,
+    heightInch: returnedCal.heightInch,
+    currentWeightLbs: returnedCal.currentWeightLbs,
+    desiredWeightLbs: returnedCal.desiredWeightLbs,
   });
 
   const changeHandler = e => {
@@ -86,30 +104,46 @@ const { name, value } = e.target;
     })
   switch (name) {
     case 'height':
-      dispatch(validateHeight({ fieldValue: value }));
-        break;
+        dispatch(validateHeight({ fieldValue: value }));
+          break;
+      case 'heightFeet':
+        dispatch(validateHeightFeet({ fieldValue: value }));
+      break;
+      case 'heightInch':
+        dispatch(validateHeightInch({ fieldValue: value }));
+          break;
     case 'age':
       dispatch(validateAge({ fieldValue: value }));
         break;
     case 'currentWeight':
       dispatch(validateCurrent({ fieldValue: value }));
+      break;
+    case 'currentWeightLbs':
+      dispatch(validateCurrentLbs({ fieldValue: value }));
         break;
     case 'desiredWeight':
       dispatch(validateDesired({ fieldValue: value }));
       break;
+     case 'desiredWeightLbs':
+      dispatch(validateDesiredLbs({ fieldValue: value }));
+      break;
     case 'bloodType':
       dispatch(validateBlood({ fieldValue: value }));
-      // console.log('bloodType' )
       break;
     default:
         break;
     }
+    if (currentTabIndex === 1) {
+      const {heightFeet, heightInch, currentWeightLbs, desiredWeightLbs} = formData
+        setFormData(formData => {
+      return {...formData, height: ((heightFeet *12 + heightInch*1) * 2.54), currentWeight: currentWeightLbs * .454, desiredWeight: desiredWeightLbs*.454 }
+        })
+  }   
     setFocusedField(name);
     toggleValidationPopup(name, true);
   };
 
   const renderValidationPopup = () => {
-    console.log('focusedField', focusedField)
     return (
       <ValidationPopup
         validationData={validationReqs[focusedField]}
@@ -118,8 +152,15 @@ const { name, value } = e.target;
     );
   };
 
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
+    if (currentTabIndex === 1) {
+    const {heightFeet, heightInch, currentWeightLbs, desiredWeightLbs} = formData
+     await setFormData(formData => {
+    return {...formData, height: ((heightFeet *12 + heightInch*1) * 2.54), currentWeight: currentWeightLbs * .454, desiredWeight: desiredWeightLbs*.454 }
+      })
+}   
+    
     const {height, age, currentWeight, desiredWeight, bloodType} = formData
     const totalCalories =
       10 * currentWeight +
@@ -140,11 +181,23 @@ dispatch(storeCalulator({height: height, age: age, currentWeight: currentWeight,
           <div className={css.calcWrapper}>
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
-
+            
+            <Tabs value={currentTabIndex} onChange={handleTabChange} sx = {{"& button": {color: "white",borderRadius: 2, backgroundColor: "#FC842D", marginTop: "15px", marginRight: "10px"},
+               "& button:focus": {color: "white", textShadow: "2px 2px", fontWeight: 900}}}>
+        <Tab label='Matric' />
+        <Tab label='Standard US' />
+      </Tabs>
+      
+{/* TAB 1 Contents */}
+      {currentTabIndex === 0 && (
             <form className={css.calcform} onSubmit={submitHandler}>
               <div className={css.formdiv}>
                 <TextField
-                  sx={{
+                  sx={{ "& .MuiOutlinedInput-root.Mui-focused": {
+      "& > fieldset": {
+borderColor: "orange"
+      }
+    },
                     fontFamily: 'Verdana',
                     fontSize: '14px',
                     fontWeight: '700',
@@ -313,8 +366,212 @@ dispatch(storeCalulator({height: height, age: age, currentWeight: currentWeight,
                 disabled={!isFormValid}
               >
                 Start losing weight
-              </Button>
-            </form>
+                </Button>
+                
+              </form>
+            )}
+{/*  Standard US Contents */}
+      {currentTabIndex === 1 && (
+            <form className={css.calcform} onSubmit={submitHandler}>
+              <div className={css.formdiv}>
+                <TextField
+                  sx={{
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
+                    width: '240px',
+                    paddingRight: '32px',
+                  }}
+                                InputLabelProps={{ style: { color: "#9B9FAA" } }}
+
+                  type="tel"
+                  label="Height Feet *"
+                  variant="standard"
+                  onChange={changeHandler}
+                  value={formData.heightFeet}
+                  name="heightFeet"
+              onFocus={() => setFocusedField('heightFeet')}
+              onBlur={() => setFocusedField(null)}
+                  />
+                  <TextField
+                  sx={{
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
+                    width: '240px',
+                    paddingRight: '32px',
+                  }}
+                                InputLabelProps={{ style: { color: "#9B9FAA" } }}
+
+                  type="tel"
+                  label="Height Inch *"
+                  variant="standard"
+                  onChange={changeHandler}
+                  value={formData.heightInch}
+                  name="heightInch"
+              onFocus={() => setFocusedField('heightInch')}
+              onBlur={() => setFocusedField(null)}
+                  />
+                
+                <TextField
+                  sx={{
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
+                    width: '240px',
+                    paddingRight: '32px',
+                  }}
+                  InputLabelProps={{ style: { color: "#9B9FAA" } }}
+                  type="tel"
+                  inputprops={{ inputprops: { min: 18, max: 80 } }}
+                  label="Age"
+                  variant="standard"
+                  onChange={changeHandler}
+                  value={formData.age}
+                  name="age"
+                  onFocus={() => setFocusedField('age')}
+              onBlur={() => setFocusedField(null)}
+                />
+                
+              </div>
+              <div className={css.formdiv}>
+                <TextField
+                  sx={{
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
+                    width: '240px',
+                    paddingRight: '32px',
+                  }}
+                                InputLabelProps={{ style: { color: "#9B9FAA" } }}
+
+                  type="tel"
+                  inputprops={{ inputprops: { min: 34, max: 181 } }}
+                  label="Current Weight Lbs"
+                  variant="standard"
+                  onChange={changeHandler}
+                  value={formData.currentWeightLbs}
+                  name="currentWeightLbs"
+                  onFocus={() => setFocusedField('currentWeightLbs')}
+              onBlur={() => setFocusedField(null)}
+                />
+                  <TextField
+                  sx={{
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
+                    width: '240px',
+                    paddingRight: '32px',
+                  }}
+                                InputLabelProps={{ style: { color: "#9B9FAA" } }}
+
+                  type="tel"
+                  inputprops={{ inputprops: { min: 34, max: 181 } }}
+                  label="Desired Weight Lbs"
+                  variant="standard"
+                  onChange={changeHandler}
+                  value={formData.desiredWeightLbs}
+                  name="desiredWeightLbs"
+                  onFocus={() => setFocusedField('desiredWeightLbs')}
+              onBlur={() => setFocusedField(null)}
+                />
+                <FormLabel id="demo-radio-buttons-group-label">
+                  Blood Type
+                </FormLabel>
+
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  value={formData.bloodType}
+                  name="bloodType"
+                  sx={{
+                    flexDirection: 'row',
+                  }}
+                  onChange={changeHandler}
+              onFocus={() => setFocusedField('bloodType')}
+              onBlur={() => setFocusedField(null)}
+                >
+                  <FormControlLabel
+                    value="A"
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
+                    label="A"
+                  />
+                  <FormControlLabel
+                    value="B"
+                    control={<Radio sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }} />}
+                    label="B"
+                  />
+                  <FormControlLabel
+                    value="AB"
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
+                    label="AB"
+                  />
+                  <FormControlLabel
+                    value="O"
+                    control={<Radio  sx={{
+          '&.Mui-checked': {
+            color: '#FC842D',
+          },
+        }}/>}
+                    label="O"
+                  />
+                </RadioGroup>
+              </div>
+
+              {renderValidationPopup()}
+
+              <Button
+                sx={{
+                  margin: '40px 0',
+                  backgroundColor: '#FC842D',
+                  width: '210px',
+                  height: '43px',
+                  dropShadow: '50% #FC842D80',
+                  borderRadius: '30px',
+                  fontFamily: 'Verdana',
+                  fontSize: '14px',
+                  fontWeight: '700',
+                  lineHeight: '17px',
+                  letterSpacing: '0.04em',
+                  textAlign: 'center',
+                  color: '#FFFFFF',
+                }}
+                type="submit"
+                variant="contained"
+                disabled={!isStandardFormValid}
+              >
+                Start losing weight
+                </Button>
+                
+              </form>
+              )}            
+
           </div>
         </div>
       </div>
