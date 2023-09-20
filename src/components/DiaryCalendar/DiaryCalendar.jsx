@@ -10,26 +10,29 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchFoods } from 'redux/productStore/productStoreOperations';
+import { addDiary, fetchDiary } from 'redux/diary/diaryOperations';
+
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
   const [formattedCalValue, setFormattedCalValue] = useState(dayjs().format(`MM/DD/YYYY`));
 
-
   const formatCalValue = value => {
     const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(newValue);
   };
+
   
-    //  const dispatch = useDispatch();
+     const dispatch = useDispatch();
     const handleDiaryChange = () => {
-      
-      // dispatch(addDiary({ foodsList: [fetchFoods()] }))
+
+      dispatch(addDiary({ foodsList: [fetchFoods()] }))
     
-    // .then(() => {
-    //   dispatch(fetchDiary())
-    // });
+    .then(() => {
+      dispatch(fetchDiary())
+    });
     };
 
   return (
@@ -39,7 +42,7 @@ export default function DiaryCalendar() {
           <PopupState variant="popper" popupId="demo-popup-popper">
             {popupState => (
               <div className={css.btnPopperContainer}>
-                <p className={css.dateText}>{formattedCalValue}</p>
+                <h2 className={css.dateText}>{formattedCalValue}</h2>
                 <IconButton aria-label="delete" {...bindToggle(popupState)}>
                   <DateRangeIcon />
                 </IconButton>
