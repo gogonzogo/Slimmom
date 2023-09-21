@@ -11,29 +11,22 @@ import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { fetchFoods } from 'redux/productStore/productStoreOperations';
-import { addDiary, fetchDiary } from 'redux/diary/diaryOperations';
-
+import { setCalDate } from 'redux/diary/diarySlice';
+import { fetchDiary } from 'redux/diary/diaryOperations';
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
-  const [formattedCalValue, setFormattedCalValue] = useState(dayjs().format(`MM/DD/YYYY`));
+  const [formattedCalValue, setFormattedCalValue] = useState(
+    dayjs().format(`MM/DD/YYYY`)
+  );
+  const dispatch = useDispatch();
 
   const formatCalValue = value => {
     const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(newValue);
+    dispatch(setCalDate(newValue));
+    dispatch(fetchDiary(newValue));
   };
-
-  
-     const dispatch = useDispatch();
-    const handleDiaryChange = () => {
-
-      dispatch(addDiary({ foodsList: [fetchFoods()] }))
-    
-    .then(() => {
-      dispatch(fetchDiary())
-    });
-    };
 
   return (
     <>
@@ -55,7 +48,6 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
-                            handleDiaryChange();
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}

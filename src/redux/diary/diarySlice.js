@@ -1,25 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDiary, addDiary, deleteDiary, updateDiary } from './diaryOperations';
+import { fetchDiary, addDiaryEntry, deleteDiaryEntry, updateDiaryEntry } from './diaryOperations';
 
 const initialState = {
   diary: {
-    items: [],
-    isLoading: false,
-    error: null,
+    calDate: '',
+    diaryList: [],
   },
+  isLoading: false,
+  error: null,
   filter: '',
 }
 
 export const diarySlice = createSlice({
   name: 'diary',
   initialState,
-   reducers: {
-    filterDiary: (state, action) => {
-      state.filter = action.payload;
+  reducers: {
+    setCalDate: (state, action) => {
+      state.diary.calDate = action.payload;
     },
-    clearDiary: (state) => {
-      state.diary.items = [];
-     },
+    setDiaryList: (state, action) => {
+      state.diary.diaryList = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -27,48 +28,49 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(fetchDiary.fulfilled, (state, action) => {
-        state.diary.items = action.payload;
+        state.diary.diaryList = action.payload;
         state.diary.error = null;
         state.diary.isLoading = false;
+        console.log(action.payload)
       })
       .addCase(fetchDiary.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
-        state.diary.items = [];
-        console.log('Server Error!');
+        state.diary.diaryList = [];
+        console.log(action.payload);
       })
-      .addCase(addDiary.pending, state => {
+      .addCase(addDiaryEntry.pending, state => {
         state.diary.isLoading = true;
       })
-      .addCase(addDiary.fulfilled, state => {
+      .addCase(addDiaryEntry.fulfilled, state => {
         state.diary.isLoading = false;
         state.diary.error = null;
       })
-      .addCase(addDiary.rejected, (state, action) => {
+      .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
       })
-      .addCase(updateDiary.pending, (state) => {
+      .addCase(updateDiaryEntry.pending, (state) => {
         state.diary.isLoading = true;
       })
-      .addCase(updateDiary.fulfilled, (state, action) => {
+      .addCase(updateDiaryEntry.fulfilled, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = null;
       })
-      .addCase(updateDiary.rejected, (state, action) => {
+      .addCase(updateDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
       })
-      .addCase(deleteDiary.pending, (state) => {
+      .addCase(deleteDiaryEntry.pending, (state) => {
         state.diary.isLoading = true;
       })
-      .addCase(deleteDiary.fulfilled, (state, action) => {
+      .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = null;
       })
-      .addCase(deleteDiary.rejected, (state, action) => {
+      .addCase(deleteDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
@@ -76,5 +78,5 @@ export const diarySlice = createSlice({
   }
 })
 
-export const { filterDiarys, clearDiarys } = diarySlice.actions;
+export const { setCalDate, setDiaryList } = diarySlice.actions;
 export const diaryReducer = diarySlice.reducer;

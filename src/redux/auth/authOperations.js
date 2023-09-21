@@ -20,18 +20,17 @@ export const register = createAsyncThunk(
       const { data } = await axios.post("/users/register", credentials);
       token.set(data.token);
       toast.success(data.data.message, {
-      position: 'top-right',
-      autoClose: 3000,
-    });
+        position: 'top-right',
+        autoClose: 3000,
+      });
       return data;
     } catch (error) {
       toast.error(error.response.data.data.message, {
-      position: 'top-right',
-      autoClose: 3000,
-    });
+        position: 'top-right',
+        autoClose: 3000,
+      });
       return rejectWithValue(error.message);
     }
-    
   }
 );
 
@@ -46,7 +45,7 @@ export const login = createAsyncThunk(
         icon: "🚀",
         theme: "colored",
       });
-      // console.log(data)
+      console.log(data.token)
       return data;
     } catch (error) {
       toast.error(error.response.data.data.message, {
