@@ -5,6 +5,7 @@ import Loader from './Loader/Loader';
 import Header from './Header/Header';
 import { ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
+import { Box } from '@mui/material';
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Diary = lazy(() => import('pages/Diary/Diary'));
@@ -14,7 +15,7 @@ const Login = lazy(() => import('pages/Login/Login'));
 
 export const App = () => {
   return (
-    <div className='app'>
+    <Box className='app'>
       <Header />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <Suspense fallback={<Loader />}>
@@ -27,6 +28,6 @@ export const App = () => {
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </Suspense>
-    </div>
+    </Box>
   );
 };
