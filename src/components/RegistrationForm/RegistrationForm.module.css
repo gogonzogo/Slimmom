@@ -1,9 +1,12 @@
-.login_color {
-    color: #e0e0e0;
+.form_container {
+    margin: 0 auto;
+    padding: 32px;
+    max-width: 1280px;
+    margin-top:0px;
 }
 
 .form_title {
-    color: #fc842d;
+color: #fc842d;
     font-family: 'Verdana';
     font-size: 14px;
     font-weight: 700;
@@ -14,43 +17,11 @@
     text-align: center;
 }
 
-.login_button {
-    width: 182px;
-    padding: 1;
-    margin: 2;
-    height: 44px;
-    background-color: #fc842d;
-    border-radius: 30px;
-    color: #ffffff;
-    font-family: 'Verdana';
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: capitalize;
-}
-
-.register_button {
-    width: 182px;
-    background-color: #ffffff;
-    height: 44px;
-    color: #fc842d;
-    border: solid #fc842d;
-    border-radius: 30px;
-    border-width: 2px;
-    font-family: 'Verdana';
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: capitalize;
-}
-
-.register_button {
-    width: 182px;
-}
-
 /* styles for mobile */
 @media screen and (min-width: 320px) {
-    .form_container {
-        padding: 20px;
-    }
+.form_container {
+padding: 20px;
+}
 
     .form_container form {
         max-width: 300px;
@@ -61,14 +32,14 @@
         padding-bottom: 55px;
         padding-top: 40px;
     }
-
-    .button_container {
-        padding: 60px 0px;
-    }
-
-    .button_container button {
-        margin-bottom: 20px;
-    }
+        .button_container {
+            padding: 60px 0px;
+        }
+    
+        .button_container button {
+            margin-bottom: 20px;
+        }
+    
 
 
 }
@@ -96,18 +67,25 @@
 
     .email_input {
         text-align: left;
-    }
+    }        .button_container {
+                display: inline-flex;
+                justify-content: space-between;
+                padding-top: 60px;
+            }
+    
+            .button_container button {
+                margin-right: 32px;
+            }
 
-    .button_container {
-        display: inline-flex;
-        justify-content: space-between;
-        padding-top: 60px;
-    }
+        .button_container {
+            display: inline-flex;
+            justify-content: space-between;
+            padding-top: 60px;
+        }
 
-    .button_container button {
-        margin-right: 32px;
-    }
-
+        .button_container button {
+            margin-right: 32px;
+        }
 
 }
 

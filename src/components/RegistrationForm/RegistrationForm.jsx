@@ -8,6 +8,7 @@ import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
+import CustomButton from 'components/Button/Button';
 //import { useAuthStore } from 'hooks/useAuth';
 
 
@@ -102,8 +103,9 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
-              helperText={formData.name.length > 5 && renderValidationPopup()}
+              helperText={ focusedField === 'name' && formData.name.length >= 3 ? (renderValidationPopup()) : null}
               //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
+  
             />
 
             <TextField
@@ -119,12 +121,13 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
+              helperText={ focusedField === 'email' && formData.email.length >= 3 ? (renderValidationPopup()) : null}
               //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
 
             <TextField
               className={style.password_input}
-              InputLabelProps={{ style: { color: "#9B9FAA" } }} // input field styles
+              InputLabelProps={{ style: { color: "#9B9FAA" } }} 
               variant="standard"
               label={'Password *'}
               type="password"
@@ -132,27 +135,23 @@ const resetForm = () => {
               fullWidth
               margin="normal"
               value={formData.password}
-              onChange={handleChange}// add to track each keystroke
-              onFocus={() => setFocusedField('password')}// needed for validation
-              onBlur={() => setFocusedField(null)}// needed for validation
+              onChange={handleChange}
+              onFocus={() => setFocusedField('password')}
+              onBlur={() => setFocusedField(null)}
+              helperText={ focusedField === 'password' && formData.password.length >= 3 ? (renderValidationPopup()) : null}
               //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             /> 
- {renderValidationPopup()} {/** render the popup  */}
-            <Box className={style.button_container}> 
-              <Button
-                variant="contained"
-                type="submit"
-                className={style.login_button}
-                disabled={!isFormValid}
-              >
-                Register
-              </Button>
-            <Link to="/Login">
-            <Button variant="contained" className={style.register_button}>
-              Log In
-            </Button>
-          </Link>
-            </Box>
+
+      <Box className={style.button_container}> 
+        <CustomButton color="orange"
+              disabled={!isFormValid}
+              >Register
+        </CustomButton>
+      <Link to="/Login">
+          <CustomButton color="white">
+          Log In</CustomButton> 
+      </Link>
+        </Box>
           </form>
         </FormControl>
 
