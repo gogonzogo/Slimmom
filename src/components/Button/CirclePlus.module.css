@@ -1,7 +1,13 @@
+:root {
+    --orange-color: #fc842d;
+    --white-color: #ffffff;
+    --hover-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
 .CirclePlus {
     padding: 8px 16px;
     border-radius: 50%;
-    background-color: #FC842D;
+    background-color: var(--orange-color);
     width: 48px;
     height: 48px;
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -16,14 +22,14 @@
     line-height: 24px;
     font-style: normal;
     font-weight: 500;
-  
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
         0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 .CirclePlus:hover,
 .CirclePlus:focus {
-    background-color: #2138cc;
+    background-color: var(--white-color);
+    color: var(--orange-color);
     border: none;
     outline: none;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
