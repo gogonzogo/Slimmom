@@ -9,7 +9,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 // import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
 import Modal from 'components/Modal/Modal';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import { validateHeight, validateAge, validateCurrent, validateDesired, validateBlood }
@@ -17,6 +16,7 @@ import { validateHeight, validateAge, validateCurrent, validateDesired, validate
 import { validateHeightFeet, validateHeightInch, validateCurrentLbs, validateDesiredLbs }
 from '../../redux/validation/calculateCalsSlice'
 import  { storeCalulator } from '../../redux/Calc/calcSlice'
+import CustomButton from 'components/Button/Button';
 
 
 const CaloriesCalc = () => {
@@ -373,32 +373,12 @@ borderColor: "orange"
         />
         )}
               </div>
-
-
-              <Button
-                sx={{
-                  margin: '40px 0',
-                  backgroundColor: '#FC842D',
-                  width: '210px',
-                  height: '43px',
-                  dropShadow: '50% #FC842D80',
-                  borderRadius: '30px',
-                  fontFamily: 'Verdana',
-                  fontSize: '14px',
-                  fontWeight: '700',
-                  lineHeight: '17px',
-                  letterSpacing: '0.04em',
-                  textAlign: 'center',
-                  color: '#FFFFFF',
-                }}
-                type="submit"
-                variant="contained"
-                disabled={!isFormValid}
-              >
-                Start losing weight
-                </Button>
-                
-              </form>
+              <CustomButton color="orange"
+              size="wide"
+              disabled={!isFormValid}
+              >Start losing weight
+        </CustomButton>
+  </form>
             )}
 {/*  Standard US Contents */}
       {currentTabIndex === 1 && (
@@ -575,30 +555,11 @@ borderColor: "orange"
               </div>
 
               {renderValidationPopup()}
-
-              <Button
-                sx={{
-                  margin: '40px 0',
-                  backgroundColor: '#FC842D',
-                  width: '210px',
-                  height: '43px',
-                  dropShadow: '50% #FC842D80',
-                  borderRadius: '30px',
-                  fontFamily: 'Verdana',
-                  fontSize: '14px',
-                  fontWeight: '700',
-                  lineHeight: '17px',
-                  letterSpacing: '0.04em',
-                  textAlign: 'center',
-                  color: '#FFFFFF',
-                }}
-                type="submit"
-                variant="contained"
-                disabled={!isStandardFormValid}
-              >
-                Start losing weight
-                </Button>
-                
+              <CustomButton color="orange"
+              size='wide'
+              disabled={!isStandardFormValid}
+              >Start losing weight
+        </CustomButton>   
               </form>
               )}            
 
