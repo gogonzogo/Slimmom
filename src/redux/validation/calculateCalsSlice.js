@@ -82,7 +82,7 @@ validateAge: (state, action) => {
   const isAgeValid = parseInt(fieldValue) >= 18 && parseInt(fieldValue) <= 80
 
       state.validationReqs.age[0].req1.met = parseInt(fieldValue) >= 18;
-      state.validationReqs.age[1].req2.met = parseInt(fieldValue) >= 80;
+      state.validationReqs.age[1].req2.met = parseInt(fieldValue) <= 80;
 
   state.isAgeValid = isAgeValid;
     },

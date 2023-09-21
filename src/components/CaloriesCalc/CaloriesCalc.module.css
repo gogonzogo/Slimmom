@@ -39,7 +39,7 @@
   }
   .calcform {
     display: grid;
-    grid-template-columns: 245px 245px;
+    grid-template-columns: 272px 272px;
     margin-top: 68px;
     margin-right: 32px;
   }

@@ -184,7 +184,7 @@ dispatch(storeCalulator({height: height, age: age, currentWeight: currentWeight,
             
             <Tabs value={currentTabIndex} onChange={handleTabChange} sx = {{"& button": {color: "white",borderRadius: 2, backgroundColor: "#FC842D", marginTop: "15px", marginRight: "10px"},
                "& button:focus": {color: "white", textShadow: "2px 2px", fontWeight: 900}}}>
-        <Tab label='Matric' />
+        <Tab label='Metric' />
         <Tab label='Standard US' />
       </Tabs>
       
@@ -204,15 +204,15 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
-                    paddingRight: '32px',
+                     width: '272px',
+                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
 
                   type="tel"
                   inputprops={{ inputprops: { min: 122, max: 214 } }}
                   label="Height *"
-                  variant="standard"
+                    variant="standard"
                   onChange={changeHandler}
                   value={formData.height}
                   name="height"
@@ -311,7 +311,7 @@ borderColor: "orange"
             color: '#FC842D',
           },
         }} />}
-                    label="A"
+                    label="1"
                   />
                   <FormControlLabel
                     value="B"
@@ -320,7 +320,7 @@ borderColor: "orange"
             color: '#FC842D',
           },
         }} />}
-                    label="B"
+                    label="2"
                   />
                   <FormControlLabel
                     value="AB"
@@ -329,7 +329,7 @@ borderColor: "orange"
             color: '#FC842D',
           },
         }}/>}
-                    label="AB"
+                    label="3"
                   />
                   <FormControlLabel
                     value="O"
@@ -338,7 +338,7 @@ borderColor: "orange"
             color: '#FC842D',
           },
         }}/>}
-                    label="O"
+                    label="4"
                   />
                 </RadioGroup>
               </div>
