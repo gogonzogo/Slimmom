@@ -5,6 +5,7 @@ import RightSideBar from 'components/RightSideBar/RightSideBar';
 import { Summery } from 'components/RightSideBar/Summery';
 import DiaryList from '../../components/DiaryList/DiaryList';
 import { useDiary } from 'hooks/useDiary';
+import Container from 'components/Container/Container';
 
 function Diary() {
   const { diaryList } = useDiary();
@@ -18,14 +19,20 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      <div style={{ flexGrow: '1' }}>
+      <section className="top-bottom" style={{ flexGrow: '1' }}>
+        <Container className="left-right">
         <DiaryCalendar />
         <DiaryAddProductForm />
-        <DiaryList diaryList={diaryList} />
-      </div>
-      <RightSideBar>
-        <Summery />
-      </RightSideBar>
+          <DiaryList diaryList={diaryList} />
+        </Container>
+      </section>
+      <section className="no-bottom">
+        <Container className="no-left-right">
+          <RightSideBar>
+            <Summery />
+          </RightSideBar>
+        </Container>
+      </section>
     </div>
   );
 }

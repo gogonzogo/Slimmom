@@ -28,7 +28,7 @@ const Header = () => {
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
   const isSmallScreen = useMediaQuery('(max-width: 319px)');
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
     
     <Box sx={{ width: "100%" }}>

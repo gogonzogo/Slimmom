@@ -1,6 +1,6 @@
 .form_container {
   margin: 0 auto;
-  padding: 32px;
+  /* padding: 32px; */
   /* background-color: #fff; */
   /* border-radius: 8px; */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
@@ -67,9 +67,9 @@
 
 /* styles for mobile */
 @media screen and (min-width: 320px) {
-  .form_container {
+  /* .form_container {
     padding: 20px;
-  }
+  } */
 
   .form_container form {
     max-width: 300px;
@@ -78,7 +78,7 @@
 
   .form_title {
     padding-bottom: 55px;
-    padding-top: 40px;
+    padding-top: 8px;
   }
 
   .button_container {

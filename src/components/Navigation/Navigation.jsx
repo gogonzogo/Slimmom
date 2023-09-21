@@ -9,7 +9,7 @@ import css from './Navigation.module.css';
 
 function Navigation({className}) {
   //const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isLoggedIn = true
+  const isLoggedIn = false;
   return (
   <>
     {isLoggedIn
