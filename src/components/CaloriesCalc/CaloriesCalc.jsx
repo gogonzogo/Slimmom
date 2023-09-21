@@ -18,6 +18,7 @@ import { validateHeightFeet, validateHeightInch, validateCurrentLbs, validateDes
 from '../../redux/validation/calculateCalsSlice'
 import  { storeCalulator } from '../../redux/Calc/calcSlice'
 
+
 const CaloriesCalc = () => {
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid)
@@ -147,7 +148,7 @@ const { name, value } = e.target;
     return (
       <ValidationPopup
         validationData={validationReqs[focusedField]}
-        visible={!!focusedField}
+        visible={focusedField}
       />
     );
   };
@@ -219,6 +220,12 @@ borderColor: "orange"
               onFocus={() => setFocusedField('height')}
               onBlur={() => setFocusedField(null)}
                 />
+                {focusedField === 'height' && (
+          <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
+        />
+        )}
                 <TextField
                   sx={{
                     fontFamily: 'Verdana',
@@ -227,7 +234,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                   InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -241,6 +248,12 @@ borderColor: "orange"
                   onFocus={() => setFocusedField('age')}
               onBlur={() => setFocusedField(null)}
                 />
+                {focusedField === 'age' && (
+          <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
+        />
+        )}
                 <TextField
                   sx={{
                     fontFamily: 'Verdana',
@@ -249,7 +262,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -264,6 +277,12 @@ borderColor: "orange"
                   onFocus={() => setFocusedField('currentWeight')}
               onBlur={() => setFocusedField(null)}
                 />
+                 {focusedField === 'currentWeight' && (
+          <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
+        />
+        )}
               </div>
               <div className={css.formdiv}>
                 <TextField
@@ -274,7 +293,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -289,6 +308,12 @@ borderColor: "orange"
                   onFocus={() => setFocusedField('desiredWeight')}
               onBlur={() => setFocusedField(null)}
                 />
+                 {focusedField === 'desiredWeight' && (
+          <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
+        />
+        )}
                 <FormLabel id="demo-radio-buttons-group-label">
                   Blood Type
                 </FormLabel>
@@ -341,9 +366,14 @@ borderColor: "orange"
                     label="4"
                   />
                 </RadioGroup>
+                {focusedField === 'bloodType' && (
+          <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
+        />
+        )}
               </div>
 
-              {renderValidationPopup()}
 
               <Button
                 sx={{
@@ -382,7 +412,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -404,7 +434,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -427,7 +457,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                   InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -452,7 +482,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -475,7 +505,7 @@ borderColor: "orange"
                     lineHeight: '17px',
                     letterSpacing: '0.04em',
                     textAlign: 'left',
-                    width: '240px',
+                    width: '272px',
                     paddingRight: '32px',
                   }}
                                 InputLabelProps={{ style: { color: "#9B9FAA" } }}
