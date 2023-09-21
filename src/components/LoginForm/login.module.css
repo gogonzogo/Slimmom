@@ -47,8 +47,8 @@
   text-transform: capitalize;
 }
 
-.register_button {
-  width: 182px;
+.register_button:hover {
+  color: #ffffff;
 }
 
 .error_message {
