@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
+import { Box, FormControl, TextField, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {validateEmail,validateName,validatePassword} from '../../redux/validation/registrationSlice';
