@@ -1,18 +1,21 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
-  getProductName,
-  getGrams,
-  getCalories,
+  getDiaryList,
+  getCalDate,
+  getIsLoading,
+  getError,
 } from "../redux/diary/diarySelectors";
 
-export const useDiaryStore = () => {
-  const productName = useSelector(getProductName);
-  const grams = useSelector(getGrams);
-  const calories = useSelector(getCalories);
+export const useDiary = () => {
+  const diaryList = useSelector(getDiaryList);
+  const calDate = useSelector(getCalDate);
+  const isLoading = useSelector(getIsLoading);
+  const isError = useSelector(getError);
 
   return {
-    productName,
-    grams,
-    calories,
+    diaryList,
+    calDate,
+    isLoading,
+    isError,
   };
 };

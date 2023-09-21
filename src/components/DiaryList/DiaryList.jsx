@@ -1,47 +1,43 @@
 import DiaryListItem from '../DiaryListItem/DiaryListItem';
 import style from './style.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getfoods} from '../../redux/productStore/productStoreSelectors';
-import { fetchFoods, deleteFood } from '../../redux/productStore/productStoreOperations';
-import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import {
+//   fetchDiary,
+//   deleteDiaryEntry,
+// } from '../../redux/diary/diaryOperations';
+// import { useEffect } from 'react';
 import * as React from 'react';
 import List from '@mui/material/List';
+// import dayjs from 'dayjs';
+// import { setCalDate } from 'redux/diary/diarySlice';
 
+function DiaryList({ diaryList }) {
+  console.log(diaryList)
+  // const { diaryList, calDate } = useDiary();
+  // const dispatch = useDispatch();
+  // let date = calDate || dayjs().format(`MM/DD/YYYY`);
 
+  // useEffect(() => {
+  //   dispatch(fetchDiary(date));
+  // }, [dispatch, date]);
 
-function ProductList() {
-  const products = useSelector(getfoods);
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(fetchFoods());
-  }, [dispatch]);
-
-  function handleDelete  (productId)  {
-    dispatch(deleteFood(productId)).then(() => {
-      dispatch(fetchFoods());
-    });
-  };
+  // function handleDelete(productId) {
+  //   dispatch(deleteDiaryEntry(productId));
+  // }
 
   return (
-    
-     <List className={style.productList}>
-              
-                {products.length > 0 &&
-                   products.map((product) => (
-                    <DiaryListItem key={product.productId} product={product} handleDelete={handleDelete} />
-                  ))}
-              
-      </List>
-      
-
-    // <ul className={style.productList}>
-    //   {products.length > 0 &&
-    //   products.map((product) => (
-    //     <DiaryListItem key={product.productId} product={product} handleDelete={handleDelete} />
-    //   ))}
-    // </ul>
+    <List className={style.productList}>
+      {diaryList.length < 1 ? <p>No Diary Entries for selected day</p>
+        : 
+        diaryList.map(item => (
+          <DiaryListItem
+            key={item.productId}
+            product={item}
+            // handleDelete={handleDelete}
+          />
+        ))}
+    </List>
   );
 }
 
-export default ProductList;
+export default DiaryList;

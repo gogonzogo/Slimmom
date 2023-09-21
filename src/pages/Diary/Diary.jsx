@@ -1,23 +1,13 @@
 import React from 'react';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
-
 import RightSideBar from 'components/RightSideBar/RightSideBar';
-
-// mocking user login to retireve token
-import { login } from 'redux/auth/authOperations';
-import { useDispatch } from 'react-redux';
 import { Summery } from 'components/RightSideBar/Summery';
+import DiaryList from '../../components/DiaryList/DiaryList';
+import { useDiary } from 'hooks/useDiary';
 
 function Diary() {
-  const dispatch = useDispatch();
-  // moock user
-  const credentials = {
-    email: 'user@example.com',
-    password: 'qwerty123',
-  };
-  // mock user login operation
-  dispatch(login(credentials));
+  const { diaryList } = useDiary();
 
   return (
     <div
@@ -31,6 +21,7 @@ function Diary() {
       <div style={{ flexGrow: '1' }}>
         <DiaryCalendar />
         <DiaryAddProductForm />
+        <DiaryList diaryList={diaryList} />
       </div>
       <RightSideBar>
         <Summery />

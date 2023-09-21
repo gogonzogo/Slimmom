@@ -1,4 +1,4 @@
-export const getDiary = state => state.diary.items;
-export const getFilter = state => state.diary.filter;
-export const getIsLoading = state => state.diary.diary.isLoading;
-export const getError = state => state.diary.diary.error;
+export const getDiaryList = state => state.diary.diary.diaryList;
+export const getCalDate = state => state.diary.calDate;
+export const getIsLoading = state => state.diary.isLoading;
+export const getError = state => state.diary.error;
