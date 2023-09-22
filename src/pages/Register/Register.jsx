@@ -5,7 +5,7 @@ import Container from 'components/Container/Container';
 function Register() {
   return (
     <div className=" background mainBackground">
-      <section>
+      <section className="top-bottom">
         <Container className="left-right">
           <RegistrationForm/>
         </Container>
