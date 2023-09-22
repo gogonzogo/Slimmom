@@ -14,7 +14,7 @@ function Navigation({className}) {
   <>
     {loggedIn
       ? (
-      <div className={`${css.navContainer} ${className}`}>
+      <div className={className}>
         <NavLink to="/diary" className={css.navLink}>
           diary
          </NavLink>
@@ -23,7 +23,7 @@ function Navigation({className}) {
         </NavLink>
         </div> 
     ) : (
-      <div className={`${css.navContainer} ${className}`}>
+      <div className={className}>
           <NavLink to="/login" className={css.navLink}>
             log in
           </NavLink>

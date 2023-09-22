@@ -35,3 +35,25 @@
     opacity: 0;
     transition: opacity 0.7s ease;
 }
+
+.smallScreenNavContainer {
+    position: fixed;
+    bottom: 15;
+    right: 0px;
+    /* Start from the right, outside the viewport */
+    width: 150px;
+    height: 30px;
+    background-color: gray;
+    transition: right 0.9s ease;
+    /* Add transition for smooth sliding */
+}
+
+.slideIn {
+    right: 0;
+    /* Slide in to the right */
+}
+
+.slideOut {
+    right: -250px;
+    /* Slide out to the right, outside the viewport */
+}

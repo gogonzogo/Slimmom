@@ -71,22 +71,28 @@ console.log(isMediumScreen, "med");
           <div>
             <IconButton
               onClick={toggleNavbar}
-              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '120px' : '0' }}
+              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '0' : '120px' }}
             >
               <CompareArrowsIcon />
              </IconButton>
           </div>
         )}
         {/** is it a small screen and navigation is toggled show image logo and navigation */}
+        {/* <div className={isOpen
+          ? `${s.smallScreenNavContainer} ${s.slideIn}`
+          : `${s.smallScreenNavContainer} ${s.slideOut}`
+        }> */}
         {isSmallScreen && showNavigation && (
-          <Box sx={{position: 'absolute', bottom: 15, transition: 'right 0.9s ease', right: showNavigation ? '-10px' : '0'}} 
-            className={`${s.smallScreenNavigationContainer}`}>
+          <Box >
             <Navigation />
           </Box>
-        )}
+          )}
+        {/* </div> */}
       </Toolbar>
     </AppBar>
   );
 };
 
 export default UserInfo;
+
+// sx={{position: 'absolute', bottom: 15, transition: 'right 0.9s ease', right: showNavigation ? '-10px' : '0'}}
