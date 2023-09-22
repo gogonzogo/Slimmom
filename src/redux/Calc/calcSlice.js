@@ -1,19 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDaySummary, getUserStats } from './calcOperations';
+import { fetchDaySummary, getUserStats, CalNoEat  } from './calcOperations';
+
 
 export const calculateSlice = createSlice({
   name: 'calCalories',
   initialState: {
-    value: {
-      height: '',
-      age: '',
-      currentWeight: '',
-      desiredWeight: '',
-      bloodType: '',
-      heightFeet: '',
-      heightInch: '',
-      currentWeightLbs: '',
-      desiredWeightLbs: '',
+    cals: {
+      value: {
+        height: '',
+        age: '',
+        currentWeight: '',
+        desiredWeight: '',
+        bloodType: '',
+        heightFeet: '',
+        heightInch: '',
+        currentWeightLbs: '',
+        desiredWeightLbs: '',
+      },
+      totalCalories: '',
+      noEat: {},
     },
     stats: {
       height: null,
@@ -30,6 +35,7 @@ export const calculateSlice = createSlice({
     setStats: (state, action) => {
       state.stats = action.payload;
     },
+    
   },
   extraReducers: builder => {
     builder
@@ -45,7 +51,20 @@ export const calculateSlice = createSlice({
       })
       .addCase(fetchDaySummary.fulfilled, (state, action) => {
         console.log(action.payload);
-      });
+      })
+     .addCase(CalNoEat.pending, state => {
+            state.cals.isRefreshing = true;
+          })
+          .addCase(CalNoEat.fulfilled, (state, action) => {
+            state.cals.isLoggedIn = true;
+            state.cals.isRefreshing = false;
+            console.log('Success! You are registered');
+          })
+          .addCase(CalNoEat.rejected, (state, action) => {
+            state.cals.isRefreshing = false;
+              console.log('Error');
+           
+          })
   },
 });
 
