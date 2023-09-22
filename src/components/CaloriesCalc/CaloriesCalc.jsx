@@ -26,6 +26,7 @@ import {
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/Calc/calcSlice';
 import CustomButton from 'components/Button/Button';
+import { CalNoEat } from '../../redux/Calc/calcOperations'
 
 const CaloriesCalc = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  const returnedCal = useSelector(state => state.calCalories.value);
+  const returnedCal = useSelector(state => state.calCalories.cals.value);
 
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
@@ -184,40 +185,41 @@ const CaloriesCalc = () => {
     );
   };
 
-  const submitHandler = async e => {
+   const submitHandler = async e => {
     e.preventDefault();
     if (currentTabIndex === 1) {
-      const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
-        formData;
-      await setFormData(formData => {
-        return {
-          ...formData,
-          height: (heightFeet * 12 + heightInch * 1) * 2.54,
-          currentWeight: currentWeightLbs * 0.454,
-          desiredWeight: desiredWeightLbs * 0.454,
-        };
-      });
-    }
-
-    const { height, age, currentWeight, desiredWeight, bloodType } = formData;
+    const {heightFeet, heightInch, currentWeightLbs, desiredWeightLbs} = formData
+     await setFormData(formData => {
+    return {...formData, height: ((heightFeet *12 + heightInch*1) * 2.54), currentWeight: currentWeightLbs * .454, desiredWeight: desiredWeightLbs*.454 }
+      })
+}   
+    
+    const {height, age, currentWeight, desiredWeight, bloodType} = formData
     const totalCalories =
       10 * currentWeight +
       6.25 * height -
       5 * age -
       161 -
       10 * (currentWeight - desiredWeight);
+    
+dispatch(storeCalulator({height: height, age: age, currentWeight: currentWeight, desiredWeight: desiredWeight, bloodType: bloodType }) )
+const entedInfo = {
+  currentWeight,
+  height, 
+  age,
+  desiredWeight,
+  bloodType,
+};
+console.log('entedInfo', entedInfo)
+try {
+  const response = await dispatch(CalNoEat(entedInfo));
+  console.log('returned Data', response.payload);
+  const passinfo = response.payload
+    handleOpen(totalCalories, passinfo); // give me food
 
-    dispatch(
-      storeCalulator({
-        height: height,
-        age: age,
-        currentWeight: currentWeight,
-        desiredWeight: desiredWeight,
-        bloodType: bloodType,
-      })
-    );
-
-    handleOpen(totalCalories); // give me food
+} catch (error) {
+  console.error('returned Error', error.message);
+}
   };
 
   return (
