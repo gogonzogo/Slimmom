@@ -63,10 +63,13 @@
   text-align: none;
 }
 ol {
-  padding: 20px 16px;
+  padding: 20px 28px;
+
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: 175px;
+  overflow-y: scroll;
 }
 .notEatItem {
   font: 400 14p/17px Verdana;
