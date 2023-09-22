@@ -34,7 +34,6 @@ export default function DiaryAddProduct() {
     if (foodItem) {
       const calculatedCalories = (foodItem.calories / 100) * grams;
       setCalories(calculatedCalories);
-      console.log(calculatedCalories);
     } else {
       setCalories(0);
     }

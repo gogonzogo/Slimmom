@@ -3,22 +3,14 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = "http://localhost:3030/api";
-
-export const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+axios.defaults.withCredentials = true;
 
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/users/register", credentials);
-      token.set(data.token);
+      // token.set(data.token);
       toast.success(data.data.message, {
         icon: '🚀',
         position: 'top-right',
@@ -41,12 +33,12 @@ export const login = createAsyncThunk(
     // console.log('login called')
     try {
       const { data } = await axios.post("/users/login", credentials);
-      token.set(data.token);
+      // token.set(data.token);
       toast.success(data.data.message, {
         icon: "🚀",
         theme: "colored",
       });
-      console.log(data.token)
+      // console.log(data.token)
       return data;
     } catch (error) {
       toast.error(error.response.data.data.message, {
@@ -65,7 +57,7 @@ export const logOut = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await axios.post("/users/logout");
-      token.set(null);
+      // token.set(null);
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -77,7 +69,7 @@ export const refresh = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await axios.post("/users/logout");
-      token.set(null);
+      // token.set(null);
     } catch (error) {
       return rejectWithValue(error.message);
     }
