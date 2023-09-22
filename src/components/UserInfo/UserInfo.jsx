@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 // mui styles
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import { AppBar, Box, Container, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/material';
+import { AppBar, Box, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 
 // internal
 import useViewPort from '../../hooks/useViewport';
