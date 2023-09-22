@@ -32,7 +32,7 @@ export default function DiaryCalendar() {
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className={css.calendarContainer}>
-          <PopupState variant="popper" popupId="demo-popup-popper">
+          <PopupState  variant="popper" popupId="demo-popup-popper">
             {popupState => (
               <div className={css.btnPopperContainer}>
                 <h2 className={css.dateText}>{formattedCalValue}</h2>
@@ -42,7 +42,7 @@ export default function DiaryCalendar() {
                 <Popper {...bindPopper(popupState)} transition>
                   {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={100}>
-                      <Paper sx={{ backgroundColor: 'white' }}>
+                      <Paper className={css.paper} sx={{ backgroundColor: 'white' }}>
                         <DateCalendar
                           value={value}
                           onChange={newValue => {

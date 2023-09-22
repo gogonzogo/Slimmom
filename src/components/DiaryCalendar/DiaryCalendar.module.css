@@ -6,3 +6,38 @@
   display: flex;
   align-items: center;
 }
+.dateText {
+  margin-left: 12px;
+  margin-right: 12px;
+  font-size: 34px;
+  font-weight: 900;
+  font-family: Verdana
+}
+.paper{
+    overflow-x: hidden;
+    width: 320px;
+    max-height: 358px;
+    margin-right: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+@media (min-width: 768px) {
+
+.btnPopperContainer {
+  margin-top: 52px;
+}
+}
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+.btnPopperContainer {
+    margin-top: 40px;
+    
+  }
+
+
+}
