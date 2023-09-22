@@ -32,7 +32,7 @@ const UserInfo = () => {
     setShowTextLogo(!isOpen);
     setShowNavigation(isOpen);
   };
-// console.log(isMediumScreen, "med");
+console.log(isMediumScreen, "med");
   return (
     <AppBar position="static" sx={{ boxShadow: 'none' }}>
       <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative' }}>

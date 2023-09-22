@@ -4,10 +4,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary', async (date, rejectWithValue) => {
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         'day/info',
-        {date}
+        date
       );
+      console.log(response)
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -23,11 +24,13 @@ export const addDiaryEntry = createAsyncThunk(
       grams: data.weight,
       calories: data.calories,
     }
+    console.log(newDiaryEntry)
     try {
       const response = await axios.post(
         'users/addFood',
         newDiaryEntry
       );
+      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
