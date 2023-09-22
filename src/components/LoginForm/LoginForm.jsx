@@ -60,7 +60,7 @@ const LoginForm = () => {
     try {
       const response = await dispatch(login(formData));
       if (response.payload.code === 200) {
-        nav('/calculator');
+        nav('/diary');
       }
       // nav('/');
     } catch (err) {
