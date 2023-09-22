@@ -1,11 +1,9 @@
 import React from 'react';
-// import NotAllowedProducts from 'components/ProductsList/NotAllowedProducts/NotAllowedProducts';
-
 
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
-import { Stats } from 'components/RightSideBar/Stats';
 import Container from 'components/Container/Container';
+import { StatsContainer } from 'components/RightSideBar/StatsContainer';
 
 function Calculator() {
   return (
@@ -22,8 +20,8 @@ function Calculator() {
       <section className="no-bottom">
         <Container className="no-left-right">
           <RightSideBar>
-            <Stats />
-          </RightSideBar> 
+            <StatsContainer />
+          </RightSideBar>
         </Container>
       </section>
     </div>

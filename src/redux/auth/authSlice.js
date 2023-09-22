@@ -3,6 +3,7 @@ import { register, login, logOut, refresh } from './authOperations';
 
 const initialState = {
   user: { name: '', email: '' },
+  userId: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -37,6 +38,7 @@ const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.token;
         state.user = action.payload.user;
+        state.userId = action.payload.userId;
         state.isRefreshing = false;
         state.isLoggedIn = true;
         console.log('Success! Logging you in...');
