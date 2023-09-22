@@ -1,5 +1,4 @@
 // external
-// import { useSelector } from 'react-redux;
 
 // mui
 import { IconButton, useMediaQuery } from '@mui/material';
@@ -10,7 +9,7 @@ import Toolbar from '@mui/material/Toolbar';
 // internal
 //import { selectIsLoggedIn } from 'redux/auth/authSelectors';
 import useViewPort from 'hooks/useViewport';
-
+import {useAuth} from '../../hooks/useAuth'
 //styles
 import styles from './Header.module.css';
 import Logo from '../Logo/Logo'
@@ -19,16 +18,15 @@ import Navigation from 'components/Navigation/Navigation';
 import VectorLogo from 'components/Logo/ImageLogo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
 
-
 const Header = () => {
-  //const isLoggedIn = useSelector(selectIsLoggedIn);
+  const {loggedIn} = useAuth();
   
   const { width } = useViewPort();
   const breakpoint = 349;
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
   const isSmallScreen = useMediaQuery('(max-width: 319px)');
-  const isLoggedIn = false;
+
   return (
     
     <Box sx={{ width: "100%" }}>
@@ -43,7 +41,7 @@ const Header = () => {
             backgroundColor: 'var(--primary-background-color)',
             padding: isSmallScreen ? '15px' : (isLargeScreen ? '80px 20px 0 20px' : '20px'),
           }}>
-          {isLoggedIn ? (
+          {loggedIn ? (
             <UserInfo/>
           ) :
             width > breakpoint ? (
@@ -56,7 +54,7 @@ const Header = () => {
               </div>
           )}
           
-          {!isLoggedIn &&(
+          {!loggedIn &&(
             <Box sx={{
               marginTop: isLargeScreen ? 4 : 0,
             }}>
@@ -65,11 +63,11 @@ const Header = () => {
           )}
         </Toolbar>
 
-        {isLoggedIn && isLargeScreen &&(
+        {loggedIn && isLargeScreen &&(
           <UserToolBar/>
         )}
       </AppBar>
-      {isLoggedIn && isMediumScreen && (
+      {loggedIn && isMediumScreen && (
         <UserToolBar/>
       )}
     </Box>
