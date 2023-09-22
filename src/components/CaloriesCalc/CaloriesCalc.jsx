@@ -230,7 +230,7 @@ try {
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
 
-            <Tabs
+            <Tabs // Metric and Standard
               value={currentTabIndex}
               onChange={handleTabChange}
               sx={{
@@ -263,6 +263,7 @@ try {
                           borderColor: 'orange',
                         },
                       },
+                      
                       fontFamily: 'Verdana',
                       fontSize: '14px',
                       fontWeight: '700',
@@ -272,6 +273,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 122, max: 214 } }}
@@ -282,6 +284,7 @@ try {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
+                    
                   />
                   {focusedField === 'height' && (
                     <ValidationPopup
@@ -300,6 +303,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
@@ -328,6 +332,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -358,6 +363,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -473,7 +479,9 @@ try {
                       textAlign: 'left',
                       width: '272px',
                       paddingRight: '32px',
+                      
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     label="Height Feet *"
@@ -495,6 +503,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     label="Height Inch *"
@@ -517,6 +526,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
@@ -541,6 +551,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -563,6 +574,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -577,14 +589,15 @@ try {
                   <FormLabel id="demo-radio-buttons-group-label">
                     Blood Type
                   </FormLabel>
-
                   <RadioGroup
+                    
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
                     }}
+                    
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
                     onBlur={() => setFocusedField(null)}
