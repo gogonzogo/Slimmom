@@ -6,7 +6,7 @@ function Login() {
   return (
     // imported my form here to see it get rendered 
     <div className="background mainBackground">
-      <section className="topBottom">
+      <section className="top-bottom">
         <Container className="left-right">
           <LoginForm />
         </Container>
