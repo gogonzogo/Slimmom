@@ -12,7 +12,6 @@ import List from '@mui/material/List';
 // import { setCalDate } from 'redux/diary/diarySlice';
 
 function DiaryList({ diaryList }) {
-  console.log(diaryList)
   // const { diaryList, calDate } = useDiary();
   // const dispatch = useDispatch();
   // let date = calDate || dayjs().format(`MM/DD/YYYY`);
