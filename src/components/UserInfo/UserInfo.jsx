@@ -13,7 +13,7 @@ import Navigation from 'components/Navigation/Navigation';
 import s from './UserInfo.module.css';
 import TextLogo from 'components/Logo/TextLogo';
 import ImageLogo from 'components/Logo/ImageLogo';
-import Logo from 'components/Logo/Logo';
+
 
 
 
@@ -50,8 +50,8 @@ console.log(isMediumScreen, "med");
           ) : (
               // when it is a large screen > 449px
               <div className={`${s.largeScreenContent}`}>
-                
-                <Logo />
+                <ImageLogo />
+                <TextLogo />
                 <Divider
                   orientation="vertical"
                   flexItem
@@ -74,7 +74,7 @@ console.log(isMediumScreen, "med");
               sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '0' : '120px' }}
             >
               <CompareArrowsIcon />
-             </IconButton>
+            </IconButton>
           </div>
         )}
         {/** is it a small screen and navigation is toggled show image logo and navigation */}
