@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import registrationReducer from './validation/registrationSlice';
 import { diaryReducer } from './diary/diarySlice';
-import CaloriesReducer from './validation/calculateCalsSlice'
+import CaloriesReducer from './validation/calculateCalsSlice';
 import { authReducer } from './auth/authSlice';
 
-import calCalories from "../redux/Calc/calcSlice"
-
+import calCalories from './Calc/calcSlice';
 
 const store = configureStore({
   reducer: {
@@ -15,7 +14,7 @@ const store = configureStore({
     calculate: CaloriesReducer,
     calCalories: calCalories,
   },
-  middleware: (getDefaultMiddleware) =>
+  middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
     }),

@@ -1,7 +1,7 @@
 import NotAllowedProducts from 'components/ProductsList/NotAllowedProducts/NotAllowedProducts';
 import s from './rightSideBar.module.css';
 
-export const Summery = () => {
+export const Summary = props => {
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
