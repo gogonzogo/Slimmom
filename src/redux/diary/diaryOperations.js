@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary', async (date, rejectWithValue) => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         'day/info',
         date
       );
