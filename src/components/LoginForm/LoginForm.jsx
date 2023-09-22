@@ -103,9 +103,9 @@ const LoginForm = () => {
                 !formData.email ? (
                   'Required'
                 ) : isEmailValid && formData.email.length > 3 ? (
-                  <p className={style.error_message_valid}>Checks out!</p>
+                  <span className={style.error_message_valid}>Checks out!</span>
                 ) : (
-                  <p className={style.error_message}>Not quite!</p>
+                  <span className={style.error_message}>Not quite!</span>
                 )
               }
               value={formData.email}
@@ -127,9 +127,9 @@ const LoginForm = () => {
                 !formData.password ? (
                   'Required'
                 ) : isPasswordValid ? (
-                  <p className={style.error_message_valid}>Checks out!</p>
+                  <span className={style.error_message_valid}>Checks out!</span>
                 ) : (
-                  <p className={style.error_message}>Not quite!</p>
+                  <span className={style.error_message}>Not quite!</span>
                 )
               }
               value={formData.password}
