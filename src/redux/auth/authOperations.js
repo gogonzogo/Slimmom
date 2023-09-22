@@ -20,6 +20,7 @@ export const register = createAsyncThunk(
       const { data } = await axios.post("/users/register", credentials);
       token.set(data.token);
       toast.success(data.data.message, {
+        icon: '🚀',
         position: 'top-right',
         autoClose: 3000,
       });

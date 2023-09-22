@@ -7,15 +7,15 @@ import {
   selectToken,
 } from "../redux/auth/authSelectors";
 
-export const useAuthStore = () => {
-  const loading = useSelector(selectIsLoggedIn);
+export const useAuth = () => {
+  const loggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
   const refreshing = useSelector(selectIsRefreshing);
   const error = useSelector(selectError);
   const token = useSelector(selectToken);
 
   return {
-    loading,
+    loggedIn,
     user,
     refreshing,
     error,
