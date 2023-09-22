@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 // mui styles
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import { AppBar, Box, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/material';
+import { AppBar, Box, Container, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 
 // internal
 import useViewPort from '../../hooks/useViewport';
@@ -32,7 +32,7 @@ const UserInfo = () => {
     setShowTextLogo(!isOpen);
     setShowNavigation(isOpen);
   };
-// console.log(isMediumScreen, "med");
+
   return (
     <AppBar position="static" sx={{ boxShadow: 'none' }}>
       <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative' }}>
@@ -71,23 +71,20 @@ const UserInfo = () => {
           <div>
             <IconButton
               onClick={toggleNavbar}
-              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '0' : '120px' }}
+              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '120px' : '0' }}
             >
               <CompareArrowsIcon />
             </IconButton>
           </div>
         )}
         {/** is it a small screen and navigation is toggled show image logo and navigation */}
-        {/* <div className={isOpen
-          ? `${s.smallScreenNavContainer} ${s.slideIn}`
-          : `${s.smallScreenNavContainer} ${s.slideOut}`
-        }> */}
+        <Box sx={{ backgroundColor: "white", padding: ' 3px 0 0', position: 'absolute', bottom: 10, transition: 'right 0.9s ease', right: showNavigation ? '-15px' : '-400px' }}>
         {isSmallScreen && showNavigation && (
           <Box >
             <Navigation />
           </Box>
           )}
-        {/* </div> */}
+        </Box>
       </Toolbar>
     </AppBar>
   );

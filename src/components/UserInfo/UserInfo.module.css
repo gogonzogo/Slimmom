@@ -40,8 +40,7 @@
 .smallScreenNavContainer {
     position: fixed;
     bottom: 15;
-    right: 0px;
-    /* Start from the right, outside the viewport */
+    right: -100;
     width: 150px;
     height: 30px;
     background-color: gray;
