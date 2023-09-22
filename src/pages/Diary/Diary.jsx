@@ -32,8 +32,8 @@ function Diary() {
             <SummaryContainer />
           </RightSideBar>
         </Container>
-      </section>
-    </div>
+        </section>
+      </div>
   );
 }
 

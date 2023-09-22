@@ -1,5 +1,5 @@
 .calendarPopperContainer {
-  margin-top: 80px;
+  margin-top: 40px;
 }
 
 .btnPopperContainer {
@@ -7,10 +7,8 @@
   align-items: center;
 }
 .dateText {
-  margin-left: 12px;
-  margin-right: 12px;
-  font-size: 34px;
-  font-weight: 900;
+  font-size: 18px;
+  font-weight: 700;
   font-family: Verdana
 }
 .paper{
@@ -25,19 +23,7 @@
 
 
 @media (min-width: 768px) {
-
-.btnPopperContainer {
-  margin-top: 52px;
-}
-}
-
-
-@media (min-width: 0px) and (max-width: 767px) {
-
-.btnPopperContainer {
-    margin-top: 40px;
-    
+  .dateText {
+    font-size: 34px;
   }
-
-
 }
