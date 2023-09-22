@@ -103,7 +103,7 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
-              helperText={ focusedField === 'name' && formData.name.length >= 3 ? (renderValidationPopup()) : null}
+              helperText={focusedField === 'name' && formData.name.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
   
             />
@@ -121,7 +121,7 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
-              helperText={ focusedField === 'email' && formData.email.length >= 3 ? (renderValidationPopup()) : null}
+              helperText={focusedField === 'email' && formData.email.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
 
@@ -138,7 +138,7 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              helperText={ focusedField === 'password' && formData.password.length >= 3 ? (renderValidationPopup()) : null}
+              helperText={focusedField === 'password' && formData.password.length >= 3 ? <span>{(renderValidationPopup())}</span> : null}
               //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
             /> 
 
