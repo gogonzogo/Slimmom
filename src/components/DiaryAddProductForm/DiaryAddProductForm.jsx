@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
-import Button from '../Button/Button';
+// import Button from '../Button/Button';
 import CirclePlus from '../Button/CirclePlus';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
@@ -105,8 +105,8 @@ export default function DiaryAddProduct() {
             onChange={handleGramsChange}
           />
         </div>
-        <Button onClick={handleSubmit} />
-        <CirclePlus />
+        {/* <Button  /> */}
+        <CirclePlus onClick={handleSubmit} />
       </form>
     </div>
   );
