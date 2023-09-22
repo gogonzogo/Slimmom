@@ -1,0 +1,72 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+
+}
+.text-container {
+    display: flex;
+    gap: 5px;
+    /* margin-top: 40px; */
+    cursor: pointer;
+}
+.image-container {
+    width: 71px;
+}
+.svg-link {
+    display: block;
+}
+.text-container .svg-link {
+margin-right: -5px;
+    margin-left: -43px;
+    margin-top: 16px;
+    
+}
+.logo {
+    max-width: 70%;
+    height: auto; 
+}
+.text{
+    max-width: 50%;
+        height: auto;
+}
+/* styles for tablet */
+@media screen and (min-width: 768px) and (max-width: 1025px) {
+    .logo {
+            max-width: 55%;
+        }
+.text {
+    max-width: 55%;
+    height: auto;
+}
+    .text-container {
+        display: flex;
+    }
+
+.text-container .svg-link {
+    margin-left: -35px;
+    margin-top: -20px;
+    margin-right: -10px;
+    
+}
+
+}
+
+/* styles for Mobile */
+@media screen and (max-width: 767px)and (min-width: 320px) {
+    .logo {
+        max-width: 55%;
+    }
+.text{
+    max-width: 35%;
+}
+        .text-container .svg-link {
+margin-left: -25px;
+    margin-top: -20px;
+    margin-right: -40px;
+
+        }
+    
+.vector-container {
+width: 71px;}
+}
+
