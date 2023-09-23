@@ -4,7 +4,6 @@
     margin-top: 32px;
 }
 
-
 .formdiv {
     display: flex;
     flex-direction: column;
@@ -13,10 +12,15 @@
 .diaryform {
     display: flex;
     flex-direction: column;
-    margin-top: 32px;
 }
 
-
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    margin: 60px 0;
+}
 
 @media screen and (min-width: 480px) {
     .Button {
@@ -74,7 +78,9 @@
     .heading:first-child {
         padding-bottom: 15px;
     }
-
+    .buttonContainer {
+        margin: 20px 0 0 0;
+    }
 }
 
 @media screen and (min-width: 1280px) {

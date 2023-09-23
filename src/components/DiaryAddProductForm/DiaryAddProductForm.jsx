@@ -74,6 +74,7 @@ export default function DiaryAddProduct() {
                     paddingRight: '32px',
                   }}
                   {...params}
+                  margin="normal"
                   variant="standard"
                   label="Enter product name*"
                   placeholder=""
@@ -94,6 +95,7 @@ export default function DiaryAddProduct() {
               width: '240px',
               paddingRight: '32px',
             }}
+            margin="normal"
             id="standard-basic"
             label="Grams"
             variant="standard"
@@ -106,7 +108,9 @@ export default function DiaryAddProduct() {
           />
         </div>
         {/* <Button  /> */}
-        <CirclePlus onClick={handleSubmit} />
+        <div className={css.buttonContainer}>
+          <CirclePlus onClick={handleSubmit} />
+        </div>
       </form>
     </div>
   );
