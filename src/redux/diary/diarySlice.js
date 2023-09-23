@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDiary, addDiaryEntry, deleteDiaryEntry, updateDiaryEntry } from './diaryOperations';
+import {
+  fetchDiary,
+  addDiaryEntry,
+  deleteDiaryEntry,
+  updateDiaryEntry,
+} from './diaryOperations';
 
 const initialState = {
   diary: {
@@ -9,7 +14,7 @@ const initialState = {
   isLoading: false,
   error: null,
   filter: '',
-}
+};
 
 export const diarySlice = createSlice({
   name: 'diary',
@@ -28,10 +33,10 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(fetchDiary.fulfilled, (state, action) => {
-        state.diary.diaryList = action.payload;
+        state.diary.diaryList = action.payload.foodItems;
+        state.diary.calDate = action.payload.date;
         state.diary.error = null;
         state.diary.isLoading = false;
-        console.log(action.payload)
       })
       .addCase(fetchDiary.rejected, (state, action) => {
         state.diary.isLoading = false;
@@ -51,7 +56,7 @@ export const diarySlice = createSlice({
         state.diary.error = action.payload;
         console.log('Server Error!');
       })
-      .addCase(updateDiaryEntry.pending, (state) => {
+      .addCase(updateDiaryEntry.pending, state => {
         state.diary.isLoading = true;
       })
       .addCase(updateDiaryEntry.fulfilled, (state, action) => {
@@ -63,7 +68,7 @@ export const diarySlice = createSlice({
         state.diary.error = action.payload;
         console.log('Server Error!');
       })
-      .addCase(deleteDiaryEntry.pending, (state) => {
+      .addCase(deleteDiaryEntry.pending, state => {
         state.diary.isLoading = true;
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
@@ -74,9 +79,9 @@ export const diarySlice = createSlice({
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
-      })
-  }
-})
+      });
+  },
+});
 
 export const { setCalDate, setDiaryList } = diarySlice.actions;
 export const diaryReducer = diarySlice.reducer;

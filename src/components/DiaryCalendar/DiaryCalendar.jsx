@@ -22,17 +22,20 @@ export default function DiaryCalendar() {
   const dispatch = useDispatch();
 
   const formatCalValue = value => {
-    const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
-    setFormattedCalValue(newValue);
-    dispatch(setCalDate(newValue));
-    dispatch(fetchDiary(newValue));
+    const displayDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
+    const fetchDate = dayjs(`${value}`).format(`MM-DD-YYYY`);
+    setFormattedCalValue(displayDate);
+    dispatch(setCalDate(fetchDate));
+    dispatch(
+      fetchDiary(fetchDate)
+    );
   };
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className={css.calendarContainer}>
-          <PopupState  variant="popper" popupId="demo-popup-popper">
+          <PopupState variant="popper" popupId="demo-popup-popper">
             {popupState => (
               <div className={css.btnPopperContainer}>
                 <h2 className={css.dateText}>{formattedCalValue}</h2>
@@ -42,12 +45,16 @@ export default function DiaryCalendar() {
                 <Popper {...bindPopper(popupState)} transition>
                   {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={100}>
-                      <Paper className={css.paper} sx={{ backgroundColor: 'white' }}>
+                      <Paper
+                        className={css.paper}
+                        sx={{ backgroundColor: 'white' }}
+                      >
                         <DateCalendar
                           value={value}
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
+                            popupState.close()
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}

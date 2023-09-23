@@ -1,7 +1,7 @@
 .section {
   display: flex;
   flex-direction: column;
-  margin-top: 32px;
+  margin-top: -8px;
 }
 /* .calcWrapper {
   padding: 0 1rem 1rem 1rem;
@@ -27,6 +27,7 @@
   flex-direction: column;
   margin-top: 32px;
 }
+
 
 .tabs{
   margin-top: 15px;

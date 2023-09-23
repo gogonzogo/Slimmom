@@ -41,7 +41,6 @@ const authSlice = createSlice({
         state.userId = action.payload.userId;
         state.isRefreshing = false;
         state.isLoggedIn = true;
-        console.log('Success! Logging you in...');
       })
       .addCase(login.rejected, state => {
         state.isRefreshing = false;

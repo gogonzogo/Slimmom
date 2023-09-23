@@ -1,41 +1,29 @@
 import DiaryListItem from '../DiaryListItem/DiaryListItem';
 import style from './style.module.css';
-// import { useDispatch } from 'react-redux';
-// import {
-//   fetchDiary,
-//   deleteDiaryEntry,
-// } from '../../redux/diary/diaryOperations';
-// import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteDiaryEntry } from '../../redux/diary/diaryOperations';
 import * as React from 'react';
 import List from '@mui/material/List';
-// import dayjs from 'dayjs';
-// import { setCalDate } from 'redux/diary/diarySlice';
+import { useDiary } from 'hooks/useDiary';
 
 function DiaryList({ diaryList }) {
-  console.log(diaryList)
-  // const { diaryList, calDate } = useDiary();
-  // const dispatch = useDispatch();
-  // let date = calDate || dayjs().format(`MM/DD/YYYY`);
+  const dispatch = useDispatch();
+  const { calDate } = useDiary();
 
-  // useEffect(() => {
-  //   dispatch(fetchDiary(date));
-  // }, [dispatch, date]);
-
-  // function handleDelete(productId) {
-  //   dispatch(deleteDiaryEntry(productId));
-  // }
+  function handleDelete(entryId) {
+    console.log(entryId);
+    dispatch(deleteDiaryEntry({ calDate, entryId }));
+  }
 
   return (
     <List className={style.productList}>
-      {diaryList.length < 1 ? <p>No Diary Entries for selected day</p>
-        : 
-        diaryList.map(item => (
-          <DiaryListItem
-            key={item.productId}
-            product={item}
-            // handleDelete={handleDelete}
-          />
-        ))}
+      {diaryList.map(item => (
+        <DiaryListItem
+          key={item._id}
+          product={item}
+          handleDelete={handleDelete}
+        />
+      ))}
     </List>
   );
 }

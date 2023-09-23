@@ -16,19 +16,18 @@ function Home() {
     <div className=" topBottom background mainBackground">
       <section className="top-bottom">
         <Container className ="left-right">
-      <CaloriesCalc />
-      <Outlet />
-        {/* <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
-          </Routes>
-          </Suspense> */}
+          <CaloriesCalc />
+          <Outlet />
+            {/* <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path="register" element={<Register />} />
+                <Route path="login" element={<Login />} />
+              </Routes>
+            </Suspense> */}
         </Container>
       </section>
-      
     </div>
   );
-}
+};
 
 export default Home;
