@@ -10,11 +10,14 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCalDate } from 'redux/diary/diarySlice';
 import { fetchDiary } from 'redux/diary/diaryOperations';
+import { selectUserId } from 'redux/auth/authSelectors';
 
 export default function DiaryCalendar() {
+  const userId = useSelector(selectUserId);
+
   const [value, setValue] = useState(dayjs());
   const [formattedCalValue, setFormattedCalValue] = useState(
     dayjs().format(`MM/DD/YYYY`)
@@ -25,14 +28,19 @@ export default function DiaryCalendar() {
     const newValue = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(newValue);
     dispatch(setCalDate(newValue));
-    dispatch(fetchDiary(newValue));
+    dispatch(
+      fetchDiary({
+        userId,
+        date: newValue,
+      })
+    );
   };
 
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className={css.calendarContainer}>
-          <PopupState  variant="popper" popupId="demo-popup-popper">
+          <PopupState variant="popper" popupId="demo-popup-popper">
             {popupState => (
               <div className={css.btnPopperContainer}>
                 <h2 className={css.dateText}>{formattedCalValue}</h2>
@@ -42,7 +50,10 @@ export default function DiaryCalendar() {
                 <Popper {...bindPopper(popupState)} transition>
                   {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={100}>
-                      <Paper className={css.paper} sx={{ backgroundColor: 'white' }}>
+                      <Paper
+                        className={css.paper}
+                        sx={{ backgroundColor: 'white' }}
+                      >
                         <DateCalendar
                           value={value}
                           onChange={newValue => {
