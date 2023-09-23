@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/Final-Team-Project/static/css/main.8ef8bc45.css",
-    "main.js": "/Final-Team-Project/static/js/main.1b25fc85.js",
+    "main.js": "/Final-Team-Project/static/js/main.74fa0013.js",
     "static/css/423.9286f36d.chunk.css": "/Final-Team-Project/static/css/423.9286f36d.chunk.css",
     "static/js/423.36ec0067.chunk.js": "/Final-Team-Project/static/js/423.36ec0067.chunk.js",
-    "static/css/353.d9b1949b.chunk.css": "/Final-Team-Project/static/css/353.d9b1949b.chunk.css",
-    "static/js/353.f7b8e964.chunk.js": "/Final-Team-Project/static/js/353.f7b8e964.chunk.js",
+    "static/css/266.0dad79e4.chunk.css": "/Final-Team-Project/static/css/266.0dad79e4.chunk.css",
+    "static/js/266.7bea5152.chunk.js": "/Final-Team-Project/static/js/266.7bea5152.chunk.js",
     "static/css/118.43cd308f.chunk.css": "/Final-Team-Project/static/css/118.43cd308f.chunk.css",
     "static/js/118.253fea14.chunk.js": "/Final-Team-Project/static/js/118.253fea14.chunk.js",
     "static/css/344.827acb32.chunk.css": "/Final-Team-Project/static/css/344.827acb32.chunk.css",
@@ -16,7 +16,7 @@
     "static/js/247.d358ae87.chunk.js": "/Final-Team-Project/static/js/247.d358ae87.chunk.js",
     "static/js/86.0f0a9fa6.chunk.js": "/Final-Team-Project/static/js/86.0f0a9fa6.chunk.js",
     "static/js/193.371ceebe.chunk.js": "/Final-Team-Project/static/js/193.371ceebe.chunk.js",
-    "static/js/270.f2e9da08.chunk.js": "/Final-Team-Project/static/js/270.f2e9da08.chunk.js",
+    "static/js/842.da1227e1.chunk.js": "/Final-Team-Project/static/js/842.da1227e1.chunk.js",
     "static/js/743.ef44f270.chunk.js": "/Final-Team-Project/static/js/743.ef44f270.chunk.js",
     "static/media/desktop-strawberry@2x.png": "/Final-Team-Project/static/media/desktop-strawberry@2x.bb4fe15573eb769f0062.png",
     "static/media/desktop-banana@2x.png": "/Final-Team-Project/static/media/desktop-banana@2x.123844449de52b336e5c.png",
@@ -40,11 +40,11 @@
     "static/media/mom.svg": "/Final-Team-Project/static/media/mom.44b3082021f2075af88260b947389fc5.svg",
     "index.html": "/Final-Team-Project/index.html",
     "main.8ef8bc45.css.map": "/Final-Team-Project/static/css/main.8ef8bc45.css.map",
-    "main.1b25fc85.js.map": "/Final-Team-Project/static/js/main.1b25fc85.js.map",
+    "main.74fa0013.js.map": "/Final-Team-Project/static/js/main.74fa0013.js.map",
     "423.9286f36d.chunk.css.map": "/Final-Team-Project/static/css/423.9286f36d.chunk.css.map",
     "423.36ec0067.chunk.js.map": "/Final-Team-Project/static/js/423.36ec0067.chunk.js.map",
-    "353.d9b1949b.chunk.css.map": "/Final-Team-Project/static/css/353.d9b1949b.chunk.css.map",
-    "353.f7b8e964.chunk.js.map": "/Final-Team-Project/static/js/353.f7b8e964.chunk.js.map",
+    "266.0dad79e4.chunk.css.map": "/Final-Team-Project/static/css/266.0dad79e4.chunk.css.map",
+    "266.7bea5152.chunk.js.map": "/Final-Team-Project/static/js/266.7bea5152.chunk.js.map",
     "118.43cd308f.chunk.css.map": "/Final-Team-Project/static/css/118.43cd308f.chunk.css.map",
     "118.253fea14.chunk.js.map": "/Final-Team-Project/static/js/118.253fea14.chunk.js.map",
     "344.827acb32.chunk.css.map": "/Final-Team-Project/static/css/344.827acb32.chunk.css.map",
@@ -55,11 +55,11 @@
     "247.d358ae87.chunk.js.map": "/Final-Team-Project/static/js/247.d358ae87.chunk.js.map",
     "86.0f0a9fa6.chunk.js.map": "/Final-Team-Project/static/js/86.0f0a9fa6.chunk.js.map",
     "193.371ceebe.chunk.js.map": "/Final-Team-Project/static/js/193.371ceebe.chunk.js.map",
-    "270.f2e9da08.chunk.js.map": "/Final-Team-Project/static/js/270.f2e9da08.chunk.js.map",
+    "842.da1227e1.chunk.js.map": "/Final-Team-Project/static/js/842.da1227e1.chunk.js.map",
     "743.ef44f270.chunk.js.map": "/Final-Team-Project/static/js/743.ef44f270.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8ef8bc45.css",
-    "static/js/main.1b25fc85.js"
+    "static/js/main.74fa0013.js"
   ]
 }
