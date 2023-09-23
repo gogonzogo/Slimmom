@@ -54,6 +54,7 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
+                            popupState.close()
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}

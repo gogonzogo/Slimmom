@@ -5,9 +5,8 @@ export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary',
   async (date, rejectWithValue) => {
     try {
-      
       const response = await axios.post('day/info', {date: date,});
-      console.log(response);
+      console.log(response.data.data)
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
