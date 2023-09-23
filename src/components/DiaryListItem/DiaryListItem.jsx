@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 
-function DiaryListItem({ product, handleDelete }) {
+function ProductListItem({ product, handleDelete }) {
   return (
     <ListItem className={style.productListItem}>
       <ListItemText
@@ -46,7 +46,13 @@ function DiaryListItem({ product, handleDelete }) {
         <DeleteIcon />
       </IconButton>
     </ListItem>
+    // <li  className={style.productListItem}>
+    //   <span>
+    //    ({product.title}) - ({product.weight}) - ({product.calories})
+    //   </span>
+    //   <button className={style.productDeleteButton}  onClick={() => handleDelete(product.productId)}>Delete</button>
+    // </li>
   );
 }
 
-export default DiaryListItem;
+export default ProductListItem;

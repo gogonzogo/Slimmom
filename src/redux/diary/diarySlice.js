@@ -37,6 +37,7 @@ export const diarySlice = createSlice({
         state.diary.calDate = action.payload.date;
         state.diary.error = null;
         state.diary.isLoading = false;
+        console.log(action.payload);
       })
       .addCase(fetchDiary.rejected, (state, action) => {
         state.diary.isLoading = false;
