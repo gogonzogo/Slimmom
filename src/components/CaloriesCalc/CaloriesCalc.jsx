@@ -229,29 +229,45 @@ try {
           <div className={css.calcWrapper}>
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
-
-            <Tabs
+            <div className={css.tabs}>
+            <Tabs className='tabs'
               value={currentTabIndex}
               onChange={handleTabChange}
               sx={{
                 '& button': {
-                  color: 'white',
-                  borderRadius: 2,
-                  backgroundColor: '#FC842D',
-                  marginTop: '15px',
-                  marginRight: '10px',
+                  marginTop: '25px',
+                  paddingTop: '15px',
+                  width: "182px",
+    padding: "1rem",
+    margin: "2px",
+    height: "44px",
+    borderRadius: "30px",
+    fontFamily: 'Verdana',
+    fontSize: "14px",
+    fontWeight: 700,
+    textTransform: "capitalize",
+    backgroundColor: '#fc842d',
+    color: '#ffffff',
+    border: 'solid #fc842d',
                 },
-                '& button:focus': {
-                  color: 'white',
-                  textShadow: '2px 2px',
-                  fontWeight: 900,
+                '& button:focus' : {
+                 backgroundColor: '#ffffff',
+    color: '#fc842d',
+    border: 'solid #fc842d',
+    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                },
+'& button:hover' : {
+                 backgroundColor: '#ffffff',
+    color: '#fc842d',
+    border: 'solid #fc842d',
+    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                 },
               }}
             >
               <Tab label="Metric" />
               <Tab label="Standard US" />
             </Tabs>
-
+</div>
             {/* TAB 1 Contents */}
             {currentTabIndex === 0 && (
               <form className={css.calcform} onSubmit={submitHandler}>
