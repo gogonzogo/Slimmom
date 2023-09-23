@@ -16,8 +16,6 @@ import { fetchDiary } from 'redux/diary/diaryOperations';
 import { selectUserId } from 'redux/auth/authSelectors';
 
 export default function DiaryCalendar() {
-  const userId = useSelector(selectUserId);
-
   const [value, setValue] = useState(dayjs());
   const [formattedCalValue, setFormattedCalValue] = useState(
     dayjs().format(`MM/DD/YYYY`)
