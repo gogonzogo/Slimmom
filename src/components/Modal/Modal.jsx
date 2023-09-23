@@ -48,9 +48,9 @@ const Modal = props => {
               <hr className={s.hr} />
               <b className={s.text2}>Foods you should not eat</b>
               <ol>
-                {modalState.foodNotToEat.map(listItem => (
-                  <li className={s.notEatItem} key={listItem}>
-                    {listItem}
+                {modalState.foodNotToEat.slice(0).map(listItem => (
+                  <li className={s.notEatItem} key={listItem._id}>
+                    {listItem.title}
                   </li>
                 ))}
               </ol>
