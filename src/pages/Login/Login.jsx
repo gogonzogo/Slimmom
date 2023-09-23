@@ -3,14 +3,14 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 
 function Login() {
   return (
-    // imported my form here to see it get rendered 
-//    <div className="background mainBackground">
-//    <section className="top-bottom">
-//    <Container className="left-right">
+  //   imported my form here to see it get rendered 
+   <div className="background mainBackground">
+    <section className="top-bottom">
+    <Container className="left-right">
         <LoginForm />
-//    </Container>
-//    </section>
-//    </div>
+    </Container>
+    </section>
+    </div>
   )
 }
 
