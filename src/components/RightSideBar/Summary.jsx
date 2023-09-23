@@ -1,7 +1,7 @@
 import NotAllowedProducts from 'components/ProductsList/NotAllowedProducts/NotAllowedProducts';
 import s from './rightSideBar.module.css';
 
-export const Summary = props => {
+const Summary = props => {
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
@@ -32,3 +32,4 @@ export const Summary = props => {
     </div>
   );
 };
+export default Summary;
