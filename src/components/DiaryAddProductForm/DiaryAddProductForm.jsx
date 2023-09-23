@@ -98,9 +98,6 @@ export default function DiaryAddProduct() {
             label="Grams"
             variant="standard"
             type="number"
-            InputLabelProps={{
-              shrink: true,
-            }}
             value={grams}
             onChange={handleGramsChange}
           />
