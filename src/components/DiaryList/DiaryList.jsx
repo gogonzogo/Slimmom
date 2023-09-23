@@ -10,10 +10,15 @@ import * as React from 'react';
 import List from '@mui/material/List';
 // import dayjs from 'dayjs';
 // import { setCalDate } from 'redux/diary/diarySlice';
+import { useDiary } from '../../hooks/useDiary';
 
-function DiaryList({ diaryList }) {
+
+
+
+function DiaryList() {
+  
+  const { diaryList } = useDiary();
   console.log(diaryList)
-  // const { diaryList, calDate } = useDiary();
   // const dispatch = useDispatch();
   // let date = calDate || dayjs().format(`MM/DD/YYYY`);
 

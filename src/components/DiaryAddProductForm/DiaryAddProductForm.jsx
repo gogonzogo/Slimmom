@@ -4,7 +4,7 @@ import { Autocomplete, TextField, Stack } from '@mui/material';
 import CirclePlus from '../Button/CirclePlus';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addDiaryEntry } from '../../redux/diary/diaryOperations';
+import { addDiaryEntry ,fetchDiary} from '../../redux/diary/diaryOperations';
 
 import jsonData from '../ProductsList/data/products.json';
 import { useDiary } from '../../hooks/useDiary';
@@ -39,7 +39,9 @@ export default function DiaryAddProduct() {
       setCalories(0);
     }
 
-    dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
+    dispatch(addDiaryEntry({ productName, grams, calories })).then(() => {
+      dispatch(fetchDiary())
+    });
 
     setProductName('');
     setGrams('');
