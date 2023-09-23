@@ -10,6 +10,7 @@ import { useAuth } from 'hooks/useAuth';
 import { fetchDiary } from 'redux/diary/diaryOperations';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
+import DiaryAddButton from '../../components/Button/DiaryAddButton';
 
 function Diary() {
   const dispatch = useDispatch();
@@ -20,7 +21,12 @@ function Diary() {
     const today = dayjs().format('MM-DD-YYYY');
     dispatch(fetchDiary(today));
   }, [dispatch]);
-  
+
+  function handleClick(e) {
+    console.log(e);
+    console.log(diaryList);
+  }
+
   return (
     <div
       className="background Calc-DairyBackground"
@@ -33,8 +39,13 @@ function Diary() {
       <section className="top-bottom" style={{ flexGrow: '1' }}>
         <Container className="left-right">
           <DiaryCalendar />
-          {diaryList.length < 1 & !refreshing && <DiaryAddProductForm />}
-          {diaryList.length > 0 & !refreshing && <DiaryList diaryList={diaryList} />}
+          {diaryList.length < 1 && !refreshing && <DiaryAddProductForm />}
+          {diaryList.length > 0 && !refreshing && (
+            <>
+              <DiaryList diaryList={diaryList} />
+              <DiaryAddButton onClick={e => handleClick(e)} />
+            </>
+          )}
         </Container>
       </section>
       <section className="no-bottom">
