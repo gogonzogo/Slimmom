@@ -3,13 +3,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary',
-  async (data, rejectWithValue) => {
+  async (date, rejectWithValue) => {
     try {
-      const date = data.date.replaceAll('/', '-');
-      const response = await axios.post('day/info', {
-        userID: data.userId,
-        date,
-      });
+      
+      const response = await axios.post('day/info', {date: date,});
       console.log(response);
       return response.data.data;
     } catch (error) {
