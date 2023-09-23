@@ -381,7 +381,10 @@ try {
                       visible={focusedField}
                     />
                   )}
-                  <FormLabel id="demo-radio-buttons-group-label">
+                  <FormLabel id="demo-radio-buttons-group-label"
+                   sx={{
+                       marginTop: '20px',
+                    }}>
                     Blood Type
                   </FormLabel>
 
@@ -391,6 +394,7 @@ try {
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
+                    
                     }}
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
@@ -574,7 +578,7 @@ try {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    
+                     margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -586,7 +590,10 @@ try {
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
                   />
-                  <FormLabel id="demo-radio-buttons-group-label">
+                  <FormLabel id="demo-radio-buttons-group-label"
+                  sx={{
+                  marginTop: '20px',
+                    }}>
                     Blood Type
                   </FormLabel>
                   <RadioGroup
@@ -662,6 +669,7 @@ try {
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
+                
                 >
                   Start losing weight
                 </CustomButton>
