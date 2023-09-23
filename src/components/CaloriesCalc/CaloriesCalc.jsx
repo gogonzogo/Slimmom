@@ -236,7 +236,7 @@ const CaloriesCalc = () => {
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
 
-            <Tabs
+            <Tabs // Metric and Standard
               value={currentTabIndex}
               onChange={handleTabChange}
               sx={{
@@ -269,6 +269,7 @@ const CaloriesCalc = () => {
                           borderColor: 'orange',
                         },
                       },
+                      
                       fontFamily: 'Verdana',
                       fontSize: '14px',
                       fontWeight: '700',
@@ -278,6 +279,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 122, max: 214 } }}
@@ -288,6 +290,7 @@ const CaloriesCalc = () => {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
+                    
                   />
                   {focusedField === 'height' && (
                     <ValidationPopup
@@ -306,6 +309,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
@@ -334,6 +338,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal" 
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -364,6 +369,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -381,7 +387,10 @@ const CaloriesCalc = () => {
                       visible={focusedField}
                     />
                   )}
-                  <FormLabel id="demo-radio-buttons-group-label">
+                  <FormLabel id="demo-radio-buttons-group-label"
+                   sx={{
+                       marginTop: '20px',
+                    }}>
                     Blood Type
                   </FormLabel>
 
@@ -391,6 +400,7 @@ const CaloriesCalc = () => {
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
+                    
                     }}
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
@@ -479,7 +489,9 @@ const CaloriesCalc = () => {
                       textAlign: 'left',
                       width: '272px',
                       paddingRight: '32px',
+                      
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     label="Height Feet *"
@@ -501,6 +513,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     label="Height Inch *"
@@ -523,6 +536,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
@@ -547,6 +561,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -569,6 +584,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
+                     margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -580,17 +596,21 @@ const CaloriesCalc = () => {
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
                   />
-                  <FormLabel id="demo-radio-buttons-group-label">
+                  <FormLabel id="demo-radio-buttons-group-label"
+                  sx={{
+                  marginTop: '20px',
+                    }}>
                     Blood Type
                   </FormLabel>
-
                   <RadioGroup
+                    
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
                     }}
+                    
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
                     onBlur={() => setFocusedField(null)}
@@ -655,6 +675,7 @@ const CaloriesCalc = () => {
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
+                
                 >
                   Start losing weight
                 </CustomButton>
