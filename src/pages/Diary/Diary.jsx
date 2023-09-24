@@ -50,7 +50,12 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <RightSideBar>
+          <RightSideBar
+            style={{
+              position: 'absolute',
+              zIndex:'1'
+          }}
+          >
             <SummaryContainer />
           </RightSideBar>
         </Container>
