@@ -11,12 +11,10 @@ import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import DiaryAddButton from '../../components/Button/DiaryAddButton';
 
-
 function Diary() {
   const dispatch = useDispatch();
   const { diaryList, calDate } = useDiary();
   const [openForm, setOpenForm] = useState(false);
-
   useEffect(() => {
     const today = dayjs().format('MM-DD-YYYY');
     dispatch(fetchDiary(today));
@@ -36,8 +34,6 @@ function Diary() {
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
-        zIndex:'2'
-
       }}
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
@@ -55,18 +51,13 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <RightSideBar
-            style={{
-              position: 'absolute',
-              zIndex:'1'
-          }}
-          >
+          <RightSideBar>
             <SummaryContainer />
-          </RightSideBar>
+            </RightSideBar>
         </Container>
       </section>
     </div>
   );
-}
+};
 
 export default Diary;
