@@ -30,15 +30,19 @@ const Header = () => {
   return (
     
     <Box sx={{ width: "100%" }}>
-      <AppBar position="static"
+      <AppBar position="fixed"
+              
         sx={{
           boxShadow: 'none',
-          borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0'
+          borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
+          backgroundColor:'transparent'
         }}>
         <Toolbar disableGutters={true} className={styles.headerToolbar}
           sx={{
+            position: 'relative',
+            zIndex: '1',
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
-            backgroundColor: 'var(--primary-background-color)',
+            backgroundColor: 'transparent',
             padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '40px'),
           }}>
           {loggedIn

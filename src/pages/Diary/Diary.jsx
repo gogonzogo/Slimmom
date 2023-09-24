@@ -35,6 +35,9 @@ function Diary() {
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
+        position: 'relative',
+        zIndex:'2'
+
       }}
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
