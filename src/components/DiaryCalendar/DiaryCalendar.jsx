@@ -20,18 +20,18 @@ export default function DiaryCalendar() {
   const [formattedCalValue, setFormattedCalValue] = useState(
     dayjs().format(`MM/DD/YYYY`)
   );
+  const [tempBugFix] = useState(dayjs().format(`MM-DD-YYYY`));
   const dispatch = useDispatch();
   // const { calDate } = useDiary();
 
   useEffect(() => {
-    dispatch(setCalDate(formattedCalValue));
-  }, [dispatch, formattedCalValue]);
+    dispatch(setCalDate(tempBugFix));
+  }, [dispatch, tempBugFix]);
 
   const formatCalValue = value => {
     const displayDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
     const fetchDate = dayjs(`${value}`).format(`MM-DD-YYYY`);
     setFormattedCalValue(displayDate);
-    // dispatch(setCalDate(fetchDate));
     dispatch(
       fetchDiary(fetchDate)
     );
