@@ -2,49 +2,53 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addDiaryEntry } from '../../redux/diary/diaryOperations';
-
-import jsonData from '../ProductsList/data/products.json';
+import { addDiaryEntry, searchFoods } from '../../redux/diary/diaryOperations';
+import CustomButton from 'components/Button/Button';
 import { useDiary } from '../../hooks/useDiary';
+import { debounce } from 'lodash';
+import { setFoodsList } from 'redux/diary/diarySlice';
 
 export default function DiaryAddProduct() {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const [calories, setCalories] = useState('');
-  const [data, setData] = useState([]);
-  const { calDate } = useDiary();
-
+  const { calDate, foodsList } = useDiary();
   const dispatch = useDispatch();
+  const uniqueTitle = Array.from(new Set(foodsList.map(item => item.title)));
 
   useEffect(() => {
-    setData(jsonData);
-  }, []);
+    console.log(foodsList);
+  }, [foodsList]);
 
-  const handleGramsChange = event => {
-    setGrams(event.target.value);
-  };
-
-  const handleSubmit = event => {
-    event.preventDefault();
-
-    const foodItem = jsonData.find(item => item.title === productName);
-
-    if (foodItem) {
-      const calculatedCalories = (foodItem.calories / 100) * grams;
-      setCalories(calculatedCalories);
-      console.log(calculatedCalories);
-    } else {
-      setCalories(0);
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
+    const foodItem = foodsList.find(item => item.title === productName);
+    console.log(foodItem)
+    const calories = (foodItem.calories / 100) * grams || 0;
 
     dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
-
+    dispatch(setFoodsList([]));
     setProductName('');
     setGrams('');
   };
 
-  const uniqueTitle = Array.from(new Set(data.map(item => item.title)));
-  const [value, setValue] = useState('');
+  const handleGramsChange = e => {
+    setGrams(e.target.value);
+  };
+
+  const debounceSearchFoods = debounce(userInput => {
+    dispatch(searchFoods(userInput));
+  }, 400);
+
+  const handleInputChange = e => {
+    if (e) {
+      const userInput = e.target.value || '';
+      if (userInput === '') {
+        // dispatch(setFoodsList([]));
+      }
+      setProductName(userInput);
+      debounceSearchFoods(userInput);
+    }
+  };
 
   return (
     <div className={css.section}>
@@ -56,14 +60,12 @@ export default function DiaryAddProduct() {
               freeSolo
               size="small"
               options={uniqueTitle}
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
+              value={productName}
+              onChange={(e, newValue) => {
+                setProductName(newValue);
               }}
               inputValue={productName}
-              onInputChange={(event, newInputValue) => {
-                setProductName(newInputValue);
-              }}
+              onInputChange={handleInputChange}
               sx={{ width: 300 }}
               renderInput={params => (
                 <TextField
@@ -100,6 +102,7 @@ export default function DiaryAddProduct() {
             onChange={handleGramsChange}
           />
         </div>
+        <CustomButton color="orange">Add</CustomButton>
       </form>
     </div>
   );
