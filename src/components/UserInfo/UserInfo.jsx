@@ -26,7 +26,7 @@ const UserInfo = () => {
   const { width } = useViewPort();
   const breakpoint = 450;
   const isSmallScreen = width < breakpoint;
-  const isMediumScreen = useMediaQuery('(min-width: 450px) and (max-width: 768px)');
+  const isLargeScreen = useMediaQuery('(min-width: 450px)')
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
     setShowTextLogo(!isOpen);
@@ -52,17 +52,25 @@ const UserInfo = () => {
               <div className={`${s.largeScreenContent}`}>
                 <ImageLogo />
                 <TextLogo />
+                <Box sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}>
                 <Divider
                   orientation="vertical"
                   flexItem
-                  sx={{
-                    paddingRight: isMediumScreen ? 2 : 0,
-                    borderRight: isMediumScreen ? '2px solid #E0E0E0' : 'none',
-                    marginRight: isMediumScreen ? 1 : 0,
-                    marginTop: isMediumScreen ? 4 : 3,
+                    sx={{
+                    width: '2px',
+                      height: '20px',
+                    // all screens larger than 450
+                    paddingRight: isLargeScreen ? 2 : 0,
+                    borderRight: isLargeScreen ? '2px solid #E0E0E0' : 'none',
+                    marginRight: isLargeScreen ? 1 : 0,
+                    marginTop: isLargeScreen ? 4 : 3
                    }}
                 />
-                <Navigation className={s.Navigation} />
+                  <Navigation className={s.Navigation} />
+                </Box>
               </div>
           )}
         </div>

@@ -1,7 +1,7 @@
 // external
 
 // mui
-import { IconButton, useMediaQuery } from '@mui/material';
+import { Divider, IconButton, useMediaQuery } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,10 +12,10 @@ import useViewPort from 'hooks/useViewport';
 import {useAuth} from '../../hooks/useAuth'
 //styles
 import styles from './Header.module.css';
-import Logo from '../Logo/Logo'
+import ImageLogo from '../Logo/Logo'
 import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
-import VectorLogo from 'components/Logo/ImageLogo';
+import Logo from 'components/Logo/ImageLogo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
 
 const Header = () => {
@@ -39,25 +39,41 @@ const Header = () => {
           sx={{
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'var(--primary-background-color)',
-            padding: isSmallScreen ? '15px' : (isLargeScreen ? '80px 20px 0 20px' : '20px'),
+            padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '40px'),
           }}>
-          {loggedIn ? (
+          {loggedIn
+            ? (
             <UserInfo/>
           ) :
             width > breakpoint ? (
               <IconButton sx={{padding: 0,}}>
-                <Logo className={styles.logo}/>
+                <ImageLogo className={styles.logo}/>
               </IconButton>
           ) : (
               <div>
-              < VectorLogo className={styles.logo}/>
+                  <Logo className={styles.logo} />
               </div>
           )}
           
           {!loggedIn &&(
-            <Box sx={{
-              marginTop: isLargeScreen ? 4 : 0,
-            }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                marginTop: isLargeScreen ? 2 : 0,
+            }}
+            >
+              {!loggedIn && isLargeScreen && (
+              <Divider
+                orientation="vertical"
+                sx={{
+                  width: '2px',
+                  height: '20px',
+                  backgroundColor: '#E0E0E0',
+                  marginRight: '20px',
+                  marginLeft: '15px',
+                }}
+              />)}
               <Navigation />
             </Box>
           )}
