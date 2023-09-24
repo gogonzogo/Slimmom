@@ -236,11 +236,12 @@ const CaloriesCalc = () => {
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
 
-           <div className={css.tabs}>
+          <div className={css.tabs}>
               <Tabs 
-                 orientation="vertical"
+                orientation="vertical"
               value={currentTabIndex}
-              onChange={handleTabChange}
+                onChange={handleTabChange}
+                indicatorColor='transparent'
               sx={{
                 '& button': {
                   marginTop: '25px',
@@ -255,18 +256,16 @@ const CaloriesCalc = () => {
     fontWeight: 700,
     textTransform: "capitalize",
     backgroundColor: '#fc842d',
-    color: '#ffffff',
     border: 'solid #fc842d',
                 },
                 '& button:focus' : {
-                 backgroundColor: '#ffffff',
-    color: '#fc842d',
+                backgroundColor: '#ffffff',
     border: 'solid #fc842d',
     boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                 },
 '& button:hover' : {
-                 backgroundColor: '#ffffff',
-    color: '#fc842d',
+                backgroundColor: '#ffffff',
+     color: '#fc842d',
     border: 'solid #fc842d',
     boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                 },

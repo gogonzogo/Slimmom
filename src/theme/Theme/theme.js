@@ -47,10 +47,11 @@ const lightTheme = createTheme({
   palette: {
     type: 'light',
     primary: {
-      main: '#ffffff',
+      main: '#fc842d',
       light: '#9b9faa',
+      medium: '#ffffff',
       dark: '#FC842D',
-      hover: '#fffff',
+      hover: '#fc842d',
       checked: '#FC842D'
     },
     background: {
@@ -60,7 +61,7 @@ const lightTheme = createTheme({
       menu: '#264061',
     },
     text: {
-      secondary: '#9ca0aa',
+      secondary: '#ffffff',
       hint: '#264061',
     },
   },
