@@ -8,7 +8,7 @@ import { StatsContainer } from 'components/RightSideBar/StatsContainer';
 function Calculator() {
   return (
     <div
-      className="background mainBackground"
+      className="background Calc-DairyBackground"
       style={{ display: 'flex', flexDirection: 'column' }}
     >
       <section className="top-bottom">
