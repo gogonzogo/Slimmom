@@ -237,7 +237,8 @@ const CaloriesCalc = () => {
             <h1 className={css.heading}>intake right now</h1>
 
            <div className={css.tabs}>
-            <Tabs 
+              <Tabs 
+                 orientation="vertical"
               value={currentTabIndex}
               onChange={handleTabChange}
               sx={{
