@@ -34,8 +34,8 @@ const UserInfo = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ boxShadow: 'none' }}>
-      <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative' }}>
+    <AppBar position="static" sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
+      <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative', backgroundColor: 'transparent' }}>
         <div>
           {isSmallScreen ? (
             <>
