@@ -17,13 +17,14 @@ export const fetchDiary = createAsyncThunk(
 export const addDiaryEntry = createAsyncThunk(
   'diary/addDiary',
   async (data, rejectWithValue) => {
+    console.log('addDiaryData', data)
     const newDiaryEntry = {
-      date: data.date,
-      productName: data.title,
-      grams: data.weight,
+      date: data.calDate,
+      title: data.productName,
+      weight: data.grams,
       calories: data.calories,
     };
-    console.log(newDiaryEntry);
+    console.log('addDiaryNewEntry', newDiaryEntry);
     try {
       const response = await axios.post('users/addFood', newDiaryEntry);
       console.log(response.data);
@@ -49,10 +50,14 @@ export const deleteDiaryEntry = createAsyncThunk(
   }
 );
 
-export const updateDiaryEntry = createAsyncThunk(
+export const searchFoods = createAsyncThunk(
   'diary/updateDiary',
-  async rejectWithValue => {
+  async (data, rejectWithValue) => {
     try {
+      const response = await axios.get(
+        `food/query/${data}`
+      );
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

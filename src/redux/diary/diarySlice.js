@@ -3,7 +3,7 @@ import {
   fetchDiary,
   addDiaryEntry,
   deleteDiaryEntry,
-  updateDiaryEntry,
+  searchFoods,
 } from './diaryOperations';
 
 const initialState = {
@@ -11,6 +11,8 @@ const initialState = {
     calDate: '',
     diaryList: [],
   },
+  searchInput: '',
+  foodsList: [],
   isLoading: false,
   error: null,
   filter: '',
@@ -25,6 +27,9 @@ export const diarySlice = createSlice({
     },
     setDiaryList: (state, action) => {
       state.diary.diaryList = action.payload;
+    },
+    setFoodsList: (state, action) => {
+      state.foodsList = action.payload;
     },
   },
   extraReducers: builder => {
@@ -47,7 +52,8 @@ export const diarySlice = createSlice({
       .addCase(addDiaryEntry.pending, state => {
         state.diary.isLoading = true;
       })
-      .addCase(addDiaryEntry.fulfilled, state => {
+      .addCase(addDiaryEntry.fulfilled, (state, action) => {
+        state.diary.diaryList = [...state.diary.diaryList, action.payload]
         state.diary.isLoading = false;
         state.diary.error = null;
       })
@@ -56,14 +62,15 @@ export const diarySlice = createSlice({
         state.diary.error = action.payload;
         console.log('Server Error!');
       })
-      .addCase(updateDiaryEntry.pending, state => {
+      .addCase(searchFoods.pending, state => {
         state.diary.isLoading = true;
       })
-      .addCase(updateDiaryEntry.fulfilled, (state, action) => {
+      .addCase(searchFoods.fulfilled, (state, action) => {
+        state.foodsList = action.payload
         state.diary.isLoading = false;
         state.diary.error = null;
       })
-      .addCase(updateDiaryEntry.rejected, (state, action) => {
+      .addCase(searchFoods.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
@@ -72,6 +79,7 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
+        state.diary.diaryList = state.diary.diaryList.filter(item => item.id !== action.payload);
         state.diary.isLoading = false;
         state.diary.error = null;
       })
@@ -83,5 +91,5 @@ export const diarySlice = createSlice({
   },
 });
 
-export const { setCalDate, setDiaryList } = diarySlice.actions;
+export const { setCalDate, setDiaryList, setFoodsList } = diarySlice.actions;
 export const diaryReducer = diarySlice.reducer;
