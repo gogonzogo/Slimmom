@@ -20,7 +20,7 @@ const Login = lazy(() => import('pages/Login/Login'));
 
 export const App = () => {
   return (
-    <Box className='app'>
+    <Box className='app max-width'>
       <Header />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <Suspense fallback={<Loader />}>
