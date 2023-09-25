@@ -26,9 +26,10 @@ const registrationSlice = createSlice({
     email: '',
   },
     // add text field check to state
-    isEmailValid: true,
-    isNameValid: true,
-    isPasswordValid: true,
+    isEmailValid: false,
+    isNameValid: false,
+    isPasswordValid: false,
+    isFormValid: false,
   },
   reducers: {
     validateEmail: (state, action) => {
