@@ -257,7 +257,7 @@ const CaloriesCalc = () => {
 
           };
           const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
-        
+        console.log(Calcresponse)
       }
       if (!loggedIn) {
         handleOpen(passinfo);
