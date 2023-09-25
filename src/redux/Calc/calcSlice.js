@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDaySummary, getUserStats, CalNoEat  } from './calcOperations';
+import { fetchDaySummary, getUserStats, CalNoEat, sendCalculator  } from './calcOperations';
 
 
 export const calculateSlice = createSlice({
@@ -58,9 +58,20 @@ export const calculateSlice = createSlice({
           .addCase(CalNoEat.fulfilled, (state, action) => {
             state.cals.isLoggedIn = true;
             state.cals.isRefreshing = false;
-            console.log('Success! You are registered');
           })
           .addCase(CalNoEat.rejected, (state, action) => {
+            state.cals.isRefreshing = false;
+              console.log('Error');
+           
+          })
+     .addCase(sendCalculator.pending, state => {
+            state.cals.isRefreshing = true;
+          })
+          .addCase(sendCalculator.fulfilled, (state, action) => {
+            state.cals.isLoggedIn = true;
+            state.cals.isRefreshing = false;
+          })
+          .addCase(sendCalculator.rejected, (state, action) => {
             state.cals.isRefreshing = false;
               console.log('Error');
            

@@ -25,13 +25,19 @@ export const fetchDaySummary = createAsyncThunk(
 export const CalNoEat = createAsyncThunk(
   "cals/calsNotFood",
   async (credentials, { rejectWithValue }) => {
-    console.log('credentials', credentials)
-    console.log('rejectWithValue', rejectWithValue)
-
-    console.log('CalNoEat called')
     try {
       const { data } = await axios.post("/calories/", credentials);
-      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const sendCalculator = createAsyncThunk(
+  "cals/postCalculator",
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post("/calcuator/", credentials);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

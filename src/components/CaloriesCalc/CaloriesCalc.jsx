@@ -26,9 +26,11 @@ import {
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/Calc/calcSlice';
 import CustomButton from 'components/Button/Button';
-import { CalNoEat } from '../../redux/Calc/calcOperations';
+import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
+import { useAuth } from '../../hooks/useAuth'
 
 const CaloriesCalc = () => {
+  const {loggedIn} = useAuth();
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
   const validAge = useSelector(state => state.calculate.isAgeValid);
@@ -217,12 +219,49 @@ const CaloriesCalc = () => {
       desiredWeight,
       bloodType,
     };
-    console.log('entedInfo', entedInfo);
     try {
       const response = await dispatch(CalNoEat(entedInfo));
-      console.log('returned Data', response.payload);
       const passinfo = response.payload.data;
-      handleOpen(passinfo);
+      
+        if (loggedIn) {
+          let convertBlood = 0
+          switch (bloodType) {
+            case 'A':
+              convertBlood = 1;
+              break;
+            case 'B':
+              convertBlood = 2;
+              break;
+            case 'AB':
+              convertBlood = 3;
+              break;
+            case 'O':
+              convertBlood = 4;
+              break;
+            default:
+              convertBlood = 1;
+              break;
+          }
+      
+          let mestype = '';
+          if (currentTabIndex === 0) { mestype = 'M' } else { mestype = 'M' }
+          const CalculatorInfo = {
+            height,
+            age,
+            bloodType: convertBlood,
+            currentWeight,
+            desiredWeight,
+            totalCalories: passinfo.totalCalories,
+            measurementType: mestype,
+            originalWeight: 0
+
+          };
+          const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
+        console.log(Calcresponse)
+      }
+      if (!loggedIn) {
+        handleOpen(passinfo);
+      }
     } catch (error) {
       console.error('returned Error', error.message);
     }
