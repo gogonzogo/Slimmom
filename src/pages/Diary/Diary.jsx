@@ -38,11 +38,11 @@ function Diary() {
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
         <Container className="left-right">
-          <DiaryCalendar />
           {openForm ? (
-              <DiaryAddProductForm />
+            <DiaryAddProductForm />
           ) : (
             <>
+              <DiaryCalendar />
               <DiaryList diaryList={diaryList} />
               <DiaryAddButton onClick={e => handleClick(e)} />
             </>
@@ -51,7 +51,12 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <RightSideBar>
+          <RightSideBar
+            style={{
+              position: 'absolute',
+              zIndex: '1',
+            }}
+          >
             <SummaryContainer />
             </RightSideBar>
         </Container>
