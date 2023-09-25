@@ -27,16 +27,16 @@ const Header = () => {
   return (
     
     <Box sx={{ width: "100%" }}>
-      <AppBar position="fixed"
+      <AppBar
               
         sx={{
+          position: "absolute",
           boxShadow: 'none',
           borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
           backgroundColor:'transparent'
         }}>
         <Toolbar disableGutters={true} className={styles.headerToolbar}
           sx={{
-            position: 'relative',
             zIndex: '1',
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'transparent',
