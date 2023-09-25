@@ -2,8 +2,6 @@
   width: 100%;
   padding: 20px;
   background-color: var(--secondary-background-color);
-  position: relative;
-  z-index: -1;
 }
 .sideBarContentWrapper {
   display: flex;
@@ -34,6 +32,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .sideBarContainer {
+    position: relative;
+    z-index: -1;
+  }
   .sideBarContentWrapper {
     flex-direction: row;
     justify-content: space-around;
@@ -43,12 +45,12 @@
   .sideBarContainer {
     max-width: 1280px;
     padding-left: 94px;
-    position: absolute;
-    z-index: inherit;
     left: 60%;
     top: 0%;
     width: 40%;
     height: 100vh;
+    position: absolute;
+    z-index: -1;
   }
   .sideBarContentWrapper {
     flex-direction: column;

@@ -13,7 +13,7 @@ import Container from 'components/Container/Container';
 
 function Home() {
   return (
-    <div className=" topBottom background mainBackground">
+    <div className="background mainBackground">
       <section className="top-bottom">
         <Container className ="left-right">
           <CaloriesCalc />

@@ -30,14 +30,13 @@ const Header = () => {
       <AppBar
               
         sx={{
-          position: "absolute",
+          position: "static",
           boxShadow: 'none',
           borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
           backgroundColor:'transparent'
         }}>
         <Toolbar disableGutters={true} className={styles.headerToolbar}
           sx={{
-            zIndex: '1',
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'transparent',
             padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '20px'),
@@ -87,10 +86,7 @@ const Header = () => {
         )}
       </AppBar>
       {loggedIn && isMediumScreen && (
-        <Box
-          sx={{
-            marginTop: '90px',
-        }}>
+        <Box>
           <UserToolBar />
           </Box>
       )}

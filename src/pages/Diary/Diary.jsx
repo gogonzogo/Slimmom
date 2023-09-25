@@ -33,7 +33,7 @@ function Diary() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        position: 'relative',
+
       }}
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
@@ -54,12 +54,7 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <RightSideBar
-            style={{
-              position: 'absolute',
-              zIndex: '1',
-            }}
-          >
+          <RightSideBar>
             <SummaryContainer />
           </RightSideBar>
         </Container>
