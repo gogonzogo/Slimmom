@@ -9,12 +9,11 @@ import { Divider } from '@mui/material';
 
 // internal
 import { logOut } from '../../redux/auth/authOperations';
-//import { useAuth } from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 const UserToolBar = () => {
-  // const { user } = useAuth;
+  const { user } = useAuth;
   const dispatch = useDispatch;
-  const user = "Stefie"
  
   return (
     <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>

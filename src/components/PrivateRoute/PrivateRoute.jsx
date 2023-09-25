@@ -1,14 +1,15 @@
-// import { useSelector } from "react-redux/es/hooks/useSelector";
-// import { Navigate } from 'react-router-dom';
+//external
+import { Navigate } from 'react-router-dom';
 
-// import { isLoggedIn } from "redux/users/selectors";
+//internal
+import { useAuth } from '../../hooks/useAuth';
 
-// const PrivateRoute = ({ children }) => {
-//     const logIn = useSelector(isLoggedIn);
-//     return (
-//         <div>
-//             {logIn ? children : <Navigate to="/" />}
-//         </div>)
-// };
+const PrivateRoute = ({ children }) => {
+    const {loggedIn} = useAuth();
+    return (
+        <div>
+            {loggedIn ? children : <Navigate to="/" />}
+        </div>)
+};
 
-// export default PrivateRoute;
+export default PrivateRoute;

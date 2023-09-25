@@ -64,7 +64,8 @@ a {
 }
 
 .background {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
   flex-grow: 1;
   overflow-y: auto;
 }
@@ -99,6 +100,7 @@ a {
         right bottom;
       background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
       background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
+      
     }
   }
 

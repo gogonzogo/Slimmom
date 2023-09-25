@@ -7,8 +7,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 // internal
-//import { selectIsLoggedIn } from 'redux/auth/authSelectors';
-import {useAuth} from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth'
+
 //styles
 import styles from './Header.module.css';
 import ImageLogo from '../Logo/Logo'
