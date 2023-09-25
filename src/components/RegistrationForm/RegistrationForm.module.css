@@ -1,3 +1,8 @@
+.password_input
+.email_input
+.name_input{
+    text-align: left;
+}
 .form_container {
     margin: 0 auto;
     /* padding: 32px; */

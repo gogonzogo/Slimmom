@@ -22,17 +22,17 @@ export const selectPasswordValidationReqs = createSelector(
 // Select individual field validation states - this works then?
 export const selectIsNameValid = createSelector(
   [selectRegistration],
-  (registration) => registration.isNameValid
+  (registration) => registration.isNameValid 
 );
 
 export const selectIsEmailValid = createSelector(
   [selectRegistration],
-  (registration) => registration.isEmailValid
+  (registration) => registration.isEmailValid 
 );
 
 export const selectIsPasswordValid = createSelector(
   [selectRegistration],
-  (registration) => registration.isPasswordValid
+  (registration) => registration.isPasswordValid 
 );
 
 // Select the overall form validity
