@@ -298,7 +298,7 @@ const CaloriesCalc = () => {
                       paddingRight: '32px',
                     }}
                     margin="normal" 
-                    InputLabelProps={{ style: { color: '#9B9FAA' } }}
+                    InputLabelProps={focusedField === 'height' && !validHeight ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 122, max: 214 } }}
                     label="Height *"
@@ -308,7 +308,7 @@ const CaloriesCalc = () => {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                    
+                    error={focusedField === 'height' && !validHeight}
                   />
                   {focusedField === 'height' && (
                     <ValidationPopup
@@ -328,9 +328,8 @@ const CaloriesCalc = () => {
                       paddingRight: '32px',
                     }}
                     margin="normal" 
-                    InputLabelProps={{ style: { color: '#9B9FAA' } }}
+                    InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 18, max: 80 } }}
                     label="Age"
                     variant="standard"
                     onChange={changeHandler}
@@ -338,6 +337,7 @@ const CaloriesCalc = () => {
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
+                    error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && (
                     <ValidationPopup
@@ -357,7 +357,7 @@ const CaloriesCalc = () => {
                       paddingRight: '32px',
                     }}
                     margin="normal" 
-                    InputLabelProps={{ style: { color: '#9B9FAA' } }}
+                    InputLabelProps={focusedField === 'currentWeight' && !validcurrent ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Current Weight"
@@ -367,6 +367,7 @@ const CaloriesCalc = () => {
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
+                    error={focusedField === 'age' && !validcurrent}
                   />
                   {focusedField === 'currentWeight' && (
                     <ValidationPopup
@@ -388,7 +389,7 @@ const CaloriesCalc = () => {
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={{ style: { color: '#9B9FAA' } }}
+                    InputLabelProps={focusedField === 'desiredWeight' && !validDesired ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Desired Weight"
@@ -398,6 +399,7 @@ const CaloriesCalc = () => {
                     name="desiredWeight"
                     onFocus={() => setFocusedField('desiredWeight')}
                     onBlur={() => setFocusedField(null)}
+                    error={focusedField === 'age' && !validDesired}
                   />
                   {focusedField === 'desiredWeight' && (
                     <ValidationPopup

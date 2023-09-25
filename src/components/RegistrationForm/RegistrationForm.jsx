@@ -119,7 +119,7 @@ const resetForm = () => {
                   )}
             <TextField
               className={style.email_input}
-              InputLabelProps={{ style: { color: "#9B9FAA" } }}
+              InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Email *'}
               type="email"
@@ -142,7 +142,7 @@ const resetForm = () => {
                   )}
             <TextField
               className={style.password_input}
-              InputLabelProps={{ style: { color: "#9B9FAA" } }} 
+              InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
               variant="standard"
               label={'Password *'}
               type="password"
