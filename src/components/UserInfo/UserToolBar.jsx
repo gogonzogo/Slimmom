@@ -31,8 +31,8 @@ const UserToolBar = () => {
           marginLeft: '13px',
         }}
       />
-      <IconButton onClick={() => dispatch(logOut())} aria-label="logout"
-        // sx={{marginRight: '50px'}}
+      <IconButton onClick={() => dispatch(logOut())}
+        aria-label="logout"
       >
         <LogoutRoundedIcon />
       </IconButton>

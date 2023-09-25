@@ -8,7 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 
 // internal
 //import { selectIsLoggedIn } from 'redux/auth/authSelectors';
-import useViewPort from 'hooks/useViewport';
 import {useAuth} from '../../hooks/useAuth'
 //styles
 import styles from './Header.module.css';
@@ -20,12 +19,10 @@ import UserToolBar from 'components/UserInfo/UserToolBar';
 
 const Header = () => {
   const {loggedIn} = useAuth();
-  
-  const { width } = useViewPort();
-  const breakpoint = 349;
+  const isMobile = useMediaQuery('(max-width: 349px)')
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
-  const isSmallScreen = useMediaQuery('(max-width: 319px)');
+  const isSmallScreen = useMediaQuery('(max-width: 320px)');
 
   return (
     
@@ -43,20 +40,22 @@ const Header = () => {
             zIndex: '1',
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'transparent',
-            padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '40px'),
+            padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '20px'),
           }}>
           {loggedIn
             ? (
             <UserInfo/>
           ) :
-            width > breakpoint ? (
+            isMobile 
+              ? (
+                <div>
+                  <Logo className={styles.logo} />
+              </div>
+            
+          ) : (
               <IconButton sx={{padding: 0,}}>
                 <ImageLogo className={styles.logo}/>
               </IconButton>
-          ) : (
-              <div>
-                  <Logo className={styles.logo} />
-              </div>
           )}
           
           {!loggedIn &&(
@@ -83,12 +82,17 @@ const Header = () => {
           )}
         </Toolbar>
 
-        {loggedIn && isLargeScreen &&(
-          <UserToolBar/>
+        {loggedIn && isLargeScreen && (
+          <UserToolBar />
         )}
       </AppBar>
       {loggedIn && isMediumScreen && (
-        <UserToolBar/>
+        <Box
+          sx={{
+            marginTop: '90px',
+        }}>
+          <UserToolBar />
+          </Box>
       )}
     </Box>
   );

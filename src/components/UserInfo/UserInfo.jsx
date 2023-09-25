@@ -1,13 +1,12 @@
 // exteranl
 import { useState } from 'react';
-//import { useSelector } from 'react-redux';
 
 // mui styles
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
 import { AppBar, Box, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 
-// internal
-import useViewPort from '../../hooks/useViewport';
+//internal
+
 // styles
 import Navigation from 'components/Navigation/Navigation';
 import s from './UserInfo.module.css';
@@ -23,9 +22,7 @@ const UserInfo = () => {
   const [showTextLogo, setShowTextLogo] = useState(true); // Initially show TextLogo
   const [showNavigation, setShowNavigation] = useState(false);
     
-  const { width } = useViewPort();
-  const breakpoint = 450;
-  const isSmallScreen = width < breakpoint;
+  const isSmallScreen = useMediaQuery('(max-width: 450px)');
   const isLargeScreen = useMediaQuery('(min-width: 450px)')
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -79,7 +76,7 @@ const UserInfo = () => {
           <div>
             <IconButton
               onClick={toggleNavbar}
-              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -15, transition: 'right 0.9s ease', right: showNavigation ? '120px' : '0' }}
+              sx={{ padding: '0 8px 0 0', position: 'absolute', bottom: -12, right: 5}}
             >
               <CompareArrowsIcon />
             </IconButton>

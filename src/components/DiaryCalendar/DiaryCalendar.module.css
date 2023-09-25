@@ -1,10 +1,11 @@
-.calendarPopperContainer {
+/* .calendarPopperContainer {
   margin-top: 40px;
-}
+} */
 
 .btnPopperContainer {
   display: flex;
   align-items: center;
+  margin-top: -30px;
 }
 .dateText {
   font-size: 18px;
@@ -20,10 +21,18 @@
     flex-direction: column;
 }
 
-
-
 @media (min-width: 768px) {
   .dateText {
     font-size: 34px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .dateText {
+    font-size: 34px;
+  }
+
+  .btnPopperContainer {
+    margin-top: 140px;
   }
 }
