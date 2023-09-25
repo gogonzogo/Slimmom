@@ -38,3 +38,19 @@ export const CalNoEat = createAsyncThunk(
     }
   }
 );
+export const sendCalculator = createAsyncThunk(
+  "cals/postCalculator",
+  async (credentials, { rejectWithValue }) => {
+    console.log('credentials', credentials)
+    console.log('rejectWithValue', rejectWithValue)
+
+    console.log('postCalculator called')
+    try {
+      const { data } = await axios.post("/calcuator/", credentials);
+      console.log(data)
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
