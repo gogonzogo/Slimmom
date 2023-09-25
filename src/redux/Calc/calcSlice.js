@@ -58,7 +58,6 @@ export const calculateSlice = createSlice({
           .addCase(CalNoEat.fulfilled, (state, action) => {
             state.cals.isLoggedIn = true;
             state.cals.isRefreshing = false;
-            console.log('Success! You are registered');
           })
           .addCase(CalNoEat.rejected, (state, action) => {
             state.cals.isRefreshing = false;
@@ -71,7 +70,6 @@ export const calculateSlice = createSlice({
           .addCase(sendCalculator.fulfilled, (state, action) => {
             state.cals.isLoggedIn = true;
             state.cals.isRefreshing = false;
-            console.log('Success! You are registered');
           })
           .addCase(sendCalculator.rejected, (state, action) => {
             state.cals.isRefreshing = false;

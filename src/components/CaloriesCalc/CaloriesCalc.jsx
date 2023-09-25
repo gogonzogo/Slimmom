@@ -219,10 +219,8 @@ const CaloriesCalc = () => {
       desiredWeight,
       bloodType,
     };
-    console.log('entedInfo', entedInfo);
     try {
       const response = await dispatch(CalNoEat(entedInfo));
-      console.log('returned Data', response.payload);
       const passinfo = response.payload.data;
       
         if (loggedIn) {
@@ -259,7 +257,6 @@ const CaloriesCalc = () => {
 
           };
           const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
-          console.log('returned Data Calcresponse', Calcresponse.payload);
         
       }
       if (!loggedIn) {

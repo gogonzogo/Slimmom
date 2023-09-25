@@ -49,7 +49,6 @@ export const diarySlice = createSlice({
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         state.diary.diaryList = [];
-        console.log(action.payload);
       })
       .addCase(addDiaryEntry.pending, state => {
         state.diary.isLoading = true;
