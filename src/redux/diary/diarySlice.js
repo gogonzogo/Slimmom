@@ -9,6 +9,7 @@ import {
 const initialState = {
   diary: {
     calDate: '',
+    dailyRate: 0,
     diaryList: [],
   },
   searchInput: '',
@@ -40,6 +41,7 @@ export const diarySlice = createSlice({
       .addCase(fetchDiary.fulfilled, (state, action) => {
         state.diary.diaryList = action.payload.foodItems;
         state.diary.calDate = action.payload.date;
+        state.diary.dailyRate = action.payload.dailyRate;
         state.diary.error = null;
         state.diary.isLoading = false;
       })
@@ -53,7 +55,7 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
-        state.diary.diaryList = [...state.diary.diaryList, action.payload]
+        state.diary.diaryList = [...state.diary.diaryList, action.payload];
         state.diary.isLoading = false;
         state.diary.error = null;
       })
@@ -66,7 +68,7 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(searchFoods.fulfilled, (state, action) => {
-        state.foodsList = action.payload
+        state.foodsList = action.payload;
         state.diary.isLoading = false;
         state.diary.error = null;
       })
@@ -79,7 +81,9 @@ export const diarySlice = createSlice({
         state.diary.isLoading = true;
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
-        state.diary.diaryList = state.diary.diaryList.filter(item => item.id !== action.payload);
+        state.diary.diaryList = state.diary.diaryList.filter(
+          item => item.id !== action.payload
+        );
         state.diary.isLoading = false;
         state.diary.error = null;
       })

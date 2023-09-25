@@ -1,21 +1,28 @@
-// import { useDiary } from 'hooks/useDiary';
-// // import { useMemo } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { selectUserId } from 'redux/auth/authSelectors';
-// // import { fetchDaySummary } from 'redux/Calc/calcOperations';
-// import { getCalDate } from 'redux/diary/diarySelectors';
-
+import { useSelector } from 'react-redux';
+import {
+  getCalDate,
+  getDailyRate,
+  getDiaryList,
+} from 'redux/diary/diarySelectors';
 import Summary from './Summary';
 
 export const SummaryContainer = () => {
-  // const dispatch = useDispatch();
-  // const date = useSelector(getCalDate);
-  // const userId = useSelector(selectUserId);
-  // const { diaryList } = useDiary();
+  const date = useSelector(getCalDate);
+  const foodList = useSelector(getDiaryList);
+  const totalConsumed = foodList
+    ? foodList.reduce((acc, el) => acc + el.calories, 0)
+    : 0;
+  const dailyRate = useSelector(getDailyRate);
 
-  // useMemo(() => {
-  //   date && dispatch(fetchDaySummary({ date, userId }));
-  //   console.log(diaryList);
-  // }, [dispatch, date, diaryList, userId]);
-  return <Summary />;
+  const left = totalConsumed !== 0 ? dailyRate - totalConsumed : 0;
+  const percentage =
+    dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;
+  const summary = {
+    left,
+    totalConsumed,
+    dailyRate,
+    percentage,
+  };
+
+  return <Summary date={date} summary={summary} />;
 };
