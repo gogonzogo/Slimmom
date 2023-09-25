@@ -27,7 +27,7 @@ import {
 import { storeCalulator } from '../../redux/Calc/calcSlice';
 import CustomButton from 'components/Button/Button';
 import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth';
 
 const CaloriesCalc = () => {
   const {loggedIn} = useAuth();
@@ -370,7 +370,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
-                    label="Age"
+                    label="Age *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.age}
@@ -399,7 +399,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Current Weight"
+                    label="Current Weight *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.currentWeight}
@@ -430,7 +430,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Desired Weight"
+                    label="Desired Weight *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.desiredWeight}
@@ -523,7 +523,7 @@ const CaloriesCalc = () => {
                     />
                   )}
                 </div>
-                <CustomButton
+                <CustomButton className={css.customButton}
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
@@ -597,7 +597,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
-                    label="Age"
+                    label="Age *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.age}
@@ -622,7 +622,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Current Weight Lbs"
+                    label="Current Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.currentWeightLbs}
@@ -645,7 +645,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Desired Weight Lbs"
+                    label="Desired Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.desiredWeightLbs}
