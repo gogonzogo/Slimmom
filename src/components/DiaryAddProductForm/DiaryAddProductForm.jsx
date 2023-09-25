@@ -40,8 +40,8 @@ export default function DiaryAddProduct() {
   }, 400);
 
   const handleInputChange = e => {
+    const userInput = e.target.value || '';
     if (e) {
-      const userInput = e.target.value || '';
       if (userInput === '') {
         // dispatch(setFoodsList([]));
       }
@@ -54,7 +54,7 @@ export default function DiaryAddProduct() {
     <div className={css.section}>
       <form className={css.diaryform} onSubmit={handleSubmit}>
         <div className={css.formdiv}>
-          <Stack spacing={2} sx={{ width: 300 }}>
+          <Stack spacing={2}>
             <Autocomplete
               id="size-small-standard"
               freeSolo
@@ -66,17 +66,15 @@ export default function DiaryAddProduct() {
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
-              sx={{ width: 300 }}
+              // sx={{ width: 300 }}
               renderInput={params => (
                 <TextField
                   sx={{
-                    width: '240px',
-                    paddingRight: '32px',
+                    fontSize: '14px'
                   }}
                   {...params}
                   variant="standard"
                   label="Enter product name*"
-                  placeholder=""
                 />
               )}
             />
@@ -91,8 +89,7 @@ export default function DiaryAddProduct() {
               lineHeight: '17px',
               letterSpacing: '0.04em',
               textAlign: 'left',
-              width: '240px',
-              paddingRight: '32px',
+
             }}
             id="standard-basic"
             label="Grams"
