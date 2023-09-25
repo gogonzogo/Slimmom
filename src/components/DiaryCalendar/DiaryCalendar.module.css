@@ -13,10 +13,10 @@
   font-family: Verdana
 }
 .paper{
-    overflow-x: hidden;
-    width: 320px;
-    max-height: 358px;
-    margin-right: 200px;
+    /* overflow-x: hidden; */
+    /* width: 320px; */
+    /* max-height: 358px; */
+    /* margin-right: 200px; */
     display: flex;
     flex-direction: column;
 }

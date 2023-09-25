@@ -9,7 +9,8 @@ import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
 import { fetchDiary } from 'redux/diary/diaryOperations';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
-import DiaryAddButton from '../../components/Button/DiaryAddButton';
+import DiaryAddButton from '../../components/DiaryAddButton/DiaryAddButton';
+import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 
 function Diary() {
   const dispatch = useDispatch();
@@ -30,7 +31,6 @@ function Diary() {
     <div
       className="background Calc-DairyBackground"
       style={{
-        height: '100vh',
         display: 'flex',
         flexDirection: 'column',
         position: 'relative',
@@ -39,7 +39,10 @@ function Diary() {
       <section className="top-bottom" style={{ flexGrow: '1' }}>
         <Container className="left-right">
           {openForm ? (
-            <DiaryAddProductForm />
+            <>
+              <DiaryBackButton onClick={e => handleClick(e)} />
+              <DiaryAddProductForm />
+            </>
           ) : (
             <>
               <DiaryCalendar />
@@ -58,7 +61,7 @@ function Diary() {
             }}
           >
             <SummaryContainer />
-            </RightSideBar>
+          </RightSideBar>
         </Container>
       </section>
     </div>
