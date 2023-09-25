@@ -5,7 +5,7 @@ import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {validateEmail,validateName,validatePassword} from '../../redux/validation/registrationSlice';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
-import { selectFormIsValid } from '../../redux/validation/registrationSelectors';
+import { selectFormIsValid,  selectIsEmailValid, selectIsPasswordValid, selectIsNameValid } from '../../redux/validation/registrationSelectors';
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/Button/Button';
@@ -13,7 +13,10 @@ import CustomButton from 'components/Button/Button';
 
 
 const RegistrationForm = () => {
-//const { loggedIn, user, refreshing, error, token } = useAuthStore();
+  //const { loggedIn, user, refreshing, error, token } = useAuthStore();
+  const isEmailValid = useSelector(selectIsEmailValid);
+  const isPasswordValid = useSelector(selectIsPasswordValid);
+  const isNameValid = useSelector(selectIsNameValid)
   const isFormValid = useSelector(selectFormIsValid);
   const validationReqs = useSelector((state) => state.registration.validationReqs);
   const navigate = useNavigate();
@@ -73,14 +76,14 @@ const resetForm = () => {
       }
 };
 
-  const renderValidationPopup = () => { 
-    return (
-      <ValidationPopup
-        validationData={validationReqs[focusedField]}
-        visible={!!focusedField}
-      />
-    );
-  };
+  // const renderValidationPopup = () => { 
+  //   return (
+  //     <ValidationPopup
+  //       validationData={validationReqs[focusedField]}
+  //       visible={!!focusedField}
+  //     />
+  //   );
+  // };
 
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
@@ -92,7 +95,7 @@ const resetForm = () => {
             noValidate>
             <TextField 
               className={style.name_input}
-              InputLabelProps={{ style: { color: "#9B9FAA" } }}
+              InputLabelProps={focusedField === 'name' && !isNameValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
               variant="standard"
               label={'Name *'}
               type="text"
@@ -103,11 +106,17 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
-              helperText={focusedField === 'name' && formData.name.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
+              error={focusedField === 'name' && !isNameValid}
+            //  helperText={focusedField === 'name' && formData.name.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
   
             />
-
+{focusedField === 'name' && (
+                    <ValidationPopup
+                      validationData={validationReqs[focusedField]}
+                      visible={focusedField}
+                    />
+                  )}
             <TextField
               className={style.email_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }}
@@ -121,10 +130,16 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
-              helperText={focusedField === 'email' && formData.email.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
+              error={focusedField === 'email' && !isEmailValid}
+            //  helperText={focusedField === 'email' && formData.email.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
-
+{focusedField === 'email' && (
+                    <ValidationPopup
+                      validationData={validationReqs[focusedField]}
+                      visible={focusedField}
+                    />
+                  )}
             <TextField
               className={style.password_input}
               InputLabelProps={{ style: { color: "#9B9FAA" } }} 
@@ -138,10 +153,16 @@ const resetForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
-              helperText={focusedField === 'password' && formData.password.length >= 3 ? <span>{(renderValidationPopup())}</span> : null}
-              //error={!formData.password && passwordValidationReqs.some((req) => !req.met)}
+              error={focusedField === 'password' && !isPasswordValid}
+            //  helperText={focusedField === 'password' && formData.password.length >= 3 ? <span>{(renderValidationPopup())}</span> : null}
+            //  error={!formData.password}
             /> 
-
+{focusedField === 'password' && (
+                    <ValidationPopup
+                      validationData={validationReqs[focusedField]}
+                      visible={focusedField}
+                    />
+                  )}
       <Box className={style.button_container}> 
         <CustomButton color="orange"
               disabled={!isFormValid}

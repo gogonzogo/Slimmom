@@ -2,6 +2,9 @@
   grid-area: rightSideBar;
   width: 100%;
   padding: 20px;
+  background-color: var(--secondary-background-color);
+  position: relative;
+  z-index: -1;
 }
 .sideBarContentWrapper {
   display: flex;
