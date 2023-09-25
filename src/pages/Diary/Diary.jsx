@@ -9,7 +9,7 @@ import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
 import { fetchDiary } from 'redux/diary/diaryOperations';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
-import DiaryAddButton from '../../components/DiaryAddButton/DiaryAddButton';
+import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 
 function Diary() {
