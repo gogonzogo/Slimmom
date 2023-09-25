@@ -16,9 +16,7 @@
 
 body {
   margin: 0;
-  /* min-height: 100vh; */
-  /* overflow-y: hidden; */
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Verdana, Geneva, Tahoma, sans-serif, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,23 +53,22 @@ a {
 
 .app {
   width: 100%;
-  /* height: 100vh; */
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  box-shadow: 0px 0px 15px gray;
+  box-shadow: none;
 }
 
 .background {
-  width: 100vw;
+  width: 100%;
   flex-grow: 1;
   overflow-y: auto;
 }
 
 @media screen and (min-width: 1280px) {
   .mainBackground {
-    background: url(./images/desktop-leaves.png),
+    background-image: url(./images/desktop-leaves.png),
       url(./images/desktop-banana.png), url(./images/desktop-strawberry.png),
       url(./images/desktop-shape.png);
     background-position: right 300px top, right top, right bottom, right bottom;
@@ -80,11 +77,11 @@ a {
   }
 
   .Calc-DairyBackground {
-    background: url(./images/desktop-diary-leaves.png); 
+    background-image: url(./images/desktop-diary-leaves.png); 
     /* linear-gradient(to right, var(--primary-background-color) 0%, var(--primary-background-color) 60%, var(--secondary-background-color) 60%, var(--secondary-background-color) 100%); */
     background-position: right;
     background-repeat: no-repeat;
-    background-size: 518px 846px, 1280px 100%;
+    background-size: 518px 846px;
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -104,11 +101,11 @@ a {
   }
 
   .Calc-DairyBackground {
-    background: url(./images/desktop-diary-leaves@2x.png); 
+    background-image: url(./images/desktop-diary-leaves@2x.png); 
     /* linear-gradient(to right, var(--primary-background-color) 0%, var(--primary-background-color) 60%, var(--secondary-background-color) 58.5%, var(--secondary-background-color) 100%); */
     background-position: right;
     background-repeat: no-repeat;
-    background-size: 518px 846px, 1280px;
+    background-size: 518px 846px;
   }
 }
 
@@ -124,11 +121,11 @@ a {
   }
 
   .Calc-DairyBackground {
-    background: url(./images/tablet-dairy-leaves.png);
+    background-image: url(./images/tablet-dairy-leaves.png);
     /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
     background-position: right bottom;
     background-repeat: no-repeat;
-    background-size: 418px 746px, 768px;
+    background-size: 418px 746px;
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -146,28 +143,28 @@ a {
     }
 
     .Calc-DairyBackground {
-      background: url(./images/tablet-dairy-leaves.png);
+      background-image: url(./images/tablet-dairy-leaves.png);
       /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
       background-position: right bottom;
       background-repeat: no-repeat;
-      background-size: 418px 746px, 768px;
+      background-size: 418px 746px;
     }
   }
 }
 
 .top-bottom {
-  padding: 120px 0;
+  padding: 40px 0;
 }
 
 @media screen and (min-width: 767px) {
   .top-bottom {
-  padding: 50px 0 0 0;
+  padding: 50px 0 0px 0;
   }
 }
 
  @media screen and (min-width:1280px) {
   .top-bottom {
-    padding: 140px 0 0 0;
+    padding: 40px 0 0 0;
   }
  }
 
