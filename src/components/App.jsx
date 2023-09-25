@@ -25,22 +25,18 @@ export const App = () => {
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
       <Suspense fallback={<Loader />}>
         <Routes>
+
           {/** public routes */}
-            <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />
-            
+            <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />  
             <Route path="register" element={<PublicRoute><Register /></PublicRoute>} />
-          
             <Route path="login" element={<PublicRoute><Login /></PublicRoute>} />
           
           {/** private routes */}
           
             <Route path="/diary" element={<PrivateRoute><Diary /></PrivateRoute>} />
-          
             <Route path="/calculator" element={<PrivateRoute><Calculator /></PrivateRoute>} />
-          
             <Route path="*" element={<h1>404</h1>} />
-        
-        
+      
         </Routes>
       </Suspense>
     </Box>
