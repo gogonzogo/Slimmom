@@ -1,5 +1,4 @@
 .sideBarContainer {
-  grid-area: rightSideBar;
   width: 100%;
   padding: 20px;
   background-color: var(--secondary-background-color);
@@ -45,6 +44,7 @@
     max-width: 1280px;
     padding-left: 94px;
     position: absolute;
+    z-index: inherit;
     left: 60%;
     top: 0%;
     width: 40%;
@@ -53,6 +53,6 @@
   .sideBarContentWrapper {
     flex-direction: column;
     position: relative;
-    top: 360px;
+    top: 220px;
   }
 }
