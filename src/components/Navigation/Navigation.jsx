@@ -28,7 +28,7 @@ function Navigation({className}) {
             log in
           </NavLink>
           <NavLink to="/register" className={css.navLink}>
-            registration
+            register
           </NavLink>
       </div >
     )}
