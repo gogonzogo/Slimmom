@@ -37,7 +37,7 @@ function Diary() {
         <Container className="left-right">
           {diaryBackBtn ? (
             <>
-              <DiaryAddProductForm />
+              <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
             </>
           ) : (
             <>

@@ -7,8 +7,9 @@ import CustomButton from 'components/CustomButton/CustomButton';
 import { useDiary } from '../../hooks/useDiary';
 import { debounce } from 'lodash';
 import { setFoodsList } from 'redux/diary/diarySlice';
+import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 
-export default function DiaryAddProduct() {
+export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
   const { calDate, foodsList } = useDiary();
@@ -28,6 +29,7 @@ export default function DiaryAddProduct() {
     dispatch(setFoodsList([]));
     setProductName('');
     setGrams('');
+    dispatch(setDiaryBackBtn(!diaryBackBtn));
   };
 
   const handleGramsChange = e => {
