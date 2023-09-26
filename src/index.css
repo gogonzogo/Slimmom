@@ -63,7 +63,51 @@ a {
 .background {
   width: 100%;
   flex-grow: 1;
-  overflow-y: auto;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+@media screen and (min-width: 768px) {
+  .mainBackground {
+    background-image: url(./images/tablet-leaves.png),
+      url(./images/tablet-babana.png), url(./images/tablet-strawberry.png),
+      url(./images/tablet-shape.png);
+    background-position: right 300px top, right bottom, right center,
+      right bottom;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
+  }
+
+  .Calc-DairyBackground {
+    background-image: url(./images/tablet-dairy-leaves.png);
+    /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
+    background-position: right bottom;
+    background-repeat: no-repeat;
+    background-size: 418px 746px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+    .mainBackground {
+      background-image: url(./images/tablet-leaves@2x.png),
+        url(./images/tablet-babana@2x.png),
+        url(./images/tablet-strawberry@2x.png),
+        url(./images/tablet-shape@2x.png);
+      background-position: right 300px top, right bottom, right center,
+        right bottom;
+      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+      background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
+    }
+
+    .Calc-DairyBackground {
+      background-image: url(./images/tablet-dairy-leaves.png);
+      /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
+      background-position: right bottom;
+      background-repeat: no-repeat;
+      background-size: 418px 746px;
+    }
+  }
 }
 
 @media screen and (min-width: 1280px) {
@@ -109,56 +153,7 @@ a {
   }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1279px) {
-  .mainBackground {
-    background-image: url(./images/tablet-leaves.png),
-      url(./images/tablet-babana.png), url(./images/tablet-strawberry.png),
-      url(./images/tablet-shape.png);
-    background-position: right 300px top, right bottom, right center,
-      right bottom;
-    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-    background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
-  }
-
-  .Calc-DairyBackground {
-    background-image: url(./images/tablet-dairy-leaves.png);
-    /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
-    background-position: right bottom;
-    background-repeat: no-repeat;
-    background-size: 418px 746px;
-  }
-
-  @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
-    .mainBackground {
-      background-image: url(./images/tablet-leaves@2x.png),
-        url(./images/tablet-babana@2x.png),
-        url(./images/tablet-strawberry@2x.png),
-        url(./images/tablet-shape@2x.png);
-      background-position: right 300px top, right bottom, right center,
-        right bottom;
-      background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
-      background-size: 746px 846px, 498px 450px, 286px 279px, 602px 816px;
-    }
-
-    .Calc-DairyBackground {
-      background-image: url(./images/tablet-dairy-leaves.png);
-      /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
-      background-position: right bottom;
-      background-repeat: no-repeat;
-      background-size: 418px 746px;
-    }
-  }
-}
-
-
-
-
-
-
-
-/** The sections/ containers have the smallest padding for each view based on design. Add margin to your component if needed **/
+/** The sections/ containers have the smallest padding for each view based on design. Add margin-top to your component if needed **/
 .top-bottom {
   padding: 32px 20px;
 }
