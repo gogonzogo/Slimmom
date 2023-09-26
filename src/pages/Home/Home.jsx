@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
 //import Section from 'components/Section/Section';
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
