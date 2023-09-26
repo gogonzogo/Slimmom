@@ -1,10 +1,12 @@
 // external
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHands } from '@fortawesome/free-solid-svg-icons';
 // mui
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+// import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { Divider } from '@mui/material';
 
 // internal
@@ -37,8 +39,12 @@ const UserToolBar = () => {
           marginLeft: '13px',
         }}
       />
-      <IconButton onClick={() => dispatch(logOut())} aria-label="logout">
-        <LogoutRoundedIcon />
+      <IconButton onClick={() => dispatch(logOut())} aria-label="logout" aria-describedby="logout-label">
+        {/* <FontAwesomeIcon */}
+          <FontAwesomeIcon icon={faHands} flip="horizontal" style={{color: "#fc842d",}} />
+            <span id="logout-label" style={{ fontSize: '12px' }}>
+              "Bye!"
+            </span>
       </IconButton>
     </Toolbar>
   );
