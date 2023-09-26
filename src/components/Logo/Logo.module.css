@@ -1,12 +1,12 @@
 .logo-container {
     display: flex;
-    align-items: center;
+margin-top: -20px;
 
 }
 .text-container {
     display: flex;
     gap: 5px;
-    /* margin-top: 40px; */
+    margin-top: 20px;
     cursor: pointer;
 }
 .image-container {
@@ -31,20 +31,27 @@
 }
 /* styles for tablet */
 @media screen and (min-width: 768px) and (max-width: 1025px) {
+    /* .logo-container{
+        margin-top: -15px;
+    } */
     .logo {
             max-width: 55%;
+            margin-top: 15px;
         }
 .text {
     max-width: 55%;
     height: auto;
+    
 }
     .text-container {
         display: flex;
+        margin-top: 35px;
+        
     }
 
 .text-container .svg-link {
     margin-left: -35px;
-    margin-top: -20px;
+    margin-top: -10px;
     margin-right: -10px;
     
 }
@@ -56,16 +63,18 @@
     .logo {
         max-width: 55%;
     }
+    .logo-container{
+        margin-top: 20px;
+    }
 .text{
     max-width: 35%;
 }
         .text-container .svg-link {
-    margin-left: -45px;
-        margin-top: -20px;
-        margin-right: -23px;
+    display: none;
         }
     
 .vector-container {
-width: 71px;}
+width: 71px;
+}
 }
 
