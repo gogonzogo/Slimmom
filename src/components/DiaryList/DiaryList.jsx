@@ -4,15 +4,10 @@ import { useDispatch } from 'react-redux';
 import { deleteDiaryEntry } from '../../redux/diary/diaryOperations';
 import List from '@mui/material/List';
 import { useDiary } from 'hooks/useDiary';
-import { useEffect } from 'react';
 
 function DiaryList() {
   const dispatch = useDispatch();
   const { calDate, diaryList } = useDiary();
-
-  useEffect(() => {
-    console.log(diaryList);
-  }, [diaryList]);
 
   function handleDelete(entryId) {
     dispatch(deleteDiaryEntry({ calDate, entryId }));

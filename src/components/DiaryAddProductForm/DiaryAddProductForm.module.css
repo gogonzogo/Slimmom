@@ -11,7 +11,6 @@
 .formdiv {
   display: flex;
   flex-direction: column;
-  
 }
 
 .diaryFormBtn {
@@ -24,6 +23,17 @@
 }
 
 @media screen and (min-width: 768px) {
+  .diaryform {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: 60px;
+  }
+
+  .diaryFormBtn {
+    display: flex;
+    margin: 0;
+  }
 }
 
 @media screen and (min-width: 1280px) {
