@@ -3,7 +3,7 @@ import ReplyIcon from '@mui/icons-material/Reply';
 
 function DiaryBackButton({onClick}) {
   return (
-    <IconButton color="primary"n onClick={onClick} aria-label="diary back button">
+    <IconButton color="primary" onClick={onClick} aria-label="diary back button">
       <ReplyIcon />
     </IconButton>
   );
