@@ -4,14 +4,18 @@ import {
   Button,
   Fade,
   Modal as MaterialModal,
+  useMediaQuery,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import s from './modal.module.css';
 
 const Modal = props => {
   const { handleClose, modalState } = props;
+  const isMobile = useMediaQuery('(max-width: 480px)');
+
   return (
     <MaterialModal
+      style={{ top: isMobile && 83 }}
       open={modalState.open}
       onClose={handleClose}
       closeAfterTransition
@@ -19,7 +23,7 @@ const Modal = props => {
       slotProps={{
         backdrop: {
           timeout: 500,
-          sx: { backgroundColor: '#2121211f' },
+          sx: { top: isMobile && 83, backgroundColor: '#2121211f' },
         },
       }}
     >
@@ -54,7 +58,7 @@ const Modal = props => {
                   </li>
                 ))}
               </ol>
-              <Link to="Login" className={s.buttonWrapper}>
+              <Link to="register" className={s.buttonWrapper}>
                 <Button className={s.button} variant="contained">
                   Start losing weight
                 </Button>
