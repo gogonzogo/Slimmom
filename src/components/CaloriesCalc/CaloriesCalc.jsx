@@ -25,7 +25,7 @@ import {
   validateDesiredLbs,
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/Calc/calcSlice';
-import CustomButton from 'components/Button/Button';
+import CustomButton from 'components/CustomButton/CustomButton';
 import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 import { useAuth } from '../../hooks/useAuth'
 
@@ -275,45 +275,47 @@ const CaloriesCalc = () => {
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
 
-          <div className={css.tabs}>
-              <Tabs 
+            <div className={css.tabs}>
+              <Tabs
                 orientation="vertical"
-              value={currentTabIndex}
+                value={currentTabIndex}
                 onChange={handleTabChange}
-                indicatorColor='transparent'
-              sx={{
-                '& button': {
-                  marginTop: '25px',
-                  paddingTop: '15px',
-                  width: "182px",
-    padding: "1rem",
-    margin: "2px",
-    height: "44px",
-    borderRadius: "30px",
-    fontFamily: 'Verdana',
-    fontSize: "14px",
-    fontWeight: 700,
-    textTransform: "capitalize",
-    backgroundColor: '#fc842d',
-    border: 'solid #fc842d',
-                },
-                '& button:focus' : {
-                backgroundColor: '#ffffff',
-    border: 'solid #fc842d',
-    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-                },
-'& button:hover' : {
-                backgroundColor: '#ffffff',
-     color: '#fc842d',
-    border: 'solid #fc842d',
-    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-                },
-              }}
-            >
-              <Tab label="Metric" />
-              <Tab label="Standard US" />
-            </Tabs>
-</div>
+                indicatorColor="transparent"
+                sx={{
+                  '& button': {
+                    marginTop: '25px',
+                    paddingTop: '15px',
+                    width: '182px',
+                    padding: '1rem',
+                    margin: '2px',
+                    height: '44px',
+                    borderRadius: '30px',
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    textTransform: 'capitalize',
+                    backgroundColor: '#fc842d',
+                    border: 'solid #fc842d',
+                  },
+                  '& button:focus': {
+                    backgroundColor: '#ffffff',
+                    border: 'solid #fc842d',
+                    boxShadow:
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  },
+                  '& button:hover': {
+                    backgroundColor: '#ffffff',
+                    color: '#fc842d',
+                    border: 'solid #fc842d',
+                    boxShadow:
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  },
+                }}
+              >
+                <Tab label="Metric" />
+                <Tab label="Standard US" />
+              </Tabs>
+            </div>
 
             {/* TAB 1 Contents */}
             {currentTabIndex === 0 && (
@@ -326,7 +328,7 @@ const CaloriesCalc = () => {
                           borderColor: 'orange',
                         },
                       },
-                      
+
                       fontFamily: 'Verdana',
                       fontSize: '14px',
                       fontWeight: '700',
@@ -336,7 +338,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 122, max: 214 } }}
@@ -347,7 +349,6 @@ const CaloriesCalc = () => {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                    
                   />
                   {focusedField === 'height' && (
                     <ValidationPopup
@@ -366,7 +367,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
@@ -395,7 +396,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -444,10 +445,12 @@ const CaloriesCalc = () => {
                       visible={focusedField}
                     />
                   )}
-                  <FormLabel id="demo-radio-buttons-group-label"
-                   sx={{
-                       marginTop: '20px',
-                    }}>
+                  <FormLabel
+                    id="demo-radio-buttons-group-label"
+                    sx={{
+                      marginTop: '20px',
+                    }}
+                  >
                     Blood Type
                   </FormLabel>
 
@@ -457,7 +460,6 @@ const CaloriesCalc = () => {
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
-                    
                     }}
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
@@ -546,7 +548,6 @@ const CaloriesCalc = () => {
                       textAlign: 'left',
                       width: '272px',
                       paddingRight: '32px',
-                      
                     }}
                     margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
@@ -641,7 +642,7 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                     margin="normal"
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
@@ -653,21 +654,21 @@ const CaloriesCalc = () => {
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
                   />
-                  <FormLabel id="demo-radio-buttons-group-label"
-                  sx={{
-                  marginTop: '20px',
-                    }}>
+                  <FormLabel
+                    id="demo-radio-buttons-group-label"
+                    sx={{
+                      marginTop: '20px',
+                    }}
+                  >
                     Blood Type
                   </FormLabel>
                   <RadioGroup
-                    
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
                     }}
-                    
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
                     onBlur={() => setFocusedField(null)}
@@ -732,7 +733,6 @@ const CaloriesCalc = () => {
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
-                
                 >
                   Start losing weight
                 </CustomButton>

@@ -3,7 +3,7 @@ import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
 import { addDiaryEntry, searchFoods } from '../../redux/diary/diaryOperations';
-import CustomButton from 'components/Button/Button';
+import CustomButton from 'components/CustomButton/CustomButton';
 import { useDiary } from '../../hooks/useDiary';
 import { debounce } from 'lodash';
 import { setFoodsList } from 'redux/diary/diarySlice';
@@ -69,7 +69,8 @@ export default function DiaryAddProduct() {
               renderInput={params => (
                 <TextField
                   sx={{
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    marginBottom: '8px',
                   }}
                   {...params}
                   variant="standard"
@@ -88,7 +89,6 @@ export default function DiaryAddProduct() {
               lineHeight: '17px',
               letterSpacing: '0.04em',
               textAlign: 'left',
-
             }}
             id="standard-basic"
             label="Grams"
@@ -98,7 +98,9 @@ export default function DiaryAddProduct() {
             onChange={handleGramsChange}
           />
         </div>
-        <CustomButton color="orange">Add</CustomButton>
+        <CustomButton className={css.Button} color="orange">
+          Add
+        </CustomButton>
       </form>
     </div>
   );
