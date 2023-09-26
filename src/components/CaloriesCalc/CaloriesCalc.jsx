@@ -277,35 +277,35 @@ const CaloriesCalc = () => {
 
             <div className={css.tabs}>
               <Tabs
-                orientation="vertical"
+                orientation="horizontal"
                 value={currentTabIndex}
                 onChange={handleTabChange}
                 indicatorColor="transparent"
                 sx={{
                   '& button': {
                     marginTop: '25px',
-                    paddingTop: '15px',
-                    width: '182px',
+                    paddingTop: '5px',
+                    width: '100px',
                     padding: '1rem',
                     margin: '2px',
-                    height: '44px',
+                  //  height: '20px',
                     borderRadius: '30px',
                     fontFamily: 'Verdana',
-                    fontSize: '14px',
+                    fontSize: '9px',
                     fontWeight: 700,
                     textTransform: 'capitalize',
-                    backgroundColor: '#fc842d',
+                   //  backgroundColor: '#fc842d',
                     border: 'solid #fc842d',
                   },
                   '& button:focus': {
-                    backgroundColor: '#ffffff',
+                  //  backgroundColor: '#ffffff',
                     border: 'solid #fc842d',
                     boxShadow:
                       ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   },
                   '& button:hover': {
-                    backgroundColor: '#ffffff',
-                    color: '#fc842d',
+                  //  backgroundColor: '#ffffff',
+                   //  color: '#fc842d',
                     border: 'solid #fc842d',
                     boxShadow:
                       ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
@@ -527,7 +527,7 @@ const CaloriesCalc = () => {
                     />
                   )}
                 </div>
-                <CustomButton className={css.customButton}
+                <CustomButton className="customButton"
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
@@ -763,7 +763,7 @@ const CaloriesCalc = () => {
                     />
                   </RadioGroup>
                 </div>
-                <CustomButton
+                <CustomButton className="customButton"
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}

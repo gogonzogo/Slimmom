@@ -58,3 +58,6 @@ color: rgba(0, 0, 0, 0.26);
 .wide{
     width: 210px;  
 }
+.customButton{
+    margin-top: 30px;
+}
