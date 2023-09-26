@@ -61,7 +61,7 @@ const lightTheme = createTheme({
       menu: '#264061',
     },
     text: {
-      secondary: '#ffffff',
+      secondary: '#9b9faa',
       hint: '#264061',
     },
   },

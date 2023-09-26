@@ -90,6 +90,7 @@ const LoginForm = () => {
             {/*pass validatioon schema */}
             <TextField
               className={style.email_input}
+              InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
               variant="standard"
               label="Email"
               type="email"
@@ -114,6 +115,7 @@ const LoginForm = () => {
             />
             <TextField
               className={style.password_input}
+              InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
               variant="standard"
               label="Password"
               type="password"

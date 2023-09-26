@@ -27,7 +27,7 @@ const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isRefreshing = false;
         if (action.payload.includes('409')) {
-          console.log('Email or name already exists');
+          console.log('Email or name already exists');//server error
         } else {
           console.log('Server error, please try again');
         }
@@ -44,7 +44,7 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, state => {
         state.isRefreshing = false;
-        console.log('Incorrect email or password');
+        console.log('Incorrect email or password');//server error
       })
       .addCase(logOut.pending, state => {
         state.isRefreshing = true;
