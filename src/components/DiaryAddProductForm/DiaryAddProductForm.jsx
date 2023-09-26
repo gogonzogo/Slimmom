@@ -65,7 +65,6 @@ export default function DiaryAddProduct() {
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
-              // sx={{ width: 300 }}
               renderInput={params => (
                 <TextField
                   sx={{
@@ -98,7 +97,7 @@ export default function DiaryAddProduct() {
             onChange={handleGramsChange}
           />
         </div>
-        <CustomButton className={css.Button} color="orange">
+        <CustomButton className={css.diaryFormBtn} color="orange">
           Add
         </CustomButton>
       </form>

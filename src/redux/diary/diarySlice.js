@@ -17,6 +17,7 @@ const initialState = {
   isLoading: false,
   error: null,
   filter: '',
+  diaryBackBtn: false,
 };
 
 export const diarySlice = createSlice({
@@ -31,6 +32,10 @@ export const diarySlice = createSlice({
     },
     setFoodsList: (state, action) => {
       state.foodsList = action.payload;
+    },
+    setDiaryBackBtn: (state, action) => {
+      console.log(action.payload)
+      state.diaryBackBtn = action.payload;
     },
   },
   extraReducers: builder => {
@@ -94,5 +99,5 @@ export const diarySlice = createSlice({
   },
 });
 
-export const { setCalDate, setDiaryList, setFoodsList } = diarySlice.actions;
+export const { setCalDate, setDiaryList, setFoodsList, setDiaryBackBtn } = diarySlice.actions;
 export const diaryReducer = diarySlice.reducer;
