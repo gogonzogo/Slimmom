@@ -15,9 +15,9 @@ function Home() {
   return (
     <div className="background mainBackground">
       <section className="top-bottom">
-        <Container className ="left-right">
+        <Container className="left-right">
           <CaloriesCalc />
-          <Outlet />
+          {/* <Outlet /> */}
             {/* <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="register" element={<Register />} />
