@@ -10,16 +10,23 @@ import { Divider } from '@mui/material';
 // internal
 import { logOut } from '../../redux/auth/authOperations';
 import { useAuth } from '../../hooks/useAuth';
+import { useDiary } from 'hooks/useDiary';
+import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 
 const UserToolBar = () => {
-  const { user } = useAuth;
-  const dispatch = useDispatch;
- 
+  const { user } = useAuth();
+  const { diaryBackBtn } = useDiary();
+  const dispatch = useDispatch();
+
+  function handleClick() {
+    dispatch(setDiaryBackBtn(!diaryBackBtn));
+  }
+
   return (
     <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Typography>
-        { user }
-      </Typography>
+      {diaryBackBtn && <DiaryBackButton onClick={handleClick} />}
+      <Typography>{user}</Typography>
       <Divider
         orientation="vertical"
         sx={{
@@ -30,9 +37,7 @@ const UserToolBar = () => {
           marginLeft: '13px',
         }}
       />
-      <IconButton onClick={() => dispatch(logOut())}
-        aria-label="logout"
-      >
+      <IconButton onClick={() => dispatch(logOut())} aria-label="logout">
         <LogoutRoundedIcon />
       </IconButton>
     </Toolbar>

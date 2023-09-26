@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
@@ -10,21 +10,19 @@ import { fetchDiary } from 'redux/diary/diaryOperations';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
-import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
+import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryList, calDate } = useDiary();
-  const [openForm, setOpenForm] = useState(false);
+  const { diaryList, diaryBackBtn } = useDiary();
+
   useEffect(() => {
     const today = dayjs().format('MM-DD-YYYY');
     dispatch(fetchDiary(today));
   }, [dispatch]);
 
-  function handleClick(e) {
-    console.log(diaryList);
-    console.log(calDate);
-    setOpenForm(!openForm);
+  function handleClick() {
+    dispatch(setDiaryBackBtn(!diaryBackBtn));
   }
 
   return (
@@ -33,21 +31,19 @@ function Diary() {
       style={{
         display: 'flex',
         flexDirection: 'column',
-
       }}
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
         <Container className="left-right">
-          {openForm ? (
+          {diaryBackBtn ? (
             <>
-              <DiaryBackButton onClick={e => handleClick(e)} />
               <DiaryAddProductForm />
             </>
           ) : (
             <>
               <DiaryCalendar />
               <DiaryList diaryList={diaryList} />
-              <DiaryAddButton onClick={e => handleClick(e)} />
+              <DiaryAddButton onClick={handleClick} />
             </>
           )}
         </Container>
@@ -61,6 +57,6 @@ function Diary() {
       </section>
     </div>
   );
-};
+}
 
 export default Diary;
