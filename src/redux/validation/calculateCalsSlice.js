@@ -5,20 +5,20 @@ const calculateCalsSlice = createSlice({
   initialState: {
     validationReqs: {
       height: [
-        { req1: { id: 1, message: 'At lease 122cm ', met: false } },
+        { req1: { id: 1, message: 'At least 122cm ', met: false } },
         { req2: { id: 2, message: '214cm and under', met: true } },
       ],
       age: [
-        { req1: { id: 1, message: 'At lease 18 ', met: false } },
+        { req1: { id: 1, message: 'At least 18 ', met: false } },
         { req2: { id: 2, message: '80 and under', met: true } },
       ],
      
       currentWeight: [
-        { req1: { id: 1, message: 'At lease 35kg ', met: false } },
+        { req1: { id: 1, message: 'At least 34kg ', met: false } },
         { req2: { id: 2, message: '181kg and under', met: true } },
       ],
  desiredWeight: [
-        { req1: { id: 1, message: 'At lease 35kg ', met: false } },
+        { req1: { id: 1, message: 'At least 34kg ', met: false } },
         { req2: { id: 2, message: '181kg and under', met: true } },
       ],
 
@@ -26,7 +26,7 @@ const calculateCalsSlice = createSlice({
         { req1: { id: 1, message: 'Pick a blood type ', met: false } },
       ],
        heightFeet: [
-        { req1: { id: 1, message: 'At lease 4 feet ', met: false } },
+        { req1: { id: 1, message: 'At least 4 feet ', met: false } },
         { req2: { id: 2, message: '7 Feet and under', met: true } },
       ],
       heightInch: [
@@ -34,11 +34,11 @@ const calculateCalsSlice = createSlice({
         { req2: { id: 2, message: '11 inches or less', met: true } },
       ],
       currentWeightLbs: [
-        { req1: { id: 1, message: 'At lease 75 Lbs ', met: false } },
+        { req1: { id: 1, message: 'At least 75 Lbs ', met: false } },
         { req2: { id: 2, message: '400 Lbs and under', met: true } },
       ],
       desiredWeightLbs: [
-        { req1: { id: 1, message: 'At lease 75 Lbs ', met: false } },
+        { req1: { id: 1, message: 'At least 75 Lbs ', met: false } },
         { req2: { id: 2, message: '400 Lbs and under', met: true } },
       ],
     },
