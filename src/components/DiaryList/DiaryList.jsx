@@ -17,9 +17,9 @@ function DiaryList({ diaryList }) {
 
   return (
     <List className={style.productList}>
-      {diaryList.map(item => (
+      {diaryList.map((item, index) => (
         <DiaryListItem
-          key={item._id}
+          key={`${item._id}-${index}`}
           product={item}
           handleDelete={handleDelete}
         />
