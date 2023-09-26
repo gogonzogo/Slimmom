@@ -34,7 +34,6 @@ export const diarySlice = createSlice({
       state.foodsList = action.payload;
     },
     setDiaryBackBtn: (state, action) => {
-      console.log(action.payload)
       state.diaryBackBtn = action.payload;
     },
   },

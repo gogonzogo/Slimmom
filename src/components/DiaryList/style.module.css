@@ -19,7 +19,7 @@
 
 @media (min-width: 768px) {
   .productList {
-    margin-left: 20px;
+    margin-left: 0;
     width: 650px;
   }
 }

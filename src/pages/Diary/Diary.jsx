@@ -11,10 +11,13 @@ import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import useViewPort from 'hooks/useViewport';
+import css from './Diary.module.css'
 
 function Diary() {
   const dispatch = useDispatch();
   const { diaryBackBtn } = useDiary();
+  const { width } = useViewPort();
 
   useEffect(() => {
     const today = dayjs().format('MM-DD-YYYY');
@@ -35,10 +38,16 @@ function Diary() {
     >
       <section className="top-bottom" style={{ flexGrow: '1' }}>
         <Container className="left-right">
-          {diaryBackBtn ? (
+          {width > 768 ? (
             <>
-              <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
+              <div className={css.tabletDeskContainer}>
+                <DiaryCalendar />
+                <DiaryAddProductForm />
+                <DiaryList />
+              </div>
             </>
+          ) : diaryBackBtn ? (
+            <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
           ) : (
             <>
               <DiaryCalendar />

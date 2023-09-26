@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
@@ -8,17 +8,16 @@ import { useDiary } from '../../hooks/useDiary';
 import { debounce } from 'lodash';
 import { setFoodsList } from 'redux/diary/diarySlice';
 import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import useViewPort from 'hooks/useViewport';
+import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calDate, foodsList, diaryList } = useDiary();
+  const { calDate, foodsList } = useDiary();
   const dispatch = useDispatch();
   const uniqueTitle = Array.from(new Set(foodsList.map(item => item.title)));
-
-  useEffect(() => {
-    console.log(foodsList);
-  }, [foodsList]);
+  const { width } = useViewPort();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -30,7 +29,6 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     setProductName('');
     setGrams('');
     dispatch(setDiaryBackBtn(!diaryBackBtn));
-    console.log(diaryList);
   };
 
   const handleGramsChange = e => {
@@ -59,21 +57,34 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
           <Stack spacing={2}>
             <Autocomplete
               id="size-small-standard"
+              sx={{
+                '@media (min-width: 768px)': {
+                  width: '240px',
+                },
+              }}
               freeSolo
               size="small"
               options={uniqueTitle}
               value={productName}
               onChange={(e, selectedObject) => {
-                if (selectedObject !== null)
-                setProductName(selectedObject);
+                if (selectedObject !== null) setProductName(selectedObject);
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
               renderInput={params => (
                 <TextField
                   sx={{
+                    fontFamily: 'Verdana',
                     fontSize: '14px',
+                    fontWeight: '700',
+                    lineHeight: '17px',
+                    letterSpacing: '0.04em',
+                    textAlign: 'left',
                     marginBottom: '8px',
+                    '@media (min-width: 768px)': {
+                      width: '240px',
+                      marginBottom: '0',
+                    },
                   }}
                   {...params}
                   variant="standard"
@@ -92,18 +103,29 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               lineHeight: '17px',
               letterSpacing: '0.04em',
               textAlign: 'left',
+              '@media (min-width: 768px)': {
+                width: '106px',
+                paddingBottom: '0',
+                marginRight: '100px',
+                marginLeft: '22px',
+                textAlign: 'right',
+              },
             }}
             id="standard-basic"
-            label="Grams"
+            label="Grams*"
             variant="standard"
             type="number"
             value={grams}
             onChange={handleGramsChange}
           />
         </div>
-        <CustomButton className={css.diaryFormBtn} color="orange">
-          Add
-        </CustomButton>
+        {width > 768 ? (
+          <DiaryAddButton onClick={handleSubmit} />
+        ) : (
+          <CustomButton className={css.diaryFormBtn} color="orange">
+            Add
+          </CustomButton>
+        )}
       </form>
     </div>
   );
