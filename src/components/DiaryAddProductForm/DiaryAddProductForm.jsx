@@ -60,8 +60,9 @@ export default function DiaryAddProduct() {
               size="small"
               options={uniqueTitle}
               value={productName}
-              onChange={(e, newValue) => {
-                setProductName(newValue);
+              onChange={(e, selectedObject) => {
+                if (selectedObject !== null)
+                setProductName(selectedObject);
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
