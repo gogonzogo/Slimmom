@@ -24,7 +24,7 @@ export const addDiaryEntry = createAsyncThunk(
     };
     try {
       const response = await axios.post('users/addFood', newDiaryEntry);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }

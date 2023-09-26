@@ -12,7 +12,7 @@ import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calDate, foodsList } = useDiary();
+  const { calDate, foodsList, diaryList } = useDiary();
   const dispatch = useDispatch();
   const uniqueTitle = Array.from(new Set(foodsList.map(item => item.title)));
 
@@ -30,6 +30,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     setProductName('');
     setGrams('');
     dispatch(setDiaryBackBtn(!diaryBackBtn));
+    console.log(diaryList);
   };
 
   const handleGramsChange = e => {
