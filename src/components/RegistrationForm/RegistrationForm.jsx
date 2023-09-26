@@ -3,22 +3,32 @@ import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {validateEmail,validateName,validatePassword} from '../../redux/validation/registrationSlice';
+import {
+  validateEmail,
+  validateName,
+  validatePassword,
+} from '../../redux/validation/registrationSlice';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
-import { selectFormIsValid,  selectIsEmailValid, selectIsPasswordValid, selectIsNameValid } from '../../redux/validation/registrationSelectors';
+import {
+  selectFormIsValid,
+  selectIsEmailValid,
+  selectIsPasswordValid,
+  selectIsNameValid,
+} from '../../redux/validation/registrationSelectors';
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
-import CustomButton from 'components/Button/Button';
+import CustomButton from 'components/CustomButton/CustomButton';
 //import { useAuthStore } from 'hooks/useAuth';
-
 
 const RegistrationForm = () => {
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
-  const isNameValid = useSelector(selectIsNameValid)
+  const isNameValid = useSelector(selectIsNameValid);
   const isFormValid = useSelector(selectFormIsValid);
-  const validationReqs = useSelector((state) => state.registration.validationReqs);
+  const validationReqs = useSelector(
+    state => state.registration.validationReqs
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [validationPopups, setValidationPopups] = useState({
@@ -35,22 +45,24 @@ const RegistrationForm = () => {
     email: '',
     password: '',
   });
-const resetForm = () => {
-  setFormData({
-    name: '',
-    email: '',
-    password: '',
-  });
-};
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      password: '',
+    });
+  };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
 
-    switch (name) { // dispatches validation reducers from the slice on change
+    switch (
+      name // dispatches validation reducers from the slice on change
+    ) {
       case 'name':
         dispatch(validateName({ fieldValue: value }));
         break;
@@ -67,16 +79,16 @@ const resetForm = () => {
     toggleValidationPopup(name, true);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-      const response = await dispatch(register(formData));
-      if (response.payload.code === 201) {
-      resetForm()
-        navigate('/calculator')
-      }
-};
+    const response = await dispatch(register(formData));
+    if (response.payload.code === 201) {
+      resetForm();
+      navigate('/calculator');
+    }
+  };
 
-  // const renderValidationPopup = () => { 
+  // const renderValidationPopup = () => {
   //   return (
   //     <ValidationPopup
   //       validationData={validationReqs[focusedField]}
@@ -90,12 +102,14 @@ const resetForm = () => {
       <h2 className={style.form_title}>REGISTER</h2>
       <Grid className={style.form_grid}>
         <FormControl variant="standard">
-          <form
-            onSubmit={handleSubmit}
-            noValidate>
-            <TextField 
+          <form onSubmit={handleSubmit} noValidate>
+            <TextField
               className={style.name_input}
-              InputLabelProps={focusedField === 'name' && !isNameValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+              InputLabelProps={
+                focusedField === 'name' && !isNameValid
+                  ? { style: { color: 'red' } }
+                  : { style: { color: '#9B9FAA' } }
+              }
               variant="standard"
               label={'Name *'}
               type="text"
@@ -107,16 +121,15 @@ const resetForm = () => {
               onFocus={() => setFocusedField('name')}
               onBlur={() => setFocusedField(null)}
               error={focusedField === 'name' && !isNameValid}
-            //  helperText={focusedField === 'name' && formData.name.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
+              //  helperText={focusedField === 'name' && formData.name.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.name && nameValidationReqs.some((req) => !req.met)}
-  
             />
-{focusedField === 'name' && (
-                    <ValidationPopup
-                      validationData={validationReqs[focusedField]}
-                      visible={focusedField}
-                    />
-                  )}
+            {focusedField === 'name' && (
+              <ValidationPopup
+                validationData={validationReqs[focusedField]}
+                visible={focusedField}
+              />
+            )}
             <TextField
               className={style.email_input}
               InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
@@ -131,15 +144,15 @@ const resetForm = () => {
               onFocus={() => setFocusedField('email')}
               onBlur={() => setFocusedField(null)}
               error={focusedField === 'email' && !isEmailValid}
-            //  helperText={focusedField === 'email' && formData.email.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
+              //  helperText={focusedField === 'email' && formData.email.length >= 3 ? <span>  {renderValidationPopup()}</span> : null}
               //error={!formData.email && emailValidationReqs.some((req) => !req.met)}
             />
-{focusedField === 'email' && (
-                    <ValidationPopup
-                      validationData={validationReqs[focusedField]}
-                      visible={focusedField}
-                    />
-                  )}
+            {focusedField === 'email' && (
+              <ValidationPopup
+                validationData={validationReqs[focusedField]}
+                visible={focusedField}
+              />
+            )}
             <TextField
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
@@ -154,28 +167,25 @@ const resetForm = () => {
               onFocus={() => setFocusedField('password')}
               onBlur={() => setFocusedField(null)}
               error={focusedField === 'password' && !isPasswordValid}
-            //  helperText={focusedField === 'password' && formData.password.length >= 3 ? <span>{(renderValidationPopup())}</span> : null}
-            //  error={!formData.password}
-            /> 
-{focusedField === 'password' && (
-                    <ValidationPopup
-                      validationData={validationReqs[focusedField]}
-                      visible={focusedField}
-                    />
-                  )}
-      <Box className={style.button_container}> 
-        <CustomButton color="orange"
-              disabled={!isFormValid}
-              >Register
-        </CustomButton>
-      <Link to="/Login">
-          <CustomButton color="white">
-          Log In</CustomButton> 
-      </Link>
-        </Box>
+              //  helperText={focusedField === 'password' && formData.password.length >= 3 ? <span>{(renderValidationPopup())}</span> : null}
+              //  error={!formData.password}
+            />
+            {focusedField === 'password' && (
+              <ValidationPopup
+                validationData={validationReqs[focusedField]}
+                visible={focusedField}
+              />
+            )}
+            <Box className={style.button_container}>
+              <CustomButton color="orange" disabled={!isFormValid}>
+                Register
+              </CustomButton>
+              <Link to="/Login">
+                <CustomButton color="white">Log In</CustomButton>
+              </Link>
+            </Box>
           </form>
         </FormControl>
-
       </Grid>
     </Box>
   );

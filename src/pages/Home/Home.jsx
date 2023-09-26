@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
 //import Section from 'components/Section/Section';
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
@@ -13,11 +13,11 @@ import Container from 'components/Container/Container';
 
 function Home() {
   return (
-    <div className=" topBottom background mainBackground">
+    <div className="background mainBackground">
       <section className="top-bottom">
-        <Container className ="left-right">
+        <Container className="left-right">
           <CaloriesCalc />
-          <Outlet />
+          {/* <Outlet /> */}
             {/* <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="register" element={<Register />} />

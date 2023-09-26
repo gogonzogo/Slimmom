@@ -1,92 +1,30 @@
 .section {
-    display: flex;
-    flex-direction: column;
-    margin: 0 20px 0 20px;
-}
-
-
-.formdiv {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .diaryform {
-    display: flex;
-    flex-direction: column;
+  width: 100%;
+}
+
+.formdiv {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.Button {
+  display: flex;
+  margin: auto;
+  margin-top: 60px;
 }
 
 @media screen and (min-width: 480px) {
-    .Button {
-        margin-top: 50px;
-        padding: 8px 16px;
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background-color: #FC842D;
-        transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-        text-align: center;
-        display: inline-block;
-        color: #fff;
-        border: 0;
-        text-decoration: none;
-        cursor: pointer;
-        font-family: inherit;
-        font-size: 23px;
-        line-height: 24px;
-        font-style: normal;
-        font-weight: 500;
-
-        box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
-            0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
-    }
-         .diaryform {
-             display: flex;
-             flex-direction: row;
-             flex-wrap: wrap;
-             margin-top: 68px;
-    
-         }
 }
 
 @media screen and (min-width: 768px) {
-    .section {
-        width: 610px;
-        margin-top: 100px;
-    }
-
-    .diaryform {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 68px;
-
-    }
-
-    .heading {
-        font-size: 34px;
-        width: 704px;
-
-    }
-
-    .heading:first-child {
-        padding-bottom: 15px;
-    }
-
 }
 
 @media screen and (min-width: 1280px) {
-    .section {
-        width: 608px;
-        margin-top: 144px;
-    }
-
-    .diaryform {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-top: 68px;
-
-    }
-
-  
 }

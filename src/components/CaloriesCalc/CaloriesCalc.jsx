@@ -25,10 +25,12 @@ import {
   validateDesiredLbs,
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/Calc/calcSlice';
-import CustomButton from 'components/Button/Button';
-import { CalNoEat } from '../../redux/Calc/calcOperations';
+import CustomButton from 'components/CustomButton/CustomButton';
+import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
+import { useAuth } from '../../hooks/useAuth';
 
 const CaloriesCalc = () => {
+  const {loggedIn} = useAuth();
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
   const validAge = useSelector(state => state.calculate.isAgeValid);
@@ -217,12 +219,49 @@ const CaloriesCalc = () => {
       desiredWeight,
       bloodType,
     };
-    console.log('entedInfo', entedInfo);
     try {
       const response = await dispatch(CalNoEat(entedInfo));
-      console.log('returned Data', response.payload);
       const passinfo = response.payload.data;
-      handleOpen(passinfo);
+      
+        if (loggedIn) {
+          let convertBlood = 0
+          switch (bloodType) {
+            case 'A':
+              convertBlood = 1;
+              break;
+            case 'B':
+              convertBlood = 2;
+              break;
+            case 'AB':
+              convertBlood = 3;
+              break;
+            case 'O':
+              convertBlood = 4;
+              break;
+            default:
+              convertBlood = 1;
+              break;
+          }
+      
+          let mestype = '';
+          if (currentTabIndex === 0) { mestype = 'M' } else { mestype = 'M' }
+          const CalculatorInfo = {
+            height,
+            age,
+            bloodType: convertBlood,
+            currentWeight,
+            desiredWeight,
+            totalCalories: passinfo.totalCalories,
+            measurementType: mestype,
+            originalWeight: 0
+
+          };
+          const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
+        console.log(Calcresponse)
+      }
+      if (!loggedIn) {
+        handleOpen(passinfo);
+      }
     } catch (error) {
       console.error('returned Error', error.message);
     }
@@ -236,45 +275,47 @@ const CaloriesCalc = () => {
             <h1 className={css.heading}>Calculate your daily calorie</h1>
             <h1 className={css.heading}>intake right now</h1>
 
-          <div className={css.tabs}>
-              <Tabs 
+            <div className={css.tabs}>
+              <Tabs
                 orientation="vertical"
-              value={currentTabIndex}
+                value={currentTabIndex}
                 onChange={handleTabChange}
-                indicatorColor='transparent'
-              sx={{
-                '& button': {
-                  marginTop: '25px',
-                  paddingTop: '15px',
-                  width: "182px",
-    padding: "1rem",
-    margin: "2px",
-    height: "44px",
-    borderRadius: "30px",
-    fontFamily: 'Verdana',
-    fontSize: "14px",
-    fontWeight: 700,
-    textTransform: "capitalize",
-    backgroundColor: '#fc842d',
-    border: 'solid #fc842d',
-                },
-                '& button:focus' : {
-                backgroundColor: '#ffffff',
-    border: 'solid #fc842d',
-    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-                },
-'& button:hover' : {
-                backgroundColor: '#ffffff',
-     color: '#fc842d',
-    border: 'solid #fc842d',
-    boxShadow: ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-                },
-              }}
-            >
-              <Tab label="Metric" />
-              <Tab label="Standard US" />
-            </Tabs>
-</div>
+                indicatorColor="transparent"
+                sx={{
+                  '& button': {
+                    marginTop: '25px',
+                    paddingTop: '15px',
+                    width: '182px',
+                    padding: '1rem',
+                    margin: '2px',
+                    height: '44px',
+                    borderRadius: '30px',
+                    fontFamily: 'Verdana',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    textTransform: 'capitalize',
+                    backgroundColor: '#fc842d',
+                    border: 'solid #fc842d',
+                  },
+                  '& button:focus': {
+                    backgroundColor: '#ffffff',
+                    border: 'solid #fc842d',
+                    boxShadow:
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  },
+                  '& button:hover': {
+                    backgroundColor: '#ffffff',
+                    color: '#fc842d',
+                    border: 'solid #fc842d',
+                    boxShadow:
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  },
+                }}
+              >
+                <Tab label="Metric" />
+                <Tab label="Standard US" />
+              </Tabs>
+            </div>
 
             {/* TAB 1 Contents */}
             {currentTabIndex === 0 && (
@@ -287,7 +328,7 @@ const CaloriesCalc = () => {
                           borderColor: 'orange',
                         },
                       },
-                      
+
                       fontFamily: 'Verdana',
                       fontSize: '14px',
                       fontWeight: '700',
@@ -330,7 +371,8 @@ const CaloriesCalc = () => {
                     margin="normal" 
                     InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    label="Age"
+                    inputprops={{ inputprops: { min: 18, max: 80 } }}
+                    label="Age *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.age}
@@ -360,7 +402,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={focusedField === 'currentWeight' && !validcurrent ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Current Weight"
+                    label="Current Weight *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.currentWeight}
@@ -392,7 +434,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={focusedField === 'desiredWeight' && !validDesired ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Desired Weight"
+                    label="Desired Weight *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.desiredWeight}
@@ -420,7 +462,6 @@ const CaloriesCalc = () => {
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
-                    
                     }}
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
@@ -486,7 +527,7 @@ const CaloriesCalc = () => {
                     />
                   )}
                 </div>
-                <CustomButton
+                <CustomButton className={css.customButton}
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
@@ -509,7 +550,6 @@ const CaloriesCalc = () => {
                       textAlign: 'left',
                       width: '272px',
                       paddingRight: '32px',
-                      
                     }}
                     margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
@@ -560,7 +600,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 18, max: 80 } }}
-                    label="Age"
+                    label="Age *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.age}
@@ -585,7 +625,7 @@ const CaloriesCalc = () => {
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Current Weight Lbs"
+                    label="Current Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.currentWeightLbs}
@@ -604,11 +644,11 @@ const CaloriesCalc = () => {
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                     margin="normal"
+                    margin="normal"
                     InputLabelProps={{ style: { color: '#9B9FAA' } }}
                     type="tel"
                     inputprops={{ inputprops: { min: 34, max: 181 } }}
-                    label="Desired Weight Lbs"
+                    label="Desired Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
                     value={formData.desiredWeightLbs}
@@ -616,21 +656,21 @@ const CaloriesCalc = () => {
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
                   />
-                  <FormLabel id="demo-radio-buttons-group-label"
-                  sx={{
-                  marginTop: '20px',
-                    }}>
+                  <FormLabel
+                    id="demo-radio-buttons-group-label"
+                    sx={{
+                      marginTop: '20px',
+                    }}
+                  >
                     Blood Type
                   </FormLabel>
                   <RadioGroup
-                    
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
                     }}
-                    
                     onChange={changeHandler}
                     onFocus={() => setFocusedField('bloodType')}
                     onBlur={() => setFocusedField(null)}
@@ -695,7 +735,6 @@ const CaloriesCalc = () => {
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
-                
                 >
                   Start losing weight
                 </CustomButton>
