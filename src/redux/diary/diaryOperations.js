@@ -5,7 +5,7 @@ export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary',
   async (date, rejectWithValue) => {
     try {
-      const response = await axios.post('day/info', {date: date,});
+      const response = await axios.post('day/info', { date: date, });
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -24,7 +24,7 @@ export const addDiaryEntry = createAsyncThunk(
     };
     try {
       const response = await axios.post('users/addFood', newDiaryEntry);
-      return response.data.data;
+      return response.data.data.newEntry;
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -38,7 +38,7 @@ export const deleteDiaryEntry = createAsyncThunk(
       const response = await axios.delete(
         `users/deleteFood/${JSON.stringify(data)}`
       );
-      return response.data;
+      return response.data.data.result;
     } catch (error) {
       return rejectWithValue(error.message);
     }

@@ -14,7 +14,7 @@ import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryList, diaryBackBtn } = useDiary();
+  const { diaryBackBtn } = useDiary();
 
   useEffect(() => {
     const today = dayjs().format('MM-DD-YYYY');
@@ -42,7 +42,7 @@ function Diary() {
           ) : (
             <>
               <DiaryCalendar />
-              <DiaryList diaryList={diaryList} />
+              <DiaryList />
               <DiaryAddButton onClick={handleClick} />
             </>
           )}

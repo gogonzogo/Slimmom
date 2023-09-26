@@ -86,7 +86,7 @@ export const diarySlice = createSlice({
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = state.diary.diaryList.filter(
-          item => item.id !== action.payload
+          item => item._id !== action.payload
         );
         state.diary.isLoading = false;
         state.diary.error = null;
