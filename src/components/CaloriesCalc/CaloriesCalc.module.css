@@ -38,9 +38,9 @@
   .positionWrapper {
     flex-grow: 1;
   }
-  .section {
-  /*  margin-top: 100px; */
-  }
+  /* .section {
+   margin-top: 100px;
+  } */
   .calcform {
     display: grid;
     grid-template-columns: 272px 272px;
@@ -66,9 +66,9 @@
     display: grid;
   }
   .section {
-    width: 1280px;
+    /* width: 1280px; */
   /*  margin-top: 144px;*/
-    margin-left: 16px;
+    /* margin-left: 16px; */
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-areas: 'calculator rightSideBar';
