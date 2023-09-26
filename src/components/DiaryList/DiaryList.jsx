@@ -11,8 +11,8 @@ function DiaryList({ diaryList }) {
   const { calDate } = useDiary();
 
   function handleDelete(entryId) {
-    console.log(entryId);
     dispatch(deleteDiaryEntry({ calDate, entryId }));
+    console.log(diaryList);
   }
 
   return (
