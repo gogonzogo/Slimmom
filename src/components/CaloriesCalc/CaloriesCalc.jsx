@@ -178,14 +178,14 @@ const CaloriesCalc = () => {
     toggleValidationPopup(name, true);
   };
 
-  const renderValidationPopup = () => {
-    return (
-      <ValidationPopup
-        validationData={validationReqs[focusedField]}
-        visible={focusedField}
-      />
-    );
-  };
+  // const renderValidationPopup = () => {
+  //   return (
+  //     <ValidationPopup
+  //       validationData={validationReqs[focusedField]}
+  //       visible={focusedField}
+  //     />
+  //   );
+  // };
 
   const submitHandler = async e => {
     e.preventDefault();
