@@ -367,7 +367,7 @@ const CaloriesCalc = () => {
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validcurrent}
+                    error={focusedField === 'currentWeight' && !validcurrent}
                   />
                   {focusedField === 'currentWeight' && (
                     <ValidationPopup
@@ -408,8 +408,8 @@ const CaloriesCalc = () => {
                     />
                   )}
                   <FormLabel id="demo-radio-buttons-group-label"
-                   sx={{
-                       marginTop: '20px',
+                  sx={{
+                    marginTop: '20px',
                     }}>
                     Blood Type
                   </FormLabel>
