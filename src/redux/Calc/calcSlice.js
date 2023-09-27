@@ -4,6 +4,7 @@ import {
   getUserStats,
   CalNoEat,
   sendCalculator,
+  searchNotAllowedFood,
 } from './calcOperations';
 
 export const calculateSlice = createSlice({
@@ -31,6 +32,7 @@ export const calculateSlice = createSlice({
       desiredWeight: null,
       bloodType: '',
     },
+    badFoodSearcList: [],
   },
   reducers: {
     storeCalulator: (state, action) => {
@@ -63,6 +65,12 @@ export const calculateSlice = createSlice({
       })
       .addCase(fetchDaySummary.fulfilled, (state, action) => {
         console.log(action.payload);
+      })
+      .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
+        state.badFoodSearcList = action.payload;
+      })
+      .addCase(searchNotAllowedFood.rejected, (state, action) => {
+        state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
       })
       .addCase(CalNoEat.pending, state => {
         state.cals.isRefreshing = true;

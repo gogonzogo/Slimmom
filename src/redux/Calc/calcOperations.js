@@ -24,6 +24,19 @@ export const fetchDaySummary = createAsyncThunk(
     }
   }
 );
+export const searchNotAllowedFood = createAsyncThunk(
+  'calcCalories/searchBadFood',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `badFood?title=${data.title}&bloodType=${data.bloodType}`
+      );
+      return response.data.data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 export const CalNoEat = createAsyncThunk(
   'cals/calsNotFood',
