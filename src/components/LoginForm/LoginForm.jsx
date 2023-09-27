@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import style from '../LoginForm/login.module.css';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +16,8 @@ import {
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
+  const passwordRef = useRef(null);
+  const ButtondRef = useRef(null);
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   // const isFormValid = useSelector(selectFormIsValid);
@@ -91,6 +93,15 @@ const LoginForm = () => {
             <TextField
               className={style.email_input}
               InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              inputProps={{
+                onKeyPress: event => {
+                  const { key } = event;
+                  console.log(key);
+                  if (key === "Enter") {
+                    passwordRef.current.focus();
+                  }
+                }
+              }}
               variant="standard"
               label="Email"
               type="email"
@@ -116,6 +127,16 @@ const LoginForm = () => {
             <TextField
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              inputRef={passwordRef}
+              inputProps={{
+                onKeyPress: event => {
+                  const { key } = event;
+                  console.log(key);
+                  if (key === "Enter") {
+                    ButtondRef.current.focus();
+                  }
+                }
+              }}
               variant="standard"
               label="Password"
               type="password"
@@ -153,6 +174,7 @@ const LoginForm = () => {
             ) : ( */}
             <Box className={style.button_container}>
               <Button
+              inputRef={ButtondRef}
                 variant="contained"
                 type="submit"
                 disabled={!isEmailValid || !isPasswordValid}
