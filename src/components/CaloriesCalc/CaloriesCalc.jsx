@@ -352,7 +352,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'height' && !validHeight}
+                  //  error={focusedField === 'height' && !validHeight}
                   />
                   {focusedField === 'height' && (
                     renderValidationPopup()
@@ -379,7 +379,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && (
                     renderValidationPopup()
@@ -406,7 +406,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'currentWeight' && !validcurrent}
+                  //  error={focusedField === 'currentWeight' && !validcurrent}
                   />
                   {focusedField === 'currentWeight' && (
                     renderValidationPopup()
@@ -435,7 +435,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="desiredWeight"
                     onFocus={() => setFocusedField('desiredWeight')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validDesired} 
+                  //  error={focusedField === 'desiredWeight' && !validDesired} 
                   />
                   {focusedField === 'desiredWeight' && (
                     renderValidationPopup()
@@ -549,7 +549,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="heightFeet"
                     onFocus={() => setFocusedField('heightFeet')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'heightFeet' && !validHeightFeet}
+                  //  error={focusedField === 'heightFeet' && !validHeightFeet}
                   />
                    {focusedField === 'heightFeet' && (
                     renderValidationPopup()
@@ -575,7 +575,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="heightInch"
                     onFocus={() => setFocusedField('heightInch')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'heightInch' && !validHeightInch}
+                   // error={focusedField === 'heightInch' && !validHeightInch}
                   />
                    {focusedField === 'heightInch' && (
                     renderValidationPopup()
@@ -602,7 +602,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && (
                     renderValidationPopup()
@@ -631,7 +631,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="currentWeightLbs"
                     onFocus={() => setFocusedField('currentWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
+                  //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
                   />
                   {focusedField === 'currentWeightLbs' && (
                     renderValidationPopup()
@@ -658,7 +658,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="desiredWeightLbs"
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
+                  //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
                   />
                   {focusedField === 'desiredWeightLbs' && (
                     renderValidationPopup()

@@ -35,36 +35,38 @@ margin-top: -20px;
         margin-top: -15px;
     } */
     .logo {
-            max-width: 55%;
+            max-width: 47%;
             margin-top: 15px;
         }
 .text {
-    max-width: 55%;
+    max-width: 47%;
     height: auto;
     
 }
     .text-container {
         display: flex;
         margin-top: 35px;
+        margin-right: 330px;
         
     }
 
 .text-container .svg-link {
-    margin-left: -35px;
-    margin-top: -10px;
-    margin-right: -10px;
+        margin-left: -45px;
+            margin-top: -10px;
+            margin-right: -10px;
     
 }
 
 }
 
 /* styles for Mobile */
-@media screen and (max-width: 767px)and (min-width: 320px) {
+@media screen and (max-width: 768px) {
     .logo {
-        max-width: 55%;
+        max-width: 70%;
     }
     .logo-container{
         margin-top: 20px;
+        
     }
 .text{
     max-width: 35%;
