@@ -81,7 +81,9 @@ const RegistrationForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const response = await dispatch(register(formData));
+    const {name, email, password} = formData
+    const senddate = {name, email: email.toLowerCase(), password }
+    const response = await dispatch(register(senddate));
     if (response.payload.code === 201) {
       resetForm();
       navigate('/calculator');
