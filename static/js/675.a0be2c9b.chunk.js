@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkfinal_team_project=self.webpackChunkfinal_team_project||[]).push([[675],{9544:function(e,a,c){c.r(a);c(2791);var n=c(5860),s=c(9198),t=c(184);a.default=function(){return(0,t.jsx)("div",{className:"background mainBackground",children:(0,t.jsx)("section",{className:"top-bottom",children:(0,t.jsx)(s.Z,{className:"left-right",children:(0,t.jsx)(n.Z,{})})})})}}}]);
+//# sourceMappingURL=675.a0be2c9b.chunk.js.map
