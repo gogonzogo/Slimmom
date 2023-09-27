@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Modal from 'components/Modal/Modal';
-import ValidationPopup from '../ValidationPopup/ValidationPopup';
+// import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import {
   validateHeight,
   validateAge,
@@ -85,7 +85,7 @@ const CaloriesCalc = () => {
     setValidationPopups({ ...validationPopups, [fieldName]: visible });
   };
 
-  const validationReqs = useSelector(state => state.calculate.validationReqs);
+  // const validationReqs = useSelector(state => state.calculate.validationReqs);
 
   const [modalState, setModalState] = useState({
     open: false,
@@ -352,7 +352,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'height' && !validHeight}
                   />
                   {focusedField === 'height' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <TextField
                     sx={{
@@ -379,7 +379,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <TextField
                     sx={{
@@ -406,7 +406,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'currentWeight' && !validcurrent}
                   />
                   {focusedField === 'currentWeight' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                 </div>
                 <div className={css.formdiv}>
@@ -435,7 +435,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'age' && !validDesired} 
                   />
                   {focusedField === 'desiredWeight' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <FormLabel id="demo-radio-buttons-group-label"
                   sx={{
@@ -509,7 +509,7 @@ const CaloriesCalc = () => {
                     />
                   </RadioGroup>
                   {focusedField === 'bloodType' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                 </div>
                 <CustomButton className="customButton"
@@ -549,7 +549,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'heightFeet' && !validHeightFeet}
                   />
                    {focusedField === 'heightFeet' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <TextField
                     sx={{
@@ -575,7 +575,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'heightInch' && !validHeightInch}
                   />
                    {focusedField === 'heightInch' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <TextField
                     sx={{
@@ -602,7 +602,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                 </div>
                 <div className={css.formdiv}>
@@ -631,7 +631,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
                   />
                   {focusedField === 'currentWeightLbs' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <TextField
                     sx={{
@@ -658,7 +658,7 @@ const CaloriesCalc = () => {
                     error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
                   />
                   {focusedField === 'desiredWeightLbs' && (
-                    renderValidationPopup()
+                    // renderValidationPopup()
                   )}
                   <FormLabel
                     id="demo-radio-buttons-group-label"
