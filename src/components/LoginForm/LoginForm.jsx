@@ -60,7 +60,9 @@ const LoginForm = () => {
   // handles login
   async function handleLogin() {
     try {
-      const response = await dispatch(login(formData));
+      const { email, password} = formData
+      const senddate = { email: email.toLowerCase(), password }
+      const response = await dispatch(login(senddate));
       if (response.payload.code === 200) {
         nav('/diary');
       }
