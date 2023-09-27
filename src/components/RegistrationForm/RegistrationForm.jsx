@@ -24,7 +24,6 @@ import CustomButton from 'components/CustomButton/CustomButton';
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const ButtondRef = useRef(null);
 
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
@@ -181,14 +180,7 @@ const RegistrationForm = () => {
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
               inputRef={passwordRef}
-              inputProps={{
-                onKeyPress: event => {
-                  const { key } = event;
-                  if (key === "Enter") {
-                    ButtondRef.current.focus();
-                  }
-                }
-              }}
+             
               variant="standard"
               label={'Password *'}
               type="password"
@@ -210,7 +202,7 @@ const RegistrationForm = () => {
               />
             )}
             <Box className={style.button_container}>
-              <CustomButton color="orange" disabled={!isFormValid} inputRef={ButtondRef}
+              <CustomButton color="orange" disabled={!isFormValid} 
 >
                 Register
               </CustomButton>

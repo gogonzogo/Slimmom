@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);
-  const ButtondRef = useRef(null);
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   // const isFormValid = useSelector(selectFormIsValid);
@@ -36,7 +35,6 @@ const LoginForm = () => {
   // listens to input change
   const handleChange = e => {
     const { name, value } = e.target;
-    // console.log('name', name);
     setFormData({ ...formData, [name]: value });
     // check if email is valid
 
@@ -98,7 +96,6 @@ const LoginForm = () => {
               inputProps={{
                 onKeyPress: event => {
                   const { key } = event;
-                  console.log(key);
                   if (key === "Enter") {
                     passwordRef.current.focus();
                   }
@@ -130,15 +127,6 @@ const LoginForm = () => {
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
               inputRef={passwordRef}
-              inputProps={{
-                onKeyPress: event => {
-                  const { key } = event;
-                  console.log(key);
-                  if (key === "Enter") {
-                    ButtondRef.current.focus();
-                  }
-                }
-              }}
               variant="standard"
               label="Password"
               type="password"
@@ -176,7 +164,6 @@ const LoginForm = () => {
             ) : ( */}
             <Box className={style.button_container}>
               <Button
-              inputRef={ButtondRef}
                 variant="contained"
                 type="submit"
                 disabled={!isEmailValid || !isPasswordValid}
