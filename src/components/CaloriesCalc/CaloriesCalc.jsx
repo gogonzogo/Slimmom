@@ -1,6 +1,6 @@
 import React from 'react';
 import css from './CaloriesCalc.module.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tab, Tabs } from '@mui/material';
 import Radio from '@mui/material/Radio';
@@ -30,6 +30,16 @@ import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 import { useAuth } from '../../hooks/useAuth';
 
 const CaloriesCalc = () => {
+  const ageRef = useRef(null);
+  const currentRef = useRef(null);
+  const desiredRef = useRef(null);
+  const heightInRef = useRef(null);
+  const ageUSRef = useRef(null);
+  const currentLbsRef = useRef(null);
+  const desiredLbsRef = useRef(null);
+
+
+
   const {loggedIn} = useAuth();
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
@@ -343,8 +353,14 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal" 
                     InputLabelProps={focusedField === 'height' && !validHeight ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
-                    type="tel"
-                    inputprops={{ inputprops: { min: 122, max: 214 } }}
+                     type="tel"
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        ageRef.current.focus();
+                      }
+                    } } }
                     label="Height *"
                     variant="standard"
                     onChange={changeHandler}
@@ -371,7 +387,14 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     margin="normal" 
                     InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 18, max: 80 } }}
+                    inputRef={ageRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        currentRef.current.focus();
+                      }
+                    }} }
                     label="Age *"
                     variant="standard"
                     onChange={changeHandler}
@@ -398,7 +421,15 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     margin="normal" 
                     InputLabelProps={focusedField === 'currentWeight' && !validcurrent ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
+                    inputRef={currentRef}
+
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        desiredRef.current.focus();
+                      }
+                    }}} 
                     label="Current Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -427,7 +458,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     margin="normal"
                     InputLabelProps={focusedField === 'desiredWeight' && !validDesired ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
+                    inputRef={desiredRef}
+
+                    
                     label="Desired Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -541,6 +574,14 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'heightFeet' && !validHeightFeet ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          heightInRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
                     label="Height Feet *"
                     variant="standard"
@@ -567,6 +608,15 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'heightInch' && !validHeightInch ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={heightInRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          ageUSRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
                     label="Height Inch *"
                     variant="standard"
@@ -593,8 +643,16 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={ageUSRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          currentLbsRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 18, max: 80 } }}
                     label="Age *"
                     variant="standard"
                     onChange={changeHandler}
@@ -622,8 +680,16 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'currentWeightLbs' && !validcurrentLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={currentLbsRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          desiredLbsRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Current Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
@@ -649,8 +715,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'desiredWeightLbs' && !validDesiredLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={desiredLbsRef}
+                   
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Desired Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
@@ -674,6 +741,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                   <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
+                    
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
