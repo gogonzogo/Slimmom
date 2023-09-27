@@ -351,9 +351,9 @@ const CaloriesCalc = () => {
                     onBlur={() => setFocusedField(null)}
                     error={focusedField === 'height' && !validHeight}
                   />
-                  {focusedField === 'height' && (
+{/*                   {focusedField === 'height' && (
                     // renderValidationPopup()
-                  )}
+                  )} */}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
