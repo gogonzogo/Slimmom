@@ -736,7 +736,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     />
                   </RadioGroup>
                 </div>
-                <CustomButton className="customButton"
+                <CustomButton 
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}

@@ -22,6 +22,7 @@
   flex-direction: column;
 }
 
+
 .calcform {
   display: flex;
   flex-direction: column;
@@ -56,6 +57,7 @@
   .heading:first-child {
     padding-bottom: 15px;
   }
+   
     
 }
 
