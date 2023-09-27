@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Final-Team-Project/static/css/main.d8de6a13.css",
-    "main.js": "/Final-Team-Project/static/js/main.81b64098.js",
+    "main.js": "/Final-Team-Project/static/js/main.58d43395.js",
     "static/css/675.481530d5.chunk.css": "/Final-Team-Project/static/css/675.481530d5.chunk.css",
     "static/js/675.a0be2c9b.chunk.js": "/Final-Team-Project/static/js/675.a0be2c9b.chunk.js",
     "static/css/423.d56b8aa6.chunk.css": "/Final-Team-Project/static/css/423.d56b8aa6.chunk.css",
@@ -9,15 +9,15 @@
     "static/css/669.d76f2271.chunk.css": "/Final-Team-Project/static/css/669.d76f2271.chunk.css",
     "static/js/669.af410c18.chunk.js": "/Final-Team-Project/static/js/669.af410c18.chunk.js",
     "static/css/344.6429d93b.chunk.css": "/Final-Team-Project/static/css/344.6429d93b.chunk.css",
-    "static/js/344.99af161c.chunk.js": "/Final-Team-Project/static/js/344.99af161c.chunk.js",
+    "static/js/344.6f0c127f.chunk.js": "/Final-Team-Project/static/js/344.6f0c127f.chunk.js",
     "static/css/209.16b62d5d.chunk.css": "/Final-Team-Project/static/css/209.16b62d5d.chunk.css",
-    "static/js/209.3994e7ee.chunk.js": "/Final-Team-Project/static/js/209.3994e7ee.chunk.js",
+    "static/js/209.e06825d5.chunk.js": "/Final-Team-Project/static/js/209.e06825d5.chunk.js",
     "static/js/624.d6a383d5.chunk.js": "/Final-Team-Project/static/js/624.d6a383d5.chunk.js",
     "static/js/223.a6a8d6c9.chunk.js": "/Final-Team-Project/static/js/223.a6a8d6c9.chunk.js",
     "static/js/942.af0c2fa5.chunk.js": "/Final-Team-Project/static/js/942.af0c2fa5.chunk.js",
     "static/js/977.484bafb8.chunk.js": "/Final-Team-Project/static/js/977.484bafb8.chunk.js",
     "static/js/138.7079b7f1.chunk.js": "/Final-Team-Project/static/js/138.7079b7f1.chunk.js",
-    "static/js/264.3b965185.chunk.js": "/Final-Team-Project/static/js/264.3b965185.chunk.js",
+    "static/js/264.fe535e30.chunk.js": "/Final-Team-Project/static/js/264.fe535e30.chunk.js",
     "static/media/desktop-strawberry@2x.png": "/Final-Team-Project/static/media/desktop-strawberry@2x.bb4fe15573eb769f0062.png",
     "static/media/desktop-banana@2x.png": "/Final-Team-Project/static/media/desktop-banana@2x.123844449de52b336e5c.png",
     "static/media/tablet-babana@2x.png": "/Final-Team-Project/static/media/tablet-babana@2x.83cfc4e5c352b0ecdcb0.png",
@@ -40,7 +40,7 @@
     "static/media/mom.svg": "/Final-Team-Project/static/media/mom.44b3082021f2075af88260b947389fc5.svg",
     "index.html": "/Final-Team-Project/index.html",
     "main.d8de6a13.css.map": "/Final-Team-Project/static/css/main.d8de6a13.css.map",
-    "main.81b64098.js.map": "/Final-Team-Project/static/js/main.81b64098.js.map",
+    "main.58d43395.js.map": "/Final-Team-Project/static/js/main.58d43395.js.map",
     "675.481530d5.chunk.css.map": "/Final-Team-Project/static/css/675.481530d5.chunk.css.map",
     "675.a0be2c9b.chunk.js.map": "/Final-Team-Project/static/js/675.a0be2c9b.chunk.js.map",
     "423.d56b8aa6.chunk.css.map": "/Final-Team-Project/static/css/423.d56b8aa6.chunk.css.map",
@@ -48,18 +48,18 @@
     "669.d76f2271.chunk.css.map": "/Final-Team-Project/static/css/669.d76f2271.chunk.css.map",
     "669.af410c18.chunk.js.map": "/Final-Team-Project/static/js/669.af410c18.chunk.js.map",
     "344.6429d93b.chunk.css.map": "/Final-Team-Project/static/css/344.6429d93b.chunk.css.map",
-    "344.99af161c.chunk.js.map": "/Final-Team-Project/static/js/344.99af161c.chunk.js.map",
+    "344.6f0c127f.chunk.js.map": "/Final-Team-Project/static/js/344.6f0c127f.chunk.js.map",
     "209.16b62d5d.chunk.css.map": "/Final-Team-Project/static/css/209.16b62d5d.chunk.css.map",
-    "209.3994e7ee.chunk.js.map": "/Final-Team-Project/static/js/209.3994e7ee.chunk.js.map",
+    "209.e06825d5.chunk.js.map": "/Final-Team-Project/static/js/209.e06825d5.chunk.js.map",
     "624.d6a383d5.chunk.js.map": "/Final-Team-Project/static/js/624.d6a383d5.chunk.js.map",
     "223.a6a8d6c9.chunk.js.map": "/Final-Team-Project/static/js/223.a6a8d6c9.chunk.js.map",
     "942.af0c2fa5.chunk.js.map": "/Final-Team-Project/static/js/942.af0c2fa5.chunk.js.map",
     "977.484bafb8.chunk.js.map": "/Final-Team-Project/static/js/977.484bafb8.chunk.js.map",
     "138.7079b7f1.chunk.js.map": "/Final-Team-Project/static/js/138.7079b7f1.chunk.js.map",
-    "264.3b965185.chunk.js.map": "/Final-Team-Project/static/js/264.3b965185.chunk.js.map"
+    "264.fe535e30.chunk.js.map": "/Final-Team-Project/static/js/264.fe535e30.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d8de6a13.css",
-    "static/js/main.81b64098.js"
+    "static/js/main.58d43395.js"
   ]
 }
