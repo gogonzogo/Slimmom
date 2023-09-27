@@ -2,14 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 axios.defaults.baseURL = 'http://localhost:3030/api';
 
-export const getUserStats = createAsyncThunk('calcCalories/stats', async () => {
-  try {
-    const response = await axios.get('users/stats');
-    return response.data.data;
-  } catch (err) {
-    return err;
+export const getUserStats = createAsyncThunk(
+  'calcCalories/stats',
+  async ({ rejectWithValue }) => {
+    try {
+      const response = await axios.get('users/stats');
+      return response.data.data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
   }
-});
+);
 export const fetchDaySummary = createAsyncThunk(
   'calcCalories/summary',
   async data => {

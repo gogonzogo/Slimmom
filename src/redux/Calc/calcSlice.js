@@ -54,6 +54,15 @@ export const calculateSlice = createSlice({
           bloodType: stats.bloodType,
         };
       })
+      .addCase(getUserStats.rejected, (state, action) => {
+        state.stats = {
+          height: 'n/a',
+          age: 'n/a',
+          currentWeight: 'n/a',
+          desiredWeight: 'n/a',
+          bloodType: 'n/a',
+        };
+      })
       .addCase(fetchDaySummary.fulfilled, (state, action) => {
         console.log(action.payload);
       })
