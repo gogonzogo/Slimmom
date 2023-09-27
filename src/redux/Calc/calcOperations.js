@@ -21,12 +21,25 @@ export const fetchDaySummary = createAsyncThunk(
     }
   }
 );
+export const searchNotAllowedFood = createAsyncThunk(
+  'calcCalories/searchBadFood',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `badFood?title=${data.title}&bloodType=${data.bloodType}`
+      );
+      return response.data.data;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
 
 export const CalNoEat = createAsyncThunk(
-  "cals/calsNotFood",
+  'cals/calsNotFood',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/calories/", credentials);
+      const { data } = await axios.post('/calories/', credentials);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -34,10 +47,10 @@ export const CalNoEat = createAsyncThunk(
   }
 );
 export const sendCalculator = createAsyncThunk(
-  "cals/postCalculator",
+  'cals/postCalculator',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/calcuator/", credentials);
+      const { data } = await axios.post('/calcuator/', credentials);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);

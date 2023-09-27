@@ -1,4 +1,7 @@
-import { useSelector } from 'react-redux';
+import { debounce } from 'lodash';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchNotAllowedFood } from 'redux/Calc/calcOperations';
+import { getBadFoodSearchResults } from 'redux/Calc/calcSliceSelectors';
 import {
   getCalDate,
   getDailyRate,
@@ -7,6 +10,9 @@ import {
 import Summary from './Summary';
 
 export const SummaryContainer = () => {
+  const dispatch = useDispatch();
+
+  //set Summary
   const date = useSelector(getCalDate);
   const foodList = useSelector(getDiaryList);
   const totalConsumed = foodList
@@ -24,5 +30,21 @@ export const SummaryContainer = () => {
     percentage,
   };
 
-  return <Summary date={date} summary={summary} />;
+  //search bad food
+  const searchResults = useSelector(getBadFoodSearchResults);
+  // const bloodType = useSelector(sideBarStats);
+  // console.log(bloodType);
+  const searchInputChange = debounce(e => {
+    const title = e.target.value;
+    title.length > 0 &&
+      dispatch(searchNotAllowedFood({ title, bloodType: 'A' }));
+  }, 400);
+  return (
+    <Summary
+      date={date}
+      summary={summary}
+      searchInputChange={searchInputChange}
+      searchResults={searchResults}
+    />
+  );
 };

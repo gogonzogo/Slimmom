@@ -7,6 +7,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import ListWithScroll from './ListWithScroll';
 import s from './modal.module.css';
 
 const Modal = props => {
@@ -51,13 +52,7 @@ const Modal = props => {
             <div className={s.notEat}>
               <hr className={s.hr} />
               <b className={s.text2}>Foods you should not eat</b>
-              <ol>
-                {modalState.foodNotToEat.slice(0).map(listItem => (
-                  <li className={s.notEatItem} key={listItem._id}>
-                    {listItem.title}
-                  </li>
-                ))}
-              </ol>
+              <ListWithScroll array={modalState.foodNotToEat.slice(0)} />
               <Link to="register" className={s.buttonWrapper}>
                 <Button className={s.button} variant="contained">
                   Start losing weight

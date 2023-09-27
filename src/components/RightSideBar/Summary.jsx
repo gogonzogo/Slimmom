@@ -1,7 +1,10 @@
-import NotAllowedProducts from 'components/ProductsList/NotAllowedProducts/NotAllowedProducts';
+import { Input, useMediaQuery } from '@mui/material';
+import ListWithScroll from 'components/Modal/ListWithScroll';
 import s from './rightSideBar.module.css';
 
-const Summary = ({ date, summary }) => {
+const Summary = ({ date, summary, searchInputChange, searchResults }) => {
+  const isLargeScreen = useMediaQuery('(min-width: 769px)');
+
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
@@ -29,7 +32,13 @@ const Summary = ({ date, summary }) => {
       </div>
       <div className={s.sideBarContent}>
         <p className={s.sideBarTitle}>Food not recommended</p>
-        <NotAllowedProducts />
+        <div>
+          <Input placeholder="type here.." onChange={searchInputChange} />
+          <ListWithScroll
+            array={searchResults}
+            style={{ height: isLargeScreen ? 400 : 150 }}
+          />
+        </div>
       </div>
     </div>
   );
