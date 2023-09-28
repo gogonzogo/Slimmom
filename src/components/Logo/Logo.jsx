@@ -6,12 +6,9 @@ import styles from './Logo.module.css';
 import { NavLink } from 'react-router-dom';
 
 const Logo = () => {
-  // Define styles for the media query
   const mediaQueryStyles = {
-    marginTop: '-20px',
+    marginTop: '0px',
   };
-
-  // Apply different styles if the screen width is less than or equal to 768px
   if (window.innerWidth <= 768) {
     mediaQueryStyles.marginTop = '20px';
   }

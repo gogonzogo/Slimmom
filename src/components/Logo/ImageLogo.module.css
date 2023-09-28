@@ -1,6 +1,6 @@
 .imagelogo-container {
     display: flex;
-    margin-top: -20px;
+    margin-top: 0px;
 }
 
 .text-container {
@@ -43,7 +43,6 @@
     } */
     .imagelogo {
         max-width: 47%;
-        margin-top: 15px;
     }
 
     .text {
@@ -88,6 +87,6 @@
     }
 
     .imagevector-container {
-        width: 71px;
+        width: 69px;
     }
 }
