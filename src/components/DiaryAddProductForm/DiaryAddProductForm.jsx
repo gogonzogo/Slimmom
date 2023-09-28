@@ -73,6 +73,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               onInputChange={handleInputChange}
               renderInput={params => (
                 <TextField
+                  required
                   sx={{
                     fontFamily: 'Verdana',
                     fontSize: '14px',
@@ -88,7 +89,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                   }}
                   {...params}
                   variant="standard"
-                  label="Enter product name*"
+                  label="Enter product name"
                 />
               )}
             />
@@ -96,6 +97,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
         </div>
         <div className={css.formdiv}>
           <TextField
+            required
             sx={{
               fontFamily: 'Verdana',
               fontSize: '14px',
@@ -112,7 +114,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               },
             }}
             id="standard-basic"
-            label="Grams*"
+            label="Grams"
             variant="standard"
             type="number"
             value={grams}
