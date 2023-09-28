@@ -18,7 +18,7 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/users/register", credentials);
+      const { data } = await axios.post("/auth/register", credentials);
       // token.set(data.token);
       toast.success(data.data.message, {
         icon: '🚀',
@@ -41,7 +41,7 @@ export const login = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     // console.log('login called')
     try {
-      const { data } = await axios.post("/users/login", credentials);
+      const { data } = await axios.post("/auth/login", credentials);
       // token.set(data.token);
       toast.success(data.data.message, {
         icon: "🚀",
@@ -64,20 +64,8 @@ export const logOut = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/users/logout");
+      await axios.post("/auth/logout");
         //token.set(null);
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
-
-export const refresh = createAsyncThunk(
-  "auth/refresh",
-  async (_, { rejectWithValue }) => {
-    try {
-      await axios.post("/users/logout");
-      // token.set(null);
     } catch (error) {
       return rejectWithValue(error.message);
     }
