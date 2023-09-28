@@ -63,10 +63,10 @@ margin-top: -20px;
     .logo {
         max-width: 70%;
     }
-    .logo-container{
+    /* .logo-container{
         margin-top: 20px;
         
-    }
+    } */
 .text{
     max-width: 35%;
 }
@@ -75,7 +75,7 @@ margin-top: -20px;
         }
     
 .vector-container {
-width: 71px;
+    width: 69px;
 }
 }
 
