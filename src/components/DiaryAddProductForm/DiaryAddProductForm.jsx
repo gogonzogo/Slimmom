@@ -24,6 +24,8 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     const foodItem = foodsList.find(item => item.title === productName);
     const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
 
+    console.log(calDate);
+
     dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
     dispatch(setFoodsList([]));
     setProductName('');

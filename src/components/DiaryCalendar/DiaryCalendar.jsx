@@ -9,7 +9,7 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCalDate } from 'redux/diary/diarySlice';
 import { fetchDiary } from 'redux/diary/diaryOperations';
@@ -20,18 +20,13 @@ export default function DiaryCalendar() {
   const [formattedCalValue, setFormattedCalValue] = useState(
     dayjs().format(`MM/DD/YYYY`)
   );
-  const [tempBugFix] = useState(dayjs().format(`MM-DD-YYYY`));
   const dispatch = useDispatch();
-  // const { calDate } = useDiary();
-
-  useEffect(() => {
-    dispatch(setCalDate(tempBugFix));
-  }, [dispatch, tempBugFix]);
 
   const formatCalValue = value => {
     const displayDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
     const fetchDate = dayjs(`${value}`).format(`MM-DD-YYYY`);
     setFormattedCalValue(displayDate);
+    dispatch(setCalDate(fetchDate));
     dispatch(
       fetchDiary(fetchDate)
     );
