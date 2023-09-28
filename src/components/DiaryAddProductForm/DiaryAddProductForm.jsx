@@ -120,9 +120,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
           />
         </div>
         {width > 768 ? (
-          <DiaryAddButton onClick={handleSubmit} />
+          <DiaryAddButton onClick={handleSubmit} disabled={(productName === "" || grams === "")} />
         ) : (
-          <CustomButton className={css.diaryFormBtn} color="orange">
+          <CustomButton className={css.diaryFormBtn} color="orange"  disabled={(productName === "" || grams === "")}>
             Add
           </CustomButton>
         )}
