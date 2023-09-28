@@ -548,7 +548,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     renderValidationPopup()
                   )}
                 </div>
-                <CustomButton className="customButton"
+                <CustomButton 
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
