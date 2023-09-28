@@ -1,9 +1,9 @@
-.logo-container {
+.textlogo-container{
     display: flex;
     align-items: center;
 
 }
-.text-container {
+.texttext-container {
     display: flex;
     gap: 5px;
     /* margin-top: 40px; */
@@ -12,10 +12,10 @@
 .image-container {
     width: 71px;
 }
-.svg-link {
+.textsvg-link {
     display: block;
 }
-.text-container .svg-link {
+.texttext-container .textsvg-link {
 margin-right: -5px;
     margin-left: -43px;
     margin-top: 26px;
@@ -25,7 +25,7 @@ margin-right: -5px;
     max-width: 70%;
     height: auto; 
 }
-.text{
+.svgtext{
     max-width: 50%;
         height: auto;
 }
@@ -34,15 +34,15 @@ margin-right: -5px;
     .logo {
             max-width: 55%;
         }
-.text {
+.svgtext {
     max-width: 47%;
     height: auto;
 }
-    .text-container {
+    .texttext-container {
         display: flex;
     }
 
-.text-container .svg-link {
+.texttext-container .textsvg-link {
 margin-left: -45px;
     margin-top: -5px;
     margin-right: -5px;
@@ -54,7 +54,7 @@ margin-left: -45px;
 /* styles for Mobile */
 @media screen and (max-width: 767px) {
 
-.text{
+.svgtext{
     display: none;
 }
 

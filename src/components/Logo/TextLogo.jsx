@@ -6,13 +6,13 @@ import { NavLink } from 'react-router-dom';
 
 const TextLogo = ({ className }) => {
   return (
-    <div className={className || styles['logo-container']}>
-      <div className={styles['text-container']}>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <SlimSVG className={styles.text} />
+    <div className={className || styles['textlogo-container']}>
+      <div className={styles['texttext-container']}>
+        <NavLink to='/Diary' className={styles['textsvg-link']}>
+          <SlimSVG className={styles.svgtext} />
         </NavLink>
-        <NavLink to='/Diary' className={styles['svg-link']}>
-          <MomSVG className={styles.text} />
+        <NavLink to='/Diary' className={styles['textsvg-link']}>
+          <MomSVG className={styles.svgtext} />
         </NavLink>
         </div>
       </div>
