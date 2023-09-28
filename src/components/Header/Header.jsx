@@ -48,12 +48,12 @@ const Header = () => {
             isMobile 
               ? (
                 <div>
-                  <Logo className={styles.logo} />
+                  <Logo />
               </div>
             
           ) : (
               <IconButton sx={{padding: 0,}}>
-                <ImageLogo className={styles.logo}/>
+                <ImageLogo/>
               </IconButton>
           )}
           
