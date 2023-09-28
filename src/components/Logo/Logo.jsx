@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 const Logo = () => { 
   return (
-    <div styles={{display: 'flex', marginTop: '-20px'}} className={styles['logo-container']}>
+    <div style={{display: 'flex', marginTop: '-20px'}} className={styles['logo-container']}>
       <div className={styles['vector-container']}>
         <NavLink to='/Diary'>
           <LogoSVG className={styles.logo} width="100" height="100" alt="A waistline with a green measuring tape"/>
