@@ -36,7 +36,6 @@
 @media screen and (min-width: 768px) {
   .sideBarContainer {
     position: relative;
-    z-index: -1;
   }
   .sideBarContentWrapper {
     flex-direction: row;
@@ -52,7 +51,6 @@
     width: 40%;
     height: 100vh;
     position: absolute;
-    z-index: -1;
   }
   .sideBarContentWrapper {
     flex-direction: column;

@@ -9,7 +9,8 @@ import {
 } from 'redux/diary/diarySelectors';
 import Summary from './Summary';
 
-export const SummaryContainer = () => {
+export const SummaryContainer = props => {
+  const stats = props;
   const dispatch = useDispatch();
 
   //set Summary
@@ -32,12 +33,11 @@ export const SummaryContainer = () => {
 
   //search bad food
   const searchResults = useSelector(getBadFoodSearchResults);
-  // const bloodType = useSelector(sideBarStats);
-  // console.log(bloodType);
+  const bloodType = stats.bloodType;
   const searchInputChange = debounce(e => {
     const title = e.target.value;
     title.length > 0 &&
-      dispatch(searchNotAllowedFood({ title, bloodType: 'A' }));
+      dispatch(searchNotAllowedFood({ title, bloodType: bloodType }));
   }, 400);
   return (
     <Summary
