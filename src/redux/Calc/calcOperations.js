@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'http://localhost:3030/api';
 
 export const getUserStats = createAsyncThunk(
   'calcCalories/stats',
-  async ({ rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.get('user/stats');
       return response.data.data;
