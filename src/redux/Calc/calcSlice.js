@@ -36,7 +36,7 @@ export const calculateSlice = createSlice({
   },
   reducers: {
     storeCalulator: (state, action) => {
-      state.value = action.payload;
+      state.cals.value = action.payload;
     },
     setStats: (state, action) => {
       state.stats = action.payload;
