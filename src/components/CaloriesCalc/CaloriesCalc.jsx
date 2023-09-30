@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './CaloriesCalc.module.css';
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -37,7 +37,7 @@ const CaloriesCalc = () => {
   const ageUSRef = useRef(null);
   const currentLbsRef = useRef(null);
   const desiredLbsRef = useRef(null);
-
+  const [buttonText, setButtonText] = useState('Submit');
 
 
   const {loggedIn} = useAuth();
@@ -51,6 +51,15 @@ const CaloriesCalc = () => {
     validHeight && validAge && validcurrent && validDesired && validBlood
       ? true
       : false;
+
+
+      useEffect(() => {
+        if (loggedIn) {
+          setButtonText('Update Calculator')
+        } else {
+          setButtonText('Start losing weight')
+        }
+    }, [loggedIn])
 
   const validHeightFeet = useSelector(
     state => state.calculate.isHeightFeetValid
@@ -553,7 +562,7 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                   size="wide"
                   disabled={!isFormValid}
                 >
-                  Start losing weight
+                  {buttonText}
                 </CustomButton>
               </form>
             )}
@@ -804,12 +813,14 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     />
                   </RadioGroup>
                 </div>
+               
                 <CustomButton 
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
                 >
-                  Start losing weight
+                                  {buttonText}
+
                 </CustomButton>
               </form>
             )}
