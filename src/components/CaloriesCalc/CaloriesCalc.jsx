@@ -275,7 +275,8 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
             desiredWeight,
             totalCalories: passinfo.totalCalories,
             measurementType: mestype,
-            originalWeight: 0
+            originalDate: new Date(),
+            enteredDate: new Date(),
 
           };
           const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
