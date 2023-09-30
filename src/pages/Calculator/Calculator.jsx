@@ -4,6 +4,7 @@ import RightSideBar from 'components/RightSideBar/RightSideBar';
 import CaloriesCalc from 'components/CaloriesCalc/CaloriesCalc';
 import Container from 'components/Container/Container';
 import { StatsContainer } from 'components/RightSideBar/StatsContainer';
+import s from '../../components/RightSideBar/rightSideBar.module.css'
 
 function Calculator() {
   return (
@@ -19,6 +20,7 @@ function Calculator() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
+<div className= {s.sidebarbox}></div>
           <RightSideBar>
             <StatsContainer />
           </RightSideBar>
