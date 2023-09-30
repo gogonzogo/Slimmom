@@ -16,7 +16,6 @@ export const fetchDiary = createAsyncThunk(
 export const addDiaryEntry = createAsyncThunk(
   'diary/add',
   async (data, rejectWithValue) => {
-    console.log(data.calDate)
     const newDiaryEntry = {
       date: data.calDate,
       title: data.productName,

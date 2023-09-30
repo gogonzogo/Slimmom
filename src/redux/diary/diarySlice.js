@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   fetchDiary,
@@ -8,7 +9,7 @@ import {
 
 const initialState = {
   diary: {
-    calDate: '',
+    calDate: dayjs().format('MM-DD-YYYY'),
     dailyRate: 0,
     diaryList: [],
   },
