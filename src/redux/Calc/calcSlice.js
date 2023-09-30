@@ -30,7 +30,9 @@ export const calculateSlice = createSlice({
       age: null,
       currentWeight: null,
       desiredWeight: null,
-      bloodType: '',
+      bloodType: null,
+      enteredDate: null,
+      originalWeight: null,
     },
     badFoodSearcList: [],
   },
@@ -52,6 +54,8 @@ export const calculateSlice = createSlice({
           currentWeight: stats.currentWeight,
           desiredWeight: stats.desiredWeight,
           bloodType: stats.bloodType,
+          enteredDate: stats.enteredDate,
+          originalWeight: stats.originalWeight,
         };
       })
       .addCase(getUserStats.rejected, (state, action) => {
@@ -61,6 +65,8 @@ export const calculateSlice = createSlice({
           currentWeight: 'n/a',
           desiredWeight: 'n/a',
           bloodType: 'n/a',
+          enteredDate: null,
+          originalWeight: null,
         };
       })
       .addCase(fetchDaySummary.fulfilled, (state, action) => {

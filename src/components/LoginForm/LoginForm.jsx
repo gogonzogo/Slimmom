@@ -14,6 +14,7 @@ import {
   validatePassword,
 } from '../../redux/validation/registrationSlice';
 import { toast } from 'react-toastify';
+import { getUserStats } from 'redux/Calc/calcOperations';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);
@@ -58,10 +59,11 @@ const LoginForm = () => {
   // handles login
   async function handleLogin() {
     try {
-      const { email, password} = formData
-      const senddate = { email: email.toLowerCase(), password }
+      const { email, password } = formData;
+      const senddate = { email: email.toLowerCase(), password };
       const response = await dispatch(login(senddate));
       if (response.payload.code === 200) {
+        dispatch(getUserStats());
         nav('/diary');
       }
       // nav('/');
@@ -92,14 +94,18 @@ const LoginForm = () => {
             {/*pass validatioon schema */}
             <TextField
               className={style.email_input}
-              InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              InputLabelProps={
+                focusedField === 'email' && !isEmailValid
+                  ? { style: { color: 'red' } }
+                  : { style: { color: '#9B9FAA' } }
+              }
               inputProps={{
                 onKeyPress: event => {
                   const { key } = event;
-                  if (key === "Enter") {
+                  if (key === 'Enter') {
                     passwordRef.current.focus();
                   }
-                }
+                },
               }}
               variant="standard"
               label="Email"
@@ -125,7 +131,11 @@ const LoginForm = () => {
             />
             <TextField
               className={style.password_input}
-              InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              InputLabelProps={
+                focusedField === 'password' && !isPasswordValid
+                  ? { style: { color: 'red' } }
+                  : { style: { color: '#9B9FAA' } }
+              }
               inputRef={passwordRef}
               variant="standard"
               label="Password"
