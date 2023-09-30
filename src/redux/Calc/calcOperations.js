@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:3030/api';
+// axios.defaults.baseURL = 'http://localhost:3030/api';
 
 export const getUserStats = createAsyncThunk(
   'calcCalories/stats',
