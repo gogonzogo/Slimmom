@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 
-axios.defaults.baseURL = "https://slimmom-9d5b6b1b5aa9.herokuapp.com/api";
+axios.defaults.baseURL = "http://localhost:3030/api";
 axios.defaults.withCredentials = true;
 
 // export const token = {
