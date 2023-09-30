@@ -80,7 +80,15 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = async e => {
+    let convertEmail = formData.email
+    convertEmail = convertEmail.toLocaleLowerCase()
+    console.log('convertEmail', convertEmail)
     e.preventDefault();
+      setFormData({
+      ...formData,
+      email: convertEmail,
+      });
+    console.log('formData', formData)
     const response = await dispatch(register(formData));
     if (response.payload.code === 201) {
       resetForm();

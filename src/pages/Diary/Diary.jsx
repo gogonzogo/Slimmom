@@ -13,6 +13,8 @@ import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 import useViewPort from 'hooks/useViewport';
 import css from './Diary.module.css'
+import s from '../../components/RightSideBar/rightSideBar.module.css'
+
 
 function Diary() {
   const dispatch = useDispatch();
@@ -59,6 +61,7 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
+          <div className= {s.sidebarbox}></div>
           <RightSideBar>
             <SummaryContainer />
           </RightSideBar>
