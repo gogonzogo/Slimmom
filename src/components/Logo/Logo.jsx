@@ -5,12 +5,19 @@ import { ReactComponent as MomSVG } from "../Logo/mom.svg";
 import styles from './Logo.module.css';
 import { NavLink } from 'react-router-dom';
 
-const Logo = ({ className }) => { 
+const Logo = () => {
+  const mediaQueryStyles = {
+    marginTop: '0px',
+  };
+  if (window.innerWidth <= 768) {
+    mediaQueryStyles.marginTop = '20px';
+  }
+
   return (
-    <div className={className || styles['logo-container']}>
+    <div style={{ display: 'flex', ...mediaQueryStyles }} className={styles['logo-container']}>
       <div className={styles['vector-container']}>
         <NavLink to='/Diary'>
-          <LogoSVG className={styles.logo} width="100" height="100" alt="A waistline with a green measuring tape"/>
+          <LogoSVG className={styles.logo} width="100" height="100" alt="A waistline with a green measuring tape" />
         </NavLink>
       </div>
       <div className={styles['text-container']}>
@@ -20,7 +27,7 @@ const Logo = ({ className }) => {
         <NavLink to='/Diary' className={styles['svg-link']}>
           <MomSVG className={styles.text} />
         </NavLink>
-        </div>
+      </div>
     </div>
   );
 };

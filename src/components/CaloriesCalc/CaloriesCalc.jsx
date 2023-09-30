@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import css from './CaloriesCalc.module.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Tab, Tabs } from '@mui/material';
 import Radio from '@mui/material/Radio';
@@ -10,7 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Modal from 'components/Modal/Modal';
-// import ValidationPopup from '../ValidationPopup/ValidationPopup';
+import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import {
   validateHeight,
   validateAge,
@@ -30,6 +30,16 @@ import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 import { useAuth } from '../../hooks/useAuth';
 
 const CaloriesCalc = () => {
+  const ageRef = useRef(null);
+  const currentRef = useRef(null);
+  const desiredRef = useRef(null);
+  const heightInRef = useRef(null);
+  const ageUSRef = useRef(null);
+  const currentLbsRef = useRef(null);
+  const desiredLbsRef = useRef(null);
+  const [buttonText, setButtonText] = useState('Submit');
+
+
   const {loggedIn} = useAuth();
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
@@ -41,6 +51,15 @@ const CaloriesCalc = () => {
     validHeight && validAge && validcurrent && validDesired && validBlood
       ? true
       : false;
+
+
+      useEffect(() => {
+        if (loggedIn) {
+          setButtonText('Update Calculator')
+        } else {
+          setButtonText('Start losing weight')
+        }
+    }, [loggedIn])
 
   const validHeightFeet = useSelector(
     state => state.calculate.isHeightFeetValid
@@ -85,7 +104,7 @@ const CaloriesCalc = () => {
     setValidationPopups({ ...validationPopups, [fieldName]: visible });
   };
 
-  // const validationReqs = useSelector(state => state.calculate.validationReqs);
+  
 
   const [modalState, setModalState] = useState({
     open: false,
@@ -177,15 +196,18 @@ const CaloriesCalc = () => {
     setFocusedField(name);
     toggleValidationPopup(name, true);
   };
-
-  // const renderValidationPopup = () => {
-  //   return (
-  //     <ValidationPopup
-  //       validationData={validationReqs[focusedField]}
-  //       visible={focusedField}
-  //     />
-  //   );
-  // };
+const validationReqs = useSelector(state => state.calculate.validationReqs);
+  const renderValidationPopup = () => {
+    
+    return (
+      <div>
+      <ValidationPopup
+        validationData={validationReqs[focusedField]}
+        visible={focusedField}
+        />
+        </div>
+    );
+  };
 
   const submitHandler = async e => {
     e.preventDefault();
@@ -340,8 +362,14 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal" 
                     InputLabelProps={focusedField === 'height' && !validHeight ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
-                    type="tel"
-                    inputprops={{ inputprops: { min: 122, max: 214 } }}
+                     type="tel"
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        ageRef.current.focus();
+                      }
+                    } } }
                     label="Height *"
                     variant="standard"
                     onChange={changeHandler}
@@ -349,11 +377,11 @@ const CaloriesCalc = () => {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'height' && !validHeight}
+                  //  error={focusedField === 'height' && !validHeight}
                   />
-{/*                   {focusedField === 'height' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'height' && (
+                    renderValidationPopup()
+                  )}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -368,7 +396,14 @@ const CaloriesCalc = () => {
                     margin="normal" 
                     InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 18, max: 80 } }}
+                    inputRef={ageRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        currentRef.current.focus();
+                      }
+                    }} }
                     label="Age *"
                     variant="standard"
                     onChange={changeHandler}
@@ -376,11 +411,11 @@ const CaloriesCalc = () => {
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
-{/*                   {focusedField === 'age' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'age' && (
+                    renderValidationPopup()
+                  )}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -395,7 +430,15 @@ const CaloriesCalc = () => {
                     margin="normal" 
                     InputLabelProps={focusedField === 'currentWeight' && !validcurrent ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
+                    inputRef={currentRef}
+
+                    inputProps={{
+                      onKeyPress: event => {
+                      const { key } = event;
+                      if (key === "Enter") {
+                        desiredRef.current.focus();
+                      }
+                    }}} 
                     label="Current Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -403,11 +446,11 @@ const CaloriesCalc = () => {
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'currentWeight' && !validcurrent}
+                  //  error={focusedField === 'currentWeight' && !validcurrent}
                   />
-{/*                   {focusedField === 'currentWeight' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'currentWeight' && (
+                    renderValidationPopup()
+                  )}
                 </div>
                 <div className={css.formdiv}>
                   <TextField
@@ -424,7 +467,9 @@ const CaloriesCalc = () => {
                     margin="normal"
                     InputLabelProps={focusedField === 'desiredWeight' && !validDesired ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
+                    inputRef={desiredRef}
+
+                    
                     label="Desired Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -432,11 +477,11 @@ const CaloriesCalc = () => {
                     name="desiredWeight"
                     onFocus={() => setFocusedField('desiredWeight')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validDesired} 
+                  //  error={focusedField === 'desiredWeight' && !validDesired} 
                   />
-{/*                   {focusedField === 'desiredWeight' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'desiredWeight' && (
+                    renderValidationPopup()
+                  )}
                   <FormLabel id="demo-radio-buttons-group-label"
                   sx={{
                     marginTop: '20px',
@@ -508,16 +553,16 @@ const CaloriesCalc = () => {
                       label="4"
                     />
                   </RadioGroup>
-{/*                   {focusedField === 'bloodType' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'bloodType' && (
+                    renderValidationPopup()
+                  )}
                 </div>
-                <CustomButton className="customButton"
+                <CustomButton 
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
                 >
-                  Start losing weight
+                  {buttonText}
                 </CustomButton>
               </form>
             )}
@@ -538,6 +583,14 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'heightFeet' && !validHeightFeet ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          heightInRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
                     label="Height Feet *"
                     variant="standard"
@@ -546,11 +599,11 @@ const CaloriesCalc = () => {
                     name="heightFeet"
                     onFocus={() => setFocusedField('heightFeet')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'heightFeet' && !validHeightFeet}
+                  //  error={focusedField === 'heightFeet' && !validHeightFeet}
                   />
-{/*                    {focusedField === 'heightFeet' && (
-                    // renderValidationPopup()
-                  )} */}
+                   {focusedField === 'heightFeet' && (
+                    renderValidationPopup()
+                  )}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -564,6 +617,15 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'heightInch' && !validHeightInch ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={heightInRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          ageUSRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
                     label="Height Inch *"
                     variant="standard"
@@ -572,11 +634,11 @@ const CaloriesCalc = () => {
                     name="heightInch"
                     onFocus={() => setFocusedField('heightInch')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'heightInch' && !validHeightInch}
+                   // error={focusedField === 'heightInch' && !validHeightInch}
                   />
-{/*                    {focusedField === 'heightInch' && (
-                    // renderValidationPopup()
-                  )} */}
+                   {focusedField === 'heightInch' && (
+                    renderValidationPopup()
+                  )}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -590,8 +652,16 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={ageUSRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          currentLbsRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 18, max: 80 } }}
                     label="Age *"
                     variant="standard"
                     onChange={changeHandler}
@@ -599,11 +669,11 @@ const CaloriesCalc = () => {
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
-{/*                   {focusedField === 'age' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'age' && (
+                    renderValidationPopup()
+                  )}
                 </div>
                 <div className={css.formdiv}>
                   <TextField
@@ -619,8 +689,16 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'currentWeightLbs' && !validcurrentLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={currentLbsRef}
+                    inputProps={{
+                      onKeyPress: event => {
+                        const { key } = event;
+                        if (key === "Enter") {
+                          desiredLbsRef.current.focus();
+                        }
+                      }
+                    }}
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Current Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
@@ -628,11 +706,11 @@ const CaloriesCalc = () => {
                     name="currentWeightLbs"
                     onFocus={() => setFocusedField('currentWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
+                  //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
                   />
-{/*                   {focusedField === 'currentWeightLbs' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'currentWeightLbs' && (
+                    renderValidationPopup()
+                  )}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -646,8 +724,9 @@ const CaloriesCalc = () => {
                     }}
                     margin="normal"
                     InputLabelProps={focusedField === 'desiredWeightLbs' && !validDesiredLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    inputRef={desiredLbsRef}
+                   
                     type="tel"
-                    inputprops={{ inputprops: { min: 34, max: 181 } }}
                     label="Desired Weight Lbs *"
                     variant="standard"
                     onChange={changeHandler}
@@ -655,11 +734,11 @@ const CaloriesCalc = () => {
                     name="desiredWeightLbs"
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
+                  //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
                   />
-{/*                   {focusedField === 'desiredWeightLbs' && (
-                    // renderValidationPopup()
-                  )} */}
+                  {focusedField === 'desiredWeightLbs' && (
+                    renderValidationPopup()
+                  )}
                   <FormLabel
                     id="demo-radio-buttons-group-label"
                     sx={{
@@ -671,6 +750,7 @@ const CaloriesCalc = () => {
                   <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
+                    
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
@@ -733,12 +813,14 @@ const CaloriesCalc = () => {
                     />
                   </RadioGroup>
                 </div>
-                <CustomButton className="customButton"
+               
+                <CustomButton 
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
                 >
-                  Start losing weight
+                                  {buttonText}
+
                 </CustomButton>
               </form>
             )}

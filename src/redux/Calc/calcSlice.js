@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchDaySummary, getUserStats, CalNoEat, sendCalculator  } from './calcOperations';
-
+import {
+  fetchDaySummary,
+  getUserStats,
+  CalNoEat,
+  sendCalculator,
+  searchNotAllowedFood,
+} from './calcOperations';
 
 export const calculateSlice = createSlice({
   name: 'calCalories',
@@ -27,15 +32,15 @@ export const calculateSlice = createSlice({
       desiredWeight: null,
       bloodType: '',
     },
+    badFoodSearcList: [],
   },
   reducers: {
     storeCalulator: (state, action) => {
-      state.value = action.payload;
+      state.cals.value = action.payload;
     },
     setStats: (state, action) => {
       state.stats = action.payload;
     },
-    
   },
   extraReducers: builder => {
     builder
@@ -49,33 +54,46 @@ export const calculateSlice = createSlice({
           bloodType: stats.bloodType,
         };
       })
+      .addCase(getUserStats.rejected, (state, action) => {
+        state.stats = {
+          height: 'n/a',
+          age: 'n/a',
+          currentWeight: 'n/a',
+          desiredWeight: 'n/a',
+          bloodType: 'n/a',
+        };
+      })
       .addCase(fetchDaySummary.fulfilled, (state, action) => {
         console.log(action.payload);
       })
-     .addCase(CalNoEat.pending, state => {
-            state.cals.isRefreshing = true;
-          })
-          .addCase(CalNoEat.fulfilled, (state, action) => {
-            state.cals.isLoggedIn = true;
-            state.cals.isRefreshing = false;
-          })
-          .addCase(CalNoEat.rejected, (state, action) => {
-            state.cals.isRefreshing = false;
-              console.log('Error');
-           
-          })
-     .addCase(sendCalculator.pending, state => {
-            state.cals.isRefreshing = true;
-          })
-          .addCase(sendCalculator.fulfilled, (state, action) => {
-            state.cals.isLoggedIn = true;
-            state.cals.isRefreshing = false;
-          })
-          .addCase(sendCalculator.rejected, (state, action) => {
-            state.cals.isRefreshing = false;
-              console.log('Error');
-           
-          })
+      .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
+        state.badFoodSearcList = action.payload;
+      })
+      .addCase(searchNotAllowedFood.rejected, (state, action) => {
+        state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
+      })
+      .addCase(CalNoEat.pending, state => {
+        state.cals.isRefreshing = true;
+      })
+      .addCase(CalNoEat.fulfilled, (state, action) => {
+        state.cals.isLoggedIn = true;
+        state.cals.isRefreshing = false;
+      })
+      .addCase(CalNoEat.rejected, (state, action) => {
+        state.cals.isRefreshing = false;
+        console.log('Error');
+      })
+      .addCase(sendCalculator.pending, state => {
+        state.cals.isRefreshing = true;
+      })
+      .addCase(sendCalculator.fulfilled, (state, action) => {
+        state.cals.isLoggedIn = true;
+        state.cals.isRefreshing = false;
+      })
+      .addCase(sendCalculator.rejected, (state, action) => {
+        state.cals.isRefreshing = false;
+        console.log('Error');
+      });
   },
 });
 

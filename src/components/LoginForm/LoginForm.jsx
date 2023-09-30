@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import style from '../LoginForm/login.module.css';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ import {
 import { toast } from 'react-toastify';
 
 const LoginForm = () => {
+  const passwordRef = useRef(null);
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   // const isFormValid = useSelector(selectFormIsValid);
@@ -34,7 +35,6 @@ const LoginForm = () => {
   // listens to input change
   const handleChange = e => {
     const { name, value } = e.target;
-    // console.log('name', name);
     setFormData({ ...formData, [name]: value });
     // check if email is valid
 
@@ -58,7 +58,9 @@ const LoginForm = () => {
   // handles login
   async function handleLogin() {
     try {
-      const response = await dispatch(login(formData));
+      const { email, password} = formData
+      const senddate = { email: email.toLowerCase(), password }
+      const response = await dispatch(login(senddate));
       if (response.payload.code === 200) {
         nav('/diary');
       }
@@ -91,6 +93,14 @@ const LoginForm = () => {
             <TextField
               className={style.email_input}
               InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              inputProps={{
+                onKeyPress: event => {
+                  const { key } = event;
+                  if (key === "Enter") {
+                    passwordRef.current.focus();
+                  }
+                }
+              }}
               variant="standard"
               label="Email"
               type="email"
@@ -116,6 +126,7 @@ const LoginForm = () => {
             <TextField
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              inputRef={passwordRef}
               variant="standard"
               label="Password"
               type="password"

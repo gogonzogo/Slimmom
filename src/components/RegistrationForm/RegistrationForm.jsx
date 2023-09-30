@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
@@ -20,7 +20,11 @@ import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
 //import { useAuthStore } from 'hooks/useAuth';
 
+
 const RegistrationForm = () => {
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
@@ -84,12 +88,11 @@ const RegistrationForm = () => {
     convertEmail = convertEmail.toLocaleLowerCase()
     console.log('convertEmail', convertEmail)
     e.preventDefault();
-      setFormData({
-      ...formData,
-      email: convertEmail,
-      });
-    console.log('formData', formData)
-    const response = await dispatch(register(formData));
+
+    const {name, email, password} = formData
+    const senddate = {name, email: email.toLowerCase(), password }
+    const response = await dispatch(register(senddate));
+
     if (response.payload.code === 201) {
       resetForm();
       navigate('/calculator');
@@ -118,6 +121,14 @@ const RegistrationForm = () => {
                   ? { style: { color: 'red' } }
                   : { style: { color: '#9B9FAA' } }
               }
+              inputProps={{
+                onKeyPress: event => {
+                  const { key } = event;
+                  if (key === "Enter") {
+                    emailRef.current.focus();
+                  }
+                }
+              }}
               variant="standard"
               label={'Name *'}
               type="text"
@@ -141,6 +152,15 @@ const RegistrationForm = () => {
             <TextField
               className={style.email_input}
               InputLabelProps={focusedField === 'email' && !isEmailValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+              inputRef={emailRef}
+              inputProps={{
+                onKeyPress: event => {
+                  const { key } = event;
+                  if (key === "Enter") {
+                    passwordRef.current.focus();
+                  }
+                }
+              }}
               variant="standard"
               label={'Email *'}
               type="email"
@@ -164,6 +184,8 @@ const RegistrationForm = () => {
             <TextField
               className={style.password_input}
               InputLabelProps={focusedField === 'password' && !isPasswordValid ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }} 
+              inputRef={passwordRef}
+             
               variant="standard"
               label={'Password *'}
               type="password"
@@ -185,7 +207,8 @@ const RegistrationForm = () => {
               />
             )}
             <Box className={style.button_container}>
-              <CustomButton color="orange" disabled={!isFormValid}>
+              <CustomButton color="orange" disabled={!isFormValid} 
+>
                 Register
               </CustomButton>
               <Link to="/Login">

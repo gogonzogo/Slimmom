@@ -24,6 +24,8 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     const foodItem = foodsList.find(item => item.title === productName);
     const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
 
+    console.log(calDate);
+
     dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
     dispatch(setFoodsList([]));
     setProductName('');
@@ -73,6 +75,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               onInputChange={handleInputChange}
               renderInput={params => (
                 <TextField
+                  required
                   sx={{
                     fontFamily: 'Verdana',
                     fontSize: '14px',
@@ -88,7 +91,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                   }}
                   {...params}
                   variant="standard"
-                  label="Enter product name*"
+                  label="Enter product name"
                 />
               )}
             />
@@ -96,6 +99,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
         </div>
         <div className={css.formdiv}>
           <TextField
+            required
             sx={{
               fontFamily: 'Verdana',
               fontSize: '14px',
@@ -112,7 +116,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               },
             }}
             id="standard-basic"
-            label="Grams*"
+            label="Grams"
             variant="standard"
             type="number"
             value={grams}
@@ -120,9 +124,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
           />
         </div>
         {width > 768 ? (
-          <DiaryAddButton onClick={handleSubmit} />
+          <DiaryAddButton onClick={handleSubmit} disabled={(productName === "" || grams === "")} />
         ) : (
-          <CustomButton className={css.diaryFormBtn} color="orange">
+          <CustomButton className={css.diaryFormBtn} color="orange"  disabled={(productName === "" || grams === "")}>
             Add
           </CustomButton>
         )}
