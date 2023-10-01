@@ -48,6 +48,7 @@ export const calculateSlice = createSlice({
     builder
       .addCase(getUserStats.fulfilled, (state, action) => {
         const stats = action.payload.stats;
+        console.log('stats',stats)
         state.stats = {
           height: stats.height,
           age: stats.age,

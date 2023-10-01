@@ -38,7 +38,6 @@ const RegistrationForm = () => {
     currentWeightLbs: returnedCal.currentWeightLbs,
     desiredWeightLbs: returnedCal.desiredWeightLbs,
   });
-  console.log(calculatorFormData)
 
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
@@ -154,10 +153,7 @@ const RegistrationForm = () => {
     toggleValidationPopup(name, true);
   };
 
-  const handleSubmit = async e => {
-    let convertEmail = formData.email;
-    convertEmail = convertEmail.toLocaleLowerCase();
-    console.log('convertEmail', convertEmail);
+  const handleSubmit = async e => {    
     e.preventDefault();
     const { name, email, password } = formData;
     const senddate = { name, email: email.toLowerCase(), password };
