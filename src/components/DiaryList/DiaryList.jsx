@@ -10,7 +10,8 @@ function DiaryList() {
   const { calDate, diaryList } = useDiary();
 
   function handleDelete(entryId) {
-    dispatch(deleteDiaryEntry({ calDate, entryId }));
+    const fomratDate = calDate.replaceAll('/', '-')
+    dispatch(deleteDiaryEntry({ fomratDate, entryId }));
   }
 
   return (
