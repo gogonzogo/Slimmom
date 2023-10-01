@@ -39,7 +39,7 @@ const UserToolBar = () => {
           marginLeft: '13px',
         }}
       />
-      <IconButton style={{zindex: 7}} onClick={() => dispatch(logOut())} aria-label="logout" aria-describedby="logout-label">
+      <IconButton style={{zIndex: 7}} onClick={() => dispatch(logOut())} aria-label="logout" aria-describedby="logout-label">
         {/* <FontAwesomeIcon */}
           <FontAwesomeIcon icon={faHands} flip="horizontal" style={{color: "#fc842d",}} />
             <span id="logout-label" style={{ fontSize: '12px' }}>
