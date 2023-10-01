@@ -52,7 +52,7 @@ const Header = () => {
               </div>
             
           ) : (
-              <IconButton sx={{padding: 0,}}>
+              <IconButton sx={{padding: 0,}} aria-label="Logo">
                 <ImageLogo/>
               </IconButton>
           )}
