@@ -1,6 +1,5 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { toast } from 'react-toastify';
 
 axios.defaults.baseURL = "https://slimmom-9d5b6b1b5aa9.herokuapp.com/api";
 axios.defaults.withCredentials = true;
@@ -18,19 +17,11 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post("/auth/register", credentials);
-      token.set(data.data.token);
-      toast.success(data.data.message, {
-        icon: '🚀',
-        position: 'top-right',
-        autoClose: 3000,
-      });
-      return data;
+      const res = await axios.post("/auth/register", credentials);
+      token.set(res.data.data.token);
+      console.log(res)
+      return res.data.data;
     } catch (error) {
-      toast.error(error.response.data.data.message, {
-        position: 'top-right',
-        autoClose: 3000,
-      });
       return rejectWithValue(error.message);
     }
   }
@@ -39,22 +30,11 @@ export const register = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async (credentials, { rejectWithValue }) => {
-    // console.log('login called')
     try {
-      const { data } = await axios.post("/auth/login", credentials);
-      token.set(data.data.token);
-      toast.success(data.data.message, {
-        icon: "🚀",
-        theme: "colored",
-      });
-      return data;
+      const  res  = await axios.post("/auth/login", credentials);
+      token.set(res.data.data.token);
+      return res.data.data;
     } catch (error) {
-      toast.error(error.response.data.data.message, {
-        position: 'top-right',
-        autoClose: 3000,
-        theme: "colored",
-        icon: true,
-      });
       return rejectWithValue(error.message);
     }
   }
@@ -64,8 +44,9 @@ export const logOut = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/auth/logout");
-        token.set(null);
+      const res = await axios.post("/auth/logout");
+      token.set(null);
+      return res.data.data
     } catch (error) {
       return rejectWithValue(error.message);
     }
