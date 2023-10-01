@@ -63,7 +63,7 @@ const LoginForm = () => {
       const senddata = { email: email.toLowerCase(), password };
       const response = await dispatch(login(senddata));
       if (response.payload.token) {
-        dispatch(getUserStats({}));
+        dispatch(getUserStats());
         nav('/diary');
       }
     } catch (err) {
@@ -77,8 +77,6 @@ const LoginForm = () => {
   function handleSubmit(e) {
     e.preventDefault();
     handleLogin(); // calls the login function
-    // clear the form data after submission
-    setFormData({ email: '', password: '' });
   }
 
   return (
