@@ -62,11 +62,10 @@ const LoginForm = () => {
       const { email, password } = formData;
       const senddata = { email: email.toLowerCase(), password };
       const response = await dispatch(login(senddata));
-      if (response.payload.code === 200) {
-        dispatch(getUserStats());
+      if (response.payload.token) {
+        dispatch(getUserStats({}));
         nav('/diary');
       }
-      // nav('/');
     } catch (err) {
       console.err('Login error', loginError);
       setLoginError('An error occured. Please try again.');
