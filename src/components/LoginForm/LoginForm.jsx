@@ -64,7 +64,7 @@ const LoginForm = () => {
       const response = await dispatch(login(senddata));
       console.log(response.payload);
       if (response.payload.token) {
-        dispatch(getUserStats({}));
+        dispatch(getUserStats());
         nav('/diary');
       }
     } catch (err) {
