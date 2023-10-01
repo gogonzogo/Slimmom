@@ -23,13 +23,10 @@ export default function DiaryCalendar() {
   const dispatch = useDispatch();
 
   const formatCalValue = value => {
-    const displayDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
-    const fetchDate = dayjs(`${value}`).format(`MM-DD-YYYY`);
-    setFormattedCalValue(displayDate);
-    dispatch(setCalDate(fetchDate));
-    dispatch(
-      fetchDiary(fetchDate)
-    );
+    const formatDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
+    setFormattedCalValue(formatDate);
+    dispatch(setCalDate(formatDate));
+    dispatch(fetchDiary(formatDate));
   };
 
   return (
