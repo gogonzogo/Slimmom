@@ -71,7 +71,7 @@ const RegistrationForm = () => {
         dispatch(validateName({ fieldValue: value }));
         break;
       case 'email':
-        dispatch(validateEmail({ fieldValue: value }));
+        dispatch(validateEmail({ fieldValue: value.toLowerCase() }));
         break;
       case 'password':
         dispatch(validatePassword({ fieldValue: value }));
