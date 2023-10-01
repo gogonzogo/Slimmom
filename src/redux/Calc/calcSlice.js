@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchDaySummary,
+
   getUserStats,
   CalNoEat,
   sendCalculator,
@@ -69,9 +69,6 @@ export const calculateSlice = createSlice({
           enteredDate: null,
           originalWeight: null,
         };
-      })
-      .addCase(fetchDaySummary.fulfilled, (state, action) => {
-        console.log(action.payload);
       })
       .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
         state.badFoodSearcList = action.payload;

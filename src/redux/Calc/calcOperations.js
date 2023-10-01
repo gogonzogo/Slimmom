@@ -12,17 +12,7 @@ export const getUserStats = createAsyncThunk(
     }
   }
 );
-export const fetchDaySummary = createAsyncThunk(
-  'calcCalories/summary',
-  async data => {
-    try {
-      const response = await axios.post('day/info', data);
-      return response.data;
-    } catch (err) {
-      return err;
-    }
-  }
-);
+
 export const searchNotAllowedFood = createAsyncThunk(
   'calcCalories/searchBadFood',
   async (data, { rejectWithValue }) => {
