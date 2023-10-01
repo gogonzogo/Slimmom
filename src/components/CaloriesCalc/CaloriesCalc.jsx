@@ -28,6 +28,7 @@ import { storeCalulator } from '../../redux/Calc/calcSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 import { useAuth } from '../../hooks/useAuth';
+import { getUserStats } from 'redux/Calc/calcOperations';
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -284,7 +285,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
       }
       if (!loggedIn) {
         handleOpen(passinfo);
-      }
+      }  else {dispatch(getUserStats());
+}
+
     } catch (error) {
       console.error('returned Error', error.message);
     }

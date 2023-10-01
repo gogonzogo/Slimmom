@@ -77,7 +77,7 @@ export const Stats = ({ stats, progressData }) => {
       ) : (
         <div className={s.sideBarContentWrapper}>
           <div className={s.sideBarContent}>
-            <p className={s.sideBarTitle}>Hey, stupid, submit a calculator!</p>
+            <p className={s.sideBarTitle}>Please complete the Calculator to begin tracking your journey</p>
           </div>
         </div>
       )}
