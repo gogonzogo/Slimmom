@@ -1,13 +1,15 @@
 .sideBarContainer {
   width: 100%;
-  background-color: var(--secondary-background-color);
+  /* background-color: var(--secondary-background-color); */
   padding: 40px 0;
 }
 .sidebarbox {
   /* bottom: -20px; */
   background-color: var(--secondary-background-color);
   z-index: -1;
-  position: relative;
+      position: absolute;
+        width: 100%;
+        height: 475px;
 }
 
 .sideBarContentWrapper {
@@ -40,10 +42,10 @@
 
 @media screen and (min-width: 768px) {
   .sidebarbox {
-    background-color: none;
+    background-color: var(--secondary-background-color);
     padding-top: 0;
     width: 100%;
-    height: 233px;
+    height: 307px;
     position: absolute;
   }
 
