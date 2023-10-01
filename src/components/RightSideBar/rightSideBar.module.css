@@ -1,7 +1,7 @@
 .sideBarContainer {
   width: 100%;
   background-color: var(--secondary-background-color);
-  padding-top: 40px;
+  padding: 40px 0;
 }
 .sidebarbox {
   /* bottom: -20px; */

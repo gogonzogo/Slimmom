@@ -62,8 +62,9 @@ const LoginForm = () => {
       const { email, password } = formData;
       const senddata = { email: email.toLowerCase(), password };
       const response = await dispatch(login(senddata));
+      console.log(response.payload);
       if (response.payload.token) {
-        dispatch(getUserStats());
+        dispatch(getUserStats({}));
         nav('/diary');
       }
     } catch (err) {
