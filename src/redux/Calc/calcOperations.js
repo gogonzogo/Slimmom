@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getUserStats = createAsyncThunk(
   'calcCalories/stats',
-  async ( { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.get('user/stats');
       return response.data.data;

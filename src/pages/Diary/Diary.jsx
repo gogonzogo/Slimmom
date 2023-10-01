@@ -52,7 +52,7 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      <section className="top-bottom" style={{ flexGrow: '1' }}>
+      <section className="top-bottom">
         <Container className="left-right">
           {onMount ? (
             <Loader />
