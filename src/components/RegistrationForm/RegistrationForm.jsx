@@ -55,6 +55,11 @@ const RegistrationForm = () => {
       email: '',
       password: '',
     });
+    dispatch(validateName({ fieldValue: "" }));
+    dispatch(validateEmail({ fieldValue: "" }));
+    dispatch(validatePassword({ fieldValue: "" }));
+
+
   };
 
   const handleChange = e => {
