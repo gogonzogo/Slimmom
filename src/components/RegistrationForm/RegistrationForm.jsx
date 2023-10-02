@@ -158,9 +158,8 @@ const RegistrationForm = () => {
     const { name, email, password } = formData;
     const senddate = { name, email: email.toLowerCase(), password };
     const response = await dispatch(register(senddate));
-
-    if (response.payload.code === 201) {
-const  {currentWeight, height, age, desiredWeight, bloodType} = calculatorFormData
+    if (response.payload.name) {
+      const  {currentWeight, height, age, desiredWeight, bloodType} = calculatorFormData
       if (currentWeight.length > 0 && height.length > 0 && age.length > 0 && desiredWeight.length > 0 && bloodType.length > 0) {
   await createCalculator()
 }
