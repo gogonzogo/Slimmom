@@ -1,54 +1,58 @@
-.logoContainer {
-    display: flex;
-    align-items: center;
-    margin-left: 0;
+.toolbarContainer {
+  width: 100%;
 }
 
 .smallScreenNavigationContainer {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .largeScreenContent {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .Navigation {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 10px;
-    margin-top: 32px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 32px;
 }
 
 .showTextLogo {
-    opacity: 1;
-    transition: opacity 1s ease;
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 .hideTextLogo {
-    opacity: 0;
-    transition: opacity 0.7s ease;
+  opacity: 0;
+  transition: opacity 0.7s ease;
 }
 
 .smallScreenNavContainer {
-    bottom: 15;
-    right: -100;
-    width: 150px;
-    height: 30px;
-    background-color: gray;
-    transition: right 0.9s ease;
-    /* Add transition for smooth sliding */
+  bottom: 15;
+  right: -100;
+  width: 150px;
+  height: 30px;
+  background-color: gray;
+  transition: right 0.9s ease;
+  /* Add transition for smooth sliding */
 }
 
 .slideIn {
-    right: 0;
-    /* Slide in to the right */
+  right: 0;
+  /* Slide in to the right */
 }
 
 .slideOut {
-    right: -250px;
-    /* Slide out to the right, outside the viewport */
+  right: -250px;
+  /* Slide out to the right, outside the viewport */
+}
+
+@media screen and (min-width: 1280px) {
+  .toolbarContainer {
+    width: 376px;
+  }
 }

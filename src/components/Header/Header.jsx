@@ -13,7 +13,7 @@ import { useAuth } from '../../hooks/useAuth'
 import styles from './Header.module.css';
 import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
-import Logo from 'components/Logo/ImageLogo';
+import Logo from 'components/Logo/Logo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
 
 const Header = () => {
