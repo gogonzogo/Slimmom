@@ -1,5 +1,17 @@
 .headerToolbar {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
 }
 
+@media screen and (min-width: 768px) {
+  .headerToolbar {
+    align-items: flex-end;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .headerToolbar {
+    justify-content: normal;
+  }
+}
