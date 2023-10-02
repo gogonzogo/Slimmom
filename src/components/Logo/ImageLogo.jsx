@@ -1,16 +1,13 @@
-import React from 'react';
-import { ReactComponent as LogoSVG } from '../Logo/slimmom.svg';
+import { ReactComponent as LogoSVG } from './slimmom.svg';
 import styles from './ImageLogo.module.css';
-import { NavLink } from 'react-router-dom';
 
-const ImageLogo = ({ className }) => {
+const ImageLogo = () => {
   return (
-    <div className={className || styles['imagelogo-container']}>
-      <div className={styles['imagevector-container']}>
-        <NavLink to='/Diary'>
-          <LogoSVG className={styles.imagelogo} width="100" height="100" alt="A waistline with a green measuring tape"/>
-        </NavLink>
-      </div>
+    <div className={styles['imagelogo-container']}>
+      <LogoSVG
+        className={styles.imageLogo}
+        alt="A waistline with a green measuring tape"
+      />
     </div>
   );
 };
