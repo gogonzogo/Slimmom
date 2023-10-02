@@ -10,8 +10,7 @@ import { AppBar, Box, Divider, IconButton, Toolbar, useMediaQuery } from '@mui/m
 // styles
 import Navigation from 'components/Navigation/Navigation';
 import s from './UserInfo.module.css';
-import TextLogo from 'components/Logo/TextLogo';
-import ImageLogo from 'components/Logo/ImageLogo';
+import Logo from 'components/Logo/Logo';
 
 
 
@@ -39,16 +38,14 @@ const UserInfo = () => {
               {/* Initially, both ImageLogo and TextLogo */}
             <div className={s.smallScreenIcons}>
                 <div className={s.logoContainer}>
-                    <ImageLogo />
-                    <TextLogo className={`${showTextLogo ? s.showTextLogo : s.hideTextLogo} ${s.textLogo}`} />
+                    <Logo className={`${showTextLogo ? s.showTextLogo : s.hideTextLogo} ${s.textLogo}`} />
                 </div>
             </div>
             </>
           ) : (
               // when it is a large screen > 449px
               <div className={`${s.largeScreenContent}`}>
-                <ImageLogo />
-                <TextLogo />
+                <Logo />
                 <Box sx={{
                   display: 'flex',
                   flexDirection: 'row',

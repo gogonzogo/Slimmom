@@ -11,7 +11,6 @@ import { useAuth } from '../../hooks/useAuth'
 
 //styles
 import styles from './Header.module.css';
-import ImageLogo from '../Logo/Logo'
 import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
 import Logo from 'components/Logo/ImageLogo';
@@ -28,7 +27,6 @@ const Header = () => {
     
     <Box sx={{ width: "100%" }}>
       <AppBar
-              
         sx={{
           position: "static",
           boxShadow: 'none',
@@ -53,7 +51,7 @@ const Header = () => {
             
           ) : (
               <IconButton sx={{padding: 0,}} aria-label="Logo">
-                <ImageLogo/>
+                <Logo />
               </IconButton>
           )}
           

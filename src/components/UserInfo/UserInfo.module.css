@@ -4,19 +4,15 @@
     margin-left: 0;
 }
 
-.textLogo {
-    margin-top: 20px;
-    margin-left: 5px;
-}
-
 .smallScreenNavigationContainer {
     box-shadow: none;
 }
 
 .largeScreenContent {
+    width: 100%;
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
 }
 
 .Navigation {

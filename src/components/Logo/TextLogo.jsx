@@ -1,21 +1,13 @@
-import React from 'react';
 import { ReactComponent as SlimSVG } from '../Logo/slim.svg';
 import { ReactComponent as MomSVG } from '../Logo/mom.svg';
 import styles from './TextLogo.module.css';
-import { NavLink } from 'react-router-dom';
 
-const TextLogo = ({ className }) => {
+const TextLogo = () => {
   return (
-    <div className={className || styles['textlogo-container']}>
-      <div className={styles['texttext-container']}>
-        <NavLink to='/Diary' className={styles['textsvg-link']}>
-          <SlimSVG className={styles.svgtext} />
-        </NavLink>
-        <NavLink to='/Diary' className={styles['textsvg-link']}>
-          <MomSVG className={styles.svgtext} />
-        </NavLink>
-        </div>
-      </div>
+    <div className={styles['textlogo-container']}>
+      <SlimSVG className={styles.svgtext} alt="Text spelling slim" />
+      <MomSVG className={styles.svgtext} alt="Text spelling mom" />
+    </div>
   );
 };
 
