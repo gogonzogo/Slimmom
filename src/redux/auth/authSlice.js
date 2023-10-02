@@ -14,7 +14,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    resetState: state => initialState,
+    resetAuthState: state => initialState,
   },
   extraReducers: builder => {
     builder
@@ -88,5 +88,5 @@ const authSlice = createSlice({
       });
   },
 });
-export const { resetState } = authSlice.actions;
+export const { resetAuthState } = authSlice.actions;
 export const authReducer = authSlice.reducer;

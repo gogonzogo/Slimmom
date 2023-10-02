@@ -2,16 +2,17 @@ import { configureStore } from '@reduxjs/toolkit';
 import registrationReducer from './validation/registrationSlice';
 import { diaryReducer } from './diary/diarySlice';
 import CaloriesReducer from './validation/calculateCalsSlice';
-import { authReducer, resetState } from './auth/authSlice';
+import { authReducer } from './auth/authSlice';
 
 import calCalories from './Calc/calcSlice';
+import { resetState } from './resetState';
 
 const customMiddleware = store => next => action => {
   if (action.error && action.error.message === 'Rejected') {
     if (action.payload.includes('401')) {
       // change to switch case; handle 500 server error
       console.log(401);
-      store.dispatch(resetState());
+      resetState(store.dispatch);
     }
   }
 

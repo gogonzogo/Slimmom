@@ -15,6 +15,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { useDiary } from 'hooks/useDiary';
 import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
+import { resetState } from 'redux/resetState';
 
 const UserToolBar = () => {
   const { user } = useAuth();
@@ -39,12 +40,24 @@ const UserToolBar = () => {
           marginLeft: '13px',
         }}
       />
-      <IconButton style={{zIndex: 7}} onClick={() => dispatch(logOut())} aria-label="logout" aria-describedby="logout-label">
+      <IconButton
+        style={{ zIndex: 7 }}
+        onClick={() => {
+          dispatch(logOut());
+          resetState(dispatch);
+        }}
+        aria-label="logout"
+        aria-describedby="logout-label"
+      >
         {/* <FontAwesomeIcon */}
-          <FontAwesomeIcon icon={faHands} flip="horizontal" style={{color: "#fc842d",}} />
-            <span id="logout-label" style={{ fontSize: '12px' }}>
-              "Bye!"
-            </span>
+        <FontAwesomeIcon
+          icon={faHands}
+          flip="horizontal"
+          style={{ color: '#fc842d' }}
+        />
+        <span id="logout-label" style={{ fontSize: '12px' }}>
+          "Bye!"
+        </span>
       </IconButton>
     </Toolbar>
   );
