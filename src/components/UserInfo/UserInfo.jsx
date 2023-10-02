@@ -32,15 +32,13 @@ const UserInfo = () => {
   return (
     <AppBar position="static" sx={{ boxShadow: 'none', backgroundColor: 'transparent' }}>
       <Toolbar disableGutters={true} sx={{ padding: '0', position: 'relative', backgroundColor: 'transparent' }}>
-        <div>
+        <div className={s.toolbarContainer}>
           {isSmallScreen ? (
             <>
               {/* Initially, both ImageLogo and TextLogo */}
-            <div className={s.smallScreenIcons}>
                 <div className={s.logoContainer}>
                     <Logo className={`${showTextLogo ? s.showTextLogo : s.hideTextLogo} ${s.textLogo}`} />
                 </div>
-            </div>
             </>
           ) : (
               // when it is a large screen > 449px
