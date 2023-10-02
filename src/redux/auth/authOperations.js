@@ -1,7 +1,7 @@
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = "https://slimmom-9d5b6b1b5aa9.herokuapp.com/api";
+axios.defaults.baseURL = 'https://slimmom-9d5b6b1b5aa9.herokuapp.com/api';
 axios.defaults.withCredentials = true;
 
 export const token = {
@@ -14,12 +14,12 @@ export const token = {
 };
 
 export const register = createAsyncThunk(
-  "auth/register",
+  'auth/register',
   async (credentials, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/auth/register", credentials);
+      const res = await axios.post('/auth/register', credentials);
       token.set(res.data.data.token);
-      console.log(res)
+      console.log(res);
       return res.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -28,10 +28,10 @@ export const register = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async (credentials, { rejectWithValue }) => {
     try {
-      const  res  = await axios.post("/auth/login", credentials);
+      const res = await axios.post('/auth/login', credentials);
       token.set(res.data.data.token);
       return res.data.data;
     } catch (error) {
@@ -41,12 +41,12 @@ export const login = createAsyncThunk(
 );
 
 export const logOut = createAsyncThunk(
-  "auth/logout",
+  'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.post("/auth/logout");
+      const res = await axios.post('/auth/logout');
       token.set(null);
-      return res.data.data
+      return res.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
