@@ -13,6 +13,9 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    resetState: state => initialState,
+  },
   extraReducers: builder => {
     builder
       .addCase(register.pending, state => {
@@ -46,8 +49,8 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isLoggedIn = true;
         toast.success(action.payload.message, {
-          icon: "🚀",
-          theme: "colored",
+          icon: '🚀',
+          theme: 'colored',
         });
       })
       .addCase(login.rejected, (state, action) => {
@@ -55,7 +58,7 @@ const authSlice = createSlice({
         toast.error(action.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
           icon: true,
         });
       })
@@ -70,7 +73,7 @@ const authSlice = createSlice({
         toast.error(action.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
           icon: true,
         });
       })
@@ -79,11 +82,11 @@ const authSlice = createSlice({
         toast.error(action.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: "colored",
+          theme: 'colored',
           icon: true,
         });
-      })
+      });
   },
 });
-
+export const { resetState } = authSlice.actions;
 export const authReducer = authSlice.reducer;
