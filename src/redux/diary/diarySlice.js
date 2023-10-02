@@ -6,6 +6,7 @@ import {
   deleteDiaryEntry,
   searchFoods,
 } from './diaryOperations';
+import { Slide, toast  } from 'react-toastify';
 
 const initialState = {
   diary: {
@@ -62,11 +63,19 @@ export const diarySlice = createSlice({
         state.diary.diaryList = [...state.diary.diaryList, action.payload];
         state.diary.isLoading = false;
         state.diary.error = null;
+        toast.success("Product added successfully", {
+          icon: "👌",
+          theme: "colored",
+          transition: Slide,
+          position: 'top-center',
+          
+        });
       })
       .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
+        toast.error("Something wrong");
       })
       .addCase(searchFoods.pending, state => {
         state.diary.isLoading = true;
@@ -90,11 +99,17 @@ export const diarySlice = createSlice({
         );
         state.diary.isLoading = false;
         state.diary.error = null;
+        toast.warn("Product removed successfully", {
+           theme: "colored",
+          transition: Slide,
+          position: 'top-center',
+        });
       })
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
+        toast.error("Something wrong");
       });
   },
 });
