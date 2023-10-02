@@ -1,41 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-
   getUserStats,
   CalNoEat,
   sendCalculator,
   searchNotAllowedFood,
 } from './calcOperations';
 
+const initialState = {
+  cals: {
+    value: {
+      height: '',
+      age: '',
+      currentWeight: '',
+      desiredWeight: '',
+      bloodType: '',
+      heightFeet: '',
+      heightInch: '',
+      currentWeightLbs: '',
+      desiredWeightLbs: '',
+    },
+    totalCalories: '',
+    noEat: {},
+  },
+  stats: {
+    height: null,
+    age: null,
+    currentWeight: null,
+    desiredWeight: null,
+    bloodType: null,
+    enteredDate: null,
+    originalWeight: null,
+  },
+  badFoodSearcList: [],
+};
 export const calculateSlice = createSlice({
   name: 'calCalories',
-  initialState: {
-    cals: {
-      value: {
-        height: '',
-        age: '',
-        currentWeight: '',
-        desiredWeight: '',
-        bloodType: '',
-        heightFeet: '',
-        heightInch: '',
-        currentWeightLbs: '',
-        desiredWeightLbs: '',
-      },
-      totalCalories: '',
-      noEat: {},
-    },
-    stats: {
-      height: null,
-      age: null,
-      currentWeight: null,
-      desiredWeight: null,
-      bloodType: null,
-      enteredDate: null,
-      originalWeight: null,
-    },
-    badFoodSearcList: [],
-  },
+  initialState,
   reducers: {
     storeCalulator: (state, action) => {
       state.cals.value = action.payload;
@@ -43,12 +43,12 @@ export const calculateSlice = createSlice({
     setStats: (state, action) => {
       state.stats = action.payload;
     },
+    resetCalcState: state => initialState,
   },
   extraReducers: builder => {
     builder
       .addCase(getUserStats.fulfilled, (state, action) => {
         const stats = action.payload.stats;
-        console.log('stats',stats)
         state.stats = {
           height: stats.height,
           age: stats.age,
@@ -101,5 +101,7 @@ export const calculateSlice = createSlice({
   },
 });
 
-export const { storeCalulator, setStats } = calculateSlice.actions;
+export const { storeCalulator, setStats, resetCalcState } =
+  calculateSlice.actions;
+
 export default calculateSlice.reducer;

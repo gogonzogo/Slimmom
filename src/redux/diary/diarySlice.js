@@ -6,7 +6,7 @@ import {
   deleteDiaryEntry,
   searchFoods,
 } from './diaryOperations';
-import { Slide, toast  } from 'react-toastify';
+import { Slide, toast } from 'react-toastify';
 
 const initialState = {
   diary: {
@@ -38,6 +38,7 @@ export const diarySlice = createSlice({
     setDiaryBackBtn: (state, action) => {
       state.diaryBackBtn = action.payload;
     },
+    resetDiaryState: state => initialState,
   },
   extraReducers: builder => {
     builder
@@ -63,19 +64,18 @@ export const diarySlice = createSlice({
         state.diary.diaryList = [...state.diary.diaryList, action.payload];
         state.diary.isLoading = false;
         state.diary.error = null;
-        toast.success("Product added successfully", {
-          icon: "👌",
-          theme: "colored",
+        toast.success('Product added successfully', {
+          icon: '👌',
+          theme: 'colored',
           transition: Slide,
           position: 'top-center',
-          
         });
       })
       .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
-        toast.error("Something wrong");
+        toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
         state.diary.isLoading = true;
@@ -99,8 +99,8 @@ export const diarySlice = createSlice({
         );
         state.diary.isLoading = false;
         state.diary.error = null;
-        toast.warn("Product removed successfully", {
-           theme: "colored",
+        toast.warn('Product removed successfully', {
+          theme: 'colored',
           transition: Slide,
           position: 'top-center',
         });
@@ -109,10 +109,16 @@ export const diarySlice = createSlice({
         state.diary.isLoading = false;
         state.diary.error = action.payload;
         console.log('Server Error!');
-        toast.error("Something wrong");
+        toast.error('Something wrong');
       });
   },
 });
 
-export const { setCalDate, setDiaryList, setFoodsList, setDiaryBackBtn } = diarySlice.actions;
+export const {
+  setCalDate,
+  setDiaryList,
+  setFoodsList,
+  setDiaryBackBtn,
+  resetDiaryState,
+} = diarySlice.actions;
 export const diaryReducer = diarySlice.reducer;
