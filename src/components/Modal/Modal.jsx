@@ -27,6 +27,7 @@ const Modal = props => {
           sx: { top: isMobile && 83, backgroundColor: '#2121211f' },
         },
       }}
+      disableScrollLock={isMobile ? true : false}
     >
       <Fade in={modalState.open}>
         <Box>
