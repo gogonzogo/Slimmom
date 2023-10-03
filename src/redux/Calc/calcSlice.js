@@ -87,7 +87,7 @@ export const calculateSlice = createSlice({
       })
       .addCase(CalNoEat.rejected, (state, action) => {
         state.cals.isRefreshing = false;
-        console.log('Error');
+        // console.log('Error');
       })
       .addCase(sendCalculator.pending, state => {
         state.cals.isRefreshing = true;
@@ -98,7 +98,7 @@ export const calculateSlice = createSlice({
       })
       .addCase(sendCalculator.rejected, (state, action) => {
         state.cals.isRefreshing = false;
-        console.log('Error');
+        // console.log('Error');
       });
   },
 });

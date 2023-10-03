@@ -74,7 +74,7 @@ export const diarySlice = createSlice({
       .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
-        console.log('Server Error!');
+        // console.log('Server Error!');
         toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
@@ -88,7 +88,7 @@ export const diarySlice = createSlice({
       .addCase(searchFoods.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
-        console.log('Server Error!');
+        // console.log('Server Error!');
       })
       .addCase(deleteDiaryEntry.pending, state => {
         state.diary.isLoading = true;
@@ -108,7 +108,7 @@ export const diarySlice = createSlice({
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
         state.diary.isLoading = false;
         state.diary.error = action.payload;
-        console.log('Server Error!');
+        // console.log('Server Error!');
         toast.error('Something wrong');
       });
   },
