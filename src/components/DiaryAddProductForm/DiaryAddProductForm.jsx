@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
-import { addDiaryEntry, searchFoods } from '../../redux/diary/diaryOperations';
+import {
+  addDiaryEntry,
+  fetchDiary,
+  searchFoods,
+} from '../../redux/diary/diaryOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { useDiary } from '../../hooks/useDiary';
 import { debounce } from 'lodash';
@@ -10,11 +14,12 @@ import { setFoodsList } from 'redux/diary/diarySlice';
 import { setDiaryBackBtn } from 'redux/diary/diarySlice';
 import useViewPort from 'hooks/useViewport';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
+import dayjs from 'dayjs';
 
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calDate, foodsList } = useDiary();
+  const { calDate, foodsList, diaryList } = useDiary();
   const dispatch = useDispatch();
   const uniqueTitle = Array.from(new Set(foodsList.map(item => item.title)));
   const { width } = useViewPort();
@@ -23,7 +28,12 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     e.preventDefault();
     const foodItem = foodsList.find(item => item.title === productName);
     const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
+
     dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
+    if (diaryList.length === 0) {
+      const today = dayjs().format('MM-DD-YYYY');
+      dispatch(fetchDiary(today));
+    }
     dispatch(setFoodsList([]));
     setProductName('');
     setGrams('');
@@ -121,9 +131,16 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
           />
         </div>
         {width > 768 ? (
-          <DiaryAddButton onClick={handleSubmit} disabled={(productName === "" || grams === "")} />
+          <DiaryAddButton
+            onClick={handleSubmit}
+            disabled={productName === '' || grams === ''}
+          />
         ) : (
-          <CustomButton className={css.diaryFormBtn} color="orange"  disabled={(productName === "" || grams === "")}>
+          <CustomButton
+            className={css.diaryFormBtn}
+            color="orange"
+            disabled={productName === '' || grams === ''}
+          >
             Add
           </CustomButton>
         )}

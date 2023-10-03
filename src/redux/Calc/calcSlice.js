@@ -30,6 +30,7 @@ const initialState = {
     bloodType: null,
     enteredDate: null,
     originalWeight: null,
+    dailyRate: null,
   },
   badFoodSearcList: [],
 };
@@ -57,6 +58,7 @@ export const calculateSlice = createSlice({
           bloodType: stats.bloodType,
           enteredDate: stats.enteredDate,
           originalWeight: stats.originalWeight,
+          dailyRate: stats.totalCalories,
         };
       })
       .addCase(getUserStats.rejected, (state, action) => {
