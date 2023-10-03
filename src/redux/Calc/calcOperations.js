@@ -6,7 +6,7 @@ export const getUserStats = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await axios.get('user/stats');
-      console.log(response.data.data);
+      // console.log(response.data.data);
       return response.data.data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -22,7 +22,7 @@ export const searchNotAllowedFood = createAsyncThunk(
       const response = await axios.get(
         `badFood?title=${data.title}&bloodType=${newBloodType}`
       );
-      console.log(response.data);
+      // console.log(response.data);
       return response.data.data;
     } catch (err) {
       console.log(err);

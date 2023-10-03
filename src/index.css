@@ -215,3 +215,26 @@ a {
 .no-left-right {
   margin: 0px auto;
 }
+
+/* Custom styles for the error toast */
+.error-toast {
+  background-color: white;
+  border: 2px solid #ff6b6b;
+  color: #ff6b6b;
+}
+
+/* Custom styles for the success toast */
+.success-toast {
+  background-color: white;
+  border: 2px solid #66bb6a;
+  color: #66bb6a;
+  
+}
+
+/* Custom styles for the info toast */
+.info-toast {
+  background-color: white;
+  border: 2px solid #6aa6b6;
+  color: #6aa6b6;
+ 
+}

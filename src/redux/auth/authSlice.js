@@ -26,18 +26,24 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;
-        toast.success(action.payload.message, {
+        toast.success('Registration Success! Have fun Slim Mom!', {
           icon: '🚀',
           position: 'top-right',
           autoClose: 3000,
+          className: 'success-toast',
         });
       })
       .addCase(register.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error(action.payload.message, {
-          position: 'top-right',
-          autoClose: 3000,
-        });
+        toast.error(
+          'Registration failed. Login instead, your email address is already registered',
+          {
+            position: 'top-right',
+            autoClose: 3000,
+            className: 'error-toast',
+            icon: '🚫',
+          }
+        );
       })
       .addCase(login.pending, state => {
         state.isRefreshing = true;
@@ -48,19 +54,28 @@ const authSlice = createSlice({
         state.userId = action.payload.userId;
         state.isRefreshing = false;
         state.isLoggedIn = true;
-        toast.success(action.payload.message, {
-          icon: '🚀',
-          theme: 'colored',
-        });
+        toast.success(
+          `Successfully Logged in! Looking good ${action.payload.name}!`,
+          {
+            position: 'top-right',
+            autoClose: 3000,
+            icon: '🚀',
+            className: 'success-toast',
+          }
+        );
       })
       .addCase(login.rejected, (state, action) => {
         state.isRefreshing = false;
-        toast.error(action.payload.message, {
-          position: 'top-right',
-          autoClose: 3000,
-          theme: 'colored',
-          icon: true,
-        });
+        console.log(action.payload);
+        toast.error(
+          'Unauthorized, please double check your username and password',
+          {
+            position: 'top-right',
+            autoClose: 3000,
+            icon: '🤔',
+            className: 'error-toast',
+          }
+        );
       })
       .addCase(logOut.pending, state => {
         state.isRefreshing = true;
@@ -70,11 +85,11 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
         state.isRefreshing = false;
-        toast.error(action.payload.message, {
+        toast.success(action.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: 'colored',
-          icon: true,
+          icon: '👋',
+          className: 'info-toast',
         });
       })
       .addCase(logOut.rejected, (state, action) => {
@@ -82,8 +97,8 @@ const authSlice = createSlice({
         toast.error(action.payload.message, {
           position: 'top-right',
           autoClose: 3000,
-          theme: 'colored',
           icon: true,
+          theme: 'colored',
         });
       });
   },
