@@ -17,7 +17,7 @@ const Logo = () => {
         aria-label="Link to the Dairy Page"
       >
         <ImageLogo />
-        {(width >= 768 || loggedIn) && <TextLogo />}
+        {(width >= 550 || loggedIn) && <TextLogo />}
       </Link>
     </div>
   );
