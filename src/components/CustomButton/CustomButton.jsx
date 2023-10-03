@@ -3,7 +3,7 @@ import css from './CustomButton.module.css';
 import { Button as MuiButton } from '@mui/material';
 import clsx from 'clsx';
 
-const CustomButton = ({ color, size,margin, children, disabled, className, style, ...restProps }) => {
+const CustomButton = ({ color, size, margin, children, disabled, className, style, ...restProps }) => {
   return (
     <MuiButton
       className={clsx(

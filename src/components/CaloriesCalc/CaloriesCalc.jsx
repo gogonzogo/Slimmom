@@ -832,14 +832,13 @@ const CaloriesCalc = () => {
                     />
                   </RadioGroup>
                 </div>
-
-                <CustomButton
-                  color="orange"
-                  size="wide"
+                  <CustomButton 
+                    color="orange"
+                    size="wide"
                   disabled={!isStandardFormValid}
-                >
-                  {buttonText}
-                </CustomButton>
+                  >
+                    {buttonText}
+                  </CustomButton>
               </form>
             )}
           </div>
