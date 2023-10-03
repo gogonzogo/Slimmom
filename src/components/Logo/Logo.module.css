@@ -1,5 +1,11 @@
 .logoLink {
-    display: flex;
-    align-items: flex-end;
+  display: flex;
+  align-items: center;
+}
 
+@media screen and (min-width: 1280px) {
+  .logoLink {
+    display: flex;
+    align-items: baseline;
+  }
 }

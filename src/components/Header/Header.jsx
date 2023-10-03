@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 
 // internal
-import { useAuth } from '../../hooks/useAuth'
+import { useAuth } from '../../hooks/useAuth';
 
 //styles
 import styles from './Header.module.css';
@@ -17,76 +17,78 @@ import Logo from 'components/Logo/Logo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
 
 const Header = () => {
-  const {loggedIn} = useAuth();
-  const isMobile = useMediaQuery('(max-width: 349px)')
+  const { loggedIn } = useAuth();
+  const isMobile = useMediaQuery('(max-width: 349px)');
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
   const isSmallScreen = useMediaQuery('(max-width: 320px)');
 
   return (
-    
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: '100%' }}>
       <AppBar
         sx={{
-          position: "static",
+          position: 'static',
           boxShadow: 'none',
           borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
-          backgroundColor:'transparent'
-        }}>
-        <Toolbar disableGutters={true} className={styles.headerToolbar}
+          backgroundColor: 'transparent',
+        }}
+      >
+        <Toolbar
+          disableGutters={true}
+          className={styles.headerToolbar}
           sx={{
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
             backgroundColor: 'transparent',
-            padding: isSmallScreen ? '15px' : (isLargeScreen ? '40px 20px 0 20px' : '20px'),
-          }}>
-          {loggedIn
-            ? (
-            <UserInfo/>
-          ) :
-            isMobile 
-              ? (
-                <div>
-                  <Logo />
-              </div>
-            
+            padding: isSmallScreen
+              ? '15px'
+              : isLargeScreen
+              ? '40px 20px 0 20px'
+              : '20px',
+          }}
+        >
+          {loggedIn ? (
+            <UserInfo />
+          ) : isMobile ? (
+            <div>
+              <Logo />
+            </div>
           ) : (
-              <IconButton sx={{padding: 0,}} aria-label="Logo">
-                <Logo />
-              </IconButton>
+            <IconButton sx={{ padding: 0 }} aria-label="Logo">
+              <Logo />
+            </IconButton>
           )}
-          
-          {!loggedIn &&(
+
+          {!loggedIn && (
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 marginTop: isLargeScreen ? 2 : 0,
-            }}
+              }}
             >
               {!loggedIn && isLargeScreen && (
-              <Divider
-                orientation="vertical"
-                sx={{
-                  width: '2px',
-                  height: '20px',
-                  backgroundColor: '#E0E0E0',
-                  marginRight: '20px',
-                  marginLeft: '15px',
-                }}
-              />)}
+                <Divider
+                  orientation="vertical"
+                  sx={{
+                    width: '2px',
+                    height: '20px',
+                    backgroundColor: '#E0E0E0',
+                    marginRight: '20px',
+                    marginLeft: '15px',
+                  }}
+                />
+              )}
               <Navigation />
             </Box>
           )}
         </Toolbar>
 
-        {loggedIn && isLargeScreen && (
-          <UserToolBar />
-        )}
+        {loggedIn && isLargeScreen && <UserToolBar />}
       </AppBar>
       {loggedIn && isMediumScreen && (
         <Box>
           <UserToolBar />
-          </Box>
+        </Box>
       )}
     </Box>
   );

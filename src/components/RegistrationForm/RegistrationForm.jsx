@@ -1,4 +1,4 @@
-import React, { useState, useRef,  } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
@@ -25,7 +25,7 @@ import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-     
+
   const returnedCal = useSelector(state => state.calCalories.cals.value);
   const [calculatorFormData] = useState({
     height: returnedCal.height,
@@ -69,15 +69,14 @@ const RegistrationForm = () => {
       email: '',
       password: '',
     });
-    dispatch(validateName({ fieldValue: "" }));
-    dispatch(validateEmail({ fieldValue: "" }));
-    dispatch(validatePassword({ fieldValue: "" }));
-
-
+    dispatch(validateName({ fieldValue: '' }));
+    dispatch(validateEmail({ fieldValue: '' }));
+    dispatch(validatePassword({ fieldValue: '' }));
   };
 
   const createCalculator = async () => {
-   const  {currentWeight, height, age, desiredWeight, bloodType} = calculatorFormData
+    const { currentWeight, height, age, desiredWeight, bloodType } =
+      calculatorFormData;
     const entedInfo = {
       currentWeight,
       height,
@@ -88,7 +87,7 @@ const RegistrationForm = () => {
     try {
       const response = await dispatch(CalNoEat(entedInfo));
       const passinfo = response.payload.data;
-        let convertBlood = 0
+      let convertBlood = 0;
       switch (bloodType) {
         case 'A':
           convertBlood = 1;
@@ -106,8 +105,8 @@ const RegistrationForm = () => {
           convertBlood = 1;
           break;
       }
-      
-        const mestype = 'M';
+
+      const mestype = 'M';
       const CalculatorInfo = {
         height,
         age,
@@ -118,14 +117,12 @@ const RegistrationForm = () => {
         measurementType: mestype,
         originalDate: new Date(),
         enteredDate: new Date(),
-      }
-        const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
-        console.log(Calcresponse)
-      
+      };
+      await dispatch(sendCalculator(CalculatorInfo));
     } catch (error) {
       console.error('returned Error', error.message);
-    };
-  }
+    }
+  };
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -153,16 +150,23 @@ const RegistrationForm = () => {
     toggleValidationPopup(name, true);
   };
 
-  const handleSubmit = async e => {    
+  const handleSubmit = async e => {
     e.preventDefault();
     const { name, email, password } = formData;
     const senddate = { name, email: email.toLowerCase(), password };
     const response = await dispatch(register(senddate));
     if (response.payload.name) {
-      const  {currentWeight, height, age, desiredWeight, bloodType} = calculatorFormData
-      if (currentWeight.length > 0 && height.length > 0 && age.length > 0 && desiredWeight.length > 0 && bloodType.length > 0) {
-  await createCalculator()
-}
+      const { currentWeight, height, age, desiredWeight, bloodType } =
+        calculatorFormData;
+      if (
+        currentWeight.length > 0 &&
+        height.length > 0 &&
+        age.length > 0 &&
+        desiredWeight.length > 0 &&
+        bloodType.length > 0
+      ) {
+        await createCalculator();
+      }
       resetForm();
       dispatch(getUserStats());
       navigate('/calculator');

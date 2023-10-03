@@ -40,8 +40,7 @@ const CaloriesCalc = () => {
   const desiredLbsRef = useRef(null);
   const [buttonText, setButtonText] = useState('Submit');
 
-
-  const {loggedIn} = useAuth();
+  const { loggedIn } = useAuth();
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
   const validAge = useSelector(state => state.calculate.isAgeValid);
@@ -53,14 +52,13 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-
-      useEffect(() => {
-        if (loggedIn) {
-          setButtonText('Update Calculator')
-        } else {
-          setButtonText('Start losing weight')
-        }
-    }, [loggedIn])
+  useEffect(() => {
+    if (loggedIn) {
+      setButtonText('Update Calculator');
+    } else {
+      setButtonText('Start losing weight');
+    }
+  }, [loggedIn]);
 
   const validHeightFeet = useSelector(
     state => state.calculate.isHeightFeetValid
@@ -104,8 +102,6 @@ const CaloriesCalc = () => {
   const toggleValidationPopup = (fieldName, visible) => {
     setValidationPopups({ ...validationPopups, [fieldName]: visible });
   };
-
-  
 
   const [modalState, setModalState] = useState({
     open: false,
@@ -197,16 +193,15 @@ const CaloriesCalc = () => {
     setFocusedField(name);
     toggleValidationPopup(name, true);
   };
-const validationReqs = useSelector(state => state.calculate.validationReqs);
+  const validationReqs = useSelector(state => state.calculate.validationReqs);
   const renderValidationPopup = () => {
-    
     return (
       <div>
-      <ValidationPopup
-        validationData={validationReqs[focusedField]}
-        visible={focusedField}
+        <ValidationPopup
+          validationData={validationReqs[focusedField]}
+          visible={focusedField}
         />
-        </div>
+      </div>
     );
   };
 
@@ -245,49 +240,51 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
     try {
       const response = await dispatch(CalNoEat(entedInfo));
       const passinfo = response.payload.data;
-      
-        if (loggedIn) {
-          let convertBlood = 0
-          switch (bloodType) {
-            case 'A':
-              convertBlood = 1;
-              break;
-            case 'B':
-              convertBlood = 2;
-              break;
-            case 'AB':
-              convertBlood = 3;
-              break;
-            case 'O':
-              convertBlood = 4;
-              break;
-            default:
-              convertBlood = 1;
-              break;
-          }
-      
-          let mestype = '';
-          if (currentTabIndex === 0) { mestype = 'M' } else { mestype = 'M' }
-          const CalculatorInfo = {
-            height,
-            age,
-            bloodType: convertBlood,
-            currentWeight,
-            desiredWeight,
-            totalCalories: passinfo.totalCalories,
-            measurementType: mestype,
-            originalDate: new Date(),
-            enteredDate: new Date(),
 
-          };
-          const Calcresponse = await dispatch(sendCalculator(CalculatorInfo));
-        console.log(Calcresponse)
+      if (loggedIn) {
+        let convertBlood = 0;
+        switch (bloodType) {
+          case 'A':
+            convertBlood = 1;
+            break;
+          case 'B':
+            convertBlood = 2;
+            break;
+          case 'AB':
+            convertBlood = 3;
+            break;
+          case 'O':
+            convertBlood = 4;
+            break;
+          default:
+            convertBlood = 1;
+            break;
+        }
+
+        let mestype = '';
+        if (currentTabIndex === 0) {
+          mestype = 'M';
+        } else {
+          mestype = 'M';
+        }
+        const CalculatorInfo = {
+          height,
+          age,
+          bloodType: convertBlood,
+          currentWeight,
+          desiredWeight,
+          totalCalories: passinfo.totalCalories,
+          measurementType: mestype,
+          originalDate: new Date(),
+          enteredDate: new Date(),
+        };
+        await dispatch(sendCalculator(CalculatorInfo));
       }
       if (!loggedIn) {
         handleOpen(passinfo);
-      }  else {dispatch(getUserStats());
-}
-
+      } else {
+        dispatch(getUserStats());
+      }
     } catch (error) {
       console.error('returned Error', error.message);
     }
@@ -314,24 +311,24 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     width: '100px',
                     padding: '1rem',
                     margin: '2px',
-                  //  height: '20px',
+                    //  height: '20px',
                     borderRadius: '30px',
                     fontFamily: 'Verdana',
                     fontSize: '9px',
                     fontWeight: 700,
                     textTransform: 'capitalize',
-                   //  backgroundColor: '#fc842d',
+                    //  backgroundColor: '#fc842d',
                     border: 'solid #fc842d',
                   },
                   '& button:focus': {
-                  //  backgroundColor: '#ffffff',
+                    //  backgroundColor: '#ffffff',
                     border: 'solid #fc842d',
                     boxShadow:
                       ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   },
                   '& button:hover': {
-                  //  backgroundColor: '#ffffff',
-                   //  color: '#fc842d',
+                    //  backgroundColor: '#ffffff',
+                    //  color: '#fc842d',
                     border: 'solid #fc842d',
                     boxShadow:
                       ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
@@ -364,16 +361,21 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
-                    InputLabelProps={focusedField === 'height' && !validHeight ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
-                     type="tel"
+                    margin="normal"
+                    InputLabelProps={
+                      focusedField === 'height' && !validHeight
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
+                    type="tel"
                     inputProps={{
                       onKeyPress: event => {
-                      const { key } = event;
-                      if (key === "Enter") {
-                        ageRef.current.focus();
-                      }
-                    } } }
+                        const { key } = event;
+                        if (key === 'Enter') {
+                          ageRef.current.focus();
+                        }
+                      },
+                    }}
                     label="Height *"
                     variant="standard"
                     onChange={changeHandler}
@@ -381,11 +383,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'height' && !validHeight}
+                    //  error={focusedField === 'height' && !validHeight}
                   />
-                  {focusedField === 'height' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'height' && renderValidationPopup()}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -397,17 +397,22 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
-                    InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    margin="normal"
+                    InputLabelProps={
+                      focusedField === 'age' && !validAge
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     type="tel"
                     inputRef={ageRef}
                     inputProps={{
                       onKeyPress: event => {
-                      const { key } = event;
-                      if (key === "Enter") {
-                        currentRef.current.focus();
-                      }
-                    }} }
+                        const { key } = event;
+                        if (key === 'Enter') {
+                          currentRef.current.focus();
+                        }
+                      },
+                    }}
                     label="Age *"
                     variant="standard"
                     onChange={changeHandler}
@@ -415,11 +420,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'age' && !validAge}
+                    //  error={focusedField === 'age' && !validAge}
                   />
-                  {focusedField === 'age' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'age' && renderValidationPopup()}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -431,18 +434,22 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       width: '272px',
                       paddingRight: '32px',
                     }}
-                    margin="normal" 
-                    InputLabelProps={focusedField === 'currentWeight' && !validcurrent ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    margin="normal"
+                    InputLabelProps={
+                      focusedField === 'currentWeight' && !validcurrent
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     type="tel"
                     inputRef={currentRef}
-
                     inputProps={{
                       onKeyPress: event => {
-                      const { key } = event;
-                      if (key === "Enter") {
-                        desiredRef.current.focus();
-                      }
-                    }}} 
+                        const { key } = event;
+                        if (key === 'Enter') {
+                          desiredRef.current.focus();
+                        }
+                      },
+                    }}
                     label="Current Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -450,11 +457,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'currentWeight' && !validcurrent}
+                    //  error={focusedField === 'currentWeight' && !validcurrent}
                   />
-                  {focusedField === 'currentWeight' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'currentWeight' && renderValidationPopup()}
                 </div>
                 <div className={css.formdiv}>
                   <TextField
@@ -469,11 +474,13 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'desiredWeight' && !validDesired ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'desiredWeight' && !validDesired
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     type="tel"
                     inputRef={desiredRef}
-
-                    
                     label="Desired Weight *"
                     variant="standard"
                     onChange={changeHandler}
@@ -481,15 +488,15 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="desiredWeight"
                     onFocus={() => setFocusedField('desiredWeight')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'desiredWeight' && !validDesired} 
+                    //  error={focusedField === 'desiredWeight' && !validDesired}
                   />
-                  {focusedField === 'desiredWeight' && (
-                    renderValidationPopup()
-                  )}
-                  <FormLabel id="demo-radio-buttons-group-label"
-                  sx={{
-                    marginTop: '20px',
-                    }}>
+                  {focusedField === 'desiredWeight' && renderValidationPopup()}
+                  <FormLabel
+                    id="demo-radio-buttons-group-label"
+                    sx={{
+                      marginTop: '20px',
+                    }}
+                  >
                     Blood Type
                   </FormLabel>
 
@@ -557,11 +564,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       label="4"
                     />
                   </RadioGroup>
-                  {focusedField === 'bloodType' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'bloodType' && renderValidationPopup()}
                 </div>
-                <CustomButton 
+                <CustomButton
                   color="orange"
                   size="wide"
                   disabled={!isFormValid}
@@ -586,14 +591,18 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'heightFeet' && !validHeightFeet ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'heightFeet' && !validHeightFeet
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     inputProps={{
                       onKeyPress: event => {
                         const { key } = event;
-                        if (key === "Enter") {
+                        if (key === 'Enter') {
                           heightInRef.current.focus();
                         }
-                      }
+                      },
                     }}
                     type="tel"
                     label="Height Feet *"
@@ -603,11 +612,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="heightFeet"
                     onFocus={() => setFocusedField('heightFeet')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'heightFeet' && !validHeightFeet}
+                    //  error={focusedField === 'heightFeet' && !validHeightFeet}
                   />
-                   {focusedField === 'heightFeet' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'heightFeet' && renderValidationPopup()}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -620,15 +627,19 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'heightInch' && !validHeightInch ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'heightInch' && !validHeightInch
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     inputRef={heightInRef}
                     inputProps={{
                       onKeyPress: event => {
                         const { key } = event;
-                        if (key === "Enter") {
+                        if (key === 'Enter') {
                           ageUSRef.current.focus();
                         }
-                      }
+                      },
                     }}
                     type="tel"
                     label="Height Inch *"
@@ -638,11 +649,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="heightInch"
                     onFocus={() => setFocusedField('heightInch')}
                     onBlur={() => setFocusedField(null)}
-                   // error={focusedField === 'heightInch' && !validHeightInch}
+                    // error={focusedField === 'heightInch' && !validHeightInch}
                   />
-                   {focusedField === 'heightInch' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'heightInch' && renderValidationPopup()}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -655,15 +664,19 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'age' && !validAge ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'age' && !validAge
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     inputRef={ageUSRef}
                     inputProps={{
                       onKeyPress: event => {
                         const { key } = event;
-                        if (key === "Enter") {
+                        if (key === 'Enter') {
                           currentLbsRef.current.focus();
                         }
-                      }
+                      },
                     }}
                     type="tel"
                     label="Age *"
@@ -673,11 +686,9 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'age' && !validAge}
+                    //  error={focusedField === 'age' && !validAge}
                   />
-                  {focusedField === 'age' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'age' && renderValidationPopup()}
                 </div>
                 <div className={css.formdiv}>
                   <TextField
@@ -692,15 +703,19 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'currentWeightLbs' && !validcurrentLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'currentWeightLbs' && !validcurrentLbs
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     inputRef={currentLbsRef}
                     inputProps={{
                       onKeyPress: event => {
                         const { key } = event;
-                        if (key === "Enter") {
+                        if (key === 'Enter') {
                           desiredLbsRef.current.focus();
                         }
-                      }
+                      },
                     }}
                     type="tel"
                     label="Current Weight Lbs *"
@@ -710,11 +725,10 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="currentWeightLbs"
                     onFocus={() => setFocusedField('currentWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
+                    //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
                   />
-                  {focusedField === 'currentWeightLbs' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'currentWeightLbs' &&
+                    renderValidationPopup()}
                   <TextField
                     sx={{
                       fontFamily: 'Verdana',
@@ -727,9 +741,12 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                       paddingRight: '32px',
                     }}
                     margin="normal"
-                    InputLabelProps={focusedField === 'desiredWeightLbs' && !validDesiredLbs ? {style: {color: "red"}} : { style: { color: "#9B9FAA" } }}
+                    InputLabelProps={
+                      focusedField === 'desiredWeightLbs' && !validDesiredLbs
+                        ? { style: { color: 'red' } }
+                        : { style: { color: '#9B9FAA' } }
+                    }
                     inputRef={desiredLbsRef}
-                   
                     type="tel"
                     label="Desired Weight Lbs *"
                     variant="standard"
@@ -738,11 +755,10 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     name="desiredWeightLbs"
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                  //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
+                    //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
                   />
-                  {focusedField === 'desiredWeightLbs' && (
-                    renderValidationPopup()
-                  )}
+                  {focusedField === 'desiredWeightLbs' &&
+                    renderValidationPopup()}
                   <FormLabel
                     id="demo-radio-buttons-group-label"
                     sx={{
@@ -754,7 +770,6 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                   <RadioGroup
                     aria-labelledby="demo-controlled-radio-buttons-group"
                     value={formData.bloodType}
-                    
                     name="bloodType"
                     sx={{
                       flexDirection: 'row',
@@ -817,14 +832,13 @@ const validationReqs = useSelector(state => state.calculate.validationReqs);
                     />
                   </RadioGroup>
                 </div>
-               
-                <CustomButton 
+
+                <CustomButton
                   color="orange"
                   size="wide"
                   disabled={!isStandardFormValid}
                 >
-                                  {buttonText}
-
+                  {buttonText}
                 </CustomButton>
               </form>
             )}
