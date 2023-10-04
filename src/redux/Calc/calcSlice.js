@@ -18,6 +18,8 @@ const initialState = {
       heightInch: '',
       currentWeightLbs: '',
       desiredWeightLbs: '',
+      measurementType: '',
+
     },
     totalCalories: '',
     noEat: {},

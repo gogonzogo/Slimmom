@@ -37,8 +37,8 @@ const RegistrationForm = () => {
     heightInch: returnedCal.heightInch,
     currentWeightLbs: returnedCal.currentWeightLbs,
     desiredWeightLbs: returnedCal.desiredWeightLbs,
+    measurementType: returnedCal.measurementType
   });
-
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
@@ -75,14 +75,15 @@ const RegistrationForm = () => {
   };
 
   const createCalculator = async () => {
-    const { currentWeight, height, age, desiredWeight, bloodType } =
+    const { height, age, currentWeight, desiredWeight, bloodType, heightFeet, heightInch, currentWeightLbs, desiredWeightLbs, measurementType} =
       calculatorFormData;
     const entedInfo = {
-      currentWeight,
-      height,
+      currentWeight: currentWeight!==''?currentWeight: currentWeightLbs * 0.454,
+      height: height!==''?height: (heightFeet * 12 + heightInch * 1) * 2.54,
       age,
-      desiredWeight,
+      desiredWeight: desiredWeight!==''?desiredWeight: desiredWeightLbs * 0.454, 
       bloodType,
+      measurementType,
     };
     try {
       const response = await dispatch(CalNoEat(entedInfo));
@@ -106,18 +107,18 @@ const RegistrationForm = () => {
           break;
       }
 
-      const mestype = 'M';
       const CalculatorInfo = {
-        height,
+        height:  height!==''?height: (heightFeet * 12 + heightInch * 1) * 2.54,
         age,
         bloodType: convertBlood,
-        currentWeight,
-        desiredWeight,
+        currentWeight: currentWeight!==''?currentWeight: currentWeightLbs * 0.454,
+        desiredWeight: desiredWeight!==''?desiredWeight: desiredWeightLbs * 0.454,
         totalCalories: passinfo.totalCalories,
-        measurementType: mestype,
+        measurementType: measurementType,
         originalDate: new Date(),
         enteredDate: new Date(),
       };
+      console.log('CalculatorInfo', CalculatorInfo)
       await dispatch(sendCalculator(CalculatorInfo));
     } catch (error) {
       console.error('returned Error', error.message);
@@ -156,13 +157,13 @@ const RegistrationForm = () => {
     const senddate = { name, email: email.toLowerCase(), password };
     const response = await dispatch(register(senddate));
     if (response.payload.name) {
-      const { currentWeight, height, age, desiredWeight, bloodType } =
+      const { height, age, currentWeight, desiredWeight, bloodType, heightFeet, currentWeightLbs, desiredWeightLbs, } =
         calculatorFormData;
       if (
-        currentWeight.length > 0 &&
-        height.length > 0 &&
+       ( currentWeight.length > 0 ||  currentWeightLbs.length > 0)  &&
+        (height.length > 0 || heightFeet.length > 0) &&
         age.length > 0 &&
-        desiredWeight.length > 0 &&
+        (desiredWeight.length > 0 || desiredWeightLbs.length > 0) &&
         bloodType.length > 0
       ) {
         await createCalculator();
