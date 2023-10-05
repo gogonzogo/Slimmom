@@ -29,6 +29,7 @@ import CustomButton from 'components/CustomButton/CustomButton';
 import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
 import { useAuth } from '../../hooks/useAuth';
 import { getUserStats } from 'redux/Calc/calcOperations';
+const { resetCalcState } = require('../../redux/Calc/calcSlice');
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -92,7 +93,29 @@ const CaloriesCalc = () => {
     bloodType: false,
   });
 
-  
+  const resetForm = () => {
+    setFormData({
+      height: '',
+    age:'',
+    currentWeight: '',
+    desiredWeight: '',
+    bloodType: '',
+    heightFeet: '',
+    heightInch: '',
+    currentWeightLbs: '',
+    desiredWeightLbs: '',
+    
+    });
+    dispatch(validateHeight({ fieldValue: '' }));
+    dispatch(validateHeightFeet({ fieldValue: '' }));
+    dispatch(validateHeightInch({ fieldValue: '' }));
+    dispatch(validateAge({ fieldValue: '' }));
+    dispatch(validateCurrent({ fieldValue: '' }));
+    dispatch(validateCurrentLbs({ fieldValue: '' }));
+    dispatch(validateDesired({ fieldValue: '' }));
+    dispatch(validateDesiredLbs({ fieldValue: '' }));
+    dispatch(validateBlood({ fieldValue: '' }));
+  };
   const [focusedField, setFocusedField] = useState(null);
 
   const toggleValidationPopup = (fieldName, visible) => {
@@ -233,6 +256,7 @@ const CaloriesCalc = () => {
     
 
     const { height, age, currentWeight, desiredWeight, bloodType, heightFeet, heightInch, currentWeightLbs, desiredWeightLbs, measurementType} = formData;
+    if (!loggedIn){
     dispatch(
       storeCalulator({
         height: height,
@@ -248,6 +272,7 @@ const CaloriesCalc = () => {
 
       })
     );
+    }
     const entedInfo = {
       currentWeight: measurementType==="M"? currentWeight: currentWeightLbs * 0.454 ,
       height: measurementType==="M"?height: (heightFeet * 12 + heightInch * 1) * 2.54 ,
@@ -302,6 +327,9 @@ const CaloriesCalc = () => {
       } else {
         dispatch(getUserStats());
       }
+      resetForm()
+      dispatch(resetCalcState);
+
     } catch (error) {
       console.error('returned Error', error.message);
     }

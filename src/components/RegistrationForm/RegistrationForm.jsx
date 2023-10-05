@@ -21,6 +21,9 @@ import CustomButton from 'components/CustomButton/CustomButton';
 import { getUserStats } from 'redux/Calc/calcOperations';
 //import { useAuthStore } from 'hooks/useAuth';
 import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
+import { storeCalulator } from '../../redux/Calc/calcSlice';
+
+const { resetCalcState } = require('../../redux/Calc/calcSlice');
 
 const RegistrationForm = () => {
   const emailRef = useRef(null);
@@ -157,7 +160,7 @@ const RegistrationForm = () => {
     const senddate = { name, email: email.toLowerCase(), password };
     const response = await dispatch(register(senddate));
     if (response.payload.name) {
-      const { height, age, currentWeight, desiredWeight, bloodType, heightFeet, currentWeightLbs, desiredWeightLbs, } =
+      const { height, age, currentWeight, desiredWeight, bloodType, heightFeet, currentWeightLbs, desiredWeightLbs, measurementType} =
         calculatorFormData;
       if (
        ( currentWeight.length > 0 ||  currentWeightLbs.length > 0)  &&
@@ -167,8 +170,24 @@ const RegistrationForm = () => {
         bloodType.length > 0
       ) {
         await createCalculator();
+        dispatch(
+          storeCalulator({
+            height: '',
+            age: '',
+            currentWeight: '',
+            desiredWeight: '',
+            bloodType: '',
+            heightFeet: '',
+            heightInch: '',
+             currentWeightLbs: '', 
+             desiredWeightLbs: '',
+             measurementType: measurementType,
+    
+          })
+        );
       }
       resetForm();
+      dispatch(resetCalcState);
       dispatch(getUserStats());
       navigate('/calculator');
     }
