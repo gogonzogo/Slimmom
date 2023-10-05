@@ -92,11 +92,6 @@ const CaloriesCalc = () => {
     bloodType: false,
   });
 
-  const [currentTabIndex, setCurrentTabIndex] = useState(0);
-
-  const handleTabChange = (e, tabIndex) => {
-    setCurrentTabIndex(tabIndex);
-  };
   const [focusedField, setFocusedField] = useState(null);
 
   const toggleValidationPopup = (fieldName, visible) => {
@@ -139,7 +134,23 @@ const CaloriesCalc = () => {
     heightInch: returnedCal.heightInch,
     currentWeightLbs: returnedCal.currentWeightLbs,
     desiredWeightLbs: returnedCal.desiredWeightLbs,
+    measurementType:
+      returnedCal.measurementType !== '' ? returnedCal.measurementType : 'M',
   });
+
+  const [currentTabIndex, setCurrentTabIndex] = useState(
+    returnedCal.measurementType === 'S' ? 1 : 0
+  );
+
+  const handleTabChange = async (e, tabIndex) => {
+    setCurrentTabIndex(tabIndex);
+    await setFormData(formData => {
+      return {
+        ...formData,
+        measurementType: tabIndex === 0 ? 'M' : 'S',
+      };
+    });
+  };
 
   const changeHandler = e => {
     const { name, value } = e.target;
@@ -178,18 +189,18 @@ const CaloriesCalc = () => {
       default:
         break;
     }
-    if (currentTabIndex === 1) {
-      const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
-        formData;
-      setFormData(formData => {
-        return {
-          ...formData,
-          height: (heightFeet * 12 + heightInch * 1) * 2.54,
-          currentWeight: currentWeightLbs * 0.454,
-          desiredWeight: desiredWeightLbs * 0.454,
-        };
-      });
-    }
+    // if (currentTabIndex === 1) {
+    //   const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
+    //     formData;
+    //   setFormData(formData => {
+    //     return {
+    //       ...formData,
+    //       height: (heightFeet * 12 + heightInch * 1) * 2.54,
+    //       currentWeight: currentWeightLbs * 0.454,
+    //       desiredWeight: desiredWeightLbs * 0.454,
+    //     };
+    //   });
+    // }
     setFocusedField(name);
     toggleValidationPopup(name, true);
   };
@@ -207,20 +218,31 @@ const CaloriesCalc = () => {
 
   const submitHandler = async e => {
     e.preventDefault();
-    if (currentTabIndex === 1) {
-      const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
-        formData;
-      await setFormData(formData => {
-        return {
-          ...formData,
-          height: (heightFeet * 12 + heightInch * 1) * 2.54,
-          currentWeight: currentWeightLbs * 0.454,
-          desiredWeight: desiredWeightLbs * 0.454,
-        };
-      });
-    }
+    // if (currentTabIndex === 1) {
+    //   const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
+    //     formData;
+    //   await setFormData(formData => {
+    //     return {
+    //       ...formData,
+    //       height: (heightFeet * 12 + heightInch * 1) * 2.54,
+    //       currentWeight: currentWeightLbs * 0.454,
+    //       desiredWeight: desiredWeightLbs * 0.454,
+    //     };
+    //   });
+    // }
 
-    const { height, age, currentWeight, desiredWeight, bloodType } = formData;
+    const {
+      height,
+      age,
+      currentWeight,
+      desiredWeight,
+      bloodType,
+      heightFeet,
+      heightInch,
+      currentWeightLbs,
+      desiredWeightLbs,
+      measurementType,
+    } = formData;
     dispatch(
       storeCalulator({
         height: height,
@@ -228,13 +250,23 @@ const CaloriesCalc = () => {
         currentWeight: currentWeight,
         desiredWeight: desiredWeight,
         bloodType: bloodType,
+        heightFeet: heightFeet,
+        heightInch: heightInch,
+        currentWeightLbs: currentWeightLbs,
+        desiredWeightLbs: desiredWeightLbs,
+        measurementType: measurementType,
       })
     );
     const entedInfo = {
-      currentWeight,
-      height,
+      currentWeight:
+        measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
+      height:
+        measurementType === 'M'
+          ? height
+          : (heightFeet * 12 + heightInch * 1) * 2.54,
       age,
-      desiredWeight,
+      desiredWeight:
+        measurementType === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
       bloodType,
     };
     try {
@@ -261,20 +293,19 @@ const CaloriesCalc = () => {
             break;
         }
 
-        let mestype = '';
-        if (currentTabIndex === 0) {
-          mestype = 'M';
-        } else {
-          mestype = 'M';
-        }
         const CalculatorInfo = {
-          height,
+          height:
+            measurementType === 'M'
+              ? height
+              : (heightFeet * 12 + heightInch * 1) * 2.54,
           age,
           bloodType: convertBlood,
-          currentWeight,
-          desiredWeight,
+          currentWeight:
+            measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
+          desiredWeight:
+            measurementType === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
           totalCalories: passinfo.totalCalories,
-          measurementType: mestype,
+          measurementType: measurementType,
           originalDate: new Date(),
           enteredDate: new Date(),
         };
@@ -832,13 +863,13 @@ const CaloriesCalc = () => {
                     />
                   </RadioGroup>
                 </div>
-                  <CustomButton 
-                    color="orange"
-                    size="wide"
+                <CustomButton
+                  color="orange"
+                  size="wide"
                   disabled={!isStandardFormValid}
-                  >
-                    {buttonText}
-                  </CustomButton>
+                >
+                  {buttonText}
+                </CustomButton>
               </form>
             )}
           </div>
