@@ -21,7 +21,8 @@ import {
   validateDesired,
   validateBlood,
 } from '../../redux/validation/calculateCalsSlice';
-import { storeCalulator, resetCalcState } from '../../redux/user/userSlice';
+import { storeCalulator } from '../../redux/user/userSlice';
+// resetCalcState;
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
