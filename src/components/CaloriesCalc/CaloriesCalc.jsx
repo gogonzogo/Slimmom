@@ -21,7 +21,7 @@ import {
   validateDesired,
   validateBlood,
 } from '../../redux/validation/calculateCalsSlice';
-import { storeCalulator } from '../../redux/user/userSlice';
+import { storeCalulator, resetCalcState } from '../../redux/user/userSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
@@ -345,7 +345,7 @@ const CaloriesCalc = () => {
         dispatch(getUserStats());
       }
       resetForm();
-      dispatch(resetCalcState);
+      dispatch(resetCalcState());
     } catch (error) {
       console.error('returned Error', error.message);
     }
