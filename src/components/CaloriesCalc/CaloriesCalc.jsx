@@ -82,7 +82,7 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  const returnedCal = useSelector(state => state.calCalories.cals.value);
+  const returnedCal = useSelector(state => state.user.cals.value);
 
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
