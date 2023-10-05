@@ -79,6 +79,7 @@ export const userSlice = createSlice({
     setStats: (state, action) => {
       state.stats = action.payload;
     },
+    resetCalcState: state => state.cals = initialState,
     resetUserState: state => initialState,
   },
   extraReducers: builder => {
