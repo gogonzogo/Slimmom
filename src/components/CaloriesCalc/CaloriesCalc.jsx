@@ -345,7 +345,7 @@ const CaloriesCalc = () => {
         dispatch(getUserStats());
       }
       resetForm();
-      dispatch(resetCalcState());
+      // dispatch(resetCalcState());
     } catch (error) {
       console.error('returned Error', error.message);
     }

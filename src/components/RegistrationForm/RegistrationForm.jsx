@@ -211,7 +211,7 @@ const RegistrationForm = () => {
         );
       }
       resetForm();
-      dispatch(resetCalcState());
+      // dispatch(resetCalcState());
       dispatch(getUserStats());
       navigate('/calculator');
     }
