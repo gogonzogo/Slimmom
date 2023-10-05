@@ -1,10 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import registrationReducer from './validation/registrationSlice';
-import { diaryReducer } from './diary/diarySlice';
 import CaloriesReducer from './validation/calculateCalsSlice';
 import { authReducer } from './auth/authSlice';
-
-import calCalories from './Calc/calcSlice';
+import { userReducer } from './user/userSlice';
 import { resetState } from './resetState';
 import { toast } from 'react-toastify';
 
@@ -33,9 +31,8 @@ const store = configureStore({
   reducer: {
     auth: authReducer,
     registration: registrationReducer,
-    diary: diaryReducer,
     calculate: CaloriesReducer,
-    calCalories: calCalories,
+    user: userReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

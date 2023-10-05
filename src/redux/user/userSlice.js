@@ -5,7 +5,11 @@ import {
   addDiaryEntry,
   deleteDiaryEntry,
   searchFoods,
-} from './diaryOperations';
+  getUserStats,
+  CalNoEat,
+  sendCalculator,
+  searchNotAllowedFood,
+} from './userOperations';
 import { Slide, toast } from 'react-toastify';
 
 const initialState = {
@@ -20,10 +24,36 @@ const initialState = {
   error: null,
   filter: '',
   diaryBackBtn: false,
+  cals: {
+    value: {
+      height: '',
+      age: '',
+      currentWeight: '',
+      desiredWeight: '',
+      bloodType: '',
+      heightFeet: '',
+      heightInch: '',
+      currentWeightLbs: '',
+      desiredWeightLbs: '',
+    },
+    totalCalories: '',
+    noEat: {},
+  },
+  stats: {
+    height: null,
+    age: null,
+    currentWeight: null,
+    desiredWeight: null,
+    bloodType: null,
+    enteredDate: null,
+    originalWeight: null,
+    dailyRate: null,
+  },
+  badFoodSearcList: [],
 };
 
-export const diarySlice = createSlice({
-  name: 'diary',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     setCalDate: (state, action) => {
@@ -38,7 +68,17 @@ export const diarySlice = createSlice({
     setDiaryBackBtn: (state, action) => {
       state.diaryBackBtn = action.payload;
     },
-    resetDiaryState: state => initialState,
+    setDailyRate: (state, action) => {
+      state.dailyRate = action.payload;
+    },
+    // CALCULATOR REDUCERS
+    storeCalulator: (state, action) => {
+      state.cals.value = action.payload;
+    },
+    setStats: (state, action) => {
+      state.stats = action.payload;
+    },
+    resetUserState: state => initialState,
   },
   extraReducers: builder => {
     builder
@@ -110,7 +150,60 @@ export const diarySlice = createSlice({
         state.diary.error = action.payload;
         // console.log('Server Error!');
         toast.error('Something wrong');
-      });
+      })
+      // CALCULATOR EXTRA REDUCERS
+      .addCase(getUserStats.fulfilled, (state, action) => {
+        const stats = action.payload.stats;
+        state.stats = {
+          height: stats.height,
+          age: stats.age,
+          currentWeight: stats.currentWeight,
+          desiredWeight: stats.desiredWeight,
+          bloodType: stats.bloodType,
+          enteredDate: stats.enteredDate,
+          originalWeight: stats.originalWeight,
+          dailyRate: stats.totalCalories,
+        };
+      })
+      .addCase(getUserStats.rejected, (state, action) => {
+        state.stats = {
+          height: 'n/a',
+          age: 'n/a',
+          currentWeight: 'n/a',
+          desiredWeight: 'n/a',
+          bloodType: 'n/a',
+          enteredDate: null,
+          originalWeight: null,
+        };
+      })
+      .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
+        state.badFoodSearcList = action.payload;
+      })
+      .addCase(searchNotAllowedFood.rejected, (state, action) => {
+        state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
+      })
+      .addCase(CalNoEat.pending, state => {
+        state.cals.isRefreshing = true;
+      })
+      .addCase(CalNoEat.fulfilled, (state, action) => {
+        state.cals.isLoggedIn = true;
+        state.cals.isRefreshing = false;
+      })
+      .addCase(CalNoEat.rejected, (state, action) => {
+        state.cals.isRefreshing = false;
+        // console.log('Error');
+      })
+      .addCase(sendCalculator.pending, state => {
+        state.cals.isRefreshing = true;
+      })
+      .addCase(sendCalculator.fulfilled, (state, action) => {
+        state.cals.isLoggedIn = true;
+        state.cals.isRefreshing = false;
+      })
+      .addCase(sendCalculator.rejected, (state, action) => {
+        state.cals.isRefreshing = false;
+        // console.log('Error');
+      })
   },
 });
 
@@ -120,5 +213,8 @@ export const {
   setFoodsList,
   setDiaryBackBtn,
   resetDiaryState,
-} = diarySlice.actions;
-export const diaryReducer = diarySlice.reducer;
+  storeCalulator,
+  setStats,
+  resetCalcState,
+} = userSlice.actions;
+export const userReducer = userSlice.reducer;

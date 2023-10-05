@@ -6,9 +6,9 @@ import {
   getCalDate,
   getIsLoading,
   getError,
-} from "../redux/diary/diarySelectors";
+} from "../redux/user/userSelectors";
 
-export const useDiary = () => {
+export const useUser = () => {
   const diaryList = useSelector(getDiaryList);
   const foodsList = useSelector(getFoodsList);
   const diaryBackBtn = useSelector(getDiaryBackBtn);
