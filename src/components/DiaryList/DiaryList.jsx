@@ -1,13 +1,13 @@
 import DiaryListItem from '../DiaryListItem/DiaryListItem';
 import style from './style.module.css';
 import { useDispatch } from 'react-redux';
-import { deleteDiaryEntry } from '../../redux/diary/diaryOperations';
+import { deleteDiaryEntry } from '../../redux/user/userOperations';
 import List from '@mui/material/List';
-import { useDiary } from 'hooks/useDiary';
+import { useUser } from 'hooks/useUser';
 
 function DiaryList() {
   const dispatch = useDispatch();
-  const { calDate, diaryList } = useDiary();
+  const { calDate, diaryList } = useUser();
 
   function handleDelete(entryId) {
     const formatDate = calDate.replaceAll('/', '-')

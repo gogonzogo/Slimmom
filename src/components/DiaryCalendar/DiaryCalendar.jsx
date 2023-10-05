@@ -11,9 +11,8 @@ import IconButton from '@mui/material/IconButton';
 import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setCalDate } from 'redux/diary/diarySlice';
-import { fetchDiary } from 'redux/diary/diaryOperations';
-// import { useDiary } from 'hooks/useDiary';
+import { setCalDate } from 'redux/user/userSlice';
+import { fetchDiary } from 'redux/user/userOperations';
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());

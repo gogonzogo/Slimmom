@@ -1,9 +1,7 @@
 const { resetAuthState } = require('./auth/authSlice');
-const { resetCalcState } = require('./Calc/calcSlice');
-const { resetDiaryState } = require('./diary/diarySlice');
+const { resetUserState } = require('./user/userSlice');
 
 export const resetState = dispatch => {
   dispatch(resetAuthState());
-  dispatch(resetCalcState());
-  dispatch(resetDiaryState());
+  dispatch(resetUserState());
 };

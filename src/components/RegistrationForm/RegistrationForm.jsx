@@ -18,15 +18,19 @@ import {
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { getUserStats } from 'redux/Calc/calcOperations';
+import {
+  getUserStats,
+  CalNoEat,
+  sendCalculator,
+} from 'redux/user/userOperations';
 //import { useAuthStore } from 'hooks/useAuth';
-import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
+
 
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const returnedCal = useSelector(state => state.calCalories.cals.value);
+  const returnedCal = useSelector(state => state.user.cals.value);
   const [calculatorFormData] = useState({
     height: returnedCal.height,
     age: returnedCal.age,

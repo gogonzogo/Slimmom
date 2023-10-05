@@ -6,29 +6,29 @@ import { Tab, Tabs } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Modal from 'components/Modal/Modal';
 import ValidationPopup from '../ValidationPopup/ValidationPopup';
 import {
+  validateHeightFeet,
+  validateHeightInch,
+  validateCurrentLbs,
+  validateDesiredLbs,
   validateHeight,
   validateAge,
   validateCurrent,
   validateDesired,
   validateBlood,
 } from '../../redux/validation/calculateCalsSlice';
-import {
-  validateHeightFeet,
-  validateHeightInch,
-  validateCurrentLbs,
-  validateDesiredLbs,
-} from '../../redux/validation/calculateCalsSlice';
-import { storeCalulator } from '../../redux/Calc/calcSlice';
+import { storeCalulator } from '../../redux/user/userSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { CalNoEat, sendCalculator } from '../../redux/Calc/calcOperations';
+import {
+  CalNoEat,
+  sendCalculator,
+  getUserStats,
+} from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
-import { getUserStats } from 'redux/Calc/calcOperations';
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -82,7 +82,7 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  const returnedCal = useSelector(state => state.calCalories.cals.value);
+  const returnedCal = useSelector(state => state.user.cals.value);
 
   const [validationPopups, setValidationPopups] = useState({
     weight: false,

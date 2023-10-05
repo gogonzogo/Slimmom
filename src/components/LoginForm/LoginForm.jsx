@@ -14,7 +14,7 @@ import {
   validatePassword,
 } from '../../redux/validation/registrationSlice';
 import { toast } from 'react-toastify';
-import { getUserStats } from 'redux/Calc/calcOperations';
+import { getUserStats } from 'redux/user/userOperations';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);

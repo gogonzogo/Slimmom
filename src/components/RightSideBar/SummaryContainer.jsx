@@ -1,12 +1,12 @@
 import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchNotAllowedFood } from 'redux/Calc/calcOperations';
-import { getBadFoodSearchResults } from 'redux/Calc/calcSliceSelectors';
+import { searchNotAllowedFood } from 'redux/user/userOperations';
 import {
   getCalDate,
   getDailyRate,
   getDiaryList,
-} from 'redux/diary/diarySelectors';
+  getBadFoodSearchResults,
+} from 'redux/user/userSelectors';
 import Summary from './Summary';
 
 export const SummaryContainer = props => {
@@ -20,7 +20,7 @@ export const SummaryContainer = props => {
     ? foodList.reduce((acc, el) => acc + el.calories, 0)
     : 0;
   const dailyRate = useSelector(getDailyRate);
-
+console.log(dailyRate)
   const left = totalConsumed !== 0 ? dailyRate - totalConsumed : 0;
   const percentage =
     dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;

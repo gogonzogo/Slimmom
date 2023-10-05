@@ -2,63 +2,43 @@ import { useState } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
-import {
-  addDiaryEntry,
-  fetchDiary,
-  searchFoods,
-} from '../../redux/diary/diaryOperations';
+import { addDiaryEntry, searchFoods } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { useDiary } from '../../hooks/useDiary';
+import { useUser } from '../../hooks/useUser';
 import { debounce } from 'lodash';
-import { setFoodsList } from 'redux/diary/diarySlice';
-import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import { setFoodsList, setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
-import dayjs from 'dayjs';
-
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calDate, foodsList, diaryList } = useDiary();
+  const { calDate, foodsList } = useUser();
   const dispatch = useDispatch();
-  const uniqueTitle = Array.from(new Set(foodsList.map(item => item.title)));
+  const autoCompleteFoodsList = foodsList.map(food => food.title);
   const { width } = useViewPort();
-
+  const handleGramsChange = e => {
+    setGrams(e.target.value);
+  };
+  const handleInputChange = e => {
+    const userInput = e.target.value || '';
+    if (e) {
+      setProductName(userInput);
+      debounceSearchFoods(userInput);
+    }
+  };
+  const debounceSearchFoods = debounce(userInput => {
+    dispatch(searchFoods(userInput));
+  }, 500);
   const handleSubmit = e => {
     e.preventDefault();
     const foodItem = foodsList.find(item => item.title === productName);
     const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
-
     dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
-    if (diaryList.length === 0) {
-      const today = dayjs().format('MM-DD-YYYY');
-      dispatch(fetchDiary(today));
-    }
     dispatch(setFoodsList([]));
     setProductName('');
     setGrams('');
     dispatch(setDiaryBackBtn(!diaryBackBtn));
   };
-
-  const handleGramsChange = e => {
-    setGrams(e.target.value);
-  };
-
-  const debounceSearchFoods = debounce(userInput => {
-    dispatch(searchFoods(userInput));
-  }, 400);
-
-  const handleInputChange = e => {
-    const userInput = e.target.value || '';
-    if (e) {
-      if (userInput === '') {
-        // dispatch(setFoodsList([]));
-      }
-      setProductName(userInput);
-      debounceSearchFoods(userInput);
-    }
-  };
-
   return (
     <div className={css.section}>
       <form className={css.diaryform} onSubmit={handleSubmit}>
@@ -73,7 +53,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               }}
               freeSolo
               size="small"
-              options={uniqueTitle}
+              options={autoCompleteFoodsList}
               value={productName}
               onChange={(e, selectedObject) => {
                 if (selectedObject !== null) setProductName(selectedObject);

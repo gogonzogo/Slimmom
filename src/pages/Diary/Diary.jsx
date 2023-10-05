@@ -3,14 +3,14 @@ import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductF
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import DiaryList from '../../components/DiaryList/DiaryList';
-import { useDiary } from 'hooks/useDiary';
+import { useUser } from 'hooks/useUser';
 import Container from 'components/Container/Container';
 import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
-import { fetchDiary } from 'redux/diary/diaryOperations';
+import { fetchDiary } from 'redux/user/userOperations';
 import { useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
-import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import { setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
 import css from './Diary.module.css';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
@@ -18,7 +18,7 @@ import Loader from 'components/Loader/Loader';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn } = useDiary();
+  const { diaryBackBtn } = useUser();
   const { width } = useViewPort();
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');

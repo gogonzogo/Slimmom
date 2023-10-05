@@ -12,14 +12,14 @@ import { Divider } from '@mui/material';
 // internal
 import { logOut } from '../../redux/auth/authOperations';
 import { useAuth } from '../../hooks/useAuth';
-import { useDiary } from 'hooks/useDiary';
-import { setDiaryBackBtn } from 'redux/diary/diarySlice';
+import { useUser } from 'hooks/useUser';
+import { setDiaryBackBtn } from 'redux/user/userSlice';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 import { resetState } from 'redux/resetState';
 
 const UserToolBar = () => {
   const { user } = useAuth();
-  const { diaryBackBtn } = useDiary();
+  const { diaryBackBtn } = useUser();
   const dispatch = useDispatch();
 
   function handleClick() {
