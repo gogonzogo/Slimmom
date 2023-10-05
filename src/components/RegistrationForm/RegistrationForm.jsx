@@ -23,8 +23,8 @@ import {
   sendCalculator,
   getUserStats,
 } from '../../redux/user/userOperations';
-import { storeCalulator, resetCalcState } from '../../redux/user/userSlice';
-
+import { storeCalulator } from '../../redux/user/userSlice';
+// resetCalcState;
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
