@@ -21,7 +21,7 @@ import {
   validateDesired,
   validateBlood,
 } from '../../redux/validation/calculateCalsSlice';
-import { storeCalulator } from '../../redux/user/userSlice';
+import { storeCalulator, resetCalcState } from '../../redux/user/userSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
@@ -82,7 +82,7 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  const returnedCal = useSelector(state => state.user.cals.value);
+  const returnedCal = useSelector(state => state.calCalories.cals.value);
 
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
@@ -92,6 +92,28 @@ const CaloriesCalc = () => {
     bloodType: false,
   });
 
+  const resetForm = () => {
+    setFormData({
+      height: '',
+      age: '',
+      currentWeight: '',
+      desiredWeight: '',
+      bloodType: '',
+      heightFeet: '',
+      heightInch: '',
+      currentWeightLbs: '',
+      desiredWeightLbs: '',
+    });
+    dispatch(validateHeight({ fieldValue: '' }));
+    dispatch(validateHeightFeet({ fieldValue: '' }));
+    dispatch(validateHeightInch({ fieldValue: '' }));
+    dispatch(validateAge({ fieldValue: '' }));
+    dispatch(validateCurrent({ fieldValue: '' }));
+    dispatch(validateCurrentLbs({ fieldValue: '' }));
+    dispatch(validateDesired({ fieldValue: '' }));
+    dispatch(validateDesiredLbs({ fieldValue: '' }));
+    dispatch(validateBlood({ fieldValue: '' }));
+  };
   const [focusedField, setFocusedField] = useState(null);
 
   const toggleValidationPopup = (fieldName, visible) => {
@@ -243,20 +265,22 @@ const CaloriesCalc = () => {
       desiredWeightLbs,
       measurementType,
     } = formData;
-    dispatch(
-      storeCalulator({
-        height: height,
-        age: age,
-        currentWeight: currentWeight,
-        desiredWeight: desiredWeight,
-        bloodType: bloodType,
-        heightFeet: heightFeet,
-        heightInch: heightInch,
-        currentWeightLbs: currentWeightLbs,
-        desiredWeightLbs: desiredWeightLbs,
-        measurementType: measurementType,
-      })
-    );
+    if (!loggedIn) {
+      dispatch(
+        storeCalulator({
+          height: height,
+          age: age,
+          currentWeight: currentWeight,
+          desiredWeight: desiredWeight,
+          bloodType: bloodType,
+          heightFeet: heightFeet,
+          heightInch: heightInch,
+          currentWeightLbs: currentWeightLbs,
+          desiredWeightLbs: desiredWeightLbs,
+          measurementType: measurementType,
+        })
+      );
+    }
     const entedInfo = {
       currentWeight:
         measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
@@ -304,6 +328,10 @@ const CaloriesCalc = () => {
             measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
           desiredWeight:
             measurementType === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
+          heightFeet,
+          heightInch,
+          currentWeightLbs,
+          desiredWeightLbs,
           totalCalories: passinfo.totalCalories,
           measurementType: measurementType,
           originalDate: new Date(),
@@ -316,6 +344,8 @@ const CaloriesCalc = () => {
       } else {
         dispatch(getUserStats());
       }
+      resetForm();
+      dispatch(resetCalcState());
     } catch (error) {
       console.error('returned Error', error.message);
     }
