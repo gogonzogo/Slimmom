@@ -3,6 +3,7 @@ import registrationReducer from './validation/registrationSlice';
 import CaloriesReducer from './validation/calculateCalsSlice';
 import { authReducer } from './auth/authSlice';
 import { userReducer } from './user/userSlice';
+import { themeReducer } from './theme/themeSlice';
 import { resetState } from './resetState';
 import { toast } from 'react-toastify';
 
@@ -33,6 +34,7 @@ const store = configureStore({
     registration: registrationReducer,
     calculate: CaloriesReducer,
     user: userReducer,
+    theme: themeReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

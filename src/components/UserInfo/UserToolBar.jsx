@@ -17,6 +17,7 @@ import { setDiaryBackBtn } from 'redux/user/userSlice';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 import { resetState } from 'redux/resetState';
 
+
 const UserToolBar = () => {
   const { user } = useAuth();
   const { diaryBackBtn } = useUser();
@@ -59,6 +60,7 @@ const UserToolBar = () => {
           "Bye!"
         </span>
       </IconButton>
+      
     </Toolbar>
   );
 };

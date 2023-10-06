@@ -5,18 +5,20 @@ import './index.css';
 import { BrowserRouter } from "react-router-dom";
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@emotion/react';
-import { lightTheme } from '../src/theme/Theme/theme';
+// import { ThemeProvider } from '@emotion/react';
+//import { lightTheme } from '../src/theme/theme';
 import { StyledEngineProvider } from '@mui/material/styles';
+
+import ThemeWrapper from 'components/ThemeWrapper/ThemeWrapper';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <BrowserRouter basename='Final-Team-Project'>
         <Provider store={store}>
-          <ThemeProvider theme={lightTheme}>
+          <ThemeWrapper >
             <App />
-          </ThemeProvider>
+          </ThemeWrapper>
         </Provider>
       </BrowserRouter>
     </StyledEngineProvider>
