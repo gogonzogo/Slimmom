@@ -218,5 +218,6 @@ export const {
   storeCalulator,
   setStats,
   resetCalcState,
+  resetUserState,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
