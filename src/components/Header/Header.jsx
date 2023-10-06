@@ -8,13 +8,13 @@ import Toolbar from '@mui/material/Toolbar';
 
 // internal
 import { useAuth } from '../../hooks/useAuth';
-
-//styles
+//import ThemeSwitch from 'components/ThemeSwitch/ThemeSwitch';
 import styles from './Header.module.css';
 import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
 import Logo from 'components/Logo/Logo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
+import ThemeSwitch from 'components/ThemeSwitch/ThemeSwitch';
 
 const Header = () => {
   const { loggedIn } = useAuth();
@@ -33,6 +33,7 @@ const Header = () => {
           backgroundColor: 'transparent',
         }}
       >
+        <ThemeSwitch></ThemeSwitch>
         <Toolbar
           disableGutters={true}
           className={styles.headerToolbar}
@@ -46,6 +47,7 @@ const Header = () => {
               : '20px',
           }}
         >
+          
           {loggedIn ? (
             <UserInfo />
           ) : isMobile ? (
