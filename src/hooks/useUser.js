@@ -4,24 +4,30 @@ import {
   getFoodsList,
   getDiaryBackBtn,
   getCalDate,
-  getIsLoading,
-  getError,
+  getDiaryError,
+  getDiaryIsLoading,
+  getCalculatorError,
+  getCalculatorIsLoading,
 } from "../redux/user/userSelectors";
 
 export const useUser = () => {
   const diaryList = useSelector(getDiaryList);
-  const foodsList = useSelector(getFoodsList);
+  const allFoodsList = useSelector(getFoodsList);
   const diaryBackBtn = useSelector(getDiaryBackBtn);
-  const calDate = useSelector(getCalDate);
-  const isLoading = useSelector(getIsLoading);
-  const isError = useSelector(getError);
+  const calendarDate = useSelector(getCalDate);
+  const diaryIsLoading = useSelector(getDiaryIsLoading);
+  const diaryError = useSelector(getDiaryError);
+  const calculatorIsLoading = useSelector(getCalculatorIsLoading);
+  const calculatorError = useSelector(getCalculatorError);
 
   return {
     diaryList,
-    foodsList,
+    allFoodsList,
     diaryBackBtn,
-    calDate,
-    isLoading,
-    isError,
+    calendarDate,
+    diaryIsLoading,
+    diaryError,
+    calculatorIsLoading,
+    calculatorError,
   };
 };
