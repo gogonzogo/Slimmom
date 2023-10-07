@@ -12,9 +12,9 @@ import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calDate, foodsList } = useUser();
+  const { calendarDate, allFoodsList } = useUser();
   const dispatch = useDispatch();
-  const autoCompleteFoodsList = foodsList.map(food => food.title);
+  const autoCompleteFoodsList = allFoodsList.map(food => food.title);
   const { width } = useViewPort();
   const handleGramsChange = e => {
     setGrams(e.target.value);
@@ -31,9 +31,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   }, 500);
   const handleSubmit = e => {
     e.preventDefault();
-    const foodItem = foodsList.find(item => item.title === productName);
+    const foodItem = allFoodsList.find(item => item.title === productName);
     const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
-    dispatch(addDiaryEntry({ calDate, productName, grams, calories }));
+    dispatch(addDiaryEntry({ calendarDate, productName, grams, calories }));
     dispatch(setFoodsList([]));
     setProductName('');
     setGrams('');

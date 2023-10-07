@@ -14,7 +14,8 @@ import {
   validatePassword,
 } from '../../redux/validation/registrationSlice';
 import { toast } from 'react-toastify';
-import { getUserStats } from 'redux/user/userOperations';
+import { getUserInfo } from 'redux/user/userOperations';
+import { useUser } from 'hooks/useUser';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);
@@ -22,6 +23,7 @@ const LoginForm = () => {
   const isPasswordValid = useSelector(selectIsPasswordValid);
   // const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
+  const { calendarDate } = useUser();
   const nav = useNavigate(); // react router hook
   // const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
 
@@ -63,7 +65,7 @@ const LoginForm = () => {
       const senddata = { email: email.toLowerCase(), password };
       const response = await dispatch(login(senddata));
       if (response.payload.token) {
-        dispatch(getUserStats());
+        dispatch(getUserInfo(calendarDate));
         nav('/diary');
       }
     } catch (err) {
