@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
 import style from './RegistrationForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -335,9 +334,6 @@ const RegistrationForm = () => {
               <CustomButton color="orange" disabled={!isFormValid}>
                 Register
               </CustomButton>
-              <Link to="/Login">
-                <CustomButton color="white">Log In</CustomButton>
-              </Link>
             </Box>
           </form>
         </FormControl>
