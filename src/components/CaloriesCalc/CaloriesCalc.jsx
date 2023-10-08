@@ -30,6 +30,8 @@ import {
   getUserStats,
 } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
+// import { logOut } from '../../redux/auth/authOperations';
+
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -173,6 +175,7 @@ const CaloriesCalc = () => {
         measurementType: tabIndex === 0 ? 'M' : 'S',
       };
     });
+   
   };
 
   const changeHandler = e => {

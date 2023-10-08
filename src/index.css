@@ -63,6 +63,14 @@ a {
   overflow-y: auto;
 }
 
+.lightmode{
+  background-color: #66bb6a;
+}
+.darkmode {
+  background-color: blue;
+}
+
+
 .active {
   color: var(--accent-bright-color);
 }

@@ -9,6 +9,11 @@ import {
   CalNoEat,
   sendCalculator,
   searchNotAllowedFood,
+  archiveInfo,
+  deleteInfo,
+  deleteAcct,
+  exportXLS,
+
 } from './userOperations';
 import { Slide, toast } from 'react-toastify';
 
@@ -205,6 +210,74 @@ export const userSlice = createSlice({
       .addCase(sendCalculator.rejected, (state, action) => {
         state.cals.isRefreshing = false;
         // console.log('Error');
+      })
+    .addCase(archiveInfo.pending, state => {
+      console.log('archiveInfo.pending')
+      state.diary.isLoading = true;
+      
+      })
+      .addCase(archiveInfo.fulfilled, (state, action) => {
+              console.log('archiveInfo.fulfilled')
+
+        state.diary.isLoading = false;
+      })
+      .addCase(archiveInfo.rejected, (state, action) => {
+                      console.log('archiveInfo.rejected')
+
+        state.diary.isLoading = false;
+        console.log('Error');
+        // console.log('Server Error!');
+      })
+    .addCase(deleteInfo.pending, state => {
+      console.log('archiveInfo.pending')
+      state.diary.isLoading = true;
+      
+      })
+      .addCase(deleteInfo.fulfilled, (state, action) => {
+              console.log('archiveInfo.fulfilled')
+
+        state.diary.isLoading = false;
+      })
+      .addCase(deleteInfo.rejected, (state, action) => {
+                      console.log('archiveInfo.rejected')
+
+        state.diary.isLoading = false;
+        console.log('Error');
+        // console.log('Server Error!');
+      })
+    .addCase(deleteAcct.pending, state => {
+      console.log('archiveInfo.pending')
+      state.diary.isLoading = true;
+      
+      })
+      .addCase(deleteAcct.fulfilled, (state, action) => {
+              console.log('archiveInfo.fulfilled')
+
+        state.diary.isLoading = false;
+      })
+      .addCase(deleteAcct.rejected, (state, action) => {
+                      console.log('archiveInfo.rejected')
+
+        state.diary.isLoading = false;
+        console.log('Error');
+        // console.log('Server Error!');
+      })
+    .addCase(exportXLS.pending, state => {
+      console.log('exportXLS.pending')
+      state.diary.isLoading = true;
+      
+      })
+      .addCase(exportXLS.fulfilled, (state, action) => {
+              console.log('exportXLS.fulfilled')
+
+        state.diary.isLoading = false;
+      })
+      .addCase(exportXLS.rejected, (state, action) => {
+                      console.log('exportXLS.rejected')
+
+        state.diary.isLoading = false;
+        console.log('Error');
+        // console.log('Server Error!');
       })
   },
 });
