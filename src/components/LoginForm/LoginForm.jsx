@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import style from '../LoginForm/login.module.css';
 import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -180,11 +180,7 @@ const LoginForm = () => {
               >
                 Log In
               </Button>
-              <Link to="/Register">
-                <Button variant="contained" className={style.register_button}>
-                  Register
-                </Button>
-              </Link>
+              
             </Box>
           </form>
         </FormControl>
