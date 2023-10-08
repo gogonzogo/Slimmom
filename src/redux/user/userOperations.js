@@ -126,3 +126,59 @@ export const sendCalculator = createAsyncThunk(
     }
   }
 );
+
+
+export const archiveInfo = createAsyncThunk(
+   'diary/archivedata',
+  async (data, rejectWithValue) => {
+    try {
+      const response = await axios.post(
+        `/user/archive/`
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const deleteInfo = createAsyncThunk(
+   'diary/deletediary',
+  async (data, rejectWithValue) => {
+    try {
+      const response = await axios.post(
+        `/user/deleteDiary/`
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteAcct = createAsyncThunk(
+   'diary/deleteAccount',
+  async (data, rejectWithValue) => {
+    try {
+      const response = await axios.post(
+        `/user/deleteAccount/`
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const exportXLS = createAsyncThunk(
+   'diary/downloadToXLS',
+  async (data, rejectWithValue) => {
+    try {
+      console.log('downloadToXLS')
+      const response = await axios.post(
+        `/user/downloadDiary/`
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);

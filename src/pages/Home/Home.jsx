@@ -10,10 +10,11 @@ import Container from 'components/Container/Container';
 // import Loader from 'components/Loader/Loader';
 // const Register = lazy(() => import('../Register/Register'));
 // const Login = lazy(() => import('../Login/Login'));
-
 function Home() {
+  
   return (
-    <div className="background mainBackground">
+    
+    <div className={`background mainBackground `}>
       <section className="top-bottom">
         <Container className="left-right">
           <CaloriesCalc />
