@@ -1,70 +1,46 @@
 import { createTheme } from '@mui/material/styles';
 
-const baseTheme = createTheme({
-  secondary: {
-    main: '#fc842d',
-    dark: '#fc842d',
-    contrastText: '#ffffff',
-  },
-  typography: {
-    fontFamily: "'verdana', sans-serif",
-    fontSize: 14,
-    fontWeight: 700,
-    fontFamilySecondary: "'Roboto Condensed', sans-serif",
-  },
-  breakpoints: {
-    values: {
-      mobile: 0,
-      mobileL: 320,
-      tablet: 768,
-      laptop: 1024,
-      desktop: 1280,
-      desktopLrg: 1500,
+const customTheme = (mode) => {
+  return createTheme({
+    palette: {
+      mode,
+      //light mode is default
+      ...(mode === 'light'
+        ? {
+            primary: {
+              light: '#9b9faa',
+              main: '#fc842d',
+              dark: '#FC842D',
+              contrastText: '#9b9faa',
+            },
+            background: {
+              default: '#ffffff',
+              paper: '#e0e0e0',
+              secondary: '#9B9FAA',
+              menu: '#264061',
+            },
+            text: {
+              secondary: '#9b9faa',
+              hint: '#264061',
+            },
+          }
+        : // else use dark mode
+          {
+            primary: {
+              main: '#516680',
+              contrastText: '#ffffff',
+            },
+          background: {
+            default: '#264061',
+              paper: '#212121',
+            },
+            text: {
+              primary: '#e0e0e0',
+              secondary: '#9B9FAA',
+            },
+          }),
     },
-  },
-});
+  });
+};
 
-const darkTheme = createTheme({
-  ...baseTheme,
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#516680',
-    },
-    text: {
-      primary: '#9b9faa',
-      secondary: '#e0e0e0',
-    },
-    background: {
-      paper: '#212121',
-      default: '#264061',
-    },
-  },
-});
-
-const lightTheme = createTheme({
-  ...baseTheme,
-  palette: {
-    type: 'light',
-    primary: {
-      main: '#fc842d',
-      light: '#9b9faa',
-      medium: '#ffffff',
-      dark: '#FC842D',
-      hover: '#fc842d',
-      checked: '#FC842D'
-    },
-    background: {
-      default: '#e0e0e0',
-      paper: '#e0e0e0',
-      secondary: '#9B9FAA',
-      menu: '#264061',
-    },
-    text: {
-      secondary: '#9b9faa',
-      hint: '#264061',
-    },
-  },
-});
-
-export { darkTheme, lightTheme };
+export default customTheme;

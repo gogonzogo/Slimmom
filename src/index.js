@@ -10,13 +10,15 @@ import { Provider } from 'react-redux';
 import { StyledEngineProvider } from '@mui/material/styles';
 
 import ThemeWrapper from 'components/ThemeWrapper/ThemeWrapper';
+import { CssBaseline } from '@mui/material';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <BrowserRouter basename='Final-Team-Project'>
         <Provider store={store}>
-          <ThemeWrapper >
+          <ThemeWrapper>
+            <CssBaseline />
             <App />
           </ThemeWrapper>
         </Provider>
