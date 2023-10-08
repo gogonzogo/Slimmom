@@ -7,17 +7,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 
 //internal
-import { toggleTheme } from "redux/theme/themeSlice";
-import { selectIsDarkMode } from "redux/theme/themeSelectors";
+import { setThemeMode } from "redux/theme/themeSlice";
+import { selectThemeMode } from "redux/theme/themeSelectors";
 
 
 
 const ThemeSwitch = () => {
     const dispatch = useDispatch();
-    const darkMode = useSelector(selectIsDarkMode);
+    const themeMode = useSelector(selectThemeMode);
     
     const handleThemeToggle = () => {
-        dispatch(toggleTheme());
+        const newMode = themeMode === 'dark' ? 'light' : 'dark';
+        dispatch(setThemeMode(newMode));
     }
     return (
         <IconButton
@@ -25,7 +26,7 @@ const ThemeSwitch = () => {
             aria-label='light or dark mode'
             aria-describedby='light or dark mode-label'
         >
-            {darkMode
+            {themeMode === 'dark'
                 ? (
                     <FontAwesomeIcon icon={faMoon} style={{ color: "#fc842d", }} />
                 ) : (
