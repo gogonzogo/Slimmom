@@ -6,26 +6,26 @@ import { node } from 'prop-types';
 import { ThemeProvider } from "@emotion/react";
 
 // internal
-import { lightTheme, darkTheme } from "theme/theme";
-import { selectIsDarkMode } from "redux/theme/themeSelectors";
-import { toggleTheme } from "redux/theme/themeSlice";
+import customTheme from "theme/theme";
+import { selectThemeMode } from "redux/theme/themeSelectors";
+import { setThemeMode } from "redux/theme/themeSlice";
 
 const ThemeWrapper = ({ children }) => {
     const dispatch = useDispatch();
-    const darkMode = useSelector(selectIsDarkMode); 
+    const themeMode = useSelector(selectThemeMode); 
 
     useEffect(() => { 
-        const setTheme = localStorage.getItem('theme');
-        if (setTheme === 'dark') {
-            dispatch(toggleTheme());
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme) {
+            dispatch(setThemeMode(storedTheme));
         }
     }, [dispatch]);
 
     useEffect(() => {
-        localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-    }, [darkMode]);
+        localStorage.setItem('theme', themeMode);
+    }, [themeMode]);
 
-    const currentTheme = darkMode ? darkTheme : lightTheme;
+    const currentTheme = customTheme(themeMode)
 
     return (
         <ThemeProvider theme={currentTheme}>

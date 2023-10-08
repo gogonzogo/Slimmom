@@ -1,10 +1,22 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+export const getUserInfo = createAsyncThunk(
+  'user/getUserInfo',
+  async (date, { rejectWithValue }) => {
+    try {
+      const response = await axios.get('/user/info/day', { date });
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 // DIARY OPERATIONS
 export const fetchDiary = createAsyncThunk(
   'diary/fetchDiary',
-  async (date, rejectWithValue) => {
+  async (date, { rejectWithValue }) => {
     const formatDate = date.replaceAll("/", "-")
     try {
       const response = await axios.post('/diary/day', { date: formatDate, });
@@ -17,9 +29,9 @@ export const fetchDiary = createAsyncThunk(
 
 export const addDiaryEntry = createAsyncThunk(
   'diary/add',
-  async (data, rejectWithValue) => {
+  async (data, { rejectWithValue }) => {
     const newDiaryEntry = {
-      date: data.calDate.replaceAll("/", "-"),
+      date: data.calendarDate.replaceAll("/", "-"),
       title: data.productName,
       weight: data.grams,
       calories: data.calories,
@@ -35,7 +47,7 @@ export const addDiaryEntry = createAsyncThunk(
 
 export const deleteDiaryEntry = createAsyncThunk(
   'diary/delete',
-  async (data, rejectWithValue) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.delete(
         `/diary/delete/${JSON.stringify(data)}`
@@ -49,7 +61,7 @@ export const deleteDiaryEntry = createAsyncThunk(
 
 export const searchFoods = createAsyncThunk(
   'diary/updateDiary',
-  async (data, rejectWithValue) => {
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `/diary/allFoods/search/${data}`

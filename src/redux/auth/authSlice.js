@@ -68,7 +68,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         console.log(action.payload);
         toast.error(
-          'Unauthorized, please double check your username and password',
+          'Unauthorized, please double check your email and password',
           {
             position: 'top-right',
             autoClose: 3000,

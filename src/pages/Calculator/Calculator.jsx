@@ -10,7 +10,7 @@ function Calculator() {
   return (
     <div
       className="background Calc-DairyBackground"
-      style={{ display: 'flex', flexDirection: 'column' }}
+      style={{ display: 'flex', flexDirection: 'column'}}
     >
       <section className="top-bottom">
         <Container className="left-right">

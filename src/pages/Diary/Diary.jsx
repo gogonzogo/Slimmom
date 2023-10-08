@@ -6,9 +6,7 @@ import DiaryList from '../../components/DiaryList/DiaryList';
 import { useUser } from 'hooks/useUser';
 import Container from 'components/Container/Container';
 import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
-import { fetchDiary } from 'redux/user/userOperations';
 import { useDispatch } from 'react-redux';
-import dayjs from 'dayjs';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 import { setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
@@ -25,8 +23,6 @@ function Diary() {
   const [onMount, setOnMount] = useState(true);
 
   useEffect(() => {
-    const today = dayjs().format('MM-DD-YYYY');
-    dispatch(fetchDiary(today));
     setOnMount(false);
   }, [dispatch]);
 

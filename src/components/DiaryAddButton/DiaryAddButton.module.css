@@ -7,7 +7,7 @@
 
 .CirclePlus {
   border-radius: 50%;
-  background-color: var(--orange-color);
+  /* background-color: var(--orange-color); */
   width: 48px;
   height: 48px;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);

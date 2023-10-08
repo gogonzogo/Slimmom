@@ -7,10 +7,10 @@ import { useUser } from 'hooks/useUser';
 
 function DiaryList() {
   const dispatch = useDispatch();
-  const { calDate, diaryList } = useUser();
+  const { calendarDate, diaryList } = useUser();
 
   function handleDelete(entryId) {
-    const formatDate = calDate.replaceAll('/', '-')
+    const formatDate = calendarDate.replaceAll('/', '-');
     dispatch(deleteDiaryEntry({ formatDate, entryId }));
   }
 

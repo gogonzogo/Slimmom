@@ -8,13 +8,15 @@ import useViewport from '../../hooks/useViewport';
 const Logo = ({ showText }) => {
   const { loggedIn } = useAuth();
   const { width } = useViewport();
+  const linkTo = loggedIn ? '/Diary' : '/';
+  const ariaLabel = loggedIn ? 'Link to the Diary Page' : 'Link to the Home Page';
 
   return (
     <div className={styles['logo-container']}>
       <Link
-        to="/Diary"
+        to={linkTo}
         className={styles.logoLink}
-        aria-label="Link to the Dairy Page"
+        aria-label={ariaLabel}
       >
         <ImageLogo />
         {(width >= 550 || loggedIn) && <TextLogo showText={showText} />}
