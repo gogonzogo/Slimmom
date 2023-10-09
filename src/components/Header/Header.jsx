@@ -14,7 +14,7 @@ import UserInfo from 'components/UserInfo/UserInfo';
 import Navigation from 'components/Navigation/Navigation';
 import Logo from 'components/Logo/Logo';
 import UserToolBar from 'components/UserInfo/UserToolBar';
-import ThemeSwitch from 'components/ThemeSwitch/ThemeSwitch';
+import ThemeButton from 'components/ThemeButton/ThemeButton';
 
 const Header = () => {
   const { loggedIn } = useAuth();
@@ -33,7 +33,7 @@ const Header = () => {
           backgroundColor: 'transparent',
         }}
       >
-        <ThemeSwitch></ThemeSwitch>
+        <ThemeButton></ThemeButton>
         <Toolbar
           disableGutters={true}
           className={styles.headerToolbar}
