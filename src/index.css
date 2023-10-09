@@ -14,7 +14,7 @@
   --primary-font-size: 14px;
 
   --transition-time: 2000ms;
-  --transition-time-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-time-function: cubic-bezier(0.4, 0, 0.8, 0.5);
 }
 
 body {
