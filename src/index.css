@@ -12,6 +12,9 @@
   --font-weight-bold: 700;
   --font-weight-light: 400;
   --primary-font-size: 14px;
+
+  --transition-time: 2000ms;
+  --transition-time-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {

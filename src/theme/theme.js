@@ -30,8 +30,8 @@ const customTheme = (mode) => {
               main: '#516680',
               contrastText: '#ffffff',
             },
-          background: {
-            default: '#264061',
+            background: {
+              default: '#264061',
               paper: '#212121',
             },
             text: {
@@ -39,6 +39,15 @@ const customTheme = (mode) => {
               secondary: '#9B9FAA',
             },
           }),
+    },
+    components: {
+      MuiButtonBase: {
+        defaultProps: {
+          style: {
+            cursor: 'pointer',
+          },
+        },
+      },
     },
   });
 };
