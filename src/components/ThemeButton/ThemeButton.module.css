@@ -1,23 +1,23 @@
 .modeWrapper {
     display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        position: fixed;
-        z-index: 1000;
-        top: 5px;
-        left: 30%;
+    justify-content: center;
+    align-items: flex-start;
+    position: fixed;
+    z-index: 1000;
+    top: 5px;
+    left: 30%;
 }
 .modeContainer {
     position: relative;
-margin: 15px 0 0 10px;
---rotation: 0;
-width: 200px;
-height: 200px;
-border: 1px solid rgba(0, 0, 0, 0.1);
-border-radius: 50%;
-transform: rotate(0deg);
-transform: rotate(calc(var(--rotation)*1deg));
-transition: transform var(--transition-time) linear;
+    margin: 15px 0 0 10px;
+/* --rotation: 0; */
+    width: 200px;
+    height: 200px;
+    border: .1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+/* transform: rotate(0deg);
+transform: rotate(calc(var(--rotation)*1deg)); */
+    transition: transform var(--transition-time) linear;
 }
 
 .modeIconContainer {
@@ -27,18 +27,31 @@ transition: transform var(--transition-time) linear;
     transform: rotate(0deg);
     transition: transform var(--transition-time) linear, opacity var(--transition-time) var(--transition-time-function);
     top: -20px; /* -child size/2 */
-    left: 90px; /* parent size/2 - child size/2 */
+    left: 80px; /* parent size/2 - child size/2 */
 }
 .modeIcons{
+    /* opacity: 1; */
     position: relative;
-    transition: opacity var(--transition-time) var(--transition-time-function)
+    transition: opacity var(--transition-time) .2s var(--transition-time-function)
 }
 .lightModeIcon {
     opacity: 0;
-    transform: rotate(0deg);
+    /* transform: rotate(0deg); */
 }
 
 .darkModeIcon {
     opacity: 1;
-    transform: rotate(180deg);
+    /* transform: rotate(360deg); */
+}
+
+.buttonClicked {
+    transition: background-color 1.2s var(--transition-time-function)
+}
+
+.darkClicked:hover {
+    background-color: #b2d1fa4e;
+}
+
+.lightClicked:hover {
+    background-color: rgba(255, 246, 209, 0.822);
 }
