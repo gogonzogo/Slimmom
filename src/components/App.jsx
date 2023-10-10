@@ -11,6 +11,8 @@ import { Box } from '@mui/material';
 import Header from './Header/Header';
 import PublicRoute from './PublicRoute/PublicRoute';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import Footer from '../pages/Footer/Footer'
+
 
 const Home = lazy(() => import('pages/Home/Home'));
 const Diary = lazy(() => import('pages/Diary/Diary'));
@@ -39,6 +41,7 @@ export const App = () => {
       
         </Routes>
       </Suspense>
+      <Footer />
     </Box>
   );
 };

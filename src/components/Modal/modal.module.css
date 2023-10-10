@@ -75,6 +75,15 @@ ol {
   font: 400 14p/17px Verdana;
   color: #9b9faa;
 }
+
+.messageSpan{
+  font: 700 18px/25px Verdana;
+}
+
+.ptag{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 @media screen and (min-width: 480px) {
   .closeButton {
     display: block;
