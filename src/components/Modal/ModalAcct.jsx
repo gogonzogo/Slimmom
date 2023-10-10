@@ -16,6 +16,8 @@ import {
 } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { toast } from 'react-toastify';
+import { logOut } from '../../redux/auth/authOperations';
+
 
 const ModalAcct = props => {
     const dispatch = useDispatch();
@@ -84,6 +86,7 @@ const ModalAcct = props => {
                             className: 'success-toast',
                         });
                     }
+                    dispatch(logOut());
                     closeModal()
 
                     break;
