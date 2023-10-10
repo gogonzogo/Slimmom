@@ -45,7 +45,7 @@
 .totalCaloriesNumber {
   font: 700 48px/58px Verdana;
 }
-.totalCalories {
+.dailyRate {
   color: #264061;
   margin: 20px 0;
 }
@@ -101,7 +101,7 @@ ol {
     margin: auto;
     max-width: 330px;
   }
-  .totalCalories {
+  .dailyRate {
     margin: 20px 0;
     font: 700 48px/58px Verdana;
   }

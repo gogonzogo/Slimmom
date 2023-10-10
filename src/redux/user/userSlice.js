@@ -21,7 +21,7 @@ import { Slide, toast } from 'react-toastify';
 const initialState = {
   diary: {
     calendarDate: dayjs().format('MM-DD-YYYY'),
-    dailyRate: 0,
+    diaryDailyRate: 0,
     diaryList: [],
     allFoodsList: [],
     diaryIsLoading: false,
@@ -29,20 +29,18 @@ const initialState = {
     filter: '',
     diaryBackBtn: false,
   },
-  cals: {
-    value: {
-      height: '',
-      age: '',
-      currentWeight: '',
-      desiredWeight: '',
-      bloodType: '',
-      heightFeet: '',
-      heightInch: '',
-      currentWeightLbs: '',
-      desiredWeightLbs: '',
-      measurementType: '',
-    },
-    totalCalories: '',
+  calculator: {
+    height: '',
+    age: '',
+    currentWeight: '',
+    desiredWeight: '',
+    bloodType: '',
+    heightFeet: '',
+    heightInch: '',
+    currentWeightLbs: '',
+    desiredWeightLbs: '',
+    unitOfMeasure: '',
+    calculatorDailyRate: '',
     noEat: {},
     calculatorIsLoading: false,
     calculatorError: null,
@@ -81,12 +79,12 @@ export const userSlice = createSlice({
     },
     // CALCULATOR REDUCERS
     storeCalulator: (state, action) => {
-      state.cals.value = action.payload;
+      state.calculator.value = action.payload;
     },
     setStats: (state, action) => {
       state.stats = action.payload;
     },
-    resetCalcState: state => { state.cals = initialState },
+    resetCalcState: state => { state.calculator = initialState },
     resetUserState: state => initialState,
   },
   extraReducers: builder => {
@@ -96,18 +94,25 @@ export const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         console.log(action.payload)
-        const info = action.payload.calculator;
-        state.stats = {
-          height:info.height,
-          age:info.age,
-          currentWeight:info.currentWeight,
-          desiredWeight:info.desiredWeight,
-          bloodType:info.bloodType,
-          enteredDate:info.enteredDate,
-          originalWeight:info.originalWeight,
-          dailyRate:info.totalCalories,
-        };
-        // state.diary.dailyRate = info.totalCalories
+        // const calculatorInfo = action.payload.calculator;
+        // const diaryInfo = action.payload.diary;
+        // if (calculatorInfo === null) return;
+        // state.stats = {
+        //   height: calculatorInfo.height,
+        //   age: calculatorInfo.age,
+        //   currentWeight: calculatorInfo.currentWeight,
+        //   desiredWeight: calculatorInfo.desiredWeight,
+        //   bloodType: calculatorInfo.bloodType,
+        //   enteredDate: calculatorInfo.enteredDate,
+        //   originalWeight: calculatorInfo.originalWeight,
+        //   dailyRate: calculatorInfo.dailyRate,
+        // };
+        // if (diaryInfo === 404) return;
+        // state.diary = {
+
+        // }
+
+        // state.diary.dailyRate = info.dailyRate
         // state.diary.diaryList = action.payload.foodItems;
         // state.diary.calendarDate = action.payload.date;
         // state.diary.dailyRate = action.payload.dailyRate;
@@ -187,28 +192,28 @@ export const userSlice = createSlice({
       })
       // CALCULATOR EXTRA REDUCERS
       .addCase(getUserStats.fulfilled, (state, action) => {
-        const stats = action.payload.stats;
-        state.stats = {
-          height: stats.height,
-          age: stats.age,
-          currentWeight: stats.currentWeight,
-          desiredWeight: stats.desiredWeight,
-          bloodType: stats.bloodType,
-          enteredDate: stats.enteredDate,
-          originalWeight: stats.originalWeight,
-          dailyRate: stats.totalCalories,
-        };
+        // const stats = action.payload.stats;
+        // state.stats = {
+        //   height: stats.height,
+        //   age: stats.age,
+        //   currentWeight: stats.currentWeight,
+        //   desiredWeight: stats.desiredWeight,
+        //   bloodType: stats.bloodType,
+        //   enteredDate: stats.enteredDate,
+        //   originalWeight: stats.originalWeight,
+        //   dailyRate: stats.dailyRate,
+        // };
       })
       .addCase(getUserStats.rejected, (state, action) => {
-        state.stats = {
-          height: 'n/a',
-          age: 'n/a',
-          currentWeight: 'n/a',
-          desiredWeight: 'n/a',
-          bloodType: 'n/a',
-          enteredDate: null,
-          originalWeight: null,
-        };
+        // state.stats = {
+        //   height: 'n/a',
+        //   age: 'n/a',
+        //   currentWeight: 'n/a',
+        //   desiredWeight: 'n/a',
+        //   bloodType: 'n/a',
+        //   enteredDate: null,
+        //   originalWeight: null,
+        // };
       })
       .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
         state.badFoodSearcList = action.payload;
@@ -217,88 +222,88 @@ export const userSlice = createSlice({
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
       })
       .addCase(CalNoEat.pending, state => {
-        state.cals.isRefreshing = true;
+        state.calculator.isRefreshing = true;
       })
       .addCase(CalNoEat.fulfilled, (state, action) => {
-        state.cals.isLoggedIn = true;
-        state.cals.isRefreshing = false;
+        state.calculator.isLoggedIn = true;
+        state.calculator.isRefreshing = false;
       })
       .addCase(CalNoEat.rejected, (state, action) => {
-        state.cals.isRefreshing = false;
+        state.calculator.isRefreshing = false;
       })
       .addCase(sendCalculator.pending, state => {
-        state.cals.isRefreshing = true;
+        state.calculator.isRefreshing = true;
       })
       .addCase(sendCalculator.fulfilled, (state, action) => {
-        state.cals.isLoggedIn = true;
-        state.cals.isRefreshing = false;
+        state.calculator.isLoggedIn = true;
+        state.calculator.isRefreshing = false;
       })
       .addCase(sendCalculator.rejected, (state, action) => {
-        state.cals.isRefreshing = false;
+        state.calculator.isRefreshing = false;
       })
-    .addCase(archiveInfo.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(archiveInfo.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(archiveInfo.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(archiveInfo.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(deleteInfo.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(deleteInfo.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(deleteInfo.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(deleteInfo.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(deleteAcct.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(deleteAcct.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(deleteAcct.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(deleteAcct.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(exportXLS.pending, state => {
-      console.log('exportXLS.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(exportXLS.pending, state => {
+        console.log('exportXLS.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(exportXLS.fulfilled, (state, action) => {
-              console.log('exportXLS.fulfilled')
+        console.log('exportXLS.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(exportXLS.rejected, (state, action) => {
-                      console.log('exportXLS.rejected')
+        console.log('exportXLS.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');

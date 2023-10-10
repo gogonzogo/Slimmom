@@ -30,8 +30,8 @@ import {
   getUserStats,
 } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
+import dayjs from 'dayjs';
 // import { logOut } from '../../redux/auth/authOperations';
-
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -44,6 +44,7 @@ const CaloriesCalc = () => {
   const [buttonText, setButtonText] = useState('Submit');
 
   const { loggedIn } = useAuth();
+  const today = dayjs().format('MM-DD-YYYY');
   const dispatch = useDispatch();
   const validHeight = useSelector(state => state.calculate.isHeightValid);
   const validAge = useSelector(state => state.calculate.isAgeValid);
@@ -85,7 +86,7 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  const returnedCal = useSelector(state => state.user.cals.value);
+  // const calculatorState = useSelector(state => state.user.calculator);
 
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
@@ -106,6 +107,7 @@ const CaloriesCalc = () => {
       heightInch: '',
       currentWeightLbs: '',
       desiredWeightLbs: '',
+      unitOfMeasure: 'M',
     });
     dispatch(validateHeight({ fieldValue: '' }));
     dispatch(validateHeightFeet({ fieldValue: '' }));
@@ -125,14 +127,14 @@ const CaloriesCalc = () => {
 
   const [modalState, setModalState] = useState({
     open: false,
-    totalCalories: null,
+    dailyRate: null,
     foodNotToEat: [],
   }); //modal state and setters
 
   const handleOpen = passinfo => {
     setModalState({
       open: true,
-      totalCalories: passinfo.totalCalories,
+      dailyRate: passinfo.dailyRate,
       foodNotToEat: passinfo.notAllowedFood,
     });
   };
@@ -145,41 +147,39 @@ const CaloriesCalc = () => {
     });
     setTimeout(() => {
       // fixing effect, when during closing modal you see 0 kcal recommended daily calorie intake
-      setModalState({ open: false, totalCalories: null, foodNotToEat: [] });
+      setModalState({ open: false, dailyRate: null, foodNotToEat: [] });
     }, 250);
   };
 
   const [formData, setFormData] = useState({
-    height: returnedCal.height,
-    age: returnedCal.age,
-    currentWeight: returnedCal.currentWeight,
-    desiredWeight: returnedCal.desiredWeight,
-    bloodType: returnedCal.bloodType,
-    heightFeet: returnedCal.heightFeet,
-    heightInch: returnedCal.heightInch,
-    currentWeightLbs: returnedCal.currentWeightLbs,
-    desiredWeightLbs: returnedCal.desiredWeightLbs,
-    measurementType:
-      returnedCal.measurementType !== '' ? returnedCal.measurementType : 'M',
+    height: '',
+    age: '',
+    currentWeight: '',
+    desiredWeight: '',
+    bloodType: '',
+    heightFeet: '',
+    heightInch: '',
+    currentWeightLbs: '',
+    desiredWeightLbs: '',
+    unitOfMeasure: 'M',
   });
 
-  const [currentTabIndex, setCurrentTabIndex] = useState(
-    returnedCal.measurementType === 'S' ? 1 : 0
-  );
+  const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
   const handleTabChange = async (e, tabIndex) => {
     setCurrentTabIndex(tabIndex);
     await setFormData(formData => {
       return {
         ...formData,
-        measurementType: tabIndex === 0 ? 'M' : 'S',
+        unitOfMeasure: tabIndex === 0 ? 'M' : 'S',
       };
     });
-   
   };
 
   const changeHandler = e => {
     const { name, value } = e.target;
+    // console.log('name', name)
+    // console.log('value', value);
     setFormData({
       ...formData,
       [name]: value,
@@ -267,7 +267,7 @@ const CaloriesCalc = () => {
       heightInch,
       currentWeightLbs,
       desiredWeightLbs,
-      measurementType,
+      unitOfMeasure,
     } = formData;
     if (!loggedIn) {
       dispatch(
@@ -281,20 +281,21 @@ const CaloriesCalc = () => {
           heightInch: heightInch,
           currentWeightLbs: currentWeightLbs,
           desiredWeightLbs: desiredWeightLbs,
-          measurementType: measurementType,
+          unitOfMeasure,
         })
       );
     }
+    console.log('formData', formData);
     const entedInfo = {
       currentWeight:
-        measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
+        unitOfMeasure === 'M' ? currentWeight : currentWeightLbs * 0.454,
       height:
-        measurementType === 'M'
+        unitOfMeasure === 'M'
           ? height
           : (heightFeet * 12 + heightInch * 1) * 2.54,
       age,
       desiredWeight:
-        measurementType === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
+        unitOfMeasure === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
       bloodType,
     };
     try {
@@ -320,27 +321,23 @@ const CaloriesCalc = () => {
             convertBlood = 1;
             break;
         }
+        console.log('unitOfMeasure', unitOfMeasure);
 
         const CalculatorInfo = {
-          height:
-            measurementType === 'M'
-              ? height
-              : (heightFeet * 12 + heightInch * 1) * 2.54,
+          height,
           age,
           bloodType: convertBlood,
-          currentWeight:
-            measurementType === 'M' ? currentWeight : currentWeightLbs * 0.454,
-          desiredWeight:
-            measurementType === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
+          currentWeight,
+          desiredWeight,
           heightFeet,
           heightInch,
           currentWeightLbs,
           desiredWeightLbs,
-          totalCalories: passinfo.totalCalories,
-          measurementType: measurementType,
-          originalDate: new Date(),
-          enteredDate: new Date(),
+          dailyRate: passinfo.dailyRate,
+          unitOfMeasure,
+          date: today,
         };
+        console.log('CalculatorInfo', CalculatorInfo);
         await dispatch(sendCalculator(CalculatorInfo));
       }
       if (!loggedIn) {
