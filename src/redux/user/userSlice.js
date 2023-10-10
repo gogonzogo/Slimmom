@@ -72,7 +72,7 @@ export const userSlice = createSlice({
       state.diary.allFoodsList = action.payload;
     },
     setDiaryBackBtn: (state, action) => {
-      state.diaryBackBtn = action.payload;
+      state.diary.diaryBackBtn = action.payload;
     },
     setDailyRate: (state, action) => {
       state.dailyRate = action.payload;
