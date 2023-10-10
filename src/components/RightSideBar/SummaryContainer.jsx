@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { searchNotAllowedFood } from 'redux/user/userOperations';
 import {
   getCalDate,
-  getDailyRate,
+  getDiaryDailyRate,
   getDiaryList,
   getBadFoodSearchResults,
 } from 'redux/user/userSelectors';
@@ -19,15 +19,15 @@ export const SummaryContainer = props => {
   const totalConsumed = foodList
     ? foodList.reduce((acc, el) => acc + el.calories, 0)
     : 0;
-  const dailyRate = useSelector(getDailyRate);
-console.log(dailyRate)
-  const left = totalConsumed !== 0 ? dailyRate - totalConsumed : 0;
+  const diaryDailyRate = useSelector(getDiaryDailyRate);
+  console.log(diaryDailyRate);
+  const left = totalConsumed !== 0 ? diaryDailyRate - totalConsumed : 0;
   const percentage =
-    dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;
+    diaryDailyRate !== 0 ? Math.round((totalConsumed / diaryDailyRate) * 100) : 0;
   const summary = {
     left,
     totalConsumed,
-    dailyRate,
+    diaryDailyRate,
     percentage,
   };
 

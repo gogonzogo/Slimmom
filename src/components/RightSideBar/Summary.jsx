@@ -22,7 +22,7 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
           </li>
           <li className={s.statsBoxItem}>
             <p>Daily rate</p>
-            <p>{summary.dailyRate.toFixed(1)}</p>
+            <p>{summary.diaryDailyRate.toFixed(1)}</p>
           </li>
           <li className={s.statsBoxItem}>
             <p>n% of normal</p>
