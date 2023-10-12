@@ -107,7 +107,7 @@ export const postCalculator = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/user/calcuator/', credentials);
-      return data;
+      return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
