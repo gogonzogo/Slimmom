@@ -13,6 +13,7 @@ import {
     deleteAcct,
     deleteInfo,
     archiveInfo,
+    exportXLS,
 } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { toast } from 'react-toastify';
@@ -29,6 +30,7 @@ const ModalAcct = props => {
     const archiveMessage = "Are you sure that you want to Archive all of your data.  this will move all of your current data to the Archive and you will have to start a new Calculator and Dairy"
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
     const accountMessage = "Are you sure that you want to Delete your accout.  You will no longer be able to login and will need to create a new account"
+    const downloadMessage = "This will download a dairy summary to your computer."
 
     const changeHandler = async e => {
         const { value } = e.target;
@@ -79,7 +81,18 @@ const ModalAcct = props => {
                     }
                     dispatch(logOut());
                     closeModal()
-
+                    break;
+                case 'download':
+                    response = await dispatch(exportXLS())
+                    console.log(response)
+                    if (response.payload === 200) {
+                        toast.success('Delete Data Success!', {
+                            position: 'top-right',
+                            autoClose: 3000,
+                            className: 'success-toast',
+                        });
+                    }
+                    closeModal()
                     break;
                 default:
 
@@ -113,7 +126,7 @@ const ModalAcct = props => {
                                 ✕
                             </span>
                             {modalState.myValue === 'archive' ?
-                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : <h3> {accountMessage}</h3>)}
+                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : <h3> {downloadMessage}</h3>))}
                             <p className={s.ptag}>type <span className={s.messageSpan}> {modalState.myValue}</span> and click submit.</p>
                             <TextField id="outlined-basic" label={modalState.myValue} variant="standard" onChange={changeHandler}
                                 value={typeText} style={{ marginBottom: '20px' }} />

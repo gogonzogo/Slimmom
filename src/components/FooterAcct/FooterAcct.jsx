@@ -27,14 +27,14 @@ export default function FooterAcct() {
     });
   }
 
-    
-    const handleCloseModal = () => {
-      setModalState(prev => {
-        return {
-          ...prev,
-          open: false
-        }
-      })
+
+  const handleCloseModal = () => {
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: false
+      }
+    })
   };
 
 
@@ -43,13 +43,13 @@ export default function FooterAcct() {
   };
 
   const handleClose = (event) => {
-    
+
     if (anchorRef.current && anchorRef.current.contains(event.target)) {
       return;
     }
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
-      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct') {
+      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download') {
         handleOpenMadal(myValue)
       }
     }
@@ -115,15 +115,17 @@ export default function FooterAcct() {
                     <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
+                    <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
+
                   </MenuList>
                 </ClickAwayListener>
               </Paper>
             </Grow>
           )}
         </Popper>
-    </div>
-          <ModalAcct handleClose={handleCloseModal} modalState={modalState} />
+      </div>
+      <ModalAcct handleClose={handleCloseModal} modalState={modalState} />
 
-</>
-      );
+    </>
+  );
 }
