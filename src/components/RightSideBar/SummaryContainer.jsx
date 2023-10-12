@@ -14,14 +14,24 @@ export const SummaryContainer = props => {
     calculatorDailyRate,
   } = useUser();
   const dispatch = useDispatch();
-  const dailyRate = diaryDailyRate || calculatorDailyRate;
+  const dailyRate =
+    ((diaryDailyRate || calculatorDailyRate) > 1
+      ? diaryDailyRate || calculatorDailyRate
+      : 0) || 0;
+
   //set Summary
   const totalConsumed = foodList
     ? foodList.reduce((acc, el) => acc + el.calories, 0)
     : 0;
-  const left = totalConsumed !== 0 ? dailyRate - totalConsumed : 0;
+  const left =
+    totalConsumed !== null && !isNaN(totalConsumed)
+      ? dailyRate - totalConsumed
+      : 0;
   const percentage =
-    dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;
+    dailyRate !== 0
+      ? Math.round((totalConsumed / dailyRate) * 100)
+      : 0;
+
   const summary = {
     left,
     totalConsumed,

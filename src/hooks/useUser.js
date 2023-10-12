@@ -11,6 +11,7 @@ import {
   getCalculator,
   getNotAllowedFoodsList,
   getCalculatorDailyRate,
+  getDiaryDailyRate,
 } from "../redux/user/userSelectors";
 
 export const useUser = () => {
@@ -25,6 +26,7 @@ export const useUser = () => {
   const calculator = useSelector(getCalculator);
   const notAllowedFoods = useSelector(getNotAllowedFoodsList);
   const calculatorDailyRate = useSelector(getCalculatorDailyRate);
+  const diaryDailyRate = useSelector(getDiaryDailyRate);
 
   return {
     diaryList,
@@ -38,5 +40,6 @@ export const useUser = () => {
     calculator,
     notAllowedFoods,
     calculatorDailyRate,
+    diaryDailyRate,
   };
 };
