@@ -1,3 +1,5 @@
+import customTheme from "theme/theme";
+
 // external
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +8,7 @@ import { node } from 'prop-types';
 import { ThemeProvider } from "@emotion/react";
 
 // internal
-import customTheme from "theme/theme";
+
 import { selectThemeMode } from "redux/theme/themeSelectors";
 import { setThemeMode } from "redux/theme/themeSlice";
 

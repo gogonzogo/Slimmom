@@ -1,17 +1,18 @@
 import css from './DiaryAddButton.module.css';
-import IconButton from '@mui/material/IconButton';
+import MuiButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 
 export default function DiaryAddButton({ onClick , disabled }) {
   return (
-    <IconButton
+    <MuiButton
       variant="outlined"
-      className={css.CirclePlus}
+      className={css.circlePlus}
       type="button"
       onClick={onClick}
-      disabled= {disabled}
+      disabled={disabled}
+      
     >
       <AddIcon />
-    </IconButton>
+    </MuiButton>
   );
 }

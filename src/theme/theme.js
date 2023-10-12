@@ -8,35 +8,46 @@ const customTheme = (mode) => {
       ...(mode === 'light'
         ? {
             primary: {
-              light: '#9b9faa',
+              light: '#e0e0e0',
               main: '#fc842d',
-              dark: '#FC842D',
-              contrastText: '#9b9faa',
+              contrastText: '#212121',
             },
             background: {
               default: '#ffffff',
-              paper: '#e0e0e0',
+              paper: '#9B9FAA',
               secondary: '#9B9FAA',
-              menu: '#264061',
             },
-            text: {
-              secondary: '#9b9faa',
-              hint: '#264061',
-            },
+            // text: {
+            //   main: '#9b9faa',
+            //   secondary: '#9b9faa',
+            //   // hint: '#271a3fe3',
+            // },
           }
         : // else use dark mode
           {
             primary: {
-              main: '#516680',
-              contrastText: '#ffffff',
+              main: '#fc842d',
+              contrastText: '#e0e0e0',
+              primary: '#e0e0e0',
             },
             background: {
-              default: '#264061',
-              paper: '#212121',
+              default: '#271a3fe3',
+              paper: '#2a1d45bb',
             },
-            text: {
-              primary: '#e0e0e0',
-              secondary: '#9B9FAA',
+            // text: {
+            //   main: '#9b9faa',
+            //   primary: '#e0e0e0',
+            //   secondary: '#e0e0e0',
+            //   contrastText: '#e0e0e0',
+            // },
+            components: {
+              MuiButtonBase: {
+                defaultProps: {
+                  style: {
+                    cursor: 'pointer',
+                  },
+                },
+              },
             },
           }),
     },
@@ -48,8 +59,22 @@ const customTheme = (mode) => {
           },
         },
       },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundColor: 'transparent',
+            background: 'unset'
+          }
+        }
+      }
     },
   });
 };
 
 export default customTheme;
+
+//#7B6C96 purple image
+// #271a3fe3 purple background
+// #494949 grey background
+// #3A3A3A grey side bar
+//#2a1d45bb purple side bar
