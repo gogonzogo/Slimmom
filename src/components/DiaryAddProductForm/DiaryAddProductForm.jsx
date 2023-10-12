@@ -14,7 +14,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   const [grams, setGrams] = useState('');
   const { calendarDate, allFoodsList } = useUser();
   const dispatch = useDispatch();
-  const autoCompleteFoodsList = allFoodsList.map(food => food.title);
+  const autoCompleteFoodsList = allFoodsList
+    ? allFoodsList.map(food => food.title)
+    : [];
   const { width } = useViewPort();
   const handleGramsChange = e => {
     setGrams(e.target.value);

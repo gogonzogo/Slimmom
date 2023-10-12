@@ -1,6 +1,6 @@
 import s from './rightSideBar.module.css';
 
-export const Stats = ({ stats, progressData }) => {
+export const Stats = ({ calculator, progressData }) => {
   let newBloodType;
   switch (progressData.originalDate) {
     case 1:
@@ -16,32 +16,32 @@ export const Stats = ({ stats, progressData }) => {
       newBloodType = 'O';
       break;
     default:
-      newBloodType = stats.bloodType;
+      newBloodType = calculator.bloodType;
       break;
   }
 
   return (
     <div>
-      {stats.enteredDate ? (
+      {calculator.startDate ? (
         <div className={s.sideBarContentWrapper}>
           <div className={s.sideBarContent}>
             <p className={s.sideBarTitle}>Your stats</p>
             <ul className={s.statsBox}>
               <li className={s.statsBoxItem}>
                 <p>Height, cm</p>
-                <p>{stats.height}</p>
+                <p>{calculator.height}</p>
               </li>
               <li className={s.statsBoxItem}>
                 <p>Age</p>
-                <p>{stats.age}</p>
+                <p>{calculator.age}</p>
               </li>
               <li className={s.statsBoxItem}>
                 <p>Current weight, kg</p>
-                <p>{stats.currentWeight}</p>
+                <p>{calculator.currentWeight}</p>
               </li>
               <li className={s.statsBoxItem}>
                 <p>Desired weight, kg</p>
-                <p>{stats.desiredWeight}</p>
+                <p>{calculator.desiredWeight}</p>
               </li>
               <li className={s.statsBoxItem}>
                 <p>Blood type</p>
@@ -77,7 +77,9 @@ export const Stats = ({ stats, progressData }) => {
       ) : (
         <div className={s.sideBarContentWrapper}>
           <div className={s.sideBarContent}>
-            <p className={s.sideBarTitle}>Please complete the Calculator to begin tracking your journey</p>
+            <p className={s.sideBarTitle}>
+              Please complete the stats to begin tracking your journey
+            </p>
           </div>
         </div>
       )}

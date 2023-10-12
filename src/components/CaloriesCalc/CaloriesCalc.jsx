@@ -26,8 +26,7 @@ import { storeCalulator } from '../../redux/user/userSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
-  sendCalculator,
-  getUserStats,
+  postCalculator,
 } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
 import dayjs from 'dayjs';
@@ -285,7 +284,6 @@ const CaloriesCalc = () => {
         })
       );
     }
-    console.log('formData', formData);
     const entedInfo = {
       currentWeight:
         unitOfMeasure === 'M' ? currentWeight : currentWeightLbs * 0.454,
@@ -321,8 +319,6 @@ const CaloriesCalc = () => {
             convertBlood = 1;
             break;
         }
-        console.log('unitOfMeasure', unitOfMeasure);
-
         const CalculatorInfo = {
           height,
           age,
@@ -337,16 +333,12 @@ const CaloriesCalc = () => {
           unitOfMeasure,
           date: today,
         };
-        console.log('CalculatorInfo', CalculatorInfo);
-        await dispatch(sendCalculator(CalculatorInfo));
+        await dispatch(postCalculator(CalculatorInfo));
       }
       if (!loggedIn) {
         handleOpen(passinfo);
-      } else {
-        dispatch(getUserStats());
       }
       resetForm();
-      // dispatch(resetCalcState());
     } catch (error) {
       console.error('returned Error', error.message);
     }

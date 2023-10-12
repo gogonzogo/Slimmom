@@ -4,7 +4,6 @@ import s from './rightSideBar.module.css';
 
 const Summary = ({ date, summary, searchInputChange, searchResults }) => {
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
-
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
@@ -22,7 +21,7 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
           </li>
           <li className={s.statsBoxItem}>
             <p>Daily rate</p>
-            <p>{summary.diaryDailyRate.toFixed(1)}</p>
+            <p>{summary.dailyRate.toFixed(1)}</p>
           </li>
           <li className={s.statsBoxItem}>
             <p>n% of normal</p>

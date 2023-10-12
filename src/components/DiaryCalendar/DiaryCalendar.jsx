@@ -12,7 +12,7 @@ import css from './DiaryCalendar.module.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCalDate } from 'redux/user/userSlice';
-import { fetchDiary } from 'redux/user/userOperations';
+import { getDiaryEntries } from 'redux/user/userOperations';
 
 export default function DiaryCalendar() {
   const [value, setValue] = useState(dayjs());
@@ -25,7 +25,7 @@ export default function DiaryCalendar() {
     const formatDate = dayjs(`${value}`).format(`MM/DD/YYYY`);
     setFormattedCalValue(formatDate);
     dispatch(setCalDate(formatDate));
-    dispatch(fetchDiary(formatDate));
+    dispatch(getDiaryEntries(formatDate));
   };
 
   return (
@@ -51,7 +51,7 @@ export default function DiaryCalendar() {
                           onChange={newValue => {
                             setValue(newValue);
                             formatCalValue(newValue);
-                            popupState.close()
+                            popupState.close();
                           }}
                           showDaysOutsideCurrentMonth
                           fixedWeekNumber={6}

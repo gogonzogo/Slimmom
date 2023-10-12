@@ -32,10 +32,7 @@ const ModalAcct = props => {
 
     const changeHandler = async e => {
         const { value } = e.target;
-        console.log('value', value)
         setTypeText(value)
-        console.log('typeText', typeText)
-
     }
 
     const closeModal = () => {
@@ -46,15 +43,11 @@ const ModalAcct = props => {
     }
 
     const runOption = async () => {
-        console.log('modalState.myValue', modalState.myValue)
-        console.log('enterText', typeText)
-
         if (modalState.myValue === typeText) {
             let response = ""
             switch (modalState.myValue) {
                 case 'archive':
                     response = await dispatch(archiveInfo())
-                    console.log(response)
                     if (response.payload === 200) {
                         toast.success('Archive Success!', {
                             position: 'top-right',
@@ -66,7 +59,6 @@ const ModalAcct = props => {
                     break;
                 case 'dairy':
                     response = await dispatch(deleteInfo())
-                    console.log(response)
                     if (response.payload === 200) {
                         toast.success('Delete Data Success!', {
                             position: 'top-right',
@@ -78,7 +70,6 @@ const ModalAcct = props => {
                     break;
                 case 'acct':
                     response = await dispatch(deleteAcct())
-                    console.log(response)
                     if (response.payload === 200) {
                         toast.success('Delete Account Success!', {
                             position: 'top-right',

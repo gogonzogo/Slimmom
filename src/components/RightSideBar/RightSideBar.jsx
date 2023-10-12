@@ -1,14 +1,12 @@
+import { useUser } from 'hooks/useUser';
 import s from './rightSideBar.module.css';
 import React from 'react';
-import { useSelector } from 'react-redux';
-
-import { sideBarStats } from 'redux/user/userSelectors';
 
 const RightSideBar = props => {
-  const stats = useSelector(sideBarStats);
+  const { calculator } = useUser();
   return (
-    <div className={s.sideBarContainer} stats={stats}>
-      {React.cloneElement(props.children, stats)}
+    <div className={s.sideBarContainer} calculator={calculator}>
+      {React.cloneElement(props.children, calculator)}
     </div>
   );
 };
