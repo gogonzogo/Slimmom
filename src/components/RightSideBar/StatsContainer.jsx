@@ -2,16 +2,16 @@ import dayjs from 'dayjs';
 
 const { Stats } = require('./Stats');
 
-export const StatsContainer = stats => {
+export const StatsContainer = calculator => {
   const progressData = {
-    originalDate: dayjs(stats.enteredDate)
+    originalDate: dayjs(calculator.startDate)
       .format('MM-DD-YYYY')
       .replaceAll('-', '/'),
-    originalWeight: stats.originalWeight,
-    lost: stats.originalWeight - stats.currentWeight,
-    inDays: dayjs().diff(stats.enteredDate, 'day'),
-    reachedGoal: stats.currentWeight <= stats.desiredWeight,
+    originalWeight: calculator.originalWeight,
+    lost: calculator.originalWeight - calculator.currentWeight,
+    inDays: dayjs().diff(calculator.enteredDate, 'day'),
+    reachedGoal: calculator.currentWeight <= calculator.desiredWeight,
   };
 
-  return <Stats stats={stats} progressData={progressData} />;
+  return <Stats calculator={calculator} progressData={progressData} />;
 };

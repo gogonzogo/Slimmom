@@ -19,8 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
-  sendCalculator,
-  getUserStats,
+  postCalculator,
 } from '../../redux/user/userOperations';
 import { storeCalulator } from '../../redux/user/userSlice';
 // resetCalcState;
@@ -136,8 +135,7 @@ const RegistrationForm = () => {
         originalDate: new Date(),
         enteredDate: new Date(),
       };
-      console.log('CalculatorInfo', CalculatorInfo);
-      await dispatch(sendCalculator(CalculatorInfo));
+      await dispatch(postCalculator(CalculatorInfo));
     } catch (error) {
       console.error('returned Error', error.message);
     }
@@ -210,8 +208,6 @@ const RegistrationForm = () => {
         );
       }
       resetForm();
-      // dispatch(resetCalcState());
-      dispatch(getUserStats());
       navigate('/calculator');
     }
   };

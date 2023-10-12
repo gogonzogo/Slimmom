@@ -8,22 +8,26 @@ import { useUser } from 'hooks/useUser';
 function DiaryList() {
   const dispatch = useDispatch();
   const { calendarDate, diaryList } = useUser();
-
   function handleDelete(entryId) {
     const formatDate = calendarDate.replaceAll('/', '-');
     dispatch(deleteDiaryEntry({ formatDate, entryId }));
   }
-
   return (
-    <List className={style.productList}>
-      {diaryList.map((item, index) => (
-        <DiaryListItem
-          key={`${item._id}-${index}`}
-          product={item}
-          handleDelete={handleDelete}
-        />
-      ))}
-    </List>
+    <>
+      {diaryList.length < 1 ? (
+        <p>No Entires for this day</p>
+      ) : (
+        <List className={style.productList}>
+          {diaryList.map((item, index) => (
+            <DiaryListItem
+              key={`${item._id}-${index}`}
+              product={item}
+              handleDelete={handleDelete}
+            />
+          ))}
+        </List>
+      )}
+    </>
   );
 }
 
