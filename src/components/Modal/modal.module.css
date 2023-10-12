@@ -45,7 +45,7 @@
 .totalCaloriesNumber {
   font: 700 48px/58px Verdana;
 }
-.totalCalories {
+.dailyRate {
   color: #264061;
   margin: 20px 0;
 }
@@ -75,6 +75,15 @@ ol {
   font: 400 14p/17px Verdana;
   color: #9b9faa;
 }
+
+.messageSpan{
+  font: 700 18px/25px Verdana;
+}
+
+.ptag{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 @media screen and (min-width: 480px) {
   .closeButton {
     display: block;
@@ -101,7 +110,7 @@ ol {
     margin: auto;
     max-width: 330px;
   }
-  .totalCalories {
+  .dailyRate {
     margin: 20px 0;
     font: 700 48px/58px Verdana;
   }

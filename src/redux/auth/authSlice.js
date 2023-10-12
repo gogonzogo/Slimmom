@@ -66,7 +66,6 @@ const authSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.isRefreshing = false;
-        console.log(action.payload);
         toast.error(
           'Unauthorized, please double check your email and password',
           {

@@ -1,26 +1,24 @@
 import { debounce } from 'lodash';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { searchNotAllowedFood } from 'redux/user/userOperations';
-import {
-  getCalDate,
-  getDailyRate,
-  getDiaryList,
-  getBadFoodSearchResults,
-} from 'redux/user/userSelectors';
 import Summary from './Summary';
+import { useUser } from 'hooks/useUser';
 
 export const SummaryContainer = props => {
-  const stats = props;
+  const calculator = props;
+  const {
+    diaryList: foodList,
+    calendarDate: date,
+    diaryDailyRate,
+    notAllowedFoods: searchResults,
+    calculatorDailyRate,
+  } = useUser();
   const dispatch = useDispatch();
-
+  const dailyRate = diaryDailyRate || calculatorDailyRate;
   //set Summary
-  const date = useSelector(getCalDate);
-  const foodList = useSelector(getDiaryList);
   const totalConsumed = foodList
     ? foodList.reduce((acc, el) => acc + el.calories, 0)
     : 0;
-  const dailyRate = useSelector(getDailyRate);
-console.log(dailyRate)
   const left = totalConsumed !== 0 ? dailyRate - totalConsumed : 0;
   const percentage =
     dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;
@@ -32,8 +30,7 @@ console.log(dailyRate)
   };
 
   //search bad food
-  const searchResults = useSelector(getBadFoodSearchResults);
-  const bloodType = stats.bloodType;
+  const bloodType = calculator.bloodType;
   const searchInputChange = debounce(e => {
     const title = e.target.value;
     title.length > 0 &&

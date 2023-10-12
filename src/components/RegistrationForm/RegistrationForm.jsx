@@ -19,8 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
 import {
   CalNoEat,
-  sendCalculator,
-  getUserStats,
+  postCalculator,
 } from '../../redux/user/userOperations';
 import { storeCalulator } from '../../redux/user/userSlice';
 // resetCalcState;
@@ -28,7 +27,7 @@ const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const returnedCal = useSelector(state => state.user.cals.value);
+  const returnedCal = useSelector(state => state.user.calculator);
   const [calculatorFormData] = useState({
     height: returnedCal.height,
     age: returnedCal.age,
@@ -39,7 +38,7 @@ const RegistrationForm = () => {
     heightInch: returnedCal.heightInch,
     currentWeightLbs: returnedCal.currentWeightLbs,
     desiredWeightLbs: returnedCal.desiredWeightLbs,
-    measurementType: returnedCal.measurementType,
+    unitOfMeasure: returnedCal.unitOfMeasure,
   });
   //const { loggedIn, user, refreshing, error, token } = useAuthStore();
   const isEmailValid = useSelector(selectIsEmailValid);
@@ -87,7 +86,7 @@ const RegistrationForm = () => {
       heightInch,
       currentWeightLbs,
       desiredWeightLbs,
-      measurementType,
+      unitOfMeasure,
     } = calculatorFormData;
     const entedInfo = {
       currentWeight:
@@ -98,7 +97,7 @@ const RegistrationForm = () => {
       desiredWeight:
         desiredWeight !== '' ? desiredWeight : desiredWeightLbs * 0.454,
       bloodType,
-      measurementType,
+      unitOfMeasure,
     };
     try {
       const response = await dispatch(CalNoEat(entedInfo));
@@ -131,13 +130,12 @@ const RegistrationForm = () => {
           currentWeight !== '' ? currentWeight : currentWeightLbs * 0.454,
         desiredWeight:
           desiredWeight !== '' ? desiredWeight : desiredWeightLbs * 0.454,
-        totalCalories: passinfo.totalCalories,
-        measurementType: measurementType,
+        dailyRate: passinfo.dailyRate,
+        unitOfMeasure: unitOfMeasure,
         originalDate: new Date(),
         enteredDate: new Date(),
       };
-      console.log('CalculatorInfo', CalculatorInfo);
-      await dispatch(sendCalculator(CalculatorInfo));
+      await dispatch(postCalculator(CalculatorInfo));
     } catch (error) {
       console.error('returned Error', error.message);
     }
@@ -184,7 +182,7 @@ const RegistrationForm = () => {
         heightFeet,
         currentWeightLbs,
         desiredWeightLbs,
-        measurementType,
+        unitOfMeasure,
       } = calculatorFormData;
       if (
         (currentWeight.length > 0 || currentWeightLbs.length > 0) &&
@@ -205,13 +203,11 @@ const RegistrationForm = () => {
             heightInch: '',
             currentWeightLbs: '',
             desiredWeightLbs: '',
-            measurementType: measurementType,
+            unitOfMeasure: unitOfMeasure,
           })
         );
       }
       resetForm();
-      // dispatch(resetCalcState());
-      dispatch(getUserStats());
       navigate('/calculator');
     }
   };

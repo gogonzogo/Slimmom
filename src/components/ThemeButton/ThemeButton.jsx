@@ -11,11 +11,14 @@ const ThemeButton = () => {
   const dispatch = useDispatch();
   const themeMode = useSelector(selectThemeMode);
   const [rotationAngle, setRotationAngle] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
+  const buttonClass = isClicked ? s.darkClicked : s.lightClicked;
 
   const toggleTheme = () => {
     const newMode = themeMode === 'dark' ? 'light' : 'dark';
     dispatch(setThemeMode(newMode));
     setRotationAngle(rotationAngle + 360);
+    setIsClicked(!isClicked);
   };
 
     return (
@@ -25,15 +28,15 @@ const ThemeButton = () => {
                 onClick={toggleTheme}
                 aria-label={`Switch to toggle ${themeMode === 'dark' ? 'light' : 'dark'} mode`}
                 aria-describedby='light or dark mode-label'
-                className={s.modeIconContainer}
+                className={`${s.modeIconContainer} ${buttonClass} ${s.buttonClicked}`} 
                 style={{ transform: `rotate(-${rotationAngle}deg)` }}
             >
             {themeMode === 'dark'
-                ? (
-                        <FontAwesomeIcon icon={faMoon} style={{ color: 'var(--accent-bright-color)'}} className={`${s.lightModeIcon} ${s.modeIcons}`} />
-                ) : (
-                        <FontAwesomeIcon icon={faSun} style={{ color: 'var(--accent-bright-color)' }} className={`${s.darkModeIcon} ${s.modeIcons}`} />
-                )
+              ? (
+                 <FontAwesomeIcon icon={faMoon} style={{ color: 'var(--accent-bright-color)'}} className={`${s.lightModeIcon} ${s.modeIcons}`} />
+              ) : (
+                <FontAwesomeIcon icon={faSun} style={{ color: 'var(--accent-bright-color)' }} className={`${s.darkModeIcon} ${s.modeIcons}`} />
+              )
             }
             </IconButton>
             </div>

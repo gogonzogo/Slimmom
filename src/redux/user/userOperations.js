@@ -5,7 +5,9 @@ export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
   async (date, { rejectWithValue }) => {
     try {
-      const response = await axios.get('/user/info/day', { date });
+      const response = await axios.get('/user/info/day', {
+        params: { date: date },
+      });
       return response.data.data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -14,8 +16,8 @@ export const getUserInfo = createAsyncThunk(
 );
 
 // DIARY OPERATIONS
-export const fetchDiary = createAsyncThunk(
-  'diary/fetchDiary',
+export const getDiaryEntries = createAsyncThunk(
+  'diary/getDiaryEntries',
   async (date, { rejectWithValue }) => {
     const formatDate = date.replaceAll("/", "-")
     try {
@@ -73,20 +75,6 @@ export const searchFoods = createAsyncThunk(
   }
 );
 
-// CALCULATOR OPERATIONS
-export const getUserStats = createAsyncThunk(
-  'calcCalories/stats',
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await axios.get('user/stats');
-      // console.log(response.data.data);
-      return response.data.data;
-    } catch (err) {
-      return rejectWithValue(err.message);
-    }
-  }
-);
-
 export const searchNotAllowedFood = createAsyncThunk(
   'calcCalories/searchBadFood',
   async (data, { rejectWithValue }) => {
@@ -98,14 +86,13 @@ export const searchNotAllowedFood = createAsyncThunk(
       // console.log(response.data);
       return response.data.data;
     } catch (err) {
-      console.log(err);
       return rejectWithValue(err.message);
     }
   }
 );
 
 export const CalNoEat = createAsyncThunk(
-  'cals/calsNotFood',
+  'calculator/calsNotFood',
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/user/calories/', credentials);
@@ -115,8 +102,8 @@ export const CalNoEat = createAsyncThunk(
     }
   }
 );
-export const sendCalculator = createAsyncThunk(
-  'cals/postCalculator',
+export const postCalculator = createAsyncThunk(
+  'calculator/postCalculator',
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post('/user/calcuator/', credentials);
@@ -129,8 +116,8 @@ export const sendCalculator = createAsyncThunk(
 
 
 export const archiveInfo = createAsyncThunk(
-   'diary/archivedata',
-  async (data, rejectWithValue) => {
+  'diary/archivedata',
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `/user/archive/`
@@ -143,8 +130,8 @@ export const archiveInfo = createAsyncThunk(
 );
 
 export const deleteInfo = createAsyncThunk(
-   'diary/deletediary',
-  async (data, rejectWithValue) => {
+  'diary/deletediary',
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `/user/deleteDiary/`
@@ -156,8 +143,8 @@ export const deleteInfo = createAsyncThunk(
   }
 );
 export const deleteAcct = createAsyncThunk(
-   'diary/deleteAccount',
-  async (data, rejectWithValue) => {
+  'diary/deleteAccount',
+  async (data, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         `/user/deleteAccount/`
@@ -169,8 +156,8 @@ export const deleteAcct = createAsyncThunk(
   }
 );
 export const exportXLS = createAsyncThunk(
-   'diary/downloadToXLS',
-  async (data, rejectWithValue) => {
+  'diary/downloadToXLS',
+  async (data, { rejectWithValue }) => {
     try {
       console.log('downloadToXLS')
       const response = await axios.post(

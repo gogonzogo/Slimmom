@@ -59,6 +59,12 @@
     margin-left: 339px;
     margin-top: 73px;
 }
+
+.small{
+    width: 120px;  
+   
+}  
+
 @media screen and (min-width: 768px) and (max-width: 1025px) {
     .wide {
             width: 210px;

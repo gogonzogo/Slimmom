@@ -44,9 +44,9 @@ const Modal = props => {
               Your recommended daily
               <br /> calorie intake is
             </p>
-            <b className={s.totalCalories}>
+            <b className={s.dailyRate}>
               <span className={s.totalCaloriesNumber}>
-                {Math.round(modalState.totalCalories)}{' '}
+                {Math.round(modalState.dailyRate)}{' '}
               </span>
               kcal
             </b>

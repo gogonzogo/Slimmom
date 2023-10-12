@@ -2,13 +2,12 @@ import dayjs from 'dayjs';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   getUserInfo,
-  fetchDiary,
+  getDiaryEntries,
   addDiaryEntry,
   deleteDiaryEntry,
   searchFoods,
-  getUserStats,
   CalNoEat,
-  sendCalculator,
+  postCalculator,
   searchNotAllowedFood,
   archiveInfo,
   deleteInfo,
@@ -21,41 +20,31 @@ import { Slide, toast } from 'react-toastify';
 const initialState = {
   diary: {
     calendarDate: dayjs().format('MM-DD-YYYY'),
-    dailyRate: 0,
+    diaryDailyRate: 0,
     diaryList: [],
     allFoodsList: [],
-    diaryIsLoading: false,
+    diaryIsLoading: true,
     diaryError: null,
-    filter: '',
+    filter: null,
     diaryBackBtn: false,
   },
-  cals: {
-    value: {
-      height: '',
-      age: '',
-      currentWeight: '',
-      desiredWeight: '',
-      bloodType: '',
-      heightFeet: '',
-      heightInch: '',
-      currentWeightLbs: '',
-      desiredWeightLbs: '',
-      measurementType: '',
-    },
-    totalCalories: '',
-    noEat: {},
-    calculatorIsLoading: false,
-    calculatorError: null,
-  },
-  stats: {
+  calculator: {
     height: null,
     age: null,
     currentWeight: null,
     desiredWeight: null,
     bloodType: null,
-    enteredDate: null,
+    heightFeet: null,
+    heightInch: null,
+    currentWeightLbs: null,
+    desiredWeightLbs: null,
+    unitOfMeasure: null,
+    calculatorDailyRate: null,
+    noEat: {},
+    calculatorIsLoading: false,
+    calculatorError: null,
+    startDate: null,
     originalWeight: null,
-    dailyRate: null,
   },
   badFoodSearcList: [],
 };
@@ -74,19 +63,16 @@ export const userSlice = createSlice({
       state.diary.allFoodsList = action.payload;
     },
     setDiaryBackBtn: (state, action) => {
-      state.diaryBackBtn = action.payload;
+      state.diary.diaryBackBtn = action.payload;
     },
     setDailyRate: (state, action) => {
       state.dailyRate = action.payload;
     },
     // CALCULATOR REDUCERS
     storeCalulator: (state, action) => {
-      state.cals.value = action.payload;
+      state.calculator.value = action.payload;
     },
-    setStats: (state, action) => {
-      state.stats = action.payload;
-    },
-    resetCalcState: state => { state.cals = initialState },
+    resetCalcState: state => { state.calculator = initialState },
     resetUserState: state => initialState,
   },
   extraReducers: builder => {
@@ -96,40 +82,42 @@ export const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         console.log(action.payload)
-        const info = action.payload.calculator;
-        state.stats = {
-          height:info.height,
-          age:info.age,
-          currentWeight:info.currentWeight,
-          desiredWeight:info.desiredWeight,
-          bloodType:info.bloodType,
-          enteredDate:info.enteredDate,
-          originalWeight:info.originalWeight,
-          dailyRate:info.totalCalories,
+        const calculatorInfo = action.payload.calculator.closest.calculatorEntries.calculatorEntry;
+        const diaryInfo = action.payload.diary;
+        state.calculator = {
+          ...state.calculator,
+          height: calculatorInfo.height,
+          age: calculatorInfo.age,
+          currentWeight: calculatorInfo.currentWeight,
+          desiredWeight: calculatorInfo.desiredWeight,
+          bloodType: calculatorInfo.bloodType,
+          enteredDate: calculatorInfo.enteredDate,
+          originalWeight: calculatorInfo.date,
+          calculatorDailyRate: calculatorInfo.dailyRate,
+          startDate: action.payload.calculator.closest.calculatorEntries.date,
         };
-        // state.diary.dailyRate = info.totalCalories
-        // state.diary.diaryList = action.payload.foodItems;
-        // state.diary.calendarDate = action.payload.date;
-        // state.diary.dailyRate = action.payload.dailyRate;
+        state.diary = {
+          ...state.diary,
+          diaryDailyRate: diaryInfo.dailyRate,
+          diaryList: diaryInfo.foodItems,
+        }
         state.diary.diaryError = null;
         state.diary.diaryIsLoading = false;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = action.payload;
-        state.diary.diaryList = [];
       })
-      .addCase(fetchDiary.pending, state => {
+      .addCase(getDiaryEntries.pending, state => {
         state.diary.diaryIsLoading = true;
       })
-      .addCase(fetchDiary.fulfilled, (state, action) => {
+      .addCase(getDiaryEntries.fulfilled, (state, action) => {
         state.diary.diaryList = action.payload.foodItems;
-        state.diary.calendarDate = action.payload.date;
         state.diary.dailyRate = action.payload.dailyRate;
         state.diary.diaryError = null;
         state.diary.diaryIsLoading = false;
       })
-      .addCase(fetchDiary.rejected, (state, action) => {
+      .addCase(getDiaryEntries.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = action.payload;
         state.diary.diaryList = [];
@@ -139,6 +127,8 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = [...state.diary.diaryList, action.payload];
+        console.log(action.payload)
+        console.log(state.diary.diaryList)
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
         toast.success('Product added successfully', {
@@ -186,30 +176,6 @@ export const userSlice = createSlice({
         toast.error('Something wrong');
       })
       // CALCULATOR EXTRA REDUCERS
-      .addCase(getUserStats.fulfilled, (state, action) => {
-        const stats = action.payload.stats;
-        state.stats = {
-          height: stats.height,
-          age: stats.age,
-          currentWeight: stats.currentWeight,
-          desiredWeight: stats.desiredWeight,
-          bloodType: stats.bloodType,
-          enteredDate: stats.enteredDate,
-          originalWeight: stats.originalWeight,
-          dailyRate: stats.totalCalories,
-        };
-      })
-      .addCase(getUserStats.rejected, (state, action) => {
-        state.stats = {
-          height: 'n/a',
-          age: 'n/a',
-          currentWeight: 'n/a',
-          desiredWeight: 'n/a',
-          bloodType: 'n/a',
-          enteredDate: null,
-          originalWeight: null,
-        };
-      })
       .addCase(searchNotAllowedFood.fulfilled, (state, action) => {
         state.badFoodSearcList = action.payload;
       })
@@ -217,88 +183,88 @@ export const userSlice = createSlice({
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
       })
       .addCase(CalNoEat.pending, state => {
-        state.cals.isRefreshing = true;
+        state.calculator.isRefreshing = true;
       })
       .addCase(CalNoEat.fulfilled, (state, action) => {
-        state.cals.isLoggedIn = true;
-        state.cals.isRefreshing = false;
+        state.calculator.isLoggedIn = true;
+        state.calculator.isRefreshing = false;
       })
       .addCase(CalNoEat.rejected, (state, action) => {
-        state.cals.isRefreshing = false;
+        state.calculator.isRefreshing = false;
       })
-      .addCase(sendCalculator.pending, state => {
-        state.cals.isRefreshing = true;
+      .addCase(postCalculator.pending, state => {
+        state.calculator.isRefreshing = true;
       })
-      .addCase(sendCalculator.fulfilled, (state, action) => {
-        state.cals.isLoggedIn = true;
-        state.cals.isRefreshing = false;
+      .addCase(postCalculator.fulfilled, (state, action) => {
+        state.calculator.isLoggedIn = true;
+        state.calculator.isRefreshing = false;
       })
-      .addCase(sendCalculator.rejected, (state, action) => {
-        state.cals.isRefreshing = false;
+      .addCase(postCalculator.rejected, (state, action) => {
+        state.calculator.isRefreshing = false;
       })
-    .addCase(archiveInfo.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(archiveInfo.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(archiveInfo.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(archiveInfo.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(deleteInfo.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(deleteInfo.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(deleteInfo.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(deleteInfo.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(deleteAcct.pending, state => {
-      console.log('archiveInfo.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(deleteAcct.pending, state => {
+        console.log('archiveInfo.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(deleteAcct.fulfilled, (state, action) => {
-              console.log('archiveInfo.fulfilled')
+        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(deleteAcct.rejected, (state, action) => {
-                      console.log('archiveInfo.rejected')
+        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
         // console.log('Server Error!');
       })
-    .addCase(exportXLS.pending, state => {
-      console.log('exportXLS.pending')
-      state.diary.isLoading = true;
-      
+      .addCase(exportXLS.pending, state => {
+        console.log('exportXLS.pending')
+        state.diary.isLoading = true;
+
       })
       .addCase(exportXLS.fulfilled, (state, action) => {
-              console.log('exportXLS.fulfilled')
+        console.log('exportXLS.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(exportXLS.rejected, (state, action) => {
-                      console.log('exportXLS.rejected')
+        console.log('exportXLS.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
@@ -314,7 +280,6 @@ export const {
   setDiaryBackBtn,
   resetDiaryState,
   storeCalulator,
-  setStats,
   resetCalcState,
   resetUserState,
 } = userSlice.actions;

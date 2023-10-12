@@ -8,6 +8,9 @@ import {
   getDiaryIsLoading,
   getCalculatorError,
   getCalculatorIsLoading,
+  getCalculator,
+  getNotAllowedFoodsList,
+  getCalculatorDailyRate,
 } from "../redux/user/userSelectors";
 
 export const useUser = () => {
@@ -19,6 +22,9 @@ export const useUser = () => {
   const diaryError = useSelector(getDiaryError);
   const calculatorIsLoading = useSelector(getCalculatorIsLoading);
   const calculatorError = useSelector(getCalculatorError);
+  const calculator = useSelector(getCalculator);
+  const notAllowedFoods = useSelector(getNotAllowedFoodsList);
+  const calculatorDailyRate = useSelector(getCalculatorDailyRate);
 
   return {
     diaryList,
@@ -29,5 +35,8 @@ export const useUser = () => {
     diaryError,
     calculatorIsLoading,
     calculatorError,
+    calculator,
+    notAllowedFoods,
+    calculatorDailyRate,
   };
 };
