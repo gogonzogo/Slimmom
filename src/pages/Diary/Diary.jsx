@@ -52,7 +52,7 @@ function Diary() {
         <Container className="left-right">
           {onMount ? (
             <Loader />
-          ) : width > 768 ? (
+          ) : width > 767 ? (
             <>
               <div className={css.tabletDeskContainer}>
                 <DiaryCalendar />
