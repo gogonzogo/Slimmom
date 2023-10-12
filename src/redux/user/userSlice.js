@@ -96,7 +96,7 @@ export const userSlice = createSlice({
           calculatorDailyRate: calculatorInfo.dailyRate,
           startDate: action.payload.calculator.closest.calculatorEntries.date,
         };
-        state.diary.diaryDailyRate = {
+        state.diary = {
           ...state.diary,
           diaryDailyRate: diaryInfo.dailyRate,
           diaryList: diaryInfo.foodItems,
@@ -127,6 +127,8 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = [...state.diary.diaryList, action.payload];
+        console.log(action.payload)
+        console.log(state.diary.diaryList)
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
         toast.success('Product added successfully', {
