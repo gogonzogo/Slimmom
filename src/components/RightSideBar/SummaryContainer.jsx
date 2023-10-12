@@ -25,7 +25,7 @@ export const SummaryContainer = props => {
     : 0;
   const left =
     totalConsumed !== null && !isNaN(totalConsumed)
-      ? dailyRate - totalConsumed
+      ? Math.max(dailyRate - totalConsumed, 0)
       : 0;
   const percentage =
     dailyRate !== 0

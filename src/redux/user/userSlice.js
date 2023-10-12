@@ -83,9 +83,7 @@ export const userSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
         const diary = action.payload.diary;
-        if (calculator === 404) {
-          return;
-        } else {
+        if (calculator !== 404) {
           const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
           state.calculator = {
             ...state.calculator,
@@ -99,10 +97,8 @@ export const userSlice = createSlice({
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: action.payload.calculator.closest.calculatorEntries.date,
           };
-        }
-        if (diary === 404) {
-          return;
-        } else {
+        };
+        if (diary !== 404) {
           state.diary = {
             ...state.diary,
             diaryDailyRate: diary.dailyRate,
@@ -202,6 +198,33 @@ export const userSlice = createSlice({
         state.calculator.isRefreshing = true;
       })
       .addCase(postCalculator.fulfilled, (state, action) => {
+        const calculator = action.payload;
+        if (calculator.unitOfMeasure === "M") {
+          state.calculator = {
+            ...state.calculator,
+            height: calculator.height,
+            age: calculator.age,
+            currentWeight: calculator.currentWeight,
+            desiredWeight: calculator.desiredWeight,
+            bloodType: calculator.bloodType,
+            originalWeight: calculator.originalWeight,
+            calculatorDailyRate: calculator.dailyRate,
+            startDate: calculator.startDate,
+          }
+        } else {
+          state.calculator = {
+            ...state.calculator,
+            heightFeet: calculator.heightFeet,
+            heightInch: calculator.heightInch,
+            age: calculator.age,
+            currentWeightLbs: calculator.currentWeightLbs,
+            desiredWeightLbs: calculator.desiredWeightLbs,
+            bloodType: calculator.bloodType,
+            originalWeight: calculator.originalWeight,
+            calculatorDailyRate: calculator.dailyRate,
+            startDate: calculator.startDate,
+          }
+        }
         state.calculator.isLoggedIn = true;
         state.calculator.isRefreshing = false;
       })
