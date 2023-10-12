@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import style from '../LoginForm/login.module.css';
-import { Box, FormControl, TextField, Button, Grid } from '@mui/material';
+import { Box, FormControl, TextField, Grid } from '@mui/material';
 import {  useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import {
 import { toast } from 'react-toastify';
 import { getUserInfo } from 'redux/user/userOperations';
 import { useUser } from 'hooks/useUser';
+import CustomButton from 'components/CustomButton/CustomButton';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);
@@ -92,6 +93,7 @@ const LoginForm = () => {
             {' '}
             {/*pass validatioon schema */}
             <TextField
+              autoComplete="email"
               className={style.email_input}
               InputLabelProps={
                 focusedField === 'email' && !isEmailValid
@@ -129,6 +131,7 @@ const LoginForm = () => {
               onFocus={() => setFocusedField('email')}
             />
             <TextField
+              autoComplete="current-password"
               className={style.password_input}
               InputLabelProps={
                 focusedField === 'password' && !isPasswordValid
@@ -172,14 +175,14 @@ const LoginForm = () => {
               </Box>
             ) : ( */}
             <Box className={style.button_container}>
-              <Button
-                variant="contained"
+              <CustomButton
+                color='orange'
                 type="submit"
                 disabled={!isEmailValid || !isPasswordValid}
                 className={style.login_button}
               >
                 Log In
-              </Button>
+              </CustomButton>
               
             </Box>
           </form>

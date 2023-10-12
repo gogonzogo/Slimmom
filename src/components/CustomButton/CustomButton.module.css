@@ -13,7 +13,7 @@
     font-size: 14px;
     font-weight: 700;
     text-transform: capitalize;
-    transition: color 0.3s, box-shadow 0.3s;
+    transition: color 0.3s, box-shadow 0.3s, background-color 0.5s;
 }
 
 .orange {
@@ -47,7 +47,7 @@
 
 
 .disabled {
-color: rgba(0, 0, 0, 0.26);
+    color: rgba(0, 0, 0, 0.26);
     box-shadow: none;
     background-color: rgba(0, 0, 0, 0.12);
     cursor: not-allowed;

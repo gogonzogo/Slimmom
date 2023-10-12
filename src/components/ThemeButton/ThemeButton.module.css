@@ -3,9 +3,9 @@
         justify-content: center;
         align-items: flex-start;
         position: fixed;
-        z-index: 1000;
+        z-index: 2;
         top: 5px;
-        left: 30%;
+        left: 40%;
 }
 .modeContainer {
     position: relative;
@@ -27,7 +27,7 @@ transition: transform var(--transition-time) linear;
     transform: rotate(0deg);
     transition: transform var(--transition-time) linear, opacity var(--transition-time) var(--transition-time-function);
     top: -20px; /* -child size/2 */
-    left: 90px; /* parent size/2 - child size/2 */
+    left: 80px; /* parent size/2 - child size/2 */
 }
 .modeIcons{
     position: relative;

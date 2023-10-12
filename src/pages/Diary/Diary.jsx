@@ -1,18 +1,22 @@
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Container from 'components/Container/Container';
+import Loader from 'components/Loader/Loader';
+import { Paper } from '@mui/material';
+
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
 import DiaryList from '../../components/DiaryList/DiaryList';
 import { useUser } from 'hooks/useUser';
-import Container from 'components/Container/Container';
 import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
-import { useDispatch } from 'react-redux';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
-import { setDiaryBackBtn } from 'redux/user/userSlice';
+import { setDiaryBackBtn } from 'redux/user/userSlice'; 
 import useViewPort from 'hooks/useViewport';
-import css from './Diary.module.css';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
-import Loader from 'components/Loader/Loader';
+import { selectThemeMode } from 'redux/theme/themeSelectors';
+
 
 function Diary() {
   const dispatch = useDispatch();
@@ -21,7 +25,8 @@ function Diary() {
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');
   const [onMount, setOnMount] = useState(true);
-
+  const themeMode = useSelector(selectThemeMode);
+  console.log(themeMode);
   useEffect(() => {
     setOnMount(false);
   }, [dispatch]);
@@ -54,7 +59,7 @@ function Diary() {
             <Loader />
           ) : width > 768 ? (
             <>
-              <div className={css.tabletDeskContainer}>
+              <div>
                 <DiaryCalendar />
                 <DiaryAddProductForm />
                 <DiaryList />
@@ -76,7 +81,7 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <div className={s.sidebarbox}></div>
+          <Paper className={`${s.sidebarBox} ${themeMode === 'dark' ? s.darkMode : s.lightMode}` }/>
           <RightSideBar>
             <SummaryContainer />
           </RightSideBar>

@@ -10,7 +10,7 @@ import s from './ThemeButton.module.css';
 const ThemeButton = () => {
   const dispatch = useDispatch();
   const themeMode = useSelector(selectThemeMode);
-const [rotationAngle, setRotationAngle] = useState(0);
+  const [rotationAngle, setRotationAngle] = useState(0);
 
   const toggleTheme = () => {
     const newMode = themeMode === 'dark' ? 'light' : 'dark';

@@ -29,8 +29,9 @@ const Header = () => {
         sx={{
           position: 'static',
           boxShadow: 'none',
-          borderBottom: isLargeScreen ? 'none' : '2px solid #E0E0E0',
+          borderBottom: isLargeScreen ? 'none' : '2px solid var(--secondary-background-color)',
           backgroundColor: 'transparent',
+          backgroundImage: 'unset',
         }}
       >
         <ThemeButton></ThemeButton>
@@ -39,6 +40,7 @@ const Header = () => {
           className={styles.headerToolbar}
           sx={{
             justifyContent: isLargeScreen ? 'unset' : 'space-between',
+            backgroundImage: 'unset',
             backgroundColor: 'transparent',
             padding: isSmallScreen
               ? '15px'
@@ -74,7 +76,7 @@ const Header = () => {
                   sx={{
                     width: '2px',
                     height: '20px',
-                    backgroundColor: '#E0E0E0',
+                    backgroundColor: 'var(--secondary-background-color)',
                     marginRight: '20px',
                     marginLeft: '15px',
                   }}

@@ -233,6 +233,7 @@ const RegistrationForm = () => {
           <form onSubmit={handleSubmit} noValidate>
             <TextField
               className={style.name_input}
+              autoComplete="name"
               InputLabelProps={
                 focusedField === 'name' && !isNameValid
                   ? { style: { color: 'red' } }
@@ -268,6 +269,7 @@ const RegistrationForm = () => {
             )}
             <TextField
               className={style.email_input}
+              autoComplete="email"
               InputLabelProps={
                 focusedField === 'email' && !isEmailValid
                   ? { style: { color: 'red' } }
@@ -304,6 +306,7 @@ const RegistrationForm = () => {
             )}
             <TextField
               className={style.password_input}
+              autoComplete="current-password"
               InputLabelProps={
                 focusedField === 'password' && !isPasswordValid
                   ? { style: { color: 'red' } }

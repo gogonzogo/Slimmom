@@ -16,7 +16,8 @@
   line-height: 25px;
   letter-spacing: 0em;
   text-align: left;
-  color: #212121;
+  margin-bottom: 10px;
+  /* color: #212121; */
   /* max-width: 280px; */
 }
 
@@ -33,7 +34,7 @@
 }
 
 .tabs{
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 @media screen and (min-width: 768px) {
