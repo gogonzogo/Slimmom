@@ -20,10 +20,10 @@ import { Slide, toast } from 'react-toastify';
 const initialState = {
   diary: {
     calendarDate: dayjs().format('MM-DD-YYYY'),
-    diaryDailyRate: 0,
+    diaryDailyRate: null,
     diaryList: [],
     allFoodsList: [],
-    diaryIsLoading: true,
+    diaryIsLoading: null,
     diaryError: null,
     filter: null,
     diaryBackBtn: false,
@@ -81,26 +81,34 @@ export const userSlice = createSlice({
         state.diary.diaryIsLoading = true;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
-        console.log(action.payload)
-        const calculatorInfo = action.payload.calculator.closest.calculatorEntries.calculatorEntry;
-        const diaryInfo = action.payload.diary;
-        state.calculator = {
-          ...state.calculator,
-          height: calculatorInfo.height,
-          age: calculatorInfo.age,
-          currentWeight: calculatorInfo.currentWeight,
-          desiredWeight: calculatorInfo.desiredWeight,
-          bloodType: calculatorInfo.bloodType,
-          enteredDate: calculatorInfo.enteredDate,
-          originalWeight: calculatorInfo.date,
-          calculatorDailyRate: calculatorInfo.dailyRate,
-          startDate: action.payload.calculator.closest.calculatorEntries.date,
-        };
-        state.diary = {
-          ...state.diary,
-          diaryDailyRate: diaryInfo.dailyRate,
-          diaryList: diaryInfo.foodItems,
+        const calculator = action.payload.calculator.closest;
+        const diary = action.payload.diary;
+        if (calculator === 404) {
+          return;
+        } else {
+          const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
+          state.calculator = {
+            ...state.calculator,
+            height: calculatorInfo.height,
+            age: calculatorInfo.age,
+            currentWeight: calculatorInfo.currentWeight,
+            desiredWeight: calculatorInfo.desiredWeight,
+            bloodType: calculatorInfo.bloodType,
+            enteredDate: calculatorInfo.enteredDate,
+            originalWeight: calculatorInfo.date,
+            calculatorDailyRate: calculatorInfo.dailyRate,
+            startDate: action.payload.calculator.closest.calculatorEntries.date,
+          };
         }
+        if (diary === 404) {
+          return;
+        } else {
+          state.diary = {
+            ...state.diary,
+            diaryDailyRate: diary.dailyRate,
+            diaryList: diary.foodItems,
+          }
+        };
         state.diary.diaryError = null;
         state.diary.diaryIsLoading = false;
       })
@@ -127,8 +135,6 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = [...state.diary.diaryList, action.payload];
-        console.log(action.payload)
-        console.log(state.diary.diaryList)
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
         toast.success('Product added successfully', {
