@@ -161,19 +161,6 @@ const LoginForm = () => {
               onChange={handleChange}
               onFocus={() => setFocusedField('password')}
             />
-            {/* if password is not longer than 5 number and email is not longer than 5 chars then disable button  */}
-            {/* {isEmailValid && isPasswordValid ? (
-              <Box className={style.button_container}>
-                <Button variant="contained" className={style.login_button}>
-                  Log In
-                </Button>
-                <Link to="/Register">
-                  <Button variant="contained" className={style.register_button}>
-                    Register
-                  </Button>
-                </Link>
-              </Box>
-            ) : ( */}
             <Box className={style.button_container}>
               <CustomButton
                 color='orange'

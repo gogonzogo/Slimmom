@@ -91,7 +91,7 @@ export const searchNotAllowedFood = createAsyncThunk(
   }
 );
 
-export const CalNoEat = createAsyncThunk(
+export const getDailyRate = createAsyncThunk(
   'calculator/calsNotFood',
   async (credentials, { rejectWithValue }) => {
     try {

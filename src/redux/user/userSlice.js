@@ -6,7 +6,7 @@ import {
   addDiaryEntry,
   deleteDiaryEntry,
   searchFoods,
-  CalNoEat,
+  getDailyRate,
   postCalculator,
   searchNotAllowedFood,
   archiveInfo,
@@ -70,7 +70,32 @@ export const userSlice = createSlice({
     },
     // CALCULATOR REDUCERS
     storeCalulator: (state, action) => {
-      state.calculator.value = action.payload;
+      if (action.payload.unitOfMeasure === "M") {
+        state.calculator = {
+          ...state.calculator,
+          height: action.payload.height,
+          age: action.payload.age,
+          currentWeight: action.payload.currentWeight,
+          desiredWeight: action.payload.desiredWeight,
+          bloodType: action.payload.bloodType,
+          originalWeight: action.payload.originalWeight,
+          calculatorDailyRate: action.payload.dailyRate,
+          startDate: action.payload.startDate,
+        }
+      } else {
+        state.calculator = {
+          ...state.calculator,
+          heightFeet: action.payload.heightFeet,
+          heightInch: action.payload.heightInch,
+          age: action.payload.age,
+          currentWeightLbs: action.payload.currentWeightLbs,
+          desiredWeightLbs: action.payload.desiredWeightLbs,
+          bloodType: action.payload.bloodType,
+          originalWeight: action.payload.originalWeight,
+          calculatorDailyRate: action.payload.dailyRate,
+          startDate: action.payload.startDate,
+        }
+      }
     },
     resetCalcState: state => { state.calculator = initialState },
     resetUserState: state => initialState,
@@ -196,14 +221,14 @@ export const userSlice = createSlice({
       .addCase(searchNotAllowedFood.rejected, (state, action) => {
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
       })
-      .addCase(CalNoEat.pending, state => {
+      .addCase(getDailyRate.pending, state => {
         state.calculator.isRefreshing = true;
       })
-      .addCase(CalNoEat.fulfilled, (state, action) => {
+      .addCase(getDailyRate.fulfilled, (state, action) => {
         state.calculator.isLoggedIn = true;
         state.calculator.isRefreshing = false;
       })
-      .addCase(CalNoEat.rejected, (state, action) => {
+      .addCase(getDailyRate.rejected, (state, action) => {
         state.calculator.isRefreshing = false;
       })
       .addCase(postCalculator.pending, state => {
