@@ -61,7 +61,7 @@
     }
 .caloriesSecondary{
         display: inline-block;
-        color: rgb(33, 33, 33);
+        /* color: rgb(33, 33, 33); */
         font-family: Verdana;
         font-weight: 400;
         line-height: 1.1;

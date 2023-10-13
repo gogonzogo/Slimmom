@@ -8,6 +8,10 @@
   height: 44px;
 }
 
+/* .imageLogoDark{
+  fill: white;
+} */
+
 @media screen and (min-width: 480px) {
   .imagelogo-container {
     width: 66px;
