@@ -24,12 +24,10 @@ import {
 import { storeCalulator } from '../../redux/user/userSlice';
 // resetCalcState;
 import CustomButton from 'components/CustomButton/CustomButton';
-import {
-  CalNoEat,
-  postCalculator,
-} from '../../redux/user/userOperations';
+import { CalNoEat, postCalculator } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
 import dayjs from 'dayjs';
+import { useUser } from 'hooks/useUser';
 // import { logOut } from '../../redux/auth/authOperations';
 
 const CaloriesCalc = () => {
@@ -41,6 +39,7 @@ const CaloriesCalc = () => {
   const currentLbsRef = useRef(null);
   const desiredLbsRef = useRef(null);
   const [buttonText, setButtonText] = useState('Submit');
+  const { calculator } = useUser();
 
   const { loggedIn } = useAuth();
   const today = dayjs().format('MM-DD-YYYY');
@@ -331,7 +330,10 @@ const CaloriesCalc = () => {
           desiredWeightLbs,
           dailyRate: passinfo.dailyRate,
           unitOfMeasure,
-          date: today,
+          date: "10-30-2023",
+          startDate: calculator.startDate || today,
+          originalWeight:
+            calculator.originalWeight || currentWeight || currentWeightLbs,
         };
         await dispatch(postCalculator(CalculatorInfo));
       }

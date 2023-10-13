@@ -6,7 +6,7 @@ export const Stats = ({ calculator, progressData }) => {
     case 1:
       newBloodType = 'A';
       break;
-    case 2:
+    case 2: 
       newBloodType = 'B';
       break;
     case 3:
@@ -19,7 +19,6 @@ export const Stats = ({ calculator, progressData }) => {
       newBloodType = calculator.bloodType;
       break;
   }
-
   return (
     <div>
       {calculator.startDate ? (

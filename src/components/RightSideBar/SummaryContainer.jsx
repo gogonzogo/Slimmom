@@ -4,8 +4,8 @@ import { searchNotAllowedFood } from 'redux/user/userOperations';
 import Summary from './Summary';
 import { useUser } from 'hooks/useUser';
 
-export const SummaryContainer = props => {
-  const calculator = props;
+export const SummaryContainer = ({ calculator }) => {
+  // const calculator = props;
   const {
     diaryList: foodList,
     calendarDate: date,
@@ -28,9 +28,7 @@ export const SummaryContainer = props => {
       ? Math.max(dailyRate - totalConsumed, 0)
       : 0;
   const percentage =
-    dailyRate !== 0
-      ? Math.round((totalConsumed / dailyRate) * 100)
-      : 0;
+    dailyRate !== 0 ? Math.round((totalConsumed / dailyRate) * 100) : 0;
 
   const summary = {
     left,
