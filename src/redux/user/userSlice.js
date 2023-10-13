@@ -82,9 +82,9 @@ export const userSlice = createSlice({
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
+        const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
         const diary = action.payload.diary;
-        if (calculator !== 404) {
-          const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
+        if (calculatorInfo.unitOfMeasure === "M") {
           state.calculator = {
             ...state.calculator,
             height: calculatorInfo.height,
@@ -92,12 +92,24 @@ export const userSlice = createSlice({
             currentWeight: calculatorInfo.currentWeight,
             desiredWeight: calculatorInfo.desiredWeight,
             bloodType: calculatorInfo.bloodType,
-            enteredDate: calculatorInfo.enteredDate,
-            originalWeight: calculatorInfo.date,
+            originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
-            startDate: action.payload.calculator.closest.calculatorEntries.date,
-          };
-        };
+            startDate: calculatorInfo.startDate,
+          }
+        } else {
+          state.calculator = {
+            ...state.calculator,
+            heightFeet: calculatorInfo.heightFeet,
+            heightInch: calculatorInfo.heightInch,
+            age: calculatorInfo.age,
+            currentWeightLbs: calculatorInfo.currentWeightLbs,
+            desiredWeightLbs: calculatorInfo.desiredWeightLbs,
+            bloodType: calculatorInfo.bloodType,
+            originalWeight: calculatorInfo.originalWeight,
+            calculatorDailyRate: calculatorInfo.dailyRate,
+            startDate: calculatorInfo.startDate,
+          }
+        }
         if (diary !== 404) {
           state.diary = {
             ...state.diary,
