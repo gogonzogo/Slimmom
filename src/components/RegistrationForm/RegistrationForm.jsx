@@ -17,30 +17,12 @@ import {
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
-import {
-  CalNoEat,
-  postCalculator,
-} from '../../redux/user/userOperations';
-import { storeCalulator } from '../../redux/user/userSlice';
-// resetCalcState;
+import { useAuth } from 'hooks/useAuth';
+
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-
-  const returnedCal = useSelector(state => state.user.calculator);
-  const [calculatorFormData] = useState({
-    height: returnedCal.height,
-    age: returnedCal.age,
-    currentWeight: returnedCal.currentWeight,
-    desiredWeight: returnedCal.desiredWeight,
-    bloodType: returnedCal.bloodType,
-    heightFeet: returnedCal.heightFeet,
-    heightInch: returnedCal.heightInch,
-    currentWeightLbs: returnedCal.currentWeightLbs,
-    desiredWeightLbs: returnedCal.desiredWeightLbs,
-    unitOfMeasure: returnedCal.unitOfMeasure,
-  });
-  //const { loggedIn, user, refreshing, error, token } = useAuthStore();
+  const { loggedIn } = useAuth();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   const isNameValid = useSelector(selectIsNameValid);
@@ -75,72 +57,6 @@ const RegistrationForm = () => {
     dispatch(validatePassword({ fieldValue: '' }));
   };
 
-  const createCalculator = async () => {
-    const {
-      height,
-      age,
-      currentWeight,
-      desiredWeight,
-      bloodType,
-      heightFeet,
-      heightInch,
-      currentWeightLbs,
-      desiredWeightLbs,
-      unitOfMeasure,
-    } = calculatorFormData;
-    const entedInfo = {
-      currentWeight:
-        currentWeight !== '' ? currentWeight : currentWeightLbs * 0.454,
-      height:
-        height !== '' ? height : (heightFeet * 12 + heightInch * 1) * 2.54,
-      age,
-      desiredWeight:
-        desiredWeight !== '' ? desiredWeight : desiredWeightLbs * 0.454,
-      bloodType,
-      unitOfMeasure,
-    };
-    try {
-      const response = await dispatch(CalNoEat(entedInfo));
-      const passinfo = response.payload.data;
-      let convertBlood = 0;
-      switch (bloodType) {
-        case 'A':
-          convertBlood = 1;
-          break;
-        case 'B':
-          convertBlood = 2;
-          break;
-        case 'AB':
-          convertBlood = 3;
-          break;
-        case 'O':
-          convertBlood = 4;
-          break;
-        default:
-          convertBlood = 1;
-          break;
-      }
-
-      const CalculatorInfo = {
-        height:
-          height !== '' ? height : (heightFeet * 12 + heightInch * 1) * 2.54,
-        age,
-        bloodType: convertBlood,
-        currentWeight:
-          currentWeight !== '' ? currentWeight : currentWeightLbs * 0.454,
-        desiredWeight:
-          desiredWeight !== '' ? desiredWeight : desiredWeightLbs * 0.454,
-        dailyRate: passinfo.dailyRate,
-        unitOfMeasure: unitOfMeasure,
-        originalDate: new Date(),
-        enteredDate: new Date(),
-      };
-      await dispatch(postCalculator(CalculatorInfo));
-    } catch (error) {
-      console.error('returned Error', error.message);
-    }
-  };
-
   const handleChange = e => {
     const { name, value } = e.target;
     setFormData({
@@ -149,7 +65,7 @@ const RegistrationForm = () => {
     });
 
     switch (
-      name // dispatches validation reducers from the slice on change
+      name
     ) {
       case 'name':
         dispatch(validateName({ fieldValue: value }));
@@ -169,57 +85,18 @@ const RegistrationForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const { name, email, password } = formData;
-    const senddate = { name, email: email.toLowerCase(), password };
-    const response = await dispatch(register(senddate));
-    if (response.payload.name) {
-      const {
-        height,
-        age,
-        currentWeight,
-        desiredWeight,
-        bloodType,
-        heightFeet,
-        currentWeightLbs,
-        desiredWeightLbs,
-        unitOfMeasure,
-      } = calculatorFormData;
-      if (
-        (currentWeight.length > 0 || currentWeightLbs.length > 0) &&
-        (height.length > 0 || heightFeet.length > 0) &&
-        age.length > 0 &&
-        (desiredWeight.length > 0 || desiredWeightLbs.length > 0) &&
-        bloodType.length > 0
-      ) {
-        await createCalculator();
-        dispatch(
-          storeCalulator({
-            height: '',
-            age: '',
-            currentWeight: '',
-            desiredWeight: '',
-            bloodType: '',
-            heightFeet: '',
-            heightInch: '',
-            currentWeightLbs: '',
-            desiredWeightLbs: '',
-            unitOfMeasure: unitOfMeasure,
-          })
-        );
-      }
-      resetForm();
-      navigate('/calculator');
+    try {
+        const { name, email, password } = formData;
+        const senddate = { name, email: email.toLowerCase(), password };
+        dispatch(register(senddate));
+        if (loggedIn) {
+          resetForm();
+          navigate('/calculator');
+        }
+    } catch (error) {
+      throw new Error()
     }
   };
-
-  // const renderValidationPopup = () => {
-  //   return (
-  //     <ValidationPopup
-  //       validationData={validationReqs[focusedField]}
-  //       visible={!!focusedField}
-  //     />
-  //   );
-  // };
 
   return (
     <Box sx={{ width: '100%' }} className={style.form_container}>
