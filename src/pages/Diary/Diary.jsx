@@ -26,7 +26,6 @@ function Diary() {
   const [formDisplay, setFormDisplay] = useState('');
   const [onMount, setOnMount] = useState(true);
   const themeMode = useSelector(selectThemeMode);
-  console.log(themeMode);
   useEffect(() => {
     setOnMount(false);
   }, [dispatch]);

@@ -44,7 +44,7 @@ export default function DiaryCalendar() {
                     <Fade {...TransitionProps} timeout={100}>
                       <Paper
                         className={css.paper}
-                        sx={{ backgroundColor: 'white' }}
+                        sx={{ backgroundColor: 'white', color: 'black' }}
                       >
                         <DateCalendar
                           value={value}
