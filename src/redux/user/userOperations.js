@@ -95,7 +95,7 @@ export const getDailyRate = createAsyncThunk(
   'calculator/calsNotFood',
   async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post('/user/calories/', credentials);
+      const { data } = await axios.post('/user/dailyRate/', credentials);
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
