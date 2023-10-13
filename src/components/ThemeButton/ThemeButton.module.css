@@ -13,7 +13,7 @@
 /* --rotation: 0; */
     width: 200px;
     height: 200px;
-    border: .1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid yellowgreen;
     border-radius: 50%;
 /* transform: rotate(0deg);
 transform: rotate(calc(var(--rotation)*1deg)); */

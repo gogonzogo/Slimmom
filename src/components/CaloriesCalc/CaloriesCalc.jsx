@@ -24,12 +24,10 @@ import {
 import { storeCalulator } from '../../redux/user/userSlice';
 // resetCalcState;
 import CustomButton from 'components/CustomButton/CustomButton';
-import {
-  CalNoEat,
-  postCalculator,
-} from '../../redux/user/userOperations';
+import { getDailyRate, postCalculator } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
 import dayjs from 'dayjs';
+import { useUser } from 'hooks/useUser';
 // import { logOut } from '../../redux/auth/authOperations';
 
 const CaloriesCalc = () => {
@@ -41,6 +39,7 @@ const CaloriesCalc = () => {
   const currentLbsRef = useRef(null);
   const desiredLbsRef = useRef(null);
   const [buttonText, setButtonText] = useState('Submit');
+  const { calculator } = useUser();
 
   const { loggedIn } = useAuth();
   const today = dayjs().format('MM-DD-YYYY');
@@ -243,104 +242,77 @@ const CaloriesCalc = () => {
 
   const submitHandler = async e => {
     e.preventDefault();
-    // if (currentTabIndex === 1) {
-    //   const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
-    //     formData;
-    //   await setFormData(formData => {
-    //     return {
-    //       ...formData,
-    //       height: (heightFeet * 12 + heightInch * 1) * 2.54,
-    //       currentWeight: currentWeightLbs * 0.454,
-    //       desiredWeight: desiredWeightLbs * 0.454,
-    //     };
-    //   });
-    // }
-
-    const {
-      height,
-      age,
-      currentWeight,
-      desiredWeight,
-      bloodType,
-      heightFeet,
-      heightInch,
-      currentWeightLbs,
-      desiredWeightLbs,
-      unitOfMeasure,
-    } = formData;
-    if (!loggedIn) {
-      dispatch(
-        storeCalulator({
-          height: height,
-          age: age,
-          currentWeight: currentWeight,
-          desiredWeight: desiredWeight,
-          bloodType: bloodType,
-          heightFeet: heightFeet,
-          heightInch: heightInch,
-          currentWeightLbs: currentWeightLbs,
-          desiredWeightLbs: desiredWeightLbs,
-          unitOfMeasure,
-        })
-      );
-    }
-    const entedInfo = {
-      currentWeight:
-        unitOfMeasure === 'M' ? currentWeight : currentWeightLbs * 0.454,
-      height:
-        unitOfMeasure === 'M'
-          ? height
-          : (heightFeet * 12 + heightInch * 1) * 2.54,
-      age,
-      desiredWeight:
-        unitOfMeasure === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
-      bloodType,
-    };
     try {
-      const response = await dispatch(CalNoEat(entedInfo));
-      const passinfo = response.payload.data;
-
-      if (loggedIn) {
-        let convertBlood = 0;
-        switch (bloodType) {
-          case 'A':
-            convertBlood = 1;
-            break;
-          case 'B':
-            convertBlood = 2;
-            break;
-          case 'AB':
-            convertBlood = 3;
-            break;
-          case 'O':
-            convertBlood = 4;
-            break;
-          default:
-            convertBlood = 1;
-            break;
-        }
-        const CalculatorInfo = {
-          height,
-          age,
-          bloodType: convertBlood,
-          currentWeight,
-          desiredWeight,
-          heightFeet,
-          heightInch,
-          currentWeightLbs,
-          desiredWeightLbs,
-          dailyRate: passinfo.dailyRate,
-          unitOfMeasure,
-          date: today,
-        };
-        await dispatch(postCalculator(CalculatorInfo));
+      const {
+        height,
+        age,
+        currentWeight,
+        desiredWeight,
+        bloodType,
+        heightFeet,
+        heightInch,
+        currentWeightLbs,
+        desiredWeightLbs,
+        unitOfMeasure,
+      } = formData;
+      let convertBlood = 0;
+      switch (bloodType) {
+        case 'A':
+          convertBlood = 1;
+          break;
+        case 'B':
+          convertBlood = 2;
+          break;
+        case 'AB':
+          convertBlood = 3;
+          break;
+        case 'O':
+          convertBlood = 4;
+          break;
+        default:
+          convertBlood = 1;
+          break;
       }
+      const convertMeasurements = {
+        currentWeight:
+          unitOfMeasure === 'M' ? currentWeight : currentWeightLbs * 0.454,
+        height:
+          unitOfMeasure === 'M'
+            ? height
+            : (heightFeet * 12 + heightInch * 1) * 2.54,
+        age,
+        desiredWeight:
+          unitOfMeasure === 'M' ? desiredWeight : desiredWeightLbs * 0.454,
+        bloodType,
+      };
+      const response = await dispatch(getDailyRate(convertMeasurements));
+      const passinfo = response.payload.data;
+      const CalculatorInfo = {
+        height,
+        age,
+        bloodType: convertBlood,
+        currentWeight,
+        desiredWeight,
+        heightFeet,
+        heightInch,
+        currentWeightLbs,
+        desiredWeightLbs,
+        dailyRate: passinfo.dailyRate,
+        unitOfMeasure,
+        date: '10-30-2023',
+        startDate: calculator.startDate || today,
+        originalWeight:
+          calculator.originalWeight || currentWeight || currentWeightLbs,
+      };
       if (!loggedIn) {
+        dispatch(storeCalulator(CalculatorInfo));
         handleOpen(passinfo);
+      } else {
+        dispatch(postCalculator(CalculatorInfo));
       }
       resetForm();
-    } catch (error) {
-      console.error('returned Error', error.message);
+    } catch (err) {
+      throw new Error('Error submitting calculator: ' + err.message)
     }
   };
 

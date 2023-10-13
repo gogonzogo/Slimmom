@@ -7,7 +7,7 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
-{/*         <p className={s.sideBarTitle}>
+        <p className={s.sideBarTitle}>
           Summary for {date.replaceAll('-', '/')}
         </p>
         <ul className={s.statsBox}>
@@ -27,7 +27,7 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
             <p>n% of normal</p>
             <p>{summary.percentage}%</p>
           </li>
-        </ul> */}
+        </ul>
       </div>
       <div className={s.sideBarContent}>
         <p className={s.sideBarTitle}>Food not recommended</p>

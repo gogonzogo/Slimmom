@@ -13,7 +13,6 @@ import { selectThemeMode } from 'redux/theme/themeSelectors';
 
 function Calculator() {
   const themeMode = useSelector(selectThemeMode);
-  console.log(themeMode);
   return (
     <div
       className="background Calc-DairyBackground"
