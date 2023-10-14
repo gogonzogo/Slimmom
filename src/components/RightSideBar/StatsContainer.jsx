@@ -3,7 +3,9 @@ import dayjs from 'dayjs';
 import { Stats } from './Stats';
 
 export const StatsContainer = ({ calculator }) => {
-   const startDate = dayjs(calculator.startDate, 'MM-DD-YYYY');
+  const startDate = dayjs(calculator.startDate, 'MM-DD-YYYY');
+  const goalWeight = calculator.currentWeight ||
+    calculator.currentWeightLbs;
 
   const lost = () => {
     if (calculator.unitOfMeasure === 'M') {
@@ -25,7 +27,6 @@ export const StatsContainer = ({ calculator }) => {
     }
     return 0;
   };
-
   const progressData = {
     originalDate: dayjs(calculator.startDate)
       .format('MM-DD-YYYY')
@@ -33,9 +34,7 @@ export const StatsContainer = ({ calculator }) => {
     originalWeight: calculator.originalWeight,
     lost: lost(),
     inDays: dayjs().diff(startDate, 'day'),
-    reachedGoal:
-      calculator.originalWeight <= calculator.currentWeight ||
-      calculator.originalWeightLbs <= calculator.currentWeightLbs,
+    reachedGoal: calculator.originalWeight > goalWeight,
   };
 
   return <Stats calculator={calculator} progressData={progressData} />;
