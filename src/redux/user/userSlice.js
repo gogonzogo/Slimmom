@@ -254,6 +254,10 @@ export const userSlice = createSlice({
             originalWeight: calculator.originalWeight,
             calculatorDailyRate: calculator.dailyRate,
             startDate: calculator.startDate,
+            heightFeet: null,
+            heightInch: null,
+            currentWeightLbs: null,
+            desiredWeightLbs: null,
           }
         } else {
           state.calculator = {
@@ -267,10 +271,14 @@ export const userSlice = createSlice({
             originalWeight: calculator.originalWeight,
             calculatorDailyRate: calculator.dailyRate,
             startDate: calculator.startDate,
+            height: null,
+            currentWeight: null,
+            desiredWeight: null,
           }
         }
         state.calculator.isLoggedIn = true;
         state.calculator.isRefreshing = false;
+        console.log('state.calculator', state.calculator)
       })
       .addCase(postCalculator.rejected, (state, action) => {
         const calculator = action.payload;
