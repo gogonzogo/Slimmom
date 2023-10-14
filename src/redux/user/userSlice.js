@@ -153,6 +153,7 @@ export const userSlice = createSlice({
         state.diary.diaryIsLoading = false;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
+        console.log('user info rejected')
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = action.payload;
       })
