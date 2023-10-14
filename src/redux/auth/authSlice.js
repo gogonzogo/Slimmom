@@ -32,6 +32,7 @@ const authSlice = createSlice({
           autoClose: 3000,
           className: 'success-toast',
         });
+        console.log(state.isLoggedIn)
       })
       .addCase(register.rejected, (state, action) => {
         state.isRefreshing = false;

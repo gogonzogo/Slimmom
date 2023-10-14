@@ -45,6 +45,7 @@ const initialState = {
     calculatorError: null,
     startDate: null,
     originalWeight: null,
+    date: null,
   },
   badFoodSearcList: [],
 };
@@ -81,6 +82,8 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
       } else {
         state.calculator = {
@@ -94,6 +97,8 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
       }
     },
@@ -120,6 +125,7 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
           }
         } else {
           state.calculator = {
@@ -133,6 +139,7 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
           }
         }
         if (diary !== 404) {

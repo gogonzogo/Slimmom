@@ -17,16 +17,17 @@ import {
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { useAuth } from 'hooks/useAuth';
+import { postCalculator } from 'redux/user/userOperations';
+import { useUser } from 'hooks/useUser';
 
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const { loggedIn } = useAuth();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   const isNameValid = useSelector(selectIsNameValid);
   const isFormValid = useSelector(selectFormIsValid);
+  const { calculator } = useUser();
   const validationReqs = useSelector(
     state => state.registration.validationReqs
   );
@@ -64,9 +65,7 @@ const RegistrationForm = () => {
       [name]: value,
     });
 
-    switch (
-      name
-    ) {
+    switch (name) {
       case 'name':
         dispatch(validateName({ fieldValue: value }));
         break;
@@ -83,18 +82,37 @@ const RegistrationForm = () => {
     toggleValidationPopup(name, true);
   };
 
-  const handleSubmit = async e => {
+  const calculatorInfo = {
+    height: calculator.height,
+    age: calculator.age,
+    bloodType: calculator.bloodType,
+    currentWeight: calculator.currentWeight,
+    desiredWeight: calculator.desiredWeight,
+    heightFeet: calculator.heightFeet,
+    heightInch: calculator.heightInch,
+    currentWeightLbs: calculator.currentWeightLbs,
+    desiredWeightLbs: calculator.desiredWeightLbs,
+    dailyRate: calculator.calculatorDailyRate,
+    unitOfMeasure: calculator.unitOfMeasure,
+    date: calculator.date,
+    startDate: calculator.startDate,
+    originalWeight: calculator.originalWeight,
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
     try {
-        const { name, email, password } = formData;
-        const senddate = { name, email: email.toLowerCase(), password };
-        dispatch(register(senddate));
-        if (loggedIn) {
+      const { name, email, password } = formData;
+      const senddate = { name, email: email.toLowerCase(), password };
+      dispatch(register(senddate)).then(resultAction => {
+        if (register.fulfilled.match(resultAction)) {
+          dispatch(postCalculator(calculatorInfo));
           resetForm();
           navigate('/calculator');
         }
+      });
     } catch (error) {
-      throw new Error()
+      throw new Error('Error regsitering user' + error.message);
     }
   };
 
