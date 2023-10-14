@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import Container from 'components/Container/Container';
 import Loader from 'components/Loader/Loader';
 import { Paper } from '@mui/material';
-
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
@@ -17,7 +16,6 @@ import useViewPort from 'hooks/useViewport';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
 
-
 function Diary() {
   const dispatch = useDispatch();
   const { diaryBackBtn } = useUser();
@@ -26,6 +24,7 @@ function Diary() {
   const [formDisplay, setFormDisplay] = useState('');
   const [onMount, setOnMount] = useState(true);
   const themeMode = useSelector(selectThemeMode);
+  
   useEffect(() => {
     setOnMount(false);
   }, [dispatch]);

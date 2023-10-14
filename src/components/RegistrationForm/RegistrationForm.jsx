@@ -99,20 +99,25 @@ const RegistrationForm = () => {
     originalWeight: calculator.originalWeight,
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const { name, email, password } = formData;
       const senddate = { name, email: email.toLowerCase(), password };
-      dispatch(register(senddate)).then(resultAction => {
-        if (register.fulfilled.match(resultAction)) {
-          dispatch(postCalculator(calculatorInfo));
-          resetForm();
+      const registerResultAction = await dispatch(register(senddate));
+      if (register.fulfilled.match(registerResultAction)) {
+        const postCalculatorResultAction = await dispatch(
+          postCalculator(calculatorInfo)
+        );
+        if (postCalculator.rejected.match(postCalculatorResultAction)) {
           navigate('/calculator');
+        } else {
+          navigate('/diary');
         }
-      });
+        resetForm();
+      }
     } catch (error) {
-      throw new Error('Error regsitering user' + error.message);
+      throw new Error('Error registering user: ' + error.message);
     }
   };
 

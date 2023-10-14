@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useRef } from 'react';
 import style from '../LoginForm/login.module.css';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -13,7 +13,6 @@ import {
   validateEmail,
   validatePassword,
 } from '../../redux/validation/registrationSlice';
-import { toast } from 'react-toastify';
 import { getUserInfo } from 'redux/user/userOperations';
 import { useUser } from 'hooks/useUser';
 import CustomButton from 'components/CustomButton/CustomButton';
@@ -22,11 +21,9 @@ const LoginForm = () => {
   const passwordRef = useRef(null);
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
-  // const isFormValid = useSelector(selectFormIsValid);
   const dispatch = useDispatch();
   const { calendarDate } = useUser();
   const nav = useNavigate(); // react router hook
-  // const validationReqs = useSelector((state) => state.registration.validationReqs); // gets validation requirements from the slice
 
   // form data state
   const [formData, setFormData] = useState({
@@ -56,23 +53,24 @@ const LoginForm = () => {
     }
   };
 
-  // listens to form submission and looks for errors
-  const [loginError, setLoginError] = useState(null);
-
   // handles login
   async function handleLogin() {
     try {
       const { email, password } = formData;
       const senddata = { email: email.toLowerCase(), password };
-      const response = await dispatch(login(senddata));
-      if (response.payload.token) {
-        dispatch(getUserInfo(calendarDate));
-        nav('/diary');
+      const loginResultAction = await dispatch(login(senddata));
+      if (login.fulfilled.match(loginResultAction)) {
+        const getUserInfoResultAction = await dispatch(
+          getUserInfo(calendarDate)
+        );
+        if (getUserInfo.rejected.match(getUserInfoResultAction)) {
+          nav('/calculator');
+        } else {
+          nav('/diary');
+        }
       }
     } catch (err) {
-      console.err('Login error', loginError);
-      setLoginError('An error occured. Please try again.');
-      toast.error('An error occured. Please try again.');
+      throw new Error('Error logging in: ' + err.message);
     }
   }
 
@@ -163,14 +161,13 @@ const LoginForm = () => {
             />
             <Box className={style.button_container}>
               <CustomButton
-                color='orange'
+                color="orange"
                 type="submit"
                 disabled={!isEmailValid || !isPasswordValid}
                 className={style.login_button}
               >
                 Log In
               </CustomButton>
-              
             </Box>
           </form>
         </FormControl>
