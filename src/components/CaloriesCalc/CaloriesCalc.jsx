@@ -263,7 +263,7 @@ const CaloriesCalc = () => {
         desiredWeightLbs,
         dailyRate: passinfo.dailyRate,
         unitOfMeasure,
-        date: '10-30-2023',
+        date: today,
         startDate: calculator.startDate || today,
         originalWeight:
           calculator.originalWeight || currentWeight || currentWeightLbs,
