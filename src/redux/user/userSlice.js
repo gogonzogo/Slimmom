@@ -45,6 +45,7 @@ const initialState = {
     calculatorError: null,
     startDate: null,
     originalWeight: null,
+    date: null,
   },
   badFoodSearcList: [],
 };
@@ -81,6 +82,8 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
       } else {
         state.calculator = {
@@ -94,6 +97,8 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
       }
     },
@@ -120,6 +125,7 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
           }
         } else {
           state.calculator = {
@@ -133,6 +139,7 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
           }
         }
         if (diary !== 404) {
@@ -266,6 +273,33 @@ export const userSlice = createSlice({
         state.calculator.isRefreshing = false;
       })
       .addCase(postCalculator.rejected, (state, action) => {
+        const calculator = action.payload;
+        if (calculator.unitOfMeasure === "M") {
+          state.calculator = {
+            ...state.calculator,
+            height: null,
+            age: null,
+            currentWeight: null,
+            desiredWeight: null,
+            bloodType: null,
+            originalWeight: null,
+            calculatorDailyRate: null,
+            startDate: null,
+          }
+        } else {
+          state.calculator = {
+            ...state.calculator,
+            heightFeet: null,
+            heightInch: null,
+            age: null,
+            currentWeightLbs: null,
+            desiredWeightLbs: null,
+            bloodType: null,
+            originalWeight: null,
+            calculatorDailyRate: null,
+            startDate: null,
+          }
+        }
         state.calculator.isRefreshing = false;
       })
       .addCase(archiveInfo.pending, state => {
