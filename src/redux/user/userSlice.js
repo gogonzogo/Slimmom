@@ -41,7 +41,7 @@ const initialState = {
     unitOfMeasure: null,
     calculatorDailyRate: null,
     noEat: {},
-    calculatorIsLoading: false,
+    calculatorIsLoading: null,
     calculatorError: null,
     startDate: null,
     originalWeight: null,
@@ -109,6 +109,7 @@ export const userSlice = createSlice({
     builder
       .addCase(getUserInfo.pending, state => {
         state.diary.diaryIsLoading = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
@@ -150,12 +151,15 @@ export const userSlice = createSlice({
           }
         };
         state.diary.diaryError = null;
-        state.diary.diaryIsLoading = false;
+        state.calculator.calculatorError = null;
+        state.diary.diaryIsLoading = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
-        console.log('user info rejected')
+        state.diary.diaryError = true;
+        state.calculator.calculatorError = true;
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.calculator.calculatorIsLoading = false;
       })
       .addCase(getDiaryEntries.pending, state => {
         state.diary.diaryIsLoading = true;
@@ -168,7 +172,7 @@ export const userSlice = createSlice({
       })
       .addCase(getDiaryEntries.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         state.diary.diaryList = [];
       })
       .addCase(addDiaryEntry.pending, state => {
@@ -187,7 +191,7 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
@@ -200,7 +204,7 @@ export const userSlice = createSlice({
       })
       .addCase(searchFoods.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
       })
       .addCase(deleteDiaryEntry.pending, state => {
         state.diary.diaryIsLoading = true;
@@ -219,7 +223,7 @@ export const userSlice = createSlice({
       })
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       // CALCULATOR EXTRA REDUCERS
@@ -228,19 +232,22 @@ export const userSlice = createSlice({
       })
       .addCase(searchNotAllowedFood.rejected, (state, action) => {
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
+        state.calculator.calculatorError = true;
+        state.calculator.calculatorIsLoading = false;
       })
       .addCase(getDailyRate.pending, state => {
-        state.calculator.isRefreshing = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getDailyRate.fulfilled, (state, action) => {
-        state.calculator.isLoggedIn = true;
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(getDailyRate.rejected, (state, action) => {
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(postCalculator.pending, state => {
-        state.calculator.isRefreshing = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(postCalculator.fulfilled, (state, action) => {
         const calculator = action.payload;
@@ -277,9 +284,8 @@ export const userSlice = createSlice({
             desiredWeight: null,
           }
         }
-        state.calculator.isLoggedIn = true;
-        state.calculator.isRefreshing = false;
-        console.log('state.calculator', state.calculator)
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = false;
       })
       .addCase(postCalculator.rejected, (state, action) => {
         const calculator = action.payload;
@@ -309,7 +315,8 @@ export const userSlice = createSlice({
             startDate: null,
           }
         }
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(archiveInfo.pending, state => {
         console.log('archiveInfo.pending')
