@@ -11,20 +11,25 @@ import DiaryList from '../../components/DiaryList/DiaryList';
 import { useUser } from 'hooks/useUser';
 import { SummaryContainer } from 'components/RightSideBar/SummaryContainer';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
-import { setDiaryBackBtn } from 'redux/user/userSlice'; 
+import { setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
+import Modal from 'components/Modal/Modal';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn } = useUser();
+  const { diaryBackBtn, calculator } = useUser();
   const { width } = useViewPort();
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');
   const [onMount, setOnMount] = useState(true);
   const themeMode = useSelector(selectThemeMode);
-  
+  const [modalState, setModalState] = useState({
+    open: false,
+    source: 'diary',
+  });
+
   useEffect(() => {
     setOnMount(false);
   }, [dispatch]);
@@ -42,6 +47,29 @@ function Diary() {
       setFormDisplay('block');
     }
   }, [diaryBackBtn]);
+
+  function handleModalOpen() {
+    if (!calculator.startDate) {
+      setModalState(prev => {
+        return {
+          ...prev,
+          open: true,
+        };
+      });
+    }
+  }
+   useEffect(() => {
+     handleModalOpen();
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, []); 
+  function handleModalClose() {
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+  }
 
   return (
     <div
@@ -79,12 +107,17 @@ function Diary() {
       </section>
       <section className="no-bottom">
         <Container className="no-left-right">
-          <Paper className={`${s.sidebarBox} ${themeMode === 'dark' ? s.darkMode : s.lightMode}` }/>
+          <Paper
+            className={`${s.sidebarBox} ${
+              themeMode === 'dark' ? s.darkMode : s.lightMode
+            }`}
+          />
           <RightSideBar>
             <SummaryContainer />
           </RightSideBar>
         </Container>
       </section>
+      <Modal handleModalClose={handleModalClose} modalState={modalState} />
     </div>
   );
 }
