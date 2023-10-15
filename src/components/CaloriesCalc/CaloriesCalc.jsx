@@ -123,16 +123,20 @@ const CaloriesCalc = () => {
     open: false,
     dailyRate: null,
     foodNotToEat: [],
+    source: 'calculator',
   }); //modal state and setters
 
   const handleOpen = passinfo => {
-    setModalState({
-      open: true,
-      dailyRate: passinfo.dailyRate,
-      foodNotToEat: passinfo.notAllowedFood,
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: true,
+        dailyRate: passinfo.dailyRate,
+        foodNotToEat: passinfo.notAllowedFood,
+      };
     });
   };
-  const handleClose = () => {
+  const handleModalClose = () => {
     setModalState(prev => {
       return {
         ...prev,
@@ -263,7 +267,7 @@ const CaloriesCalc = () => {
         desiredWeightLbs,
         dailyRate: passinfo.dailyRate,
         unitOfMeasure,
-        date: today,
+        date: '12-24-2023',
         startDate: calculator.startDate || today,
         originalWeight:
           calculator.originalWeight || currentWeight || currentWeightLbs,
@@ -276,7 +280,7 @@ const CaloriesCalc = () => {
       }
       resetForm();
     } catch (err) {
-      throw new Error('Error submitting calculator: ' + err.message)
+      throw new Error('Error submitting calculator: ' + err.message);
     }
   };
 
@@ -835,7 +839,7 @@ const CaloriesCalc = () => {
         </div>
       </div>
 
-      <Modal handleClose={handleClose} modalState={modalState} />
+      <Modal handleModalClose={handleModalClose} modalState={modalState} />
     </>
   );
 };
