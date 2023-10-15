@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import s from './modal.module.css';
 
-function DiaryModal({handleClose}) {
+function DiaryModal() {
   return (
     <>
       <div className={s.modalBox}>

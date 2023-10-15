@@ -16,10 +16,13 @@ import useViewPort from 'hooks/useViewport';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
 import Modal from 'components/Modal/Modal';
+import { useAuth } from 'hooks/useAuth';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn, calculator } = useUser();
+  const { diaryBackBtn, calculator, diaryIsLoading, calculatorIsLoading } =
+    useUser();
+  const { loggedIn, refreshing } = useAuth();
   const { width } = useViewPort();
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');
@@ -58,18 +61,10 @@ function Diary() {
       });
     }
   }
-   useEffect(() => {
-     handleModalOpen();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []); 
-  function handleModalClose() {
-    setModalState(prev => {
-      return {
-        ...prev,
-        open: false,
-      };
-    });
-  }
+  useEffect(() => {
+    handleModalOpen();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
@@ -79,45 +74,49 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      <section className="top-bottom">
-        <Container className="left-right">
-          {onMount ? (
-            <Loader />
-          ) : width > 767 ? (
-            <>
-              <div>
-                <DiaryCalendar />
-                <DiaryAddProductForm />
-                <DiaryList />
-              </div>
-            </>
-          ) : (
-            <>
-              <div style={{ display: `${formDisplay}` }}>
-                <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
-              </div>
-              <div style={{ display: `${calendarDisplay}` }}>
-                <DiaryCalendar />
-                <DiaryList />
-                <DiaryAddButton onClick={handleClick} />
-              </div>
-            </>
-          )}
-        </Container>
-      </section>
-      <section className="no-bottom">
-        <Container className="no-left-right">
-          <Paper
-            className={`${s.sidebarBox} ${
-              themeMode === 'dark' ? s.darkMode : s.lightMode
-            }`}
-          />
-          <RightSideBar>
-            <SummaryContainer />
-          </RightSideBar>
-        </Container>
-      </section>
-      <Modal handleModalClose={handleModalClose} modalState={modalState} />
+      {diaryIsLoading || calculatorIsLoading || refreshing || !loggedIn || onMount ? (
+        <Loader />
+      ) : (
+        <>
+          <section className="top-bottom">
+            <Container className="left-right">
+              {width > 767 ? (
+                <>
+                  <div>
+                    <DiaryCalendar />
+                    <DiaryAddProductForm />
+                    <DiaryList />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div style={{ display: `${formDisplay}` }}>
+                    <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
+                  </div>
+                  <div style={{ display: `${calendarDisplay}` }}>
+                    <DiaryCalendar />
+                    <DiaryList />
+                    <DiaryAddButton onClick={handleClick} />
+                  </div>
+                </>
+              )}
+            </Container>
+          </section>
+          <section className="no-bottom">
+            <Container className="no-left-right">
+              <Paper
+                className={`${s.sidebarBox} ${
+                  themeMode === 'dark' ? s.darkMode : s.lightMode
+                }`}
+              />
+              <RightSideBar>
+                <SummaryContainer />
+              </RightSideBar>
+            </Container>
+          </section>
+          <Modal modalState={modalState} />
+        </>
+      )}
     </div>
   );
 }
