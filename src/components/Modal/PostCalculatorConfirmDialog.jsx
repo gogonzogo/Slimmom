@@ -34,10 +34,10 @@ export default function PostCalculatorConfirmDialog({
         onClose={postCalculatorConfirmed}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+        <DialogTitle>{"Save updated calculator?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Would you like to save this update to your calculator data?
+            Would you like to save this update to your calculator data or discard?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
