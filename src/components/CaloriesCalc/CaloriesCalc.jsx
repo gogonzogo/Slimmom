@@ -23,10 +23,11 @@ import {
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/user/userSlice';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { getDailyRate, postCalculator } from '../../redux/user/userOperations';
+import { getDailyRate } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
 import dayjs from 'dayjs';
 import { useUser } from 'hooks/useUser';
+import PostCalculatorConfirmDialog from 'components/Modal/PostCalculatorConfirmDialog';
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -38,6 +39,10 @@ const CaloriesCalc = () => {
   const desiredLbsRef = useRef(null);
   const [buttonText, setButtonText] = useState('Submit');
   const { calculator } = useUser();
+  const [confirmPostCalculator, setConfirmPostCalculator] = useState({
+    calculator: null,
+    open: false,
+  });
 
   const { loggedIn } = useAuth();
   const today = dayjs().format('MM-DD-YYYY');
@@ -126,7 +131,7 @@ const CaloriesCalc = () => {
     source: 'calculator',
   }); //modal state and setters
 
-  const handleOpen = passinfo => {
+  const handleModalOpen = passinfo => {
     setModalState(prev => {
       return {
         ...prev,
@@ -226,6 +231,19 @@ const CaloriesCalc = () => {
     );
   };
 
+  const postCalculatorConfirmed = (e) => {
+    const target = e.target.firstChild.data;;
+    setConfirmPostCalculator(prev => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+    if (target !== 'Discard') {
+      resetForm();
+    };
+  };
+
   const submitHandler = async e => {
     e.preventDefault();
     try {
@@ -274,11 +292,15 @@ const CaloriesCalc = () => {
       };
       if (!loggedIn) {
         dispatch(storeCalulator(calculatorInfo));
-        handleOpen(passinfo);
+        handleModalOpen(passinfo);
       } else {
-        dispatch(postCalculator(calculatorInfo));
+        setConfirmPostCalculator(() => {
+          return {
+            calculator: calculatorInfo,
+            open: true,
+          };
+        });
       }
-      resetForm();
     } catch (err) {
       throw new Error('Error submitting calculator: ' + err.message);
     }
@@ -838,8 +860,11 @@ const CaloriesCalc = () => {
           </div>
         </div>
       </div>
-
       <Modal handleModalClose={handleModalClose} modalState={modalState} />
+      <PostCalculatorConfirmDialog
+        confirmPostCalculator={confirmPostCalculator}
+        postCalculatorConfirmed={postCalculatorConfirmed}
+      />
     </>
   );
 };

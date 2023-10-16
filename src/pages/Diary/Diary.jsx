@@ -16,13 +16,11 @@ import useViewPort from 'hooks/useViewport';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
 import Modal from 'components/Modal/Modal';
-import { useAuth } from 'hooks/useAuth';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn, calculator, diaryIsLoading, calculatorIsLoading } =
+  const { diaryBackBtn, calculator } =
     useUser();
-  const { loggedIn, refreshing } = useAuth();
   const { width } = useViewPort();
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');
@@ -32,10 +30,6 @@ function Diary() {
     open: false,
     source: 'diary',
   });
-
-  useEffect(() => {
-    setOnMount(false);
-  }, [dispatch]);
 
   function handleClick() {
     dispatch(setDiaryBackBtn(!diaryBackBtn));
@@ -59,6 +53,8 @@ function Diary() {
           open: true,
         };
       });
+    } else {
+      setOnMount(false);
     }
   }
   useEffect(() => {
@@ -74,7 +70,7 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      {diaryIsLoading || calculatorIsLoading || refreshing || !loggedIn || onMount ? (
+      { onMount ? (
         <Loader />
       ) : (
         <>
