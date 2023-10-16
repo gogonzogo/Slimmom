@@ -16,15 +16,16 @@ import useViewPort from 'hooks/useViewport';
 import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
 import Modal from 'components/Modal/Modal';
+import { useAuth } from 'hooks/useAuth';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn, calculator } =
+  const { diaryBackBtn, calculator, calculatorIsLoading, diaryIsLoading } =
     useUser();
+  const { refreshing } = useAuth();
   const { width } = useViewPort();
   const [calendarDisplay, setCalendarDisplay] = useState('');
   const [formDisplay, setFormDisplay] = useState('');
-  const [onMount, setOnMount] = useState(true);
   const themeMode = useSelector(selectThemeMode);
   const [modalState, setModalState] = useState({
     open: false,
@@ -45,7 +46,7 @@ function Diary() {
     }
   }, [diaryBackBtn]);
 
-  function handleModalOpen() {
+  useEffect(() => {
     if (!calculator.startDate) {
       setModalState(prev => {
         return {
@@ -54,13 +55,14 @@ function Diary() {
         };
       });
     } else {
-      setOnMount(false);
+      setModalState(prev => {
+        return {
+          ...prev,
+          open: false,
+        };
+      });
     }
-  }
-  useEffect(() => {
-    handleModalOpen();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [calculator.startDate]);
 
   return (
     <div
@@ -70,7 +72,7 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      { onMount ? (
+      {calculatorIsLoading || diaryIsLoading || refreshing ? (
         <Loader />
       ) : (
         <>
