@@ -16,6 +16,7 @@ import {
 import { getUserInfo } from 'redux/user/userOperations';
 import { useUser } from 'hooks/useUser';
 import CustomButton from 'components/CustomButton/CustomButton';
+import { clearCalculator } from 'redux/user/userSlice';
 
 const LoginForm = () => {
   const passwordRef = useRef(null);
@@ -56,6 +57,7 @@ const LoginForm = () => {
   // handles login
   async function handleLogin() {
     try {
+      dispatch(clearCalculator());
       const { email, password } = formData;
       const senddata = { email: email.toLowerCase(), password };
       const loginResultAction = await dispatch(login(senddata));

@@ -23,7 +23,7 @@ const initialState = {
     diaryDailyRate: null,
     diaryList: [],
     allFoodsList: [],
-    diaryIsLoading: null,
+    diaryIsLoading: false,
     diaryError: null,
     filter: null,
     diaryBackBtn: false,
@@ -41,7 +41,7 @@ const initialState = {
     unitOfMeasure: null,
     calculatorDailyRate: null,
     noEat: {},
-    calculatorIsLoading: null,
+    calculatorIsLoading: false,
     calculatorError: null,
     startDate: null,
     originalWeight: null,
@@ -100,6 +100,25 @@ export const userSlice = createSlice({
           unitOfMeasure: action.payload.unitOfMeasure,
           date: action.payload.date,
         }
+      }
+    },
+    clearCalculator: (state, action) => {
+      state.calculator = {
+        ...state.calculator,
+        height: null,
+        age: null,
+        currentWeight: null,
+        desiredWeight: null,
+        bloodType: null,
+        originalWeight: null,
+        calculatorDailyRate: null,
+        startDate: null,
+        unitOfMeasure: null,
+        date: null,
+        heightFeet: null,
+        heightInch: null,
+        currentWeightLbs: null,
+        desiredWeightLbs: null,
       }
     },
     resetCalcState: state => { state.calculator = initialState },
@@ -195,7 +214,7 @@ export const userSlice = createSlice({
         toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
-        state.diary.diaryIsLoading = true;
+        // state.diary.diaryIsLoading = true;
       })
       .addCase(searchFoods.fulfilled, (state, action) => {
         state.diary.allFoodsList = action.payload;
@@ -203,18 +222,18 @@ export const userSlice = createSlice({
         state.diary.diaryError = null;
       })
       .addCase(searchFoods.rejected, (state, action) => {
-        state.diary.diaryIsLoading = false;
-        state.diary.diaryError = true;
+        // state.diary.diaryIsLoading = false;
+        // state.diary.diaryError = true;
       })
       .addCase(deleteDiaryEntry.pending, state => {
-        state.diary.diaryIsLoading = true;
+        // state.diary.diaryIsLoading = true;
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = state.diary.diaryList.filter(
           item => item._id !== action.payload
         );
-        state.diary.diaryIsLoading = false;
-        state.diary.diaryError = null;
+        // state.diary.diaryIsLoading = false;
+        // state.diary.diaryError = null;
         toast.warn('Product removed successfully', {
           theme: 'colored',
           transition: Slide,
@@ -222,8 +241,8 @@ export const userSlice = createSlice({
         });
       })
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
-        state.diary.diaryIsLoading = false;
-        state.diary.diaryError = true;
+        // state.diary.diaryIsLoading = false;
+        // state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       // CALCULATOR EXTRA REDUCERS
@@ -233,7 +252,7 @@ export const userSlice = createSlice({
       .addCase(searchNotAllowedFood.rejected, (state, action) => {
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
         state.calculator.calculatorError = true;
-        state.calculator.calculatorIsLoading = false;
+        // state.calculator.calculatorIsLoading = false;
       })
       .addCase(getDailyRate.pending, state => {
         state.calculator.calculatorIsLoading = true;
@@ -285,7 +304,7 @@ export const userSlice = createSlice({
           }
         }
         state.calculator.calculatorIsLoading = false;
-        state.calculator.calculatorError = false;
+        state.calculator.calculatorError = null;
       })
       .addCase(postCalculator.rejected, (state, action) => {
         const calculator = action.payload;
@@ -398,5 +417,6 @@ export const {
   storeCalulator,
   resetCalcState,
   resetUserState,
+  clearCalculator,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;
