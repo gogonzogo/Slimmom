@@ -57,7 +57,6 @@ const LoginForm = () => {
   // handles login
   async function handleLogin() {
     try {
-      dispatch(clearCalculator());
       const { email, password } = formData;
       const senddata = { email: email.toLowerCase(), password };
       const loginResultAction = await dispatch(login(senddata));
@@ -66,6 +65,7 @@ const LoginForm = () => {
           getUserInfo(calendarDate)
         );
         if (getUserInfo.rejected.match(getUserInfoResultAction)) {
+          dispatch(clearCalculator());
           nav('/calculator');
         } else {
           nav('/diary');

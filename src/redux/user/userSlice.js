@@ -133,6 +133,7 @@ export const userSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
         const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
+        console.log(calculatorInfo)
         const diary = action.payload.diary;
         if (calculatorInfo.unitOfMeasure === "M") {
           state.calculator = {
@@ -146,6 +147,8 @@ export const userSlice = createSlice({
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
             unitOfMeasure: calculatorInfo.unitOfMeasure,
+            calculatorIsLoading: false,
+            calculatorErro: null,
           }
         } else {
           state.calculator = {
@@ -160,19 +163,26 @@ export const userSlice = createSlice({
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
             unitOfMeasure: calculatorInfo.unitOfMeasure,
+            calculatorIsLoading: false,
+            calculatorErro: null,
           }
+        }
+        if (calculator === 404) {
+          state.calculator.calculatorIsLoading = false;
+          state.calculator.calculatorError = null;
         }
         if (diary !== 404) {
           state.diary = {
             ...state.diary,
             diaryDailyRate: diary.dailyRate,
             diaryList: diary.foodItems,
+            diaryError: null,
+            diaryIsLoading: false,
           }
+        } else {
+          state.diary.diaryError = null;
+          state.diary.diaryIsLoading = false;
         };
-        state.diary.diaryError = null;
-        state.calculator.calculatorError = null;
-        state.diary.diaryIsLoading = true;
-        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
         state.diary.diaryError = true;
