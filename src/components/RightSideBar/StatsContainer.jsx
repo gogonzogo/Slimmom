@@ -34,7 +34,7 @@ export const StatsContainer = ({ calculator }) => {
     originalWeight: calculator.originalWeight,
     lost: lost(),
     inDays: dayjs().diff(startDate, 'day'),
-    reachedGoal: calculator.originalWeight > goalWeight,
+    reachedGoal: calculator.desired <= goalWeight,
   };
 
   return <Stats calculator={calculator} progressData={progressData} />;

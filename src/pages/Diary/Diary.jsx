@@ -20,7 +20,7 @@ import { useAuth } from 'hooks/useAuth';
 
 function Diary() {
   const dispatch = useDispatch();
-  const { diaryBackBtn, calculator, calculatorIsLoading, diaryIsLoading } =
+  const { diaryBackBtn, calculator, calculatorIsLoading } =
     useUser();
   const { refreshing } = useAuth();
   const { width } = useViewPort();
@@ -72,7 +72,7 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      {calculatorIsLoading || diaryIsLoading || refreshing ? (
+      {calculatorIsLoading || refreshing ? (
         <Loader />
       ) : (
         <>
