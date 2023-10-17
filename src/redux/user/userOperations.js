@@ -156,11 +156,10 @@ export const deleteAcct = createAsyncThunk(
 );
 export const exportXLS = createAsyncThunk(
   'diary/downloadToXLS',
-  async (data, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
-      console.log('downloadToXLS')
       const response = await axios.post(
-        `/user/downloadDiary/`
+        `/user/downloadDiary/`, credentials
       );
       return response.data.data;
     } catch (error) {

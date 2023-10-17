@@ -18,14 +18,26 @@ import {
 import CustomButton from 'components/CustomButton/CustomButton';
 import { toast } from 'react-toastify';
 import { logOut } from '../../redux/auth/authOperations';
+import { DateRange } from 'react-date-range'
+import dayjs from 'dayjs';
 
+
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 
 const ModalAcct = props => {
     const dispatch = useDispatch();
     const { handleClose, modalState } = props;
     const [typeText, setTypeText] = useState('');
     const isMobile = useMediaQuery('(max-width: 480px)');
+    const [dateRange, setDateRange] = useState([
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
 
+        }
+    ])
 
     const archiveMessage = "Are you sure that you want to Archive all of your data.  this will move all of your current data to the Archive and you will have to start a new Calculator and Dairy"
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
@@ -49,6 +61,7 @@ const ModalAcct = props => {
             let response = ""
             switch (modalState.myValue) {
                 case 'archive':
+                    console.log('dateRange', dateRange)
                     response = await dispatch(archiveInfo())
                     if (response.payload === 200) {
                         toast.success('Archive Success!', {
@@ -83,7 +96,14 @@ const ModalAcct = props => {
                     closeModal()
                     break;
                 case 'download':
-                    response = await dispatch(exportXLS())
+                    console.log('dateRange', dateRange)
+                    const startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
+                    const endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
+                    console.log('formatStartDate', startDate)
+                    console.log('formatEndDate', endDate)
+                    const reportDates = { startDate: startDate, endDate: endDate }
+                    console.log('reportDates', reportDates)
+                    response = await dispatch(exportXLS(reportDates))
                     console.log(response)
                     if (response.payload === 200) {
                         toast.success('Delete Data Success!', {
@@ -125,6 +145,22 @@ const ModalAcct = props => {
                             <span className={s.closeButton} onClick={closeModal}>
                                 ✕
                             </span>
+
+                            <div>
+                                {(modalState.myValue === 'archive' || modalState.myValue === 'download') &&
+                                    <DateRange
+                                        editableDateInputs={true}
+                                        onChange={item => setDateRange([item.selection])}
+                                        moveRangeOnFirstSelection={false}
+                                        ranges={dateRange}
+                                    />
+                                }
+                            </div>
+
+
+
+
+
                             {modalState.myValue === 'archive' ?
                                 <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : <h3> {downloadMessage}</h3>))}
                             <p className={s.ptag}>type <span className={s.messageSpan}> {modalState.myValue}</span> and click submit.</p>
