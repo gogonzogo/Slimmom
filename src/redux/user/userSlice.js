@@ -22,7 +22,7 @@ const initialState = {
     calendarDate: dayjs().format('MM-DD-YYYY'),
     diaryDailyRate: null,
     diaryList: [],
-    allFoodsList: [],
+    allFoodsSearchList: [],
     diaryIsLoading: false,
     diaryError: null,
     filter: null,
@@ -46,6 +46,8 @@ const initialState = {
     startDate: null,
     originalWeight: null,
     date: null,
+    bloodTypesMetric: [0, 1, 2, 3, 4],
+    bloodTypesStandard: [0, 'A', 'B', 'AB', 'O'],
   },
   badFoodSearcList: [],
 };
@@ -60,8 +62,8 @@ export const userSlice = createSlice({
     setDiaryList: (state, action) => {
       state.diary.diaryList = action.payload;
     },
-    setFoodsList: (state, action) => {
-      state.diary.allFoodsList = action.payload;
+    clearAllFoodsSearchList: (state, action) => {
+      state.diary.allFoodsSearchList = [];
     },
     setDiaryBackBtn: (state, action) => {
       state.diary.diaryBackBtn = action.payload;
@@ -133,7 +135,6 @@ export const userSlice = createSlice({
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
         const calculatorInfo = calculator.calculatorEntries.calculatorEntry;
-        console.log(calculatorInfo)
         const diary = action.payload.diary;
         if (calculatorInfo.unitOfMeasure === "M") {
           state.calculator = {
@@ -224,26 +225,26 @@ export const userSlice = createSlice({
         toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
-        // state.diary.diaryIsLoading = true;
+        state.diary.diaryIsLoading = true;
       })
       .addCase(searchFoods.fulfilled, (state, action) => {
-        state.diary.allFoodsList = action.payload;
+        state.diary.allFoodsSearchList = action.payload;
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
       })
       .addCase(searchFoods.rejected, (state, action) => {
-        // state.diary.diaryIsLoading = false;
-        // state.diary.diaryError = true;
+        state.diary.diaryIsLoading = false;
+        state.diary.diaryError = true;
       })
       .addCase(deleteDiaryEntry.pending, state => {
-        // state.diary.diaryIsLoading = true;
+        state.diary.diaryIsLoading = true;
       })
       .addCase(deleteDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = state.diary.diaryList.filter(
           item => item._id !== action.payload
         );
-        // state.diary.diaryIsLoading = false;
-        // state.diary.diaryError = null;
+        state.diary.diaryIsLoading = false;
+        state.diary.diaryError = null;
         toast.warn('Product removed successfully', {
           theme: 'colored',
           transition: Slide,
@@ -251,8 +252,8 @@ export const userSlice = createSlice({
         });
       })
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
-        // state.diary.diaryIsLoading = false;
-        // state.diary.diaryError = true;
+        state.diary.diaryIsLoading = false;
+        state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       // CALCULATOR EXTRA REDUCERS
@@ -262,7 +263,6 @@ export const userSlice = createSlice({
       .addCase(searchNotAllowedFood.rejected, (state, action) => {
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
         state.calculator.calculatorError = true;
-        // state.calculator.calculatorIsLoading = false;
       })
       .addCase(getDailyRate.pending, state => {
         state.calculator.calculatorIsLoading = true;
@@ -423,7 +423,7 @@ export const userSlice = createSlice({
 export const {
   setCalDate,
   setDiaryList,
-  setFoodsList,
+  clearAllFoodsSearchList,
   setDiaryBackBtn,
   resetDiaryState,
   storeCalulator,

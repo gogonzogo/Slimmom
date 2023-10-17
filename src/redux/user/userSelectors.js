@@ -1,5 +1,5 @@
 export const getDiaryList = state => state.user.diary.diaryList;
-export const getFoodsList = state => state.user.diary.allFoodsList;
+export const getFoodsList = state => state.user.diary.allFoodsSearchList;
 export const getDiaryBackBtn = state => state.user.diary.diaryBackBtn;
 export const getCalDate = state => state.user.diary.calendarDate;
 export const getDiaryDailyRate = state => state.user.diary.diaryDailyRate;

@@ -1,7 +1,6 @@
 import s from './rightSideBar.module.css';
 
 export const Stats = ({ calculator, progressData }) => {
-  console.log(`calculator`, calculator);
   return (
     <div>
       {calculator.startDate ? (
@@ -69,10 +68,10 @@ export const Stats = ({ calculator, progressData }) => {
               <li className={s.statsBoxItem}>
                 <p>Weight Lost</p>
                 {calculator.unitOfMeasure === 'M'
-                    ? `${progressData.lost} kg`
-                    : calculator.unitOfMeasure === 'S'
-                    ? `${progressData.lost} lbs`
-                    : 'Lost weight data not available'}
+                  ? `${progressData.lost.toFixed(2)} kg`
+                  : calculator.unitOfMeasure === 'S'
+                  ? `${progressData.lost.toFixed(2)} lbs`
+                  : 'Lost weight data not available'}
               </li>
               <li className={s.statsBoxItem}>
                 <p>Days Tracking</p>
