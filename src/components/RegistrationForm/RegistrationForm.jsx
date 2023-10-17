@@ -103,7 +103,7 @@ const RegistrationForm = () => {
       <h2 className={style.form_title}>REGISTER</h2>
       <Grid className={style.form_grid}>
         <FormControl variant="standard">
-          <form onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit} noValidate className={style.form}>
             <TextField
               className={style.name_input}
               autoComplete="name"

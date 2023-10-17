@@ -12,7 +12,7 @@ const CustomIcon = ({ iconName, color, className }) => {
 
 CustomIcon.propTypes = {
     iconName: string.isRequired,
-    color: string.isRequired,
+    color: string,
     className: string.isRequired
 }
 export default CustomIcon;

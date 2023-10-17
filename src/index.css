@@ -14,7 +14,7 @@
   --primary-font-size: 14px;
 
   --transition-time: 2000ms;
-  --transition-time-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-time-function: ease-in;
   --hover-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
       0 3px 6px rgba(0, 0, 0, 0.23);
 /*   --transition-time-function: cubic-bezier(0.4, 0, 0.8, 0.5); */
@@ -41,9 +41,9 @@ code {
   padding: 0;
 }
 
-.active {
+/* .active {
   color: #212121;
-}
+} */
 
 ul {
   list-style: none;
@@ -70,17 +70,9 @@ a {
   overflow-y: auto;
 }
 
-.lightmode{
-  background-color: #66bb6a;
-}
-.darkmode {
-  background-color: blue;
-}
-
-
-.active {
+/* .active {
   color: var(--accent-bright-color);
-}
+} */
 
 @media screen and (min-width: 768px) {
   .mainBackground {
@@ -95,7 +87,6 @@ a {
 
   .Calc-DairyBackground {
     background-image: url(./images/tablet-dairy-leaves.png);
-    /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
     background-position: right bottom;
     background-repeat: no-repeat;
     background-size: 418px 746px;
@@ -117,7 +108,6 @@ a {
 
     .Calc-DairyBackground {
       background-image: url(./images/tablet-dairy-leaves.png);
-      /* , linear-gradient(to bottom, var(--primary-background-color) 0%, var(--primary-background-color) 66.6%, var(--secondary-background-color) 66.6%, var(--secondary-background-color) 100%); */
       background-position: right bottom;
       background-repeat: no-repeat;
       background-size: 418px 746px;
@@ -137,7 +127,6 @@ a {
 
   .Calc-DairyBackground {
     background-image: url(./images/desktop-diary-leaves.png);
-    /* linear-gradient(to right, var(--primary-background-color) 0%, var(--primary-background-color) 60%, var(--secondary-background-color) 60%, var(--secondary-background-color) 100%); */
     background-position: right;
     background-repeat: no-repeat;
     background-size: 518px 846px;
@@ -160,7 +149,6 @@ a {
 
   .Calc-DairyBackground {
     background-image: url(./images/desktop-diary-leaves@2x.png);
-    /* linear-gradient(to right, var(--primary-background-color) 0%, var(--primary-background-color) 60%, var(--secondary-background-color) 58.5%, var(--secondary-background-color) 100%); */
     background-position: right;
     background-repeat: no-repeat;
     background-size: 518px 846px;
@@ -196,9 +184,9 @@ a {
 }
 
 .left-right {
-  max-width: 280px;
   margin: 0px auto;
 }
+
 @media screen and (min-width: 768px) {
   .left-right {
     max-width: 768px;
@@ -213,22 +201,12 @@ a {
   }
 }
 
-@media screen and (min-width: 1280px) {
-  .left-right {
-    max-width: 1280px;
-  }
-}
-
 @media screen and (min-width: 1440px) {
   .max-width {
     max-width: 1280px;
     margin: 0 auto;
     /* Center the container horizontally on larger screens */
   }
-}
-
-.no-left-right {
-  margin: 0px auto;
 }
 
 /* Custom styles for the error toast */

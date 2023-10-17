@@ -106,7 +106,7 @@ const UserInfo = () => {
         {/** is it a small screen and navigation is toggled show image logo and navigation */}
         <Box
           sx={{
-            backgroundColor: 'white',
+            backgroundColor: 'transparent',
             padding: ' 3px 0 0',
             position: 'absolute',
             bottom: 10,
