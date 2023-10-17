@@ -230,7 +230,11 @@ const RegistrationForm = () => {
               />
             )}
             <Box className={style.button_container}>
-              <CustomButton color="orange" disabled={!isFormValid}>
+              <CustomButton
+                type="submit"
+                color="orange"
+                disabled={!isFormValid}
+              >
                 Register
               </CustomButton>
             </Box>
