@@ -19,8 +19,9 @@
   margin-top: 60px;
 }
 
-.not-allowed-food {
+.notAllowedFood {
   color: red;
+  font-size: 8px;
 }
 
 @media screen and (min-width: 480px) {

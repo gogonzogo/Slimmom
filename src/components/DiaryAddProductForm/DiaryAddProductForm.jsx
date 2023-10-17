@@ -36,6 +36,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   const handleInputChange = e => {
     if (e && e.target) {
       const userInput = e.target.value || '';
+      if (userInput === '') dispatch(clearAllFoodsSearchList());
       setProductName(userInput);
       throttleSearchFoods(userInput);
     }
@@ -46,18 +47,18 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   }, 500);
   const handleSubmit = e => {
     try {
-       e.preventDefault();
-       const foodItem = allFoodsSearchList.find(
-         item => item.title === productName
-       );
-       const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
-       dispatch(addDiaryEntry({ calendarDate, productName, grams, calories }));
-       dispatch(clearAllFoodsSearchList());
-       setProductName('');
-       setGrams('');
-       dispatch(setDiaryBackBtn(!diaryBackBtn));
+      e.preventDefault();
+      const foodItem = allFoodsSearchList.find(
+        item => item.title === productName
+      );
+      const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
+      dispatch(addDiaryEntry({ calendarDate, productName, grams, calories }));
+      dispatch(clearAllFoodsSearchList());
+      setProductName('');
+      setGrams('');
+      dispatch(setDiaryBackBtn(!diaryBackBtn));
     } catch (error) {
-      throw new Error(`Error submitting diary entry` + error.message)
+      throw new Error(`Error submitting diary entry` + error.message);
     }
   };
 
@@ -74,8 +75,10 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                 },
               }}
               freeSolo
+              autoComplete
+              includeInputInList
+              filterSelectedOptions
               size="small"
-              options={autoCompleteFoodsData}
               value={productName}
               onChange={(e, selectedObject) => {
                 if (selectedObject !== null)
@@ -83,7 +86,6 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
-              getOptionLabel={option => option.title || ''}
               renderInput={params => (
                 <TextField
                   required
@@ -105,28 +107,23 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                   label="Enter product name"
                 />
               )}
+              noOptionsText="No locations"
+              options={autoCompleteFoodsData}
               renderOption={(props, option) => {
-                // Log the class application and other relevant information
-                console.log('Option:', option.title);
-                console.log(
-                  'Is not allowed:',
-                  option.groupBloodNotAllowed[bloodTypeIndex]
-                );
-
+                const notRecommended =
+                  option.groupBloodNotAllowed[bloodTypeIndex];
                 return (
                   <li {...props}>
-                    <div
-                      className={
-                        option.groupBloodNotAllowed[bloodTypeIndex]
-                          ? 'not-allowed-food'
-                          : ''
-                      }
-                    >
+                    <div>
+                      {notRecommended && (
+                        <p className={css.notAllowedFood}>Not Recommended</p>
+                      )}
                       {option.title}
                     </div>
                   </li>
                 );
               }}
+              getOptionLabel={option => option.title || ''}
             />
           </Stack>
         </div>
