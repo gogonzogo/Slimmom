@@ -1,9 +1,8 @@
-
-:root {
+/* :root {
     --orange-color: #fc842d;
     --white-color: #ffffff;
     --hover-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-}
+} */
 .Button {
     width: 182px;
     padding: 1rem;
@@ -17,31 +16,31 @@
 }
 
 .orange {
-    background-color: var(--orange-color);
-    color: var(--white-color);
-    border: solid var(--orange-color);
+    background-color: var(--accent-bright-color);
+    color: var(--secondary-font-light);
+    border: solid var(--accent-bright-color);
 }
 .orange:hover,
 .orange:focus {
-    background-color: var(--white-color);
-    color: var(--orange-color);
-    border: solid var(--orange-color);
+    background-color: var(--secondary-font-light);
+    color: var(--accent-bright-color);
+    border: solid var(--accent-bright-color);
     box-shadow: var(--hover-box-shadow);
 }
 
 .white {
-    background-color: var(--white-color);
-    color: var(--orange-color);
-    border: solid var(--orange-color);
+    background-color: var(--secondary-font-light);
+    color: var(--accent-bright-color);
+    border: solid var(--accent-bright-color);
     border-radius: 30px;
     border-width: 2px;
 
 }
 .white:hover,
 .white:focus {
-    background-color: var(--orange-color);
-    color: var(--white-color);
-    border: solid var(--orange-color);
+    background-color: var(--accent-bright-color);
+    color: var(--secondary-font-light);
+    border: solid var(--accent-bright-color);
     box-shadow: var(--hover-box-shadow);
 }
 
@@ -62,20 +61,19 @@
 
 .small{
     width: 120px;  
-   
 }  
 
 @media screen and (min-width: 768px) and (max-width: 1025px) {
     .wide {
-            width: 210px;
-            margin-left: 0px;
-            margin-top: 60px;
-        }
+        width: 210px;
+        margin-left: 0px;
+        margin-top: 60px;
+    }
 }
 @media screen and (max-width: 767px){
     .wide {
-            width: 210px;
-            margin-left: 0px;
-            margin-top: 40px;
-        }
+        width: 210px;
+        margin-left: 0px;
+        margin-top: 40px;
+    }
 }

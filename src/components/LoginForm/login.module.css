@@ -33,6 +33,13 @@
   text-transform: capitalize;
 }
 
+.login_button:disabled {
+  color: rgba(0, 0, 0, 0.26);
+  box-shadow: none;
+  background-color: rgba(0, 0, 0, 0.12);
+  cursor: not-allowed;
+}
+
 .error_message {
   color: red;
   font-family: 'Verdana';

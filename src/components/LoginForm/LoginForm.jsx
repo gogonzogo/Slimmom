@@ -58,8 +58,8 @@ const LoginForm = () => {
   async function handleLogin() {
     try {
       const { email, password } = formData;
-      const senddata = { email: email.toLowerCase(), password };
-      const loginResultAction = await dispatch(login(senddata));
+      const sendData = { email: email.toLowerCase(), password };
+      const loginResultAction = await dispatch(login(sendData));
       if (login.fulfilled.match(loginResultAction)) {
         const getUserInfoResultAction = await dispatch(
           getUserInfo(calendarDate)
