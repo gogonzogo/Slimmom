@@ -14,6 +14,7 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  margin: 0 10px;
 }
 .sideBarContent {
   width: 100%;
@@ -25,7 +26,6 @@
 .statsBox {
   max-width: 300px;
   font: 500 14px Verdana;
-  color: var(--secondary-background-color);
   margin-top: 20px;
   width: 100%;
   list-style: none;
@@ -35,14 +35,6 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
-}
-
-.darkMode {
-  background-color: var(--darkmode-background-color);
-}
-
-.lightMode {
-  background-color: var(--secondary-background-color);
 }
 
 @media screen and (min-width: 768px) {
@@ -56,13 +48,13 @@
   .sideBarContentWrapper {
     flex-direction: row;
     justify-content: space-around;
+    margin: 0 auto;
+    
   }
 }
 @media screen and (min-width: 1280px) {
   .sideBarContainer {
     padding-top: 150px;
-    max-width: 1280px;
-    padding-left: 94px;
     left: 60%;
     top: 0%;
     width: 40%;
@@ -70,7 +62,6 @@
     position: absolute;
   }
   .sidebarBox {
-    max-width: 1280px;
     padding-left: 94px;
     left: 60%;
     top: 0%;
@@ -84,5 +75,7 @@
     flex-direction: column;
     position: relative;
     top: 220px;
+    margin: 0 auto;
+    justify-content: unset;
   }
 }

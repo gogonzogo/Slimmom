@@ -89,7 +89,7 @@ const LoginForm = () => {
         {/* login form */}
 
         <FormControl variant="standard">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={style.form}>
             {' '}
             {/*pass validatioon schema */}
             <TextField

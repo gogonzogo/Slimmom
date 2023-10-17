@@ -1,16 +1,13 @@
 .imagelogo-container {
   width: 46px;
   height: 44px;
+  z-index: 3px;
 }
 
 .imageLogo {
   width: 46px;
   height: 44px;
 }
-
-/* .imageLogoDark{
-  fill: white;
-} */
 
 @media screen and (min-width: 480px) {
   .imagelogo-container {
