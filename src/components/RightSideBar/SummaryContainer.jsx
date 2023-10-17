@@ -1,4 +1,4 @@
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 import { useDispatch } from 'react-redux';
 import { searchNotAllowedFood } from 'redux/user/userOperations';
 import Summary from './Summary';
@@ -39,7 +39,7 @@ export const SummaryContainer = ({ calculator }) => {
 
   //search bad food
   const bloodType = calculator.bloodType;
-  const searchInputChange = debounce(e => {
+  const searchInputChange = throttle(e => {
     const title = e.target.value;
     title.length > 0 &&
       dispatch(searchNotAllowedFood({ title, bloodType: bloodType }));

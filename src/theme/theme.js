@@ -8,20 +8,21 @@ const customTheme = (mode) => {
       ...(mode === 'light'
         ? {
             primary: {
-              light: '#e0e0e0',
+              default: '#9B9FAA',
+              // light: '#e0e0e0',
               main: '#fc842d',
-              contrastText: '#212121',
+              contrastText: '#9B9FAA',
             },
             background: {
               default: '#ffffff',
-              paper: '#9B9FAA',
+              paper: '#e0e0e0',
               secondary: '#9B9FAA',
             },
             // text: {
             //   main: '#9b9faa',
             //   secondary: '#9b9faa',
             //   // hint: '#271a3fe3',
-            // },
+            //},
           }
         : // else use dark mode
           {
@@ -53,8 +54,8 @@ const customTheme = (mode) => {
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: 'transparent',
-            background: 'unset',
+            // backgroundColor: 'transparent',
+            backgroundImage: 'unset',
           },
         },
       },
@@ -63,17 +64,28 @@ const customTheme = (mode) => {
           root: {
             backgroundColor: mode === 'dark' ? '#2a1d45f5' : '#ffffff',
             color: mode === 'dark' ? '#ffffff' : '#000000',
-            boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
+            boxShadow:
+              '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
           },
         },
       },
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            color: mode === 'dark' ? '##ffffff' : '#000000',
-          }
-        }
-      }
+      // MuiSvgIcon: {
+      //   styleOverrides: {
+      //     root: {
+      //       color: mode === 'dark' ? '##ffffff' : '#fc842d',
+      //     },
+      //   },
+      // },
+      // MuiRadio: {
+      //   styleOverrides: {
+      //     root: {
+      //       color: '#9b9faa',
+      //       '&.Mui-checked': {
+      //         color: '#fc842d',
+      //       },
+      //     },
+      //   },
+      // },
     },
   });
 };

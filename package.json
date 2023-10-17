@@ -18,7 +18,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "dayjs": "^1.11.9",
-    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "material-ui-popup-state": "^5.0.9",
     "notiflix": "^3.2.6",
     "react": "^18.1.0",

@@ -16,7 +16,7 @@ import {
 
 export const useUser = () => {
   const diaryList = useSelector(getDiaryList);
-  const allFoodsList = useSelector(getFoodsList);
+  const allFoodsSearchList = useSelector(getFoodsList);
   const diaryBackBtn = useSelector(getDiaryBackBtn);
   const calendarDate = useSelector(getCalDate);
   const diaryIsLoading = useSelector(getDiaryIsLoading);
@@ -30,7 +30,7 @@ export const useUser = () => {
 
   return {
     diaryList,
-    allFoodsList,
+    allFoodsSearchList,
     diaryBackBtn,
     calendarDate,
     diaryIsLoading,

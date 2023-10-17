@@ -5,42 +5,63 @@ import { useDispatch } from 'react-redux';
 import { addDiaryEntry, searchFoods } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { useUser } from '../../hooks/useUser';
-import { debounce } from 'lodash';
-import { setFoodsList, setDiaryBackBtn } from 'redux/user/userSlice';
+import { throttle } from 'lodash';
+import { clearAllFoodsSearchList, setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
-  const { calendarDate, allFoodsList } = useUser();
+  const { calendarDate, allFoodsSearchList, calculator } = useUser();
   const dispatch = useDispatch();
-  const autoCompleteFoodsList = allFoodsList
-    ? allFoodsList.map(food => food.title)
-    : [];
+  const autoCompleteFoodsList = allFoodsSearchList || [];
+  const autoCompleteFoodsData = autoCompleteFoodsList.map(food => ({
+    title: food.title,
+    groupBloodNotAllowed: food.groupBloodNotAllowed,
+  }));
+
   const { width } = useViewPort();
+
+  const userBloodTypeIndex = () => {
+    if (calculator.unitOfMeasure === 'M') {
+      return calculator.bloodTypesMetric.indexOf(calculator.bloodType);
+    } else {
+      return calculator.bloodTypesStandard.indexOf(calculator.bloodType);
+    }
+  };
+  const bloodTypeIndex = userBloodTypeIndex();
   const handleGramsChange = e => {
     setGrams(e.target.value);
   };
   const handleInputChange = e => {
-    const userInput = e.target.value || '';
-    if (e) {
+    if (e && e.target) {
+      const userInput = e.target.value || '';
+      if (userInput === '') dispatch(clearAllFoodsSearchList());
       setProductName(userInput);
-      debounceSearchFoods(userInput);
+      throttleSearchFoods(userInput);
     }
   };
-  const debounceSearchFoods = debounce(userInput => {
+
+  const throttleSearchFoods = throttle(userInput => {
     dispatch(searchFoods(userInput));
   }, 500);
   const handleSubmit = e => {
-    e.preventDefault();
-    const foodItem = allFoodsList.find(item => item.title === productName);
-    const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
-    dispatch(addDiaryEntry({ calendarDate, productName, grams, calories }));
-    dispatch(setFoodsList([]));
-    setProductName('');
-    setGrams('');
-    dispatch(setDiaryBackBtn(!diaryBackBtn));
+    try {
+      e.preventDefault();
+      const foodItem = allFoodsSearchList.find(
+        item => item.title === productName
+      );
+      const calories = Math.ceil((foodItem.calories / 100) * grams) || 0;
+      dispatch(addDiaryEntry({ calendarDate, productName, grams, calories }));
+      dispatch(clearAllFoodsSearchList());
+      setProductName('');
+      setGrams('');
+      dispatch(setDiaryBackBtn(!diaryBackBtn));
+    } catch (error) {
+      throw new Error(`Error submitting diary entry` + error.message);
+    }
   };
+
   return (
     <div className={css.section}>
       <form className={css.diaryform} onSubmit={handleSubmit}>
@@ -54,11 +75,14 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                 },
               }}
               freeSolo
+              autoComplete
+              includeInputInList
+              filterSelectedOptions
               size="small"
-              options={autoCompleteFoodsList}
               value={productName}
               onChange={(e, selectedObject) => {
-                if (selectedObject !== null) setProductName(selectedObject);
+                if (selectedObject !== null)
+                  setProductName(selectedObject.title);
               }}
               inputValue={productName}
               onInputChange={handleInputChange}
@@ -83,6 +107,23 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
                   label="Enter product name"
                 />
               )}
+              noOptionsText="No locations"
+              options={autoCompleteFoodsData}
+              renderOption={(props, option) => {
+                const notRecommended =
+                  option.groupBloodNotAllowed[bloodTypeIndex];
+                return (
+                  <li {...props}>
+                    <div>
+                      {notRecommended && (
+                        <p className={css.notAllowedFood}>Not Recommended</p>
+                      )}
+                      {option.title}
+                    </div>
+                  </li>
+                );
+              }}
+              getOptionLabel={option => option.title || ''}
             />
           </Stack>
         </div>

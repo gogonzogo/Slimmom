@@ -1,4 +1,6 @@
 .navLink {
+  position: relative;
+  z-index: 3;
   color: #9B9FAA;
   font-weight: 700;
   font-size: 14px;

@@ -83,7 +83,6 @@ export const searchNotAllowedFood = createAsyncThunk(
       const response = await axios.get(
         `badFood?title=${data.title}&bloodType=${newBloodType}`
       );
-      // console.log(response.data);
       return response.data.data;
     } catch (err) {
       return rejectWithValue(err.message);

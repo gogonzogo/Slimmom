@@ -22,8 +22,8 @@ const initialState = {
     calendarDate: dayjs().format('MM-DD-YYYY'),
     diaryDailyRate: null,
     diaryList: [],
-    allFoodsList: [],
-    diaryIsLoading: null,
+    allFoodsSearchList: [],
+    diaryIsLoading: false,
     diaryError: null,
     filter: null,
     diaryBackBtn: false,
@@ -45,6 +45,9 @@ const initialState = {
     calculatorError: null,
     startDate: null,
     originalWeight: null,
+    date: null,
+    bloodTypesMetric: [0, 1, 2, 3, 4],
+    bloodTypesStandard: [0, 'A', 'B', 'AB', 'O'],
   },
   badFoodSearcList: [],
 };
@@ -59,8 +62,8 @@ export const userSlice = createSlice({
     setDiaryList: (state, action) => {
       state.diary.diaryList = action.payload;
     },
-    setFoodsList: (state, action) => {
-      state.diary.allFoodsList = action.payload;
+    clearAllFoodsSearchList: (state, action) => {
+      state.diary.allFoodsSearchList = [];
     },
     setDiaryBackBtn: (state, action) => {
       state.diary.diaryBackBtn = action.payload;
@@ -81,6 +84,8 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
       } else {
         state.calculator = {
@@ -94,7 +99,28 @@ export const userSlice = createSlice({
           originalWeight: action.payload.originalWeight,
           calculatorDailyRate: action.payload.dailyRate,
           startDate: action.payload.startDate,
+          unitOfMeasure: action.payload.unitOfMeasure,
+          date: action.payload.date,
         }
+      }
+    },
+    clearCalculator: (state, action) => {
+      state.calculator = {
+        ...state.calculator,
+        height: null,
+        age: null,
+        currentWeight: null,
+        desiredWeight: null,
+        bloodType: null,
+        originalWeight: null,
+        calculatorDailyRate: null,
+        startDate: null,
+        unitOfMeasure: null,
+        date: null,
+        heightFeet: null,
+        heightInch: null,
+        currentWeightLbs: null,
+        desiredWeightLbs: null,
       }
     },
     resetCalcState: state => { state.calculator = initialState },
@@ -104,6 +130,7 @@ export const userSlice = createSlice({
     builder
       .addCase(getUserInfo.pending, state => {
         state.diary.diaryIsLoading = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getUserInfo.fulfilled, (state, action) => {
         const calculator = action.payload.calculator.closest;
@@ -120,6 +147,9 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
+            calculatorIsLoading: false,
+            calculatorErro: null,
           }
         } else {
           state.calculator = {
@@ -133,21 +163,33 @@ export const userSlice = createSlice({
             originalWeight: calculatorInfo.originalWeight,
             calculatorDailyRate: calculatorInfo.dailyRate,
             startDate: calculatorInfo.startDate,
+            unitOfMeasure: calculatorInfo.unitOfMeasure,
+            calculatorIsLoading: false,
+            calculatorErro: null,
           }
+        }
+        if (calculator === 404) {
+          state.calculator.calculatorIsLoading = false;
+          state.calculator.calculatorError = null;
         }
         if (diary !== 404) {
           state.diary = {
             ...state.diary,
             diaryDailyRate: diary.dailyRate,
             diaryList: diary.foodItems,
+            diaryError: null,
+            diaryIsLoading: false,
           }
+        } else {
+          state.diary.diaryError = null;
+          state.diary.diaryIsLoading = false;
         };
-        state.diary.diaryError = null;
-        state.diary.diaryIsLoading = false;
       })
       .addCase(getUserInfo.rejected, (state, action) => {
+        state.diary.diaryError = true;
+        state.calculator.calculatorError = true;
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.calculator.calculatorIsLoading = false;
       })
       .addCase(getDiaryEntries.pending, state => {
         state.diary.diaryIsLoading = true;
@@ -160,7 +202,7 @@ export const userSlice = createSlice({
       })
       .addCase(getDiaryEntries.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         state.diary.diaryList = [];
       })
       .addCase(addDiaryEntry.pending, state => {
@@ -179,20 +221,20 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       .addCase(searchFoods.pending, state => {
         state.diary.diaryIsLoading = true;
       })
       .addCase(searchFoods.fulfilled, (state, action) => {
-        state.diary.allFoodsList = action.payload;
+        state.diary.allFoodsSearchList = action.payload;
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
       })
       .addCase(searchFoods.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
       })
       .addCase(deleteDiaryEntry.pending, state => {
         state.diary.diaryIsLoading = true;
@@ -211,7 +253,7 @@ export const userSlice = createSlice({
       })
       .addCase(deleteDiaryEntry.rejected, (state, action) => {
         state.diary.diaryIsLoading = false;
-        state.diary.diaryError = action.payload;
+        state.diary.diaryError = true;
         toast.error('Something wrong');
       })
       // CALCULATOR EXTRA REDUCERS
@@ -220,19 +262,21 @@ export const userSlice = createSlice({
       })
       .addCase(searchNotAllowedFood.rejected, (state, action) => {
         state.badFoodSearcList = [{ _id: 0, title: 'Nothing Found' }];
+        state.calculator.calculatorError = true;
       })
       .addCase(getDailyRate.pending, state => {
-        state.calculator.isRefreshing = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(getDailyRate.fulfilled, (state, action) => {
-        state.calculator.isLoggedIn = true;
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(getDailyRate.rejected, (state, action) => {
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(postCalculator.pending, state => {
-        state.calculator.isRefreshing = true;
+        state.calculator.calculatorIsLoading = true;
       })
       .addCase(postCalculator.fulfilled, (state, action) => {
         const calculator = action.payload;
@@ -247,6 +291,11 @@ export const userSlice = createSlice({
             originalWeight: calculator.originalWeight,
             calculatorDailyRate: calculator.dailyRate,
             startDate: calculator.startDate,
+            unitOfMeasure: calculator.unitOfMeasure,
+            heightFeet: null,
+            heightInch: null,
+            currentWeightLbs: null,
+            desiredWeightLbs: null,
           }
         } else {
           state.calculator = {
@@ -260,13 +309,45 @@ export const userSlice = createSlice({
             originalWeight: calculator.originalWeight,
             calculatorDailyRate: calculator.dailyRate,
             startDate: calculator.startDate,
+            unitOfMeasure: calculator.unitOfMeasure,
+            height: null,
+            currentWeight: null,
+            desiredWeight: null,
           }
         }
-        state.calculator.isLoggedIn = true;
-        state.calculator.isRefreshing = false;
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = null;
       })
       .addCase(postCalculator.rejected, (state, action) => {
-        state.calculator.isRefreshing = false;
+        const calculator = action.payload;
+        if (calculator.unitOfMeasure === "M") {
+          state.calculator = {
+            ...state.calculator,
+            height: null,
+            age: null,
+            currentWeight: null,
+            desiredWeight: null,
+            bloodType: null,
+            originalWeight: null,
+            calculatorDailyRate: null,
+            startDate: null,
+          }
+        } else {
+          state.calculator = {
+            ...state.calculator,
+            heightFeet: null,
+            heightInch: null,
+            age: null,
+            currentWeightLbs: null,
+            desiredWeightLbs: null,
+            bloodType: null,
+            originalWeight: null,
+            calculatorDailyRate: null,
+            startDate: null,
+          }
+        }
+        state.calculator.calculatorIsLoading = false;
+        state.calculator.calculatorError = true;
       })
       .addCase(archiveInfo.pending, state => {
         console.log('archiveInfo.pending')
@@ -342,11 +423,12 @@ export const userSlice = createSlice({
 export const {
   setCalDate,
   setDiaryList,
-  setFoodsList,
+  clearAllFoodsSearchList,
   setDiaryBackBtn,
   resetDiaryState,
   storeCalulator,
   resetCalcState,
   resetUserState,
+  clearCalculator,
 } = userSlice.actions;
 export const userReducer = userSlice.reducer;

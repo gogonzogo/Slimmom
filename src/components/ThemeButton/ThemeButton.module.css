@@ -2,56 +2,43 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    position: fixed;
+    position: relative;
     z-index: 2;
-    top: 5px;
-    left: 40%;
+    top: 21px;
+    padding-bottom: 15px;
 }
 .modeContainer {
-    position: relative;
-    margin: 15px 0 0 10px;
-/* --rotation: 0; */
+    position: absolute;
     width: 200px;
     height: 200px;
-    border: 1px solid yellowgreen;
+    /* border: .5px dashed green; */
     border-radius: 50%;
-/* transform: rotate(0deg);
-transform: rotate(calc(var(--rotation)*1deg)); */
     transition: transform var(--transition-time) linear;
 }
 
 .modeIconContainer {
-    position: relative;
+    position: absolute;
     width: 40px;
     height: 40px;
     transform: rotate(0deg);
-    transition: transform var(--transition-time) linear, opacity var(--transition-time) var(--transition-time-function);
+    transition: transform var(--transition-time) linear;
     top: -20px; /* -child size/2 */
     left: 80px; /* parent size/2 - child size/2 */
 }
-.modeIcons{
-    /* opacity: 1; */
-    position: relative;
-    transition: opacity var(--transition-time) .2s var(--transition-time-function)
-}
-.lightModeIcon {
-    opacity: 0;
-    /* transform: rotate(0deg); */
+
+.darkClicked {
+    background-color: transparent;
 }
 
-.darkModeIcon {
-    opacity: 1;
-    /* transform: rotate(360deg); */
-}
-
-.buttonClicked {
-    transition: background-color 1.2s var(--transition-time-function)
-}
-
-.darkClicked:hover {
-    background-color: #b2d1fa4e;
+.lightClicked {
+    background-color: transparent;
 }
 
 .lightClicked:hover {
-    background-color: rgba(255, 246, 209, 0.822);
+    background-color: #b2d1fa90;
 }
+
+.darkClicked:hover {
+    background-color: rgba(250, 233, 167, 0.788);
+}
+

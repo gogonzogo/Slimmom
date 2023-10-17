@@ -22,13 +22,12 @@ import {
   validateBlood,
 } from '../../redux/validation/calculateCalsSlice';
 import { storeCalulator } from '../../redux/user/userSlice';
-// resetCalcState;
 import CustomButton from 'components/CustomButton/CustomButton';
-import { getDailyRate, postCalculator } from '../../redux/user/userOperations';
+import { getDailyRate } from '../../redux/user/userOperations';
 import { useAuth } from '../../hooks/useAuth';
 import dayjs from 'dayjs';
 import { useUser } from 'hooks/useUser';
-// import { logOut } from '../../redux/auth/authOperations';
+import PostCalculatorConfirmDialog from 'components/Modal/PostCalculatorConfirmDialog';
 
 const CaloriesCalc = () => {
   const ageRef = useRef(null);
@@ -40,6 +39,10 @@ const CaloriesCalc = () => {
   const desiredLbsRef = useRef(null);
   const [buttonText, setButtonText] = useState('Submit');
   const { calculator } = useUser();
+  const [confirmPostCalculator, setConfirmPostCalculator] = useState({
+    calculator: null,
+    open: false,
+  });
 
   const { loggedIn } = useAuth();
   const today = dayjs().format('MM-DD-YYYY');
@@ -84,8 +87,6 @@ const CaloriesCalc = () => {
       ? true
       : false;
 
-  // const calculatorState = useSelector(state => state.user.calculator);
-
   const [validationPopups, setValidationPopups] = useState({
     weight: false,
     age: false,
@@ -127,16 +128,20 @@ const CaloriesCalc = () => {
     open: false,
     dailyRate: null,
     foodNotToEat: [],
+    source: 'calculator',
   }); //modal state and setters
 
-  const handleOpen = passinfo => {
-    setModalState({
-      open: true,
-      dailyRate: passinfo.dailyRate,
-      foodNotToEat: passinfo.notAllowedFood,
+  const handleModalOpen = passinfo => {
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: true,
+        dailyRate: passinfo.dailyRate,
+        foodNotToEat: passinfo.notAllowedFood,
+      };
     });
   };
-  const handleClose = () => {
+  const handleModalClose = () => {
     setModalState(prev => {
       return {
         ...prev,
@@ -176,8 +181,6 @@ const CaloriesCalc = () => {
 
   const changeHandler = e => {
     const { name, value } = e.target;
-    // console.log('name', name)
-    // console.log('value', value);
     setFormData({
       ...formData,
       [name]: value,
@@ -213,18 +216,6 @@ const CaloriesCalc = () => {
       default:
         break;
     }
-    // if (currentTabIndex === 1) {
-    //   const { heightFeet, heightInch, currentWeightLbs, desiredWeightLbs } =
-    //     formData;
-    //   setFormData(formData => {
-    //     return {
-    //       ...formData,
-    //       height: (heightFeet * 12 + heightInch * 1) * 2.54,
-    //       currentWeight: currentWeightLbs * 0.454,
-    //       desiredWeight: desiredWeightLbs * 0.454,
-    //     };
-    //   });
-    // }
     setFocusedField(name);
     toggleValidationPopup(name, true);
   };
@@ -238,6 +229,19 @@ const CaloriesCalc = () => {
         />
       </div>
     );
+  };
+
+  const postCalculatorConfirmed = (e) => {
+    const target = e.target.firstChild.data;;
+    setConfirmPostCalculator(prev => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+    if (target !== 'Discard') {
+      resetForm();
+    };
   };
 
   const submitHandler = async e => {
@@ -255,24 +259,6 @@ const CaloriesCalc = () => {
         desiredWeightLbs,
         unitOfMeasure,
       } = formData;
-      let convertBlood = 0;
-      switch (bloodType) {
-        case 'A':
-          convertBlood = 1;
-          break;
-        case 'B':
-          convertBlood = 2;
-          break;
-        case 'AB':
-          convertBlood = 3;
-          break;
-        case 'O':
-          convertBlood = 4;
-          break;
-        default:
-          convertBlood = 1;
-          break;
-      }
       const convertMeasurements = {
         currentWeight:
           unitOfMeasure === 'M' ? currentWeight : currentWeightLbs * 0.454,
@@ -287,10 +273,10 @@ const CaloriesCalc = () => {
       };
       const response = await dispatch(getDailyRate(convertMeasurements));
       const passinfo = response.payload.data;
-      const CalculatorInfo = {
+      const calculatorInfo = {
         height,
         age,
-        bloodType: convertBlood,
+        bloodType,
         currentWeight,
         desiredWeight,
         heightFeet,
@@ -299,20 +285,24 @@ const CaloriesCalc = () => {
         desiredWeightLbs,
         dailyRate: passinfo.dailyRate,
         unitOfMeasure,
-        date: '10-30-2023',
+        date: '12-24-2023',
         startDate: calculator.startDate || today,
         originalWeight:
           calculator.originalWeight || currentWeight || currentWeightLbs,
       };
       if (!loggedIn) {
-        dispatch(storeCalulator(CalculatorInfo));
-        handleOpen(passinfo);
+        dispatch(storeCalulator(calculatorInfo));
+        handleModalOpen(passinfo);
       } else {
-        dispatch(postCalculator(CalculatorInfo));
+        setConfirmPostCalculator(() => {
+          return {
+            calculator: calculatorInfo,
+            open: true,
+          };
+        });
       }
-      resetForm();
     } catch (err) {
-      throw new Error('Error submitting calculator: ' + err.message)
+      throw new Error('Error submitting calculator: ' + err.message);
     }
   };
 
@@ -870,8 +860,11 @@ const CaloriesCalc = () => {
           </div>
         </div>
       </div>
-
-      <Modal handleClose={handleClose} modalState={modalState} />
+      <Modal handleModalClose={handleModalClose} modalState={modalState} />
+      <PostCalculatorConfirmDialog
+        confirmPostCalculator={confirmPostCalculator}
+        postCalculatorConfirmed={postCalculatorConfirmed}
+      />
     </>
   );
 };

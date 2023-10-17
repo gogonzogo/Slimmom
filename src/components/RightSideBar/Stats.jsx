@@ -1,24 +1,6 @@
 import s from './rightSideBar.module.css';
 
 export const Stats = ({ calculator, progressData }) => {
-  let newBloodType;
-  switch (progressData.originalDate) {
-    case 1:
-      newBloodType = 'A';
-      break;
-    case 2: 
-      newBloodType = 'B';
-      break;
-    case 3:
-      newBloodType = 'AB';
-      break;
-    case 4:
-      newBloodType = 'O';
-      break;
-    default:
-      newBloodType = calculator.bloodType;
-      break;
-  }
   return (
     <div>
       {calculator.startDate ? (
@@ -27,24 +9,42 @@ export const Stats = ({ calculator, progressData }) => {
             <p className={s.sideBarTitle}>Your stats</p>
             <ul className={s.statsBox}>
               <li className={s.statsBoxItem}>
-                <p>Height, cm</p>
-                <p>{calculator.height}</p>
+                <p>Height</p>
+                <p>
+                  {calculator.height
+                    ? `${calculator.height} cm`
+                    : calculator.heightFeet && calculator.heightInch
+                    ? `${calculator.heightFeet} ft ${calculator.heightInch} in`
+                    : 'Height data not available'}
+                </p>
               </li>
               <li className={s.statsBoxItem}>
                 <p>Age</p>
-                <p>{calculator.age}</p>
+                <p>{calculator.age} years young</p>
               </li>
               <li className={s.statsBoxItem}>
-                <p>Current weight, kg</p>
-                <p>{calculator.currentWeight}</p>
+                <p>Current Weight</p>
+                <p>
+                  {calculator.currentWeight
+                    ? `${calculator.currentWeight} kg`
+                    : calculator.currentWeightLbs
+                    ? `${calculator.currentWeightLbs} lbs`
+                    : 'Current weight data not available'}
+                </p>
               </li>
               <li className={s.statsBoxItem}>
-                <p>Desired weight, kg</p>
-                <p>{calculator.desiredWeight}</p>
+                <p>Desired Weight</p>
+                <p>
+                  {calculator.desiredWeight
+                    ? `${calculator.desiredWeight} kg`
+                    : calculator.desiredWeightLbs
+                    ? `${calculator.desiredWeightLbs} lbs`
+                    : 'Desired weight data not available'}
+                </p>
               </li>
               <li className={s.statsBoxItem}>
-                <p>Blood type</p>
-                <p>{newBloodType}</p>
+                <p>Blood Type</p>
+                <p>{calculator.bloodType}</p>
               </li>
             </ul>
           </div>
@@ -52,19 +52,29 @@ export const Stats = ({ calculator, progressData }) => {
             <p className={s.sideBarTitle}>Your progress</p>
             <ul className={s.statsBox}>
               <li className={s.statsBoxItem}>
-                <p>Started date</p>
+                <p>Started Date</p>
                 <p>{progressData.originalDate}</p>
               </li>
               <li className={s.statsBoxItem}>
-                <p>Original weight, kg</p>
-                <p>{progressData.originalWeight}</p>
+                <p>Starting Weight</p>
+                <p>
+                  {calculator.unitOfMeasure === 'M'
+                    ? `${calculator.originalWeight} kg`
+                    : calculator.unitOfMeasure === 'S'
+                    ? `${calculator.originalWeight} lbs`
+                    : 'Starting weight data not available'}
+                </p>
               </li>
               <li className={s.statsBoxItem}>
-                <p>Lost, kg</p>
-                <p>{progressData.lost}</p>
+                <p>Weight Lost</p>
+                {calculator.unitOfMeasure === 'M'
+                  ? `${progressData.lost.toFixed(2)} kg`
+                  : calculator.unitOfMeasure === 'S'
+                  ? `${progressData.lost.toFixed(2)} lbs`
+                  : 'Lost weight data not available'}
               </li>
               <li className={s.statsBoxItem}>
-                <p>In</p>
+                <p>Days Tracking</p>
                 <p>{progressData.inDays} days</p>
               </li>
             </ul>

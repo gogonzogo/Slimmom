@@ -6,8 +6,9 @@
 /* .calcWrapper {
   padding: 0 1rem 1rem 1rem;
 } */
-.positionWrapper{max-width: 280px}
-
+.positionWrapper{
+  max-width: 280px;
+}
 
 .heading {
   font-family: Verdana;
@@ -24,17 +25,21 @@
 .formdiv {
   display: flex;
   flex-direction: column;
+  margin-left: auto;
 }
 
 
 .calcform {
   display: flex;
   flex-direction: column;
+  align-items: center;
  /* margin-top: 32px;*/
 }
 
 .tabs{
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {
@@ -60,7 +65,9 @@
   .heading:first-child {
     padding-bottom: 15px;
   }
-   
+   .tabs {
+    display: inline-block;
+   }
     
 }
 

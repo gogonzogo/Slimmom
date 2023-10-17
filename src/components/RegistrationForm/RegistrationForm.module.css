@@ -1,3 +1,7 @@
+.form {
+    margin-top: 15px;
+}
+
 .password_input
 .email_input
 .name_input{
@@ -22,6 +26,10 @@
     text-align: center;
 }
 
+.button_container {
+    margin: 60px 0 0 0;
+}
+
 /* styles for mobile */
 @media screen and (min-width: 320px) {
     .form_container form {
@@ -31,14 +39,6 @@
 
     .form_title {
         margin-bottom: 55px;
-    }
-
-    .button_container {
-        margin-top: 60px;
-    }
-
-    .button_container button {
-        margin-bottom: 20px;
     }
 }
 

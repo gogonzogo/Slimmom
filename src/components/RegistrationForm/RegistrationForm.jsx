@@ -17,16 +17,17 @@ import {
 import { register } from 'redux/auth/authOperations';
 import { useNavigate } from 'react-router-dom';
 import CustomButton from 'components/CustomButton/CustomButton';
-import { useAuth } from 'hooks/useAuth';
+import { postCalculator } from 'redux/user/userOperations';
+import { useUser } from 'hooks/useUser';
 
 const RegistrationForm = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const { loggedIn } = useAuth();
   const isEmailValid = useSelector(selectIsEmailValid);
   const isPasswordValid = useSelector(selectIsPasswordValid);
   const isNameValid = useSelector(selectIsNameValid);
   const isFormValid = useSelector(selectFormIsValid);
+  const { calculator } = useUser();
   const validationReqs = useSelector(
     state => state.registration.validationReqs
   );
@@ -64,9 +65,7 @@ const RegistrationForm = () => {
       [name]: value,
     });
 
-    switch (
-      name
-    ) {
+    switch (name) {
       case 'name':
         dispatch(validateName({ fieldValue: value }));
         break;
@@ -83,18 +82,42 @@ const RegistrationForm = () => {
     toggleValidationPopup(name, true);
   };
 
+  const calculatorInfo = {
+    height: calculator.height,
+    age: calculator.age,
+    bloodType: calculator.bloodType,
+    currentWeight: calculator.currentWeight,
+    desiredWeight: calculator.desiredWeight,
+    heightFeet: calculator.heightFeet,
+    heightInch: calculator.heightInch,
+    currentWeightLbs: calculator.currentWeightLbs,
+    desiredWeightLbs: calculator.desiredWeightLbs,
+    dailyRate: calculator.calculatorDailyRate,
+    unitOfMeasure: calculator.unitOfMeasure,
+    date: calculator.date,
+    startDate: calculator.startDate,
+    originalWeight: calculator.originalWeight,
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-        const { name, email, password } = formData;
-        const senddate = { name, email: email.toLowerCase(), password };
-        dispatch(register(senddate));
-        if (loggedIn) {
-          resetForm();
+      const { name, email, password } = formData;
+      const senddate = { name, email: email.toLowerCase(), password };
+      const registerResultAction = await dispatch(register(senddate));
+      if (register.fulfilled.match(registerResultAction)) {
+        const postCalculatorResultAction = await dispatch(
+          postCalculator(calculatorInfo)
+        );
+        if (postCalculator.rejected.match(postCalculatorResultAction)) {
           navigate('/calculator');
+        } else {
+          navigate('/diary');
         }
+        resetForm();
+      }
     } catch (error) {
-      throw new Error()
+      throw new Error('Error registering user: ' + error.message);
     }
   };
 
@@ -103,7 +126,7 @@ const RegistrationForm = () => {
       <h2 className={style.form_title}>REGISTER</h2>
       <Grid className={style.form_grid}>
         <FormControl variant="standard">
-          <form onSubmit={handleSubmit} noValidate>
+          <form onSubmit={handleSubmit} noValidate className={style.form}>
             <TextField
               className={style.name_input}
               autoComplete="name"
