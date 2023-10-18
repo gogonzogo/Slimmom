@@ -40,7 +40,12 @@ export const addDiaryEntry = createAsyncThunk(
     };
     try {
       const response = await axios.post('/diary/add', newDiaryEntry);
-      return response.data.data.newEntry;
+      const newEntry = response.data.data.newEntry;
+      const dailyRate = response.data.data.dailyRate;
+      return {
+        newEntry,
+        dailyRate,
+      };
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -103,9 +108,10 @@ export const getDailyRate = createAsyncThunk(
 );
 export const postCalculator = createAsyncThunk(
   'calculator/postCalculator',
-  async (credentials, { rejectWithValue }) => {
+  async (calculator, { rejectWithValue }) => {
+    console.log('calculator', calculator)
     try {
-      const { data } = await axios.post('/user/calcuator/', credentials);
+      const { data } = await axios.post('/user/calcuator/', calculator);
       return data.data;
     } catch (error) {
       return rejectWithValue(error.message);
