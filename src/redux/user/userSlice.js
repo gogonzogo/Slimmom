@@ -209,7 +209,9 @@ export const userSlice = createSlice({
         state.diary.diaryIsLoading = true;
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
-        state.diary.diaryList = [...state.diary.diaryList, action.payload];
+        state.diary.diaryList = [...state.diary.diaryList, action.payload.newEntry];
+        if (action.payload.dailyRate )
+        state.diary.dailyRate = action.payload.dailyRate;
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
         toast.success('Product added successfully', {
