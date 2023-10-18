@@ -36,7 +36,6 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   const handleInputChange = e => {
     if (e && e.target) {
       const userInput = e.target.value || '';
-      if (userInput === '') dispatch(clearAllFoodsSearchList());
       setProductName(userInput);
       throttleSearchFoods(userInput);
     }
