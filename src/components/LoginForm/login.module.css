@@ -34,7 +34,6 @@
 }
 
 .login_button:disabled {
-  color: rgba(0, 0, 0, 0.26);
   box-shadow: none;
   background-color: rgba(0, 0, 0, 0.12);
   cursor: not-allowed;
