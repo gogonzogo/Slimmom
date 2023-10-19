@@ -340,14 +340,14 @@ const CaloriesCalc = () => {
                     //  backgroundColor: '#ffffff',
                     border: 'solid #fc842d',
                     boxShadow:
-                      '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   },
                   '& button:hover': {
                     //  backgroundColor: '#ffffff',
                     //  color: '#fc842d',
                     border: 'solid #fc842d',
                     boxShadow:
-                      '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                      ' 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   },
                 }}
               >

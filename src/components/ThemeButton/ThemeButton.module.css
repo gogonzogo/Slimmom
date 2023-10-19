@@ -34,12 +34,11 @@
     background-color: transparent;
 }
 
-/* .lightClicked:hover {
-    box-shadow: var(--light-mode-box-shadow);
+.lightClicked:hover {
+    background-color: #b2d1fa90;
 }
 
-.darkClicked:hover
- {
-    box-shadow: var(--dark-mode-box-shadow);
-} */
+.darkClicked:hover {
+    background-color: rgba(250, 233, 167, 0.788);
+}
 

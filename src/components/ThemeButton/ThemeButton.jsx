@@ -33,13 +33,13 @@ const ThemeButton = () => {
   const sunStyle = {
     color: 'var(--accent-bright-color)',
     opacity: sunOpacity,
-    transition: "opacity 0.6s var(--transition-time-function)", 
+    transition: "opacity 0.6s, background-color 0.4s var(--transition-time-function)", 
   };
 
  const moonStyle = {
     color: 'var(--accent-bright-color)',
     opacity: moonOpacity,
-    transition: "opacity 0.6s var(--transition-time-function)",
+    transition: "opacity 0.6s, background-color 0.4s var(--transition-time-function)",
   };
 
   return (

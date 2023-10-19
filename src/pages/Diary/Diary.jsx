@@ -17,7 +17,6 @@ import s from '../../components/RightSideBar/rightSideBar.module.css';
 import { selectThemeMode } from 'redux/theme/themeSelectors';
 import Modal from 'components/Modal/Modal';
 import { useAuth } from 'hooks/useAuth';
-import Heading from 'components/Heading/Heading';
 
 function Diary() {
   const dispatch = useDispatch();
@@ -73,10 +72,6 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      <Heading
-        heading="Create a new diary entry, add foods you ate today"
-      />
-      
       {calculatorIsLoading || refreshing ? (
         <Loader />
       ) : (
