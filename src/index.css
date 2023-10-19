@@ -8,14 +8,16 @@
   --primary-font-color: #9b9faa;
   --secondary-font-dark: #212121;
   --secondary-font-light: #ffffff;
-  --disabled-button-text: #e0e0e0;
+  --disabled-button-text: #9b9faa;
   --font-weight-bold: 700;
   --font-weight-light: 400;
   --primary-font-size: 14px;
 
   --transition-time: 2000ms;
-  --transition-time-function: ease-in;
+  --transition-time-function: ease-in-out;
   --hover-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  /* --light-mode-box-shadow: 0 3px 6px rgba(250, 233, 167, 0.788), 0 3px 6px rgba(250, 233, 167, 0.788);
+  --dark-mode-box-shadow: 0 3px 6px #b2d1fa90, 0 3px 6px #b2d1fa90; */
 /*   --transition-time-function: cubic-bezier(0.4, 0, 0.8, 0.5); */
 
 }
@@ -50,6 +52,14 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+.MuiButtonBase-root:hover {
+  background-color: transparent !important;
+}
+
+.MuiTouchRipple-root {
+  display: none;
 }
 
 .app {

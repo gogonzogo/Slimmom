@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useRef } from 'react';
-import style from '../LoginForm/login.module.css';
+import style from '../LoginForm/Login.module.css';
 import { Box, FormControl, TextField, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { login } from 'redux/auth/authOperations';
