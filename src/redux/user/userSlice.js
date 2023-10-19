@@ -352,21 +352,17 @@ export const userSlice = createSlice({
         state.calculator.calculatorError = true;
       })
       .addCase(archiveInfo.pending, state => {
-        console.log('archiveInfo.pending')
         state.diary.isLoading = true;
 
       })
       .addCase(archiveInfo.fulfilled, (state, action) => {
-        console.log('archiveInfo.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(archiveInfo.rejected, (state, action) => {
-        console.log('archiveInfo.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
-        // console.log('Server Error!');
       })
       .addCase(deleteInfo.pending, state => {
         console.log('archiveInfo.pending')

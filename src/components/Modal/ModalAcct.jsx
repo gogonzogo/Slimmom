@@ -61,7 +61,6 @@ const ModalAcct = props => {
             let response = ""
             switch (modalState.myValue) {
                 case 'archive':
-                    console.log('dateRange', dateRange)
                     response = await dispatch(archiveInfo())
                     if (response.payload === 200) {
                         toast.success('Archive Success!', {
@@ -96,15 +95,11 @@ const ModalAcct = props => {
                     closeModal()
                     break;
                 case 'download':
-                    console.log('dateRange', dateRange)
                     const startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
                     const endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
-                    console.log('formatStartDate', startDate)
-                    console.log('formatEndDate', endDate)
+
                     const reportDates = { startDate: startDate, endDate: endDate }
-                    console.log('reportDates', reportDates)
                     response = await dispatch(exportXLS(reportDates))
-                    console.log(response)
                     if (response.payload === 200) {
                         toast.success('Delete Data Success!', {
                             position: 'top-right',

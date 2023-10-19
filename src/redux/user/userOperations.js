@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import fileDownload from 'js-file-download';
 
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
@@ -165,9 +166,12 @@ export const exportXLS = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `/user/downloadDiary/`, credentials
+        `/user/downloadDiary/`, credentials,
+        { responseType: "blob" }
       );
-      return response.data.data;
+      console.log("response.data", response)
+      fileDownload(response.data, 'dairy-report.pdf');
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.message);
     }
