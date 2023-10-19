@@ -11,7 +11,7 @@
 }
 
 .heading {
-  font-family: Verdana;
+  /* font-family: Verdana; */
   font-size: 18px;
   font-weight: 700;
   line-height: 25px;
@@ -84,11 +84,6 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     grid-template-areas: 'calculator rightSideBar';
-  }
-
-  .heading {
-    font-size: 34px;
-    /* width: 608px; */
   }
 
   .heading:first-child {
