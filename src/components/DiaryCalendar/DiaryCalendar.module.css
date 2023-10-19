@@ -5,7 +5,7 @@
 .btnPopperContainer {
   display: flex;
   align-items: center;
-  margin-top: -45px;
+  margin-top: -5px;
 }
 .dateText {
   font-size: 18px;
