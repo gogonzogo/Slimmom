@@ -18,11 +18,9 @@ const customTheme = (mode) => {
               paper: '#e0e0e0',
               secondary: '#9B9FAA',
             },
-            // text: {
-            //   main: '#9b9faa',
-            //   secondary: '#9b9faa',
-            //   // hint: '#271a3fe3',
-            //},
+            action: {
+              disabled: '#9B9FAA',
+            },
           }
         : // else use dark mode
           {
@@ -35,13 +33,14 @@ const customTheme = (mode) => {
               default: '#271a3fe3',
               paper: '#2a1d45bb',
             },
-            // text: {
-            //   main: '#9b9faa',
-            //   primary: '#e0e0e0',
-            //   secondary: '#e0e0e0',
-            //   contrastText: '#e0e0e0',
-            // },
+            action: {
+              disabled: '#9B9FAA',
+            },
           }),
+    },
+    // global mui styles
+    typography: {
+      fontFamily: 'Verdana, Geneva, Tahoma, sans-serif',
     },
     components: {
       MuiButtonBase: {
@@ -54,7 +53,6 @@ const customTheme = (mode) => {
       MuiPaper: {
         styleOverrides: {
           root: {
-            // backgroundColor: 'transparent',
             backgroundImage: 'unset',
           },
         },
@@ -69,23 +67,6 @@ const customTheme = (mode) => {
           },
         },
       },
-      // MuiSvgIcon: {
-      //   styleOverrides: {
-      //     root: {
-      //       color: mode === 'dark' ? '##ffffff' : '#fc842d',
-      //     },
-      //   },
-      // },
-      // MuiRadio: {
-      //   styleOverrides: {
-      //     root: {
-      //       color: '#9b9faa',
-      //       '&.Mui-checked': {
-      //         color: '#fc842d',
-      //       },
-      //     },
-      //   },
-      // },
     },
   });
 };
