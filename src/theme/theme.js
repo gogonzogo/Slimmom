@@ -60,13 +60,21 @@ const customTheme = (mode) => {
       MuiDateCalendar: {
         styleOverrides: {
           root: {
-            backgroundColor: mode === 'dark' ? '#2a1d45f5' : '#ffffff',
+            backgroundColor: mode === 'dark' ? '#2a1d45' : '#ffffff',
             color: mode === 'dark' ? '#ffffff' : '#000000',
             boxShadow:
               '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
           },
         },
       },
+      // MuiCard: {
+      //   styleOverrides: {
+      //     root: {
+      //       backgroundColor: mode === 'dark' ? '#2a1d45bb' : '#ffffff',
+      //       // backgroundColor: 'transparent',
+      //     },
+      //   },
+      // },
     },
   });
 };
