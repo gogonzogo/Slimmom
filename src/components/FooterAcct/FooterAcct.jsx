@@ -92,7 +92,7 @@ export default function FooterAcct() {
           open={open}
           anchorEl={anchorRef.current}
           role={undefined}
-          placement="bottom-start"
+          placement="top-start"
           transition
           disablePortal
         >
