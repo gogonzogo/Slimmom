@@ -20,7 +20,7 @@ export default function FooterAcct() {
   });
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const handleOpenMadal = myValue => {
+  const handleOpenModal = myValue => {
     setModalState({
       open: true,
       myValue: myValue,
@@ -50,7 +50,7 @@ export default function FooterAcct() {
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
       if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download') {
-        handleOpenMadal(myValue)
+        handleOpenModal(myValue)
       }
     }
     setOpen(false);
