@@ -123,10 +123,10 @@ export const postCalculator = createAsyncThunk(
 
 export const archiveInfo = createAsyncThunk(
   'diary/archivedata',
-  async (data, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `/user/archive/`
+        `/user/archive/`, credentials
       );
       return response.data.data;
     } catch (error) {

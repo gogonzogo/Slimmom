@@ -210,8 +210,8 @@ export const userSlice = createSlice({
       })
       .addCase(addDiaryEntry.fulfilled, (state, action) => {
         state.diary.diaryList = [...state.diary.diaryList, action.payload.newEntry];
-        if (action.payload.dailyRate )
-        state.diary.dailyRate = action.payload.dailyRate;
+        if (action.payload.dailyRate)
+          state.diary.dailyRate = action.payload.dailyRate;
         state.diary.diaryIsLoading = false;
         state.diary.diaryError = null;
         toast.success('Product added successfully', {
@@ -365,55 +365,39 @@ export const userSlice = createSlice({
         console.log('Error');
       })
       .addCase(deleteInfo.pending, state => {
-        console.log('archiveInfo.pending')
         state.diary.isLoading = true;
 
       })
       .addCase(deleteInfo.fulfilled, (state, action) => {
-        console.log('archiveInfo.fulfilled')
-
         state.diary.isLoading = false;
       })
       .addCase(deleteInfo.rejected, (state, action) => {
-        console.log('archiveInfo.rejected')
-
         state.diary.isLoading = false;
         console.log('Error');
-        // console.log('Server Error!');
       })
       .addCase(deleteAcct.pending, state => {
-        console.log('archiveInfo.pending')
         state.diary.isLoading = true;
 
       })
       .addCase(deleteAcct.fulfilled, (state, action) => {
-        console.log('archiveInfo.fulfilled')
-
         state.diary.isLoading = false;
       })
       .addCase(deleteAcct.rejected, (state, action) => {
-        console.log('archiveInfo.rejected')
-
         state.diary.isLoading = false;
         console.log('Error');
-        // console.log('Server Error!');
       })
       .addCase(exportXLS.pending, state => {
-        console.log('exportXLS.pending')
         state.diary.isLoading = true;
 
       })
       .addCase(exportXLS.fulfilled, (state, action) => {
-        console.log('exportXLS.fulfilled')
 
         state.diary.isLoading = false;
       })
       .addCase(exportXLS.rejected, (state, action) => {
-        console.log('exportXLS.rejected')
 
         state.diary.isLoading = false;
         console.log('Error');
-        // console.log('Server Error!');
       })
   },
 });

@@ -112,7 +112,7 @@ export default function FooterAcct() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy and Caculator data</MenuItem>
+                    <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy data</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
                     <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
