@@ -6,6 +6,7 @@ import { userReducer } from './user/userSlice';
 import { themeReducer } from './theme/themeSlice';
 import { resetState } from './resetState';
 import { toast } from 'react-toastify';
+import { avatarReducer } from './avatar/avatarSlice';
 
 const customMiddleware = store => next => action => {
   if (action.error && action.error.message === 'Rejected') {
@@ -32,6 +33,7 @@ const store = configureStore({
     calculate: CaloriesReducer,
     user: userReducer,
     theme: themeReducer,
+    avatar: avatarReducer
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

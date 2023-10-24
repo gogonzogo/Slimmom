@@ -1,9 +1,12 @@
+//external
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+//internal
+import generateDefaultAvatarCode from 'redux/avatar/avatarOperations';
 
-axios.defaults.baseURL = 'https://slimmom-9d5b6b1b5aa9.herokuapp.com/api';
-//axios.defaults.baseURL = 'http://localhost:3030/api';
+//axios.defaults.baseURL = 'https://slimmom-9d5b6b1b5aa9.herokuapp.com/api';
+axios.defaults.baseURL = 'http://localhost:3030/api';
 axios.defaults.withCredentials = true;
 
 export const token = {
@@ -17,9 +20,10 @@ export const token = {
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (credentials, { rejectWithValue }) => {
+  async (credentials, { dispatch, rejectWithValue }) => {
     try {
       const res = await axios.post('/auth/register', credentials);
+      dispatch(generateDefaultAvatarCode(credentials.email));
       token.set(res.data.data.token);
       return res.data.data;
     } catch (error) {
@@ -30,9 +34,10 @@ export const register = createAsyncThunk(
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (credentials, { rejectWithValue }) => {
+  async (credentials, { dispatch, rejectWithValue }) => {
     try {
       const res = await axios.post('/auth/login', credentials);
+      dispatch(generateDefaultAvatarCode(credentials.email));
       token.set(res.data.data.token);
       return res.data.data;
     } catch (error) {

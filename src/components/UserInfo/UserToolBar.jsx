@@ -16,7 +16,7 @@ import { useUser } from 'hooks/useUser';
 import { setDiaryBackBtn } from 'redux/user/userSlice';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 import { resetState } from 'redux/resetState';
-
+import AvatarImg from 'components/Avatar/AvatarImg';
 
 const UserToolBar = () => {
   const { user } = useAuth();
@@ -30,6 +30,7 @@ const UserToolBar = () => {
   return (
     <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       {diaryBackBtn && <DiaryBackButton onClick={handleClick} />}
+      <AvatarImg/>
       <Typography>{user}</Typography>
       <Divider
         orientation="vertical"
