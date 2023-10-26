@@ -110,7 +110,6 @@ export const getDailyRate = createAsyncThunk(
 export const postCalculator = createAsyncThunk(
   'calculator/postCalculator',
   async (calculator, { rejectWithValue }) => {
-    console.log('calculator', calculator)
     try {
       const { data } = await axios.post('/user/calculator/', calculator);
       return data.data;
@@ -127,6 +126,21 @@ export const archiveInfo = createAsyncThunk(
     try {
       const response = await axios.post(
         `/user/archive/`, credentials
+      );
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const getArchive = createAsyncThunk(
+  'diary/getarchivedata',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `/user/getarchive/`
       );
       return response.data.data;
     } catch (error) {
@@ -169,7 +183,6 @@ export const exportXLS = createAsyncThunk(
         `/user/downloadDiary/`, credentials,
         { responseType: "blob" }
       );
-      console.log("response.data", response)
       fileDownload(response.data, 'dairy-report.pdf');
       return response.data;
     } catch (error) {

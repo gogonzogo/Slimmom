@@ -13,6 +13,7 @@ import {
   deleteInfo,
   deleteAcct,
   exportXLS,
+  getArchive,
 
 } from './userOperations';
 import { Slide, toast } from 'react-toastify';
@@ -395,6 +396,19 @@ export const userSlice = createSlice({
         state.diary.isLoading = false;
       })
       .addCase(exportXLS.rejected, (state, action) => {
+
+        state.diary.isLoading = false;
+        console.log('Error');
+      })
+      .addCase(getArchive.pending, state => {
+        state.diary.isLoading = true;
+
+      })
+      .addCase(getArchive.fulfilled, (state, action) => {
+
+        state.diary.isLoading = false;
+      })
+      .addCase(getArchive.rejected, (state, action) => {
 
         state.diary.isLoading = false;
         console.log('Error');
