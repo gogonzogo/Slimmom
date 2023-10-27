@@ -20,7 +20,6 @@ export default function PostCalculatorConfirmDialog({
   const dispatch = useDispatch();
 
   const handleSave = (e) => {
-    console.log(confirmPostCalculator.calculator);
     dispatch(postCalculator(confirmPostCalculator.calculator));
     postCalculatorConfirmed(e);
   };

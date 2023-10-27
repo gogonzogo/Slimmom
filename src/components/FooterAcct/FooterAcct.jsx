@@ -20,6 +20,7 @@ export default function FooterAcct() {
   });
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
+
   const handleOpenModal = myValue => {
     setModalState({
       open: true,
@@ -49,7 +50,7 @@ export default function FooterAcct() {
     }
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
-      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download') {
+      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download' || myValue === 'get') {
         handleOpenModal(myValue)
       }
     }
@@ -112,7 +113,8 @@ export default function FooterAcct() {
                     aria-labelledby="composition-button"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy and Caculator data</MenuItem>
+                    <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy data</MenuItem>
+                    <MenuItem data-my-value="get" onClick={handleClose}>get List of Archives</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
                     <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>

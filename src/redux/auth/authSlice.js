@@ -9,7 +9,6 @@ const initialState = {
   isLoggedIn: false,
   isRefreshing: false,
 };
-console.log(initialState)
 const authSlice = createSlice({
   name: 'auth',
   initialState,

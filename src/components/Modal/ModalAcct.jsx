@@ -14,6 +14,7 @@ import {
     deleteInfo,
     archiveInfo,
     exportXLS,
+    getArchive,
 } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { toast } from 'react-toastify';
@@ -32,17 +33,19 @@ const ModalAcct = props => {
     const isMobile = useMediaQuery('(max-width: 480px)');
     const [dateRange, setDateRange] = useState([
         {
+            currentDate: new Date(),
             startDate: new Date(),
             endDate: new Date(),
             key: 'selection',
-
         }
     ])
 
-    const archiveMessage = "Are you sure that you want to Archive all of your data.  this will move all of your current data to the Archive and you will have to start a new Calculator and Dairy"
+    const archiveMessage = "Are you sure that you want to Archive the dates selected.  this will move these dates to an archive location"
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
     const accountMessage = "Are you sure that you want to Delete your accout.  You will no longer be able to login and will need to create a new account"
     const downloadMessage = "This will download a dairy summary to your computer."
+    const getArchivedMessage = "This will download a dairy summary to your computer."
+
 
     const changeHandler = async e => {
         const { value } = e.target;
@@ -59,10 +62,19 @@ const ModalAcct = props => {
     const runOption = async () => {
         if (modalState.myValue === typeText) {
             let response = ""
+            let startDate = "";
+            let endDate = '';
+            let currentDate = '';
+            let reportDates
+
             switch (modalState.myValue) {
                 case 'archive':
-                    response = await dispatch(archiveInfo())
-                    if (response.payload === 200) {
+                    startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
+                    endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
+                    currentDate = dayjs(`${dateRange[0].currentDate}`).format(`MM/DD/YYYY`);
+                    reportDates = { startDate: startDate, endDate: endDate, currentDate: currentDate }
+                    response = await dispatch(archiveInfo(reportDates))
+                    if (response.payload.code === 200) {
                         toast.success('Archive Success!', {
                             position: 'top-right',
                             autoClose: 3000,
@@ -95,10 +107,10 @@ const ModalAcct = props => {
                     closeModal()
                     break;
                 case 'download':
-                    const startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
-                    const endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
+                    startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
+                    endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
 
-                    const reportDates = { startDate: startDate, endDate: endDate }
+                    reportDates = { startDate: startDate, endDate: endDate }
                     response = await dispatch(exportXLS(reportDates))
                     if (response.payload === 200) {
                         toast.success('Delete Data Success!', {
@@ -109,6 +121,20 @@ const ModalAcct = props => {
                     }
                     closeModal()
                     break;
+                case 'get':
+                    response = await dispatch(getArchive())
+
+                    if (response.payload.code === 200) {
+                        toast.success('Archive Info received', {
+                            position: 'top-right',
+                            autoClose: 3000,
+                            className: 'success-toast',
+                        });
+                    }
+                    closeModal()
+                    break;
+
+
                 default:
 
                     break;
@@ -152,12 +178,12 @@ const ModalAcct = props => {
                                 }
                             </div>
 
-
+                            getArchivedMessage
 
 
 
                             {modalState.myValue === 'archive' ?
-                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : <h3> {downloadMessage}</h3>))}
+                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : (modalState.myValue === 'download' ? <h3> {downloadMessage}</h3> : <h3> {getArchivedMessage}</h3>)))}
                             <p className={s.ptag}>type <span className={s.messageSpan}> {modalState.myValue}</span> and click submit.</p>
                             <TextField id="outlined-basic" label={modalState.myValue} variant="standard" onChange={changeHandler}
                                 value={typeText} style={{ marginBottom: '20px' }} />
