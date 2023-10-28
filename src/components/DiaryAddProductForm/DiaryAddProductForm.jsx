@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Autocomplete, TextField, Stack } from '@mui/material';
 import css from './DiaryAddProductForm.module.css';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { addDiaryEntry, searchFoods } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { useUser } from '../../hooks/useUser';
+import { selectThemeMode } from 'redux/theme/themeSelectors';
 import { throttle } from 'lodash';
 import { clearAllFoodsSearchList, setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
@@ -19,7 +21,7 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
     title: food.title,
     groupBloodNotAllowed: food.groupBloodNotAllowed,
   }));
-
+  const themeMode = useSelector(selectThemeMode);
   const { width } = useViewPort();
 
   const userBloodTypeIndex = () => {
@@ -71,6 +73,11 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               sx={{
                 '@media (min-width: 768px)': {
                   width: '240px',
+                },
+              }}
+              ListboxProps={{
+                sx: {
+                  backgroundColor: themeMode === 'dark' ? '#2a1d45' : '#ffffff'
                 },
               }}
               freeSolo
