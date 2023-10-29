@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Final-Team-Project/static/css/main.02b6e234.css",
-    "main.js": "/Final-Team-Project/static/js/main.605dc5c6.js",
+    "main.css": "/Final-Team-Project/static/css/main.a3236573.css",
+    "main.js": "/Final-Team-Project/static/js/main.8bbe0c91.js",
     "static/css/661.97e047cd.chunk.css": "/Final-Team-Project/static/css/661.97e047cd.chunk.css",
     "static/js/661.e7784284.chunk.js": "/Final-Team-Project/static/js/661.e7784284.chunk.js",
     "static/css/883.ad9edbc4.chunk.css": "/Final-Team-Project/static/css/883.ad9edbc4.chunk.css",
@@ -36,12 +36,12 @@
     "static/media/desktop-shape@2x.png": "/Final-Team-Project/static/media/desktop-shape@2x.d2cb43d0fdf60e0e0b8b.png",
     "static/media/tablet-dairy-leaves.png": "/Final-Team-Project/static/media/tablet-dairy-leaves.7887c12ec4fc572fe392.png",
     "static/media/tablet-shape@2x.png": "/Final-Team-Project/static/media/tablet-shape@2x.889e3a64552804317009.png",
-    "static/media/sprite.svg": "/Final-Team-Project/static/media/sprite.9d9ceb3d2a9a28a4f833aec94c19a578.svg",
+    "static/media/sprite.svg": "/Final-Team-Project/static/media/sprite.a3a9a6821d9d18d2f899030545ede6e0.svg",
     "static/media/slim.svg": "/Final-Team-Project/static/media/slim.99566354f098178820c3b3692170357f.svg",
     "static/media/mom.svg": "/Final-Team-Project/static/media/mom.44b3082021f2075af88260b947389fc5.svg",
     "index.html": "/Final-Team-Project/index.html",
-    "main.02b6e234.css.map": "/Final-Team-Project/static/css/main.02b6e234.css.map",
-    "main.605dc5c6.js.map": "/Final-Team-Project/static/js/main.605dc5c6.js.map",
+    "main.a3236573.css.map": "/Final-Team-Project/static/css/main.a3236573.css.map",
+    "main.8bbe0c91.js.map": "/Final-Team-Project/static/js/main.8bbe0c91.js.map",
     "661.97e047cd.chunk.css.map": "/Final-Team-Project/static/css/661.97e047cd.chunk.css.map",
     "661.e7784284.chunk.js.map": "/Final-Team-Project/static/js/661.e7784284.chunk.js.map",
     "883.ad9edbc4.chunk.css.map": "/Final-Team-Project/static/css/883.ad9edbc4.chunk.css.map",
@@ -59,7 +59,7 @@
     "44.ae35dba3.chunk.js.map": "/Final-Team-Project/static/js/44.ae35dba3.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.02b6e234.css",
-    "static/js/main.605dc5c6.js"
+    "static/css/main.a3236573.css",
+    "static/js/main.8bbe0c91.js"
   ]
 }
