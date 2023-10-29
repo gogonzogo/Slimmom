@@ -1,0 +1,14 @@
+.iconContainer {
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.iconSpace {
+    padding:0 3px;
+}
+.icon {
+    height: 18px;
+    width: 21px;
+    fill: var(--accent-bright-color);
+}
