@@ -1,9 +1,14 @@
-.iconContainer {
+.footerContainer {
     padding: 8px 10px;
     display: flex;
-    align-items: center;
+}
+
+.iconContainer {
+    display: flex;
+    padding: 3px 10px;
     justify-content: center;
 }
+
 .iconSpace {
     padding:0 3px;
 }
