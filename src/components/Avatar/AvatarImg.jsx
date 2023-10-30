@@ -19,7 +19,7 @@ const AvatarImg = () => {
                         alt={`users avatar ${user}`}
                         name={avatarData}
                         variant='beam'
-                        size={25}
+                        size={30}
                         colors={['#7B6C96', '#9B9FAA', '#FC842D', '#337A02', '#E6E119']}
                     />}
             </Box>
