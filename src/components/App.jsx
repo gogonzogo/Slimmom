@@ -3,8 +3,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Loader from './Loader/Loader';
-import { ToastContainer } from 'react-toastify'; 
-import 'react-toastify/dist/ReactToastify.css'; 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Box } from '@mui/material';
 
 // internal
@@ -19,6 +19,7 @@ const Diary = lazy(() => import('pages/Diary/Diary'));
 const Calculator = lazy(() => import('pages/Calculator/Calculator'));
 const Register = lazy(() => import('pages/Register/Register'));
 const Login = lazy(() => import('pages/Login/Login'));
+const Archive = lazy(() => import('pages/Archive/Archive'));
 
 export const App = () => {
   return (
@@ -29,16 +30,16 @@ export const App = () => {
         <Routes>
 
           {/** public routes */}
-            <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />  
-            <Route path="register" element={<PublicRoute><Register /></PublicRoute>} />
-            <Route path="login" element={<PublicRoute><Login /></PublicRoute>} />
-          
+          <Route path="/" element={<PublicRoute><Home /></PublicRoute>} />
+          <Route path="register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="login" element={<PublicRoute><Login /></PublicRoute>} />
+
           {/** private routes */}
-          
-            <Route path="/diary" element={<PrivateRoute><Diary /></PrivateRoute>} />
-            <Route path="/calculator" element={<PrivateRoute><Calculator /></PrivateRoute>} />
-            <Route path="*" element={<h1>404</h1>} />
-      
+
+          <Route path="/diary" element={<PrivateRoute><Diary /></PrivateRoute>} />
+          <Route path="/calculator" element={<PrivateRoute><Calculator /></PrivateRoute>} />
+          <Route path="/archive" element={<PrivateRoute><Archive /></PrivateRoute>} />
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </Suspense>
       <Footer />
