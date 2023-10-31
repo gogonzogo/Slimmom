@@ -7,9 +7,9 @@ function Archive() {
     const location = useLocation();
     const archivesData = location.state;
     return (
-        <div className="background mainBackground">
-            <section className="top-bottom">
-                <Container className="left-right">
+        <div >
+            <section >
+                <Container>
                     <ArchiveByDate archivesData={archivesData} />
                 </Container>
             </section>

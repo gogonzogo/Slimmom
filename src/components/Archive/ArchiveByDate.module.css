@@ -1,0 +1,22 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.report {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.row:first-child {
+    width: 70%;
+
+}
+
+.row:not:first-child {
+    width: 15%;
+
+}
