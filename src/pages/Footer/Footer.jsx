@@ -11,7 +11,7 @@ import s from './Footer.module.css'
 function Footer() {
   const { loggedIn } = useAuth();
   const themeMode = useSelector(selectThemeMode);
-  
+
   return (
     <Box className={`${s.footerContainer}`}>
       
@@ -32,8 +32,8 @@ function Footer() {
             ) : (
               null)
           }
-          <Box className={`${s.iconContainer}`}>
-            <Typography>Developed with
+          <Box className={`${s.iconContainer}`} style={{ padding: loggedIn ? '0 10px 3px 10px' : '8px 10px 3px 10px'}}>
+            <Typography className={s.developerText}>Developed with
               <span className={s.iconSpace}>
                 <a href="https://github.com/gogonzogo/Final-Team-Project/blob/main/README.md" target="_blank" rel="noopener noreferrer">
                   <CustomIcon className={`${s.icon}`}
