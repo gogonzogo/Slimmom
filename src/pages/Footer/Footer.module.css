@@ -5,7 +5,6 @@
 
 .iconContainer {
     display: flex;
-    padding: 3px 10px;
     justify-content: center;
 }
 
@@ -13,7 +12,11 @@
     padding:0 3px;
 }
 .icon {
-    height: 18px;
-    width: 21px;
+    height: 12px;
+    width: 15px;
     fill: var(--accent-bright-color);
+}
+
+.developerText{
+    font-size: 12px;
 }
