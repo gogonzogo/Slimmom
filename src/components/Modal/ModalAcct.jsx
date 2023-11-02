@@ -48,7 +48,7 @@ const ModalAcct = props => {
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
     const accountMessage = "Are you sure that you want to Delete your accout.  You will no longer be able to login and will need to create a new account"
     const downloadMessage = "This will download a dairy summary to your computer."
-    const getArchivedMessage = "This will download a dairy summary to your computer."
+    const getArchivedMessage = "Review previously Archived information."
 
 
     const changeHandler = async e => {
@@ -126,7 +126,7 @@ const ModalAcct = props => {
                     closeModal()
                     break;
 
-                case 'get':
+                case 'review':
                     response = await dispatch(getArchive())
                     closeModal()
                     if (response.payload.code === 200) {
