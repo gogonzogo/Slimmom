@@ -1,4 +1,3 @@
-
 import { string } from 'prop-types';
 import Sprite from './sprite.svg';
 
@@ -13,6 +12,6 @@ const CustomIcon = ({ iconName, color, className }) => {
 CustomIcon.propTypes = {
     iconName: string.isRequired,
     color: string,
-    className: string.isRequired
+    className: string
 }
 export default CustomIcon;

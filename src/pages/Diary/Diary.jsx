@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Container from 'components/Container/Container';
 import Loader from 'components/Loader/Loader';
-import { Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import DiaryAddProductForm from 'components/DiaryAddProductForm/DiaryAddProductForm';
 import DiaryCalendar from 'components/DiaryCalendar/DiaryCalendar';
 import RightSideBar from 'components/RightSideBar/RightSideBar';
@@ -18,7 +18,7 @@ import { selectThemeMode } from 'redux/theme/themeSelectors';
 import Modal from 'components/Modal/Modal';
 import { useAuth } from 'hooks/useAuth';
 import Heading from 'components/Heading/Heading';
-
+import style from './Diary.module.css';
 function Diary() {
   const dispatch = useDispatch();
   const { diaryBackBtn, calculator, calculatorIsLoading } =
@@ -73,34 +73,33 @@ function Diary() {
         flexDirection: 'column',
       }}
     >
-      <Heading
-        heading="Create a new diary entry, add foods you ate today"
-      />
       
       {calculatorIsLoading || refreshing ? (
         <Loader />
       ) : (
-        <>
+          <>
           <section className="top-bottom">
             <Container className="left-right">
               {width > 767 ? (
                 <>
-                  <div>
+                  <Box className={style.formContainer}>
+                    <Heading heading="Create a new diary entry, add foods you ate today"/>
                     <DiaryCalendar />
                     <DiaryAddProductForm />
                     <DiaryList />
-                  </div>
+                  </Box>
                 </>
               ) : (
                 <>
                   <div style={{ display: `${formDisplay}` }}>
                     <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
                   </div>
-                  <div style={{ display: `${calendarDisplay}` }}>
+                  <Box style={{ display: `${calendarDisplay}` }} className={style.formContainer}>
+                    <Heading heading="Create a new diary entry, add foods you ate today"/>
                     <DiaryCalendar />
                     <DiaryList />
                     <DiaryAddButton onClick={handleClick} />
-                  </div>
+                  </Box>
                 </>
               )}
             </Container>

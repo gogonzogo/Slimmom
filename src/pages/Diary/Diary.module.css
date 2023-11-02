@@ -1,0 +1,29 @@
+/* .formContainer {
+    margin: 0 auto;
+    max-width: 1280px;
+} */
+
+@media screen and (min-width: 320px) {
+    .formContainer {
+        max-width: 288px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .formContainer {
+        max-width: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        /* margin-top: 60px; */
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .formContainer {
+        /* margin-top: 0; */
+        margin: 0 auto;
+         max-width: 1280px;
+    }
+}

@@ -1,0 +1,22 @@
+.footerContainer {
+    padding: 8px 10px;
+    display: flex;
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.iconSpace {
+    padding:0 3px;
+}
+.icon {
+    height: 12px;
+    width: 15px;
+    fill: var(--accent-bright-color);
+}
+
+.developerText{
+    font-size: 12px;
+}
