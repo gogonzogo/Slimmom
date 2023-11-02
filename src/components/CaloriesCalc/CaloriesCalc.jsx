@@ -311,8 +311,11 @@ const CaloriesCalc = () => {
       <div className={css.positionWrapper}>
         <div className={css.section}>
           <div className={css.calcWrapper}>
-            <h1 className={css.heading}>Calculate your daily calorie</h1>
-            <h1 className={css.heading}>intake right now</h1>
+            {!loggedIn ? <><h1 className={css.heading}>Calculate your daily calorie</h1>
+            <h1 className={css.heading}>intake right now</h1></>
+          : <><h1 className={css.heading}>Input your stats, calculate</h1>
+            <h1 className={css.heading}>your caloric intake</h1></>
+          }
 
             <div className={css.tabs}>
               <Tabs
