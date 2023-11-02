@@ -7,7 +7,7 @@ function Archive() {
     const location = useLocation();
     const archivesData = location.state;
     return (
-        <div >
+        <div className="background Calc-DairyBackground">
             <section >
                 <Container>
                     <ArchiveByDate archivesData={archivesData} />

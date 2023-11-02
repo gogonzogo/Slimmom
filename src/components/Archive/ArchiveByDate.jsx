@@ -5,16 +5,16 @@ import { getArchiveDateinfo } from '../../redux/user/userOperations';
 import { useDispatch } from 'react-redux';
 import css from './ArchiveByDate.module.css';
 
-
 function ArchiveByDate(props) {
     let dairyRate = 0
     let dayCalories = 0
+    const [diaryinf, setDiaryinf] = useState(props.archivesData.archiveinfo)
     const userinfo = props.archivesData.userinfo
     const calcinfo = props.archivesData.calculatorInfo
-    let diaryinf = props.archivesData.archiveinfo
     const alldates = props.archivesData.archiveDates
     const dispatch = useDispatch();
     const [archivePick, setArchivePick] = useState(0);
+
 
     const handleChange = async e => {
         const { value } = e.target;
@@ -26,7 +26,7 @@ function ArchiveByDate(props) {
         }
         const response = await dispatch(getArchiveDateinfo(Archiveinfo));
         if (response) {
-            diaryinf = response.payload.userArchive
+            setDiaryinf(response.payload.archiveReturnData)
         }
 
     }
@@ -60,21 +60,20 @@ function ArchiveByDate(props) {
                     </Select>
                 </div>
 
-                <div>
-
-                    <h3>Dairy Archive Summary for </h3>
-                    <h5>{userinfo[0].name}   ({userinfo[0].email})</h5>
-                    <h5>Archived on {diaryinf[0].archiveDate}</h5>
-                    <h5>{diaryinf[0].startDate} through {diaryinf[0].endDate}</h5>
+                <div >
+                    <h3 className={css.centerText}>Dairy Archive Summary for </h3>
+                    <h5 className={css.centerText}>{userinfo[0].name}   ({userinfo[0].email})</h5>
+                    <h5 className={css.centerText}>Archived on {diaryinf[0].archiveDate}</h5>
+                    <h5 className={css.centerText}>{diaryinf[0].startDate} through {diaryinf[0].endDate}</h5>
 
                     {calcinfo[0].calculatorEntries[0].calculatorEntry[0].unitOfMeasure !== "S" ?
                         <>
-                            <h5>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].height.toString()}cm  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>
-                            <h5>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeightLbs.toString()}kg  Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeightLbs.toString()}kg</h5>
+                            <h5 className={css.centerText}>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].height.toString()}cm  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>
+                            <h5 className={css.centerText}>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeightLbs.toString()}kg  Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeightLbs.toString()}kg</h5>
                         </> :
                         <>
-                            <h5>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightFeet.toString()}  feet {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightInch.toString()}  inches  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>
-                            <h5>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeightLbs.toString()}lbs    Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeightLbs.toString()}lbs</h5>
+                            <h5 className={css.centerText}>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightFeet.toString()}  feet {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightInch.toString()}  inches  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>
+                            <h5 className={css.centerText}>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeightLbs.toString()}lbs    Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeightLbs.toString()}lbs</h5>
                         </>
 
                     }
@@ -87,46 +86,51 @@ function ArchiveByDate(props) {
                         <div>
 
                             {dayCalories = 0}
-                            {dairyRate = item.dailyRat}
+                            {dairyRate = item.dailyRate}
+
+
                             <div className={css.row}>
-                                <h4> {item.date}</h4>
+                                <h4 className={css.dateHeader}> {item.date}</h4>
                             </div>
                             <div className={css.row}>
-                                <h4 >Food Name</h4>
-                                <h4> Grams</h4>
-                                <h4>Calories</h4>
+                                <h4 className={css.firstColumn} >Food Name</h4>
+                                <h4 className={css.otherColumn}> Grams</h4>
+                                <h4 className={css.otherColumn}>Calories</h4>
                             </div>
 
                             {item.foodItems.map((food, rowID) =>
-                                <div className={css.row}>
+                                <>
+                                    <div className={css.row} key={rowID}>
 
-                                    <p>{food.title}</p>
-                                    <p>{food.weight}</p>
-                                    <p>{food.calories}</p>
-                                </div>
-                                //  { dayCalories = dayCalories + food.calories }
+                                        <p key={`title-${index}`} className={css.firstColumn}>{food.title}</p>
+                                        <p key={`weight-${index}`} className={css.otherColumn}>{food.weight}</p>
+                                        <p key={`calories-${index}`} className={css.otherColumn}>{food.calories}</p>
+                                    </div>
+                                    {dayCalories = dayCalories + food.calories}
+
+                                </>
                             )}
 
                             <div className={css.row}>
-                                <p >
+                                <p className={css.totalColumn}>
                                     Daily Rate:
                                 </p>
-                                <p >
+                                <p className={css.totalColumn}>
                                     Calories consumed
                                 </p>
-                                <p >
+                                <p className={css.totalColumn}>
                                     Remaining calories
                                 </p>
                             </div>
                             <div className={css.row}>
-                                <p >
-                                    {dairyRate.toFixed(2).toString()}
+                                <p className={css.totalColumn}>
+                                    {dairyRate.toString()}
                                 </p>
-                                <p >
-                                    {dayCalories.toFixed(2).toString()}
+                                <p className={css.totalColumn}>
+                                    {dayCalories.toString()}
                                 </p>
-                                <p >
-                                    {(dairyRate * 1 - dayCalories * 1).toFixed(2).toString()}
+                                <p className={css.totalColumn}>
+                                    {(dairyRate * 1 - dayCalories * 1).toString()}
                                 </p>
                             </div>
 

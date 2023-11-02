@@ -9,14 +9,31 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    height: 75%;
 }
 
-.row:first-child {
-    width: 70%;
 
+
+.firstColumn {
+    width: 60%
 }
 
-.row:not:first-child {
-    width: 15%;
+.otherColumn {
+    width: 20%
+}
 
+.totalColumn {
+    width: 33%
+}
+
+.centerText {
+    text-align: center;
+    justify-content: center
+}
+
+.dateHeader {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
