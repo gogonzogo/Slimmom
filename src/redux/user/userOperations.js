@@ -149,6 +149,23 @@ export const getArchive = createAsyncThunk(
   }
 );
 
+export const getArchiveDateinfo = createAsyncThunk(
+  'diary/getarchiveFromDate',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/user/getarchiveDate/`, credentials
+      );
+
+
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+
 export const deleteInfo = createAsyncThunk(
   'diary/deletediary',
   async (data, { rejectWithValue }) => {

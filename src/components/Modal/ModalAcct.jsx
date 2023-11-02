@@ -25,6 +25,8 @@ import dayjs from 'dayjs';
 
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
+import { useNavigate } from 'react-router-dom';
+
 
 const ModalAcct = props => {
     const dispatch = useDispatch();
@@ -39,12 +41,14 @@ const ModalAcct = props => {
             key: 'selection',
         }
     ])
+    const nav = useNavigate(); // react router hook
+
 
     const archiveMessage = "Are you sure that you want to Archive the dates selected.  this will move these dates to an archive location"
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
     const accountMessage = "Are you sure that you want to Delete your accout.  You will no longer be able to login and will need to create a new account"
     const downloadMessage = "This will download a dairy summary to your computer."
-    const getArchivedMessage = "This will download a dairy summary to your computer."
+    const getArchivedMessage = "Review previously Archived information."
 
 
     const changeHandler = async e => {
@@ -121,17 +125,20 @@ const ModalAcct = props => {
                     }
                     closeModal()
                     break;
-                case 'get':
-                    response = await dispatch(getArchive())
 
+                case 'review':
+                    response = await dispatch(getArchive())
+                    closeModal()
                     if (response.payload.code === 200) {
                         toast.success('Archive Info received', {
                             position: 'top-right',
                             autoClose: 3000,
                             className: 'success-toast',
                         });
+                        const data = response.payload;
+                        nav('/archive', { state: data });
                     }
-                    closeModal()
+
                     break;
 
 

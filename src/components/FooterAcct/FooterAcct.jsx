@@ -114,7 +114,7 @@ export default function FooterAcct() {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy data</MenuItem>
-                    <MenuItem data-my-value="get" onClick={handleClose}>get List of Archives</MenuItem>
+                    <MenuItem data-my-value="review" onClick={handleClose}>get List of Archives</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
                     <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
