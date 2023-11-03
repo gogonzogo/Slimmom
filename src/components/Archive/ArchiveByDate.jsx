@@ -1,20 +1,55 @@
 
 import { Select, MenuItem } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getArchiveDateinfo } from '../../redux/user/userOperations';
 import { useDispatch } from 'react-redux';
 import css from './ArchiveByDate.module.css';
+import React, { useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import CustomButton from 'components/CustomButton/CustomButton';
+import { ReactComponent as LogoSVG } from '../Logo/slimmom.svg';
+import styles from '../Logo/ImageLogo.module.css';
+
 
 function ArchiveByDate(props) {
-    let dairyRate = 0
-    let dayCalories = 0
     const [diaryinf, setDiaryinf] = useState(props.archivesData.archiveinfo)
     const userinfo = props.archivesData.userinfo
     const calcinfo = props.archivesData.calculatorInfo
     const alldates = props.archivesData.archiveDates
     const dispatch = useDispatch();
     const [archivePick, setArchivePick] = useState(0);
+    const [showLogo, setShowLogo] = useState(false)
+    const [showButton, setShowButton] = useState(true)
+    const [isPrinting, setIsPrinting] = useState(false);
+    const promiseResolveRef = useRef(null);
 
+    const printRef = useRef();
+
+    useEffect(() => {
+        if (isPrinting && promiseResolveRef.current) {
+            // Resolves the Promise, letting `react-to-print` know that the DOM updates are completed
+            promiseResolveRef.current();
+        }
+    }, [isPrinting]);
+    const handlePrint = useReactToPrint({
+        content: () => printRef.current,
+        onBeforeGetContent: () => {
+            setShowLogo(true)
+            setShowButton(false)
+            return new Promise((resolve) => {
+                promiseResolveRef.current = resolve;
+                setIsPrinting(true);
+            });
+        },
+        onAfterPrint: () => {
+            // Reset the Promise resolve so we can print again
+
+            setShowLogo(false)
+            setShowButton(true)
+            promiseResolveRef.current = null;
+            setIsPrinting(false);
+        }
+    });
 
     const handleChange = async e => {
         const { value } = e.target;
@@ -60,7 +95,17 @@ function ArchiveByDate(props) {
                     </Select>
                 </div>
 
-                <div >
+                <div ref={printRef} >
+
+                    {showLogo &&
+                        <div className={css.logo}>
+                            <LogoSVG
+                                className={styles.imageLogo}
+                                alt="A waistline with a green measuring tape"
+                            />
+                        </div>}
+
+
                     <h3 className={css.centerText}>Dairy Archive Summary for </h3>
                     <h5 className={css.centerText}>{userinfo[0].name}   ({userinfo[0].email})</h5>
                     <h5 className={css.centerText}>Archived on {diaryinf[0].archiveDate}</h5>
@@ -85,8 +130,8 @@ function ArchiveByDate(props) {
 
                         <div key={`archiveDate-${index}`}>
 
-                            {dayCalories = 0}
-                            {dairyRate = item.dailyRate}
+                            {/* {dayCalories = 0}
+                            {dairyRate = item.dailyRate} */}
 
 
                             <div className={css.row}>
@@ -106,7 +151,7 @@ function ArchiveByDate(props) {
                                         <p key={`weight-${rowID}`} className={css.otherColumn}>{food.weight}</p>
                                         <p key={`calories-${rowID}`} className={css.otherColumn}>{food.calories}</p>
                                     </div>
-                                    {dayCalories = dayCalories + food.calories}
+                                    {/* {dayCalories = dayCalories + food.calories} */}
 
                                 </>
                             )}
@@ -124,20 +169,33 @@ function ArchiveByDate(props) {
                             </div>
                             <div key={`totalamtd-${index}`} className={css.row}>
                                 <p key={`totalamtDaily-${index}`} className={css.totalColumn}>
-                                    {dairyRate.toString()}
+                                    {Math.round(item.dailyRate * 100) / 100}
                                 </p>
                                 <p key={`totalamtconsumed-${index}`} className={css.totalColumn}>
-                                    {dayCalories.toString()}
+                                    {(Math.round(item.foodItems.reduce(function (prev, cur) {
+                                        return prev + cur.calories;
+                                    }, 0) * 100) / 100).toFixed(2)}
                                 </p>
                                 <p key={`totalamtRemaining-${index}`} className={css.totalColumn}>
-                                    {(dairyRate * 1 - dayCalories * 1).toString()}
+                                    {(Math.round((item.dailyRate - (item.foodItems.reduce(function (prev, cur) {
+                                        return prev + cur.calories;
+                                    }, 0))) * 100) / 100).toFixed(2)}
                                 </p>
+
                             </div>
 
 
                         </div>
                     ))}
+                    {showButton &&
+                        <CustomButton onClick={handlePrint}
+                            color="orange"
+                            size="wide"
 
+                        >
+                            Print Archive Summary
+                        </CustomButton>
+                    }
                 </div>
             </div>
         </>
