@@ -2,14 +2,15 @@
 import { Select, MenuItem } from "@mui/material";
 import { useState, useEffect } from "react";
 import { getArchiveDateinfo } from '../../redux/user/userOperations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import css from './ArchiveByDate.module.css';
 import React, { useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { ReactComponent as LogoSVG } from '../Logo/slimmom.svg';
 import styles from '../Logo/ImageLogo.module.css';
-
+import { setThemeMode } from "redux/theme/themeSlice";
+import { selectThemeMode } from "redux/theme/themeSelectors";
 
 function ArchiveByDate(props) {
     const [diaryinf, setDiaryinf] = useState(props.archivesData.archiveinfo)
@@ -22,8 +23,9 @@ function ArchiveByDate(props) {
     const [showButton, setShowButton] = useState(true)
     const [isPrinting, setIsPrinting] = useState(false);
     const promiseResolveRef = useRef(null);
-
+    const themeMode = useSelector(selectThemeMode);
     const printRef = useRef();
+    let holdMode
 
     useEffect(() => {
         if (isPrinting && promiseResolveRef.current) {
@@ -34,6 +36,8 @@ function ArchiveByDate(props) {
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
         onBeforeGetContent: () => {
+            holdMode = themeMode
+            dispatch(setThemeMode('light'));
             setShowLogo(true)
             setShowButton(false)
             return new Promise((resolve) => {
@@ -43,7 +47,7 @@ function ArchiveByDate(props) {
         },
         onAfterPrint: () => {
             // Reset the Promise resolve so we can print again
-
+            dispatch(setThemeMode(holdMode));
             setShowLogo(false)
             setShowButton(true)
             promiseResolveRef.current = null;
