@@ -83,53 +83,53 @@ function ArchiveByDate(props) {
 
                     {diaryinf.map((item, index) => (
 
-                        <div>
+                        <div key={`archiveDate-${index}`}>
 
                             {dayCalories = 0}
                             {dairyRate = item.dailyRate}
 
 
                             <div className={css.row}>
-                                <h4 className={css.dateHeader}> {item.date}</h4>
+                                <h4 key={`date-${index}`} className={css.dateHeader}> {item.date}</h4>
                             </div>
-                            <div className={css.row}>
-                                <h4 className={css.firstColumn} >Food Name</h4>
-                                <h4 className={css.otherColumn}> Grams</h4>
-                                <h4 className={css.otherColumn}>Calories</h4>
+                            <div key={`rowTitle-${index}`} className={css.row}>
+                                <h4 key={`FoodTitle-${index}`} className={css.firstColumn} >Food Name</h4>
+                                <h4 key={`gramsTitle-${index}`} className={css.otherColumn}> Grams</h4>
+                                <h4 key={`calsTitle-${index}`} className={css.otherColumn}>Calories</h4>
                             </div>
 
                             {item.foodItems.map((food, rowID) =>
                                 <>
-                                    <div className={css.row} key={rowID}>
+                                    <div className={css.row} key={`foodGeroup-${rowID}`}>
 
-                                        <p key={`title-${index}`} className={css.firstColumn}>{food.title}</p>
-                                        <p key={`weight-${index}`} className={css.otherColumn}>{food.weight}</p>
-                                        <p key={`calories-${index}`} className={css.otherColumn}>{food.calories}</p>
+                                        <p key={`title-${rowID}`} className={css.firstColumn}>{food.title}</p>
+                                        <p key={`weight-${rowID}`} className={css.otherColumn}>{food.weight}</p>
+                                        <p key={`calories-${rowID}`} className={css.otherColumn}>{food.calories}</p>
                                     </div>
                                     {dayCalories = dayCalories + food.calories}
 
                                 </>
                             )}
 
-                            <div className={css.row}>
-                                <p className={css.totalColumn}>
+                            <div key={`totalHead-${index}`} className={css.row}>
+                                <p key={`totalHeadDaily-${index}`} className={css.totalColumn}>
                                     Daily Rate:
                                 </p>
-                                <p className={css.totalColumn}>
+                                <p key={`totalHeadconsumed-${index}`} className={css.totalColumn}>
                                     Calories consumed
                                 </p>
-                                <p className={css.totalColumn}>
+                                <p key={`totalHeadRemaining-${index}`} className={css.totalColumn}>
                                     Remaining calories
                                 </p>
                             </div>
-                            <div className={css.row}>
-                                <p className={css.totalColumn}>
+                            <div key={`totalamtd-${index}`} className={css.row}>
+                                <p key={`totalamtDaily-${index}`} className={css.totalColumn}>
                                     {dairyRate.toString()}
                                 </p>
-                                <p className={css.totalColumn}>
+                                <p key={`totalamtconsumed-${index}`} className={css.totalColumn}>
                                     {dayCalories.toString()}
                                 </p>
-                                <p className={css.totalColumn}>
+                                <p key={`totalamtRemaining-${index}`} className={css.totalColumn}>
                                     {(dairyRate * 1 - dayCalories * 1).toString()}
                                 </p>
                             </div>

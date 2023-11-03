@@ -50,7 +50,7 @@ export default function FooterAcct() {
     }
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
-      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download' || myValue === 'get') {
+      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download' || myValue === 'review') {
         handleOpenModal(myValue)
       }
     }
@@ -114,7 +114,7 @@ export default function FooterAcct() {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy data</MenuItem>
-                    <MenuItem data-my-value="review" onClick={handleClose}>get List of Archives</MenuItem>
+                    <MenuItem data-my-value="review" onClick={handleClose}>Review previous Archives Data</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
                     <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
