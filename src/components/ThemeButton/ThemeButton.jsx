@@ -1,23 +1,21 @@
+// external
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@mui/material";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import { setThemeMode } from "redux/theme/themeSlice";
-import { selectThemeMode } from "redux/theme/themeSelectors";
+// internal
+import useThemeToggle from "hooks/useThemeToggle";
 import s from './ThemeButton.module.css';
 
 const ThemeButton = () => {
-  const dispatch = useDispatch();
-  const themeMode = useSelector(selectThemeMode);
+  const { themeMode, toggleTheme } = useThemeToggle();
   const [rotationAngle, setRotationAngle] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
   const [moonOpacity, setMoonOpacity] = useState(1);
   const [sunOpacity, setSunOpacity] = useState(1);
 
-  const toggleTheme = () => {
-    const newMode = themeMode === 'dark' ? 'light' : 'dark';
-    dispatch(setThemeMode(newMode));
+  const handleClick = () => {
+    toggleTheme();
     setRotationAngle(rotationAngle + 360);
     setIsClicked(!isClicked);
     setMoonOpacity(0);
@@ -46,7 +44,7 @@ const ThemeButton = () => {
       <div className={s.modeWrapper}>
         <div className={s.modeContainer} style={{ transform: `rotate(${rotationAngle}deg)` }}>
           <IconButton
-            onClick={toggleTheme}
+            onClick={handleClick}
             aria-label={`Switch to toggle ${themeMode === 'dark' ? 'light' : 'dark'} mode`}
             aria-describedby='light or dark mode-label'
             className={`${s.modeIconContainer} ${buttonClass}`} 
