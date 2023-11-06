@@ -8,12 +8,18 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import ModalAcct from 'components/Modal/ModalAcct';
 import { useState } from 'react';
-
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { getArchive, } from '../../redux/user/userOperations';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function FooterAcct() {
+  const dispatch = useDispatch();
+  const nav = useNavigate(); // react router hook
+
   const [modalState, setModalState] = useState({
     open: false,
     myValue: null,
@@ -42,6 +48,25 @@ export default function FooterAcct() {
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
   };
+
+  const handleReview = async () => {
+    const response = await dispatch(getArchive())
+    if (response.payload.code === 200) {
+      toast.success('Archive Info received', {
+        position: 'top-right',
+        autoClose: 3000,
+        className: 'success-toast',
+      });
+      const data = response.payload;
+      nav('/archive', { state: data });
+    }
+
+
+
+
+
+    setOpen(false);
+  }
 
   const handleClose = (event) => {
 
@@ -114,7 +139,7 @@ export default function FooterAcct() {
                     onKeyDown={handleListKeyDown}
                   >
                     <MenuItem data-my-value="archive" onClick={handleClose}>Archive Dairy data</MenuItem>
-                    <MenuItem data-my-value="review" onClick={handleClose}>Review previous Archives Data</MenuItem>
+                    <MenuItem data-my-value="review" onClick={handleReview}>Review previous Archives Data</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
                     <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
