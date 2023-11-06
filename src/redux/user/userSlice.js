@@ -14,6 +14,7 @@ import {
   deleteAcct,
   exportXLS,
   getArchive,
+  restoreDairyArchive,
 
 } from './userOperations';
 import { Slide, toast } from 'react-toastify';
@@ -413,6 +414,20 @@ export const userSlice = createSlice({
         state.diary.isLoading = false;
         console.log('Error');
       })
+      .addCase(restoreDairyArchive.pending, state => {
+        state.diary.isLoading = true;
+
+      })
+      .addCase(restoreDairyArchive.fulfilled, (state, action) => {
+
+        state.diary.isLoading = false;
+      })
+      .addCase(restoreDairyArchive.rejected, (state, action) => {
+
+        state.diary.isLoading = false;
+        console.log('Error');
+      })
+
   },
 });
 

@@ -11,12 +11,14 @@ import { ReactComponent as LogoSVG } from '../Logo/slimmom.svg';
 import styles from '../Logo/ImageLogo.module.css';
 import { setThemeMode } from "redux/theme/themeSlice";
 import { selectThemeMode } from "redux/theme/themeSelectors";
+import { restoreDairyArchive } from 'redux/user/userOperations';
+
 
 function ArchiveByDate(props) {
     const [diaryinf, setDiaryinf] = useState(props.archivesData.archiveinfo)
     const userinfo = props.archivesData.userinfo
     const calcinfo = props.archivesData.calculatorInfo
-    const alldates = props.archivesData.archiveDates
+    const [alldates, setAlldates] = useState(props.archivesData.archiveDates)
     const dispatch = useDispatch();
     const [archivePick, setArchivePick] = useState(0);
     const [showLogo, setShowLogo] = useState(false)
@@ -54,6 +56,23 @@ function ArchiveByDate(props) {
             setIsPrinting(false);
         }
     });
+
+    const handleRestore = async () => {
+        console.log('diaryinf', diaryinf)
+
+
+        const restoreDates = {
+            archiveDate: diaryinf[0].archiveDate,
+            startDate: diaryinf[0].startDate,
+            endDate: diaryinf[0].endDate
+        }
+        console.log('restoreDates', restoreDates)
+
+        const response = await dispatch(restoreDairyArchive(restoreDates));
+        console.log('handleRestore response', response)
+        setAlldates(response.payload.archiveDates)
+
+    }
 
     const handleChange = async e => {
         const { value } = e.target;
@@ -191,15 +210,26 @@ function ArchiveByDate(props) {
 
                         </div>
                     ))}
-                    {showButton &&
-                        <CustomButton onClick={handlePrint}
-                            color="orange"
-                            size="wide"
+                    <div className={css.buttons}>
+                        {showButton &&
+                            <CustomButton onClick={handlePrint}
+                                color="orange"
+                                size="wide"
 
-                        >
-                            Print Archive Summary
-                        </CustomButton>
-                    }
+                            >
+                                Print Archive Summary
+                            </CustomButton>
+                        }
+                        {showButton &&
+                            <CustomButton onClick={handleRestore}
+                                color="orange"
+                                size="wide"
+
+                            >
+                                Restore Archive
+                            </CustomButton>
+                        }
+                    </div>
                 </div>
             </div>
         </>

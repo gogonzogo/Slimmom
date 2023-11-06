@@ -42,3 +42,8 @@
     display: flex;
     justify-content: space-around;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+}

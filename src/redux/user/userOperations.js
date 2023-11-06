@@ -207,3 +207,18 @@ export const exportXLS = createAsyncThunk(
     }
   }
 );
+export const restoreDairyArchive = createAsyncThunk(
+  'diary/restoreArchive',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `/user/restoreArchive/`, credentials
+      );
+
+
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
