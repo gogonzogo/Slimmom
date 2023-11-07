@@ -1,13 +1,62 @@
 import { Input, useMediaQuery } from '@mui/material';
 import ListWithScroll from 'components/Modal/ListWithScroll';
 import s from './rightSideBar.module.css';
+import CustomButton from 'components/CustomButton/CustomButton';
+import { useDispatch } from 'react-redux';
+import { getGraphData } from '../../redux/user/userOperations';
+import { useState } from 'react';
+import GraphModal from 'components/Modal/GraphModal';
+
 
 const Summary = ({ date, summary, searchInputChange, searchResults }) => {
+  const dispatch = useDispatch();
+  const [modalState, setModalState] = useState({
+    open: false,
+    data: null,
+  });
+
+  const showGraph = async () => {
+    const grpthDates = {
+      todayDate: new Date(),
+    }
+    const result = await dispatch(getGraphData(grpthDates));
+    console.log('result', result)
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: true,
+        data: result
+      };
+    });
+  };
+
+  const handleModalClose = () => {
+    setModalState(prev => {
+      return {
+        ...prev,
+        open: false,
+      };
+    });
+    setTimeout(() => {
+      // fixing effect, when during closing modal you see 0 kcal recommended daily calorie intake
+      setModalState({ open: false, dailyRate: null, foodNotToEat: [] });
+    }, 250);
+  };
+
+
   const isLargeScreen = useMediaQuery('(min-width: 769px)');
   return (
     <div className={s.sideBarContentWrapper}>
       <div className={s.sideBarContent}>
+        <CustomButton
+          color="orange"
+          size="wide"
+          onClick={showGraph}
+        >
+          graph of calories
+        </CustomButton>
         <p className={s.sideBarTitle}>
+
           Summary for {date.replaceAll('-', '/')}
         </p>
         <ul className={s.statsBox}>
@@ -39,6 +88,10 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
           />
         </div>
       </div>
+
+      {modalState.data &&
+        <GraphModal handleModalClose={handleModalClose} modalState={modalState} />
+      }
     </div>
   );
 };

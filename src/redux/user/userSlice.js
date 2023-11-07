@@ -15,6 +15,7 @@ import {
   exportXLS,
   getArchive,
   restoreDairyArchive,
+  getGraphData
 
 } from './userOperations';
 import { Slide, toast } from 'react-toastify';
@@ -427,7 +428,21 @@ export const userSlice = createSlice({
         state.diary.isLoading = false;
         console.log('Error');
       })
+      .addCase(getGraphData.pending, state => {
+        console.log('pending')
+        state.diary.isLoading = true;
 
+      })
+      .addCase(getGraphData.fulfilled, (state, action) => {
+        console.log('fulfilled')
+
+        state.diary.isLoading = false;
+      })
+      .addCase(getGraphData.rejected, (state, action) => {
+
+        state.diary.isLoading = false;
+        console.log('Error');
+      })
   },
 });
 
