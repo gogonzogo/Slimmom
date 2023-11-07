@@ -222,3 +222,20 @@ export const restoreDairyArchive = createAsyncThunk(
     }
   }
 );
+
+export const getGraphData = createAsyncThunk(
+  'diary/getGraphData',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      console.log('try')
+      const response = await axios.post(
+        `/user/graph/`, credentials
+      );
+      console.log('response', response)
+
+      return response.data.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
