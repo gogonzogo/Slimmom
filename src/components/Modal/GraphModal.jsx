@@ -1,6 +1,8 @@
 // import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 // import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import React from 'react';
+import { forwardRef } from 'react';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,22 +13,28 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import {
-    Backdrop,
-    Fade,
-    Box,
-    Modal as MaterialModal,
-    useMediaQuery,
-} from '@mui/material';
+
+
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Slide from '@mui/material/Slide';
+
 import { selectThemeMode } from "redux/theme/themeSelectors";
 import { useSelector } from 'react-redux';
+
+const Transition = forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
+
 
 const GraphModal = props => {
     const themeMode = useSelector(selectThemeMode);
 
     const { handleModalClose, modalState } = props;
-    const isMobile = useMediaQuery('(max-width: 480px)');
-    console.log('modalState', modalState)
 
     const graphData = modalState.data.payload.graphData
     const graphDates = modalState.data.payload.graphDates
@@ -61,23 +69,24 @@ const GraphModal = props => {
     return (
 
         <>
-            <MaterialModal
-                style={{ top: isMobile && 83 }}
-                open={modalState.open}
-                onClose={handleModalClose}
-                closeAfterTransition
-                slots={{ backdrop: Backdrop }}
-                slotProps={{
-                    backdrop: {
-                        timeout: 500,
-                        sx: { top: isMobile && 83, backgroundColor: '#2121211f' },
-                    },
+            <Dialog
+                PaperProps={{
+                    sx: {
+                        width: "80%",
+                        maxHeight: "60%",
+                        minHeight: "60%"
+                    }
                 }}
-                disableScrollLock={isMobile ? true : false}
-
+                open={modalState.open}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleModalClose}
+                aria-describedby="alert-dialog-slide-description"
             >
-                <Fade in={modalState.open}>
-                    <Box>
+
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-slide-description">
+
                         <Bar
                             data={data}
                             options={{
@@ -96,10 +105,13 @@ const GraphModal = props => {
                                 }
                             }}
                         />
-                    </Box>
-                </Fade>
-            </MaterialModal>
 
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleModalClose}>close</Button>
+                </DialogActions>
+            </Dialog>
         </>
     )
 }
