@@ -1,19 +1,6 @@
-// import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-// import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 import React from 'react';
-import { forwardRef } from 'react';
-
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
-
+import { forwardRef, } from 'react';
 
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -21,9 +8,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { LineChart } from '@mui/x-charts/LineChart';
 
-import { selectThemeMode } from "redux/theme/themeSelectors";
-import { useSelector } from 'react-redux';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -32,49 +19,28 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 
 const GraphModal = props => {
-    const themeMode = useSelector(selectThemeMode);
 
     const { handleModalClose, modalState } = props;
 
-    const graphData = modalState.data.payload.graphData
-    const graphDates = modalState.data.payload.graphDates
+    const graphCalcDates = modalState.data.payload.graphCalcDates
+    const grapCalcData = modalState.data.payload.graphCalcData
+    const grapDairyhData = modalState.data.payload.grapDairyhData
+    const graphDiaryDates = modalState.data.payload.graphDiaryDates
 
 
-    // console.log('data', data)
-    const data = {
-        labels: graphDates,
-        // datasets is an array of objects where each object represents a set of data to display corresponding to the labels above. for brevity, we'll keep it at one object
-        datasets: [
-            {
-                label: 'Calories Consumed',
-                data: graphData,
-                // you can set indiviual colors for each bar
-                backgroundColor: [
-                    'orange',
-                ],
-                borderWidth: 1,
-            }
-        ]
-    }
-
-    ChartJS.register(
-        CategoryScale,
-        LinearScale,
-        BarElement,
-        Title,
-        Tooltip,
-        Legend
-    );
 
     return (
 
         <>
+
             <Dialog
+
                 PaperProps={{
                     sx: {
-                        width: "80%",
-                        maxHeight: "60%",
-                        minHeight: "60%"
+                        minWidth: "80%",
+                        maxWidth: "80%",
+                        maxHeight: "80%",
+                        minHeight: "80%"
                     }
                 }}
                 open={modalState.open}
@@ -85,26 +51,40 @@ const GraphModal = props => {
             >
 
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-slide-description">
 
-                        <Bar
-                            data={data}
-                            options={{
-                                plugins: {
-                                    title: {
-                                        display: true,
-                                        text: "Daily Calories consumed",
-                                        color: themeMode === 'light' ? 'black' : 'white'
+                    <DialogContentText id="alert-dialog-slide-description">
+                        <div style={{ height: "100%", width: '100%' }}>
+
+                            <BarChart
+                                xAxis={[
+                                    {
+                                        id: 'barCategories',
+                                        data: graphDiaryDates, label: 'Calories eaten',
+                                        scaleType: 'band',
                                     },
-                                    legend: {
-                                        display: true,
-                                        labels: {
-                                            color: themeMode === 'light' ? 'black' : 'white'
-                                        }
-                                    }
-                                }
-                            }}
-                        />
+                                ]}
+                                series={[
+                                    {
+                                        data: grapDairyhData
+                                    },
+                                ]}
+                                width={500}
+                                height={300}
+                            />
+                            <LineChart
+
+                                series={[
+                                    {
+                                        data: grapCalcData, label: 'Change in weight', color: 'orange'
+                                    },
+
+
+                                ]}
+                                xAxis={[{ scaleType: 'point', data: graphCalcDates }]}
+                                width={500}
+                                height={300}
+                            />
+                        </div>
 
                     </DialogContentText>
                 </DialogContent>
