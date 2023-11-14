@@ -1,0 +1,39 @@
+.header {
+    font-weight: 700;
+    font-size: 125px;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.notfoundList {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+.notfounfHeader {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.notfoundText {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.notfoundreasons {
+    font-size: 20px;
+    color: var(--accent-bright-color);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.notfoundListItem {
+    font-size: 20px;
+    font-weight: 500;
+}

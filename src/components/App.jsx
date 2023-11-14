@@ -20,6 +20,8 @@ const Calculator = lazy(() => import('pages/Calculator/Calculator'));
 const Register = lazy(() => import('pages/Register/Register'));
 const Login = lazy(() => import('pages/Login/Login'));
 const Archive = lazy(() => import('pages/Archive/Archive'));
+const Page404 = lazy(() => import('pages/Page404/Page404'));
+
 
 export const App = () => {
   return (
@@ -39,7 +41,7 @@ export const App = () => {
           <Route path="/diary" element={<PrivateRoute><Diary /></PrivateRoute>} />
           <Route path="/calculator" element={<PrivateRoute><Calculator /></PrivateRoute>} />
           <Route path="/archive" element={<PrivateRoute><Archive /></PrivateRoute>} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<PublicRoute><Page404 /></PublicRoute>} />
         </Routes>
       </Suspense>
       <Footer />
