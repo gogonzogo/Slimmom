@@ -50,10 +50,10 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
       <div className={s.sideBarContent}>
         <CustomButton
           color="orange"
-          size="wide"
+          size="graph"
           onClick={showGraph}
         >
-          graph of calories
+          graphs
         </CustomButton>
         <p className={s.sideBarTitle}>
 
