@@ -227,7 +227,6 @@ export const getGraphData = createAsyncThunk(
   'diary/getGraphData',
   async (credentials, { rejectWithValue }) => {
     try {
-      console.log('try')
       const response = await axios.post(
         `/user/graph/`, credentials
       );

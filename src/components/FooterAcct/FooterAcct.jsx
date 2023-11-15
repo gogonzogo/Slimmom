@@ -60,11 +60,6 @@ export default function FooterAcct() {
       const data = response.payload;
       nav('/archive', { state: data });
     }
-
-
-
-
-
     setOpen(false);
   }
 
@@ -75,7 +70,7 @@ export default function FooterAcct() {
     }
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
-      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download' || myValue === 'review') {
+      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download') {
         handleOpenModal(myValue)
       }
     }

@@ -146,6 +146,12 @@ const ModalAcct = props => {
 
                     break;
             }
+        } else {
+            toast.warn('You have typed an incorrect word', {
+                position: 'top-right',
+                autoClose: 3000,
+                className: 'error-toast ',
+            });
         }
     }
 
