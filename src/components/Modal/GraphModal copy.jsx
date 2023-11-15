@@ -40,7 +40,6 @@ const GraphModal = props => {
     const graphDates = modalState.data.payload.graphDates
 
 
-    // console.log('data', data)
     const data = {
         labels: graphDates,
         // datasets is an array of objects where each object represents a set of data to display corresponding to the labels above. for brevity, we'll keep it at one object

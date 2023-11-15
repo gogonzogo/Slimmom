@@ -3,12 +3,10 @@ import Container from 'components/Container/Container';
 import CustomButton from 'components/CustomButton/CustomButton';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-console.log('useAuth', useAuth)
 
 
 const Page404 = () => {
     const { loggedIn } = useAuth();
-    console.log('loggedIn', loggedIn)
 
     const nav = useNavigate(); // react router hook
 

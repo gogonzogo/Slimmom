@@ -58,7 +58,7 @@ function ArchiveByDate(props) {
     });
 
     const handleRestore = async () => {
-        console.log('diaryinf', diaryinf)
+
 
 
         const restoreDates = {
@@ -66,10 +66,8 @@ function ArchiveByDate(props) {
             startDate: diaryinf[0].startDate,
             endDate: diaryinf[0].endDate
         }
-        console.log('restoreDates', restoreDates)
 
         const response = await dispatch(restoreDairyArchive(restoreDates));
-        console.log('handleRestore response', response)
         setAlldates(response.payload.archiveDates)
 
     }
@@ -134,7 +132,6 @@ function ArchiveByDate(props) {
                     <h5 className={css.centerText}>Archived on {diaryinf[0].archiveDate}</h5>
                     <h5 className={css.centerText}>{diaryinf[0].startDate} through {diaryinf[0].endDate}</h5>
 
-                    {console.log('calcinfo', calcinfo)}
 
                     {calcinfo[0].calculatorEntries[0].calculatorEntry[0].unitOfMeasure !== "S" ?
                         <>

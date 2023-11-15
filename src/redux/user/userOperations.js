@@ -231,7 +231,6 @@ export const getGraphData = createAsyncThunk(
       const response = await axios.post(
         `/user/graph/`, credentials
       );
-      console.log('response', response)
 
       return response.data.data;
     } catch (error) {
