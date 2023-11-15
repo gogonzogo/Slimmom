@@ -134,10 +134,12 @@ function ArchiveByDate(props) {
                     <h5 className={css.centerText}>Archived on {diaryinf[0].archiveDate}</h5>
                     <h5 className={css.centerText}>{diaryinf[0].startDate} through {diaryinf[0].endDate}</h5>
 
+                    {console.log('calcinfo', calcinfo)}
+
                     {calcinfo[0].calculatorEntries[0].calculatorEntry[0].unitOfMeasure !== "S" ?
                         <>
                             <h5 className={css.centerText}>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].height.toString()}cm  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>
-                            <h5 className={css.centerText}>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeightLbs.toString()}kg  Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeightLbs.toString()}kg</h5>
+                            <h5 className={css.centerText}>Current Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].currentWeight.toString()}kg  Desired Weight:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].desiredWeight.toString()}kg</h5>
                         </> :
                         <>
                             <h5 className={css.centerText}>Height:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightFeet.toString()}  feet {calcinfo[0].calculatorEntries[0].calculatorEntry[0].heightInch.toString()}  inches  Age:  {calcinfo[0].calculatorEntries[0].calculatorEntry[0].age.toString()}  BloodType:   {calcinfo[0].calculatorEntries[0].calculatorEntry[0].bloodType} </h5>

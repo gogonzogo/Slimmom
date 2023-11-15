@@ -185,7 +185,6 @@ const ModalAcct = props => {
                                 }
                             </div>
 
-                            getArchivedMessage
 
 
 
