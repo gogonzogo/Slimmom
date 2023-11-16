@@ -22,6 +22,7 @@
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.9",
     "js-file-download": "^0.4.12",
+    "js-html2pdf": "^1.1.4",
     "lodash.throttle": "^4.1.1",
     "material-ui-popup-state": "^5.0.9",
     "notiflix": "^3.2.6",

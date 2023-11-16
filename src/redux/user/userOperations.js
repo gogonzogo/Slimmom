@@ -192,21 +192,7 @@ export const deleteAcct = createAsyncThunk(
     }
   }
 );
-export const exportXLS = createAsyncThunk(
-  'diary/downloadToXLS',
-  async (credentials, { rejectWithValue }) => {
-    try {
-      const response = await axios.post(
-        `/user/downloadDiary/`, credentials,
-        { responseType: "blob" }
-      );
-      fileDownload(response.data, 'dairy-report.pdf');
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
+
 export const restoreDairyArchive = createAsyncThunk(
   'diary/restoreArchive',
   async (credentials, { rejectWithValue }) => {

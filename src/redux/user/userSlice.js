@@ -12,7 +12,6 @@ import {
   archiveInfo,
   deleteInfo,
   deleteAcct,
-  exportXLS,
   getArchive,
   restoreDairyArchive,
   getGraphData
@@ -389,19 +388,7 @@ export const userSlice = createSlice({
         state.diary.isLoading = false;
         console.log('Error');
       })
-      .addCase(exportXLS.pending, state => {
-        state.diary.isLoading = true;
 
-      })
-      .addCase(exportXLS.fulfilled, (state, action) => {
-
-        state.diary.isLoading = false;
-      })
-      .addCase(exportXLS.rejected, (state, action) => {
-
-        state.diary.isLoading = false;
-        console.log('Error');
-      })
       .addCase(getArchive.pending, state => {
         state.diary.isLoading = true;
 

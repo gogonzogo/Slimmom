@@ -12,7 +12,7 @@ import styles from '../Logo/ImageLogo.module.css';
 import { setThemeMode } from "redux/theme/themeSlice";
 import { selectThemeMode } from "redux/theme/themeSelectors";
 import { restoreDairyArchive } from 'redux/user/userOperations';
-
+import Html2Pdf from 'js-html2pdf';
 
 function ArchiveByDate(props) {
     const [diaryinf, setDiaryinf] = useState(props.archivesData.archiveinfo)
@@ -35,6 +35,9 @@ function ArchiveByDate(props) {
             promiseResolveRef.current();
         }
     }, [isPrinting]);
+
+
+
     const handlePrint = useReactToPrint({
         content: () => printRef.current,
         onBeforeGetContent: () => {
@@ -54,9 +57,45 @@ function ArchiveByDate(props) {
             setShowButton(true)
             promiseResolveRef.current = null;
             setIsPrinting(false);
-        }
+        },
     });
 
+
+    const handleSave = useReactToPrint({
+        content: () => printRef.current,
+        onBeforeGetContent: () => {
+            holdMode = themeMode
+            dispatch(setThemeMode('light'));
+            setShowLogo(true)
+            setShowButton(false)
+            return new Promise((resolve) => {
+                promiseResolveRef.current = resolve;
+                setIsPrinting(true);
+            });
+        },
+        onAfterPrint: () => {
+            // Reset the Promise resolve so we can print again
+            dispatch(setThemeMode(holdMode));
+            setShowLogo(false)
+            setShowButton(true)
+            promiseResolveRef.current = null;
+            setIsPrinting(false);
+        },
+        removeAfterPrint: true,
+        print: async (printIframe) => {
+            const document = printIframe.contentDocument;
+            if (document) {
+                const html = document.getElementById("element-to-download-as-pdf");
+                console.log(html);
+                const exporter = new Html2Pdf(html, {
+                    filename: 'archive.pdf'
+                });
+                exporter.getPdf(true);
+            }
+        },
+
+
+    });
     const handleRestore = async () => {
 
 
@@ -116,7 +155,7 @@ function ArchiveByDate(props) {
                     </Select>
                 </div>
 
-                <div ref={printRef} >
+                <div ref={printRef} id='element-to-download-as-pdf'>
 
                     {showLogo &&
                         <div className={css.logo}>
@@ -211,21 +250,35 @@ function ArchiveByDate(props) {
                     ))}
                     <div className={css.buttons}>
                         {showButton &&
-                            <CustomButton onClick={handlePrint}
+                            <CustomButton onClick={() => {
+                                handlePrint();
+                            }}
                                 color="orange"
-                                size="wide"
+                                size="archive"
 
                             >
-                                Print Archive Summary
+                                Print Summary
                             </CustomButton>
                         }
                         {showButton &&
                             <CustomButton onClick={handleRestore}
                                 color="orange"
-                                size="wide"
+                                size="archive"
 
                             >
                                 Restore Archive
+                            </CustomButton>
+                        }
+                        {showButton &&
+                            <CustomButton onClick={() => {
+                                handleSave();
+                            }}
+                                color="orange"
+                                size="archive"
+
+
+                            >
+                                Save as PDF
                             </CustomButton>
                         }
                     </div>
