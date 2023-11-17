@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import fileDownload from 'js-file-download';
 
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
