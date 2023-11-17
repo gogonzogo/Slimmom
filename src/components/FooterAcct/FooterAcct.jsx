@@ -60,11 +60,6 @@ export default function FooterAcct() {
       const data = response.payload;
       nav('/archive', { state: data });
     }
-
-
-
-
-
     setOpen(false);
   }
 
@@ -75,7 +70,7 @@ export default function FooterAcct() {
     }
     if (event.currentTarget.dataset) {
       const { myValue } = event.currentTarget.dataset;
-      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct' || myValue === 'download' || myValue === 'review') {
+      if (myValue === 'archive' || myValue === 'dairy' || myValue === 'acct') {
         handleOpenModal(myValue)
       }
     }
@@ -142,8 +137,6 @@ export default function FooterAcct() {
                     <MenuItem data-my-value="review" onClick={handleReview}>Review previous Archives Data</MenuItem>
                     <MenuItem data-my-value="dairy" onClick={handleClose}>Delete Dairy and Caculator data</MenuItem>
                     <MenuItem data-my-value="acct" onClick={handleClose}>Delete Accout</MenuItem>
-                    <MenuItem data-my-value="download" onClick={handleClose}>download diary</MenuItem>
-
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

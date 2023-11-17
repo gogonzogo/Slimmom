@@ -20,7 +20,6 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
       todayDate: new Date(),
     }
     const result = await dispatch(getGraphData(grpthDates));
-    console.log('result', result)
     setModalState(prev => {
       return {
         ...prev,

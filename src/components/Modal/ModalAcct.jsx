@@ -13,7 +13,6 @@ import {
     deleteAcct,
     deleteInfo,
     archiveInfo,
-    exportXLS,
     getArchive,
 } from '../../redux/user/userOperations';
 import CustomButton from 'components/CustomButton/CustomButton';
@@ -47,7 +46,6 @@ const ModalAcct = props => {
     const archiveMessage = "Are you sure that you want to Archive the dates selected.  this will move these dates to an archive location"
     const diaryMessage = "Are you sure that you want to Delete all of your data.  this will remove all of your current data and you will have to start a new Calculator and Dairy"
     const accountMessage = "Are you sure that you want to Delete your accout.  You will no longer be able to login and will need to create a new account"
-    const downloadMessage = "This will download a dairy summary to your computer."
     const getArchivedMessage = "Review previously Archived information."
 
 
@@ -110,21 +108,6 @@ const ModalAcct = props => {
                     dispatch(logOut());
                     closeModal()
                     break;
-                case 'download':
-                    startDate = dayjs(`${dateRange[0].startDate}`).format(`MM/DD/YYYY`);
-                    endDate = dayjs(`${dateRange[0].endDate}`).format(`MM/DD/YYYY`);
-
-                    reportDates = { startDate: startDate, endDate: endDate }
-                    response = await dispatch(exportXLS(reportDates))
-                    if (response.payload === 200) {
-                        toast.success('Delete Data Success!', {
-                            position: 'top-right',
-                            autoClose: 3000,
-                            className: 'success-toast',
-                        });
-                    }
-                    closeModal()
-                    break;
 
                 case 'review':
                     response = await dispatch(getArchive())
@@ -146,6 +129,12 @@ const ModalAcct = props => {
 
                     break;
             }
+        } else {
+            toast.warn('You have typed an incorrect word', {
+                position: 'top-right',
+                autoClose: 3000,
+                className: 'error-toast ',
+            });
         }
     }
 
@@ -175,7 +164,7 @@ const ModalAcct = props => {
                             </span>
 
                             <div>
-                                {(modalState.myValue === 'archive' || modalState.myValue === 'download') &&
+                                {(modalState.myValue === 'archive') &&
                                     <DateRange
                                         editableDateInputs={true}
                                         onChange={item => setDateRange([item.selection])}
@@ -185,12 +174,11 @@ const ModalAcct = props => {
                                 }
                             </div>
 
-                            getArchivedMessage
 
 
 
                             {modalState.myValue === 'archive' ?
-                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : (modalState.myValue === 'download' ? <h3> {downloadMessage}</h3> : <h3> {getArchivedMessage}</h3>)))}
+                                <h3> {archiveMessage}</h3> : (modalState.myValue === 'dairy' ? <h3> {diaryMessage}</h3> : (modalState.myValue === 'acct' ? <h3> {accountMessage}</h3> : <h3> {getArchivedMessage}</h3>))}
                             <p className={s.ptag}>type <span className={s.messageSpan}> {modalState.myValue}</span> and click submit.</p>
                             <TextField id="outlined-basic" label={modalState.myValue} variant="standard" onChange={changeHandler}
                                 value={typeText} style={{ marginBottom: '20px' }} />
