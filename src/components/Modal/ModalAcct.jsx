@@ -20,11 +20,15 @@ import { toast } from 'react-toastify';
 import { logOut } from '../../redux/auth/authOperations';
 import { DateRange } from 'react-date-range'
 import dayjs from 'dayjs';
+import { getUserInfo } from 'redux/user/userOperations';
+import { clearCalculator } from 'redux/user/userSlice';
+import { getDiaryEntries } from 'redux/user/userOperations';
 
 
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 import { useNavigate } from 'react-router-dom';
+import { useUser } from 'hooks/useUser';
 
 
 const ModalAcct = props => {
@@ -41,6 +45,7 @@ const ModalAcct = props => {
         }
     ])
     const nav = useNavigate(); // react router hook
+    const { calendarDate } = useUser();
 
 
     const archiveMessage = "Are you sure that you want to Archive the dates selected.  this will move these dates to an archive location"
@@ -77,6 +82,8 @@ const ModalAcct = props => {
                     reportDates = { startDate: startDate, endDate: endDate, currentDate: currentDate }
                     response = await dispatch(archiveInfo(reportDates))
                     if (response.payload.code === 200) {
+                        const formatDate = dayjs().format(`MM/DD/YYYY`);
+                        dispatch(getDiaryEntries(formatDate));
                         toast.success('Archive Success!', {
                             position: 'top-right',
                             autoClose: 3000,
@@ -88,6 +95,18 @@ const ModalAcct = props => {
                 case 'dairy':
                     response = await dispatch(deleteInfo())
                     if (response.payload === 200) {
+                        const getUserInfoResultAction = await dispatch(
+                            getUserInfo(calendarDate)
+                        );
+                        console.log('getUserInfoResultAction', getUserInfoResultAction)
+                        console.log('getUserInfo.rejected.match(getUserInfoResultAction)', getUserInfo.rejected.match(getUserInfoResultAction))
+
+                        if (getUserInfo.rejected.match(getUserInfoResultAction)) {
+                            dispatch(clearCalculator());
+                            nav('/calculator');
+                        } else {
+                            nav('/diary');
+                        }
                         toast.success('Delete Data Success!', {
                             position: 'top-right',
                             autoClose: 3000,
