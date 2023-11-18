@@ -28,6 +28,9 @@ function ArchiveByDate(props) {
     const themeMode = useSelector(selectThemeMode);
     const printRef = useRef();
     let holdMode
+    let fileName = `archive${diaryinf[0].startDate}-${diaryinf[0].endDate}.pdf`
+    console.log('fileName', fileName)
+
 
     useEffect(() => {
         if (isPrinting && promiseResolveRef.current) {
@@ -84,12 +87,17 @@ function ArchiveByDate(props) {
         removeAfterPrint: true,
         print: async (printIframe) => {
             const document = printIframe.contentDocument;
+            const opt = {
+                margin: .5,
+                filename: fileName,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
             if (document) {
                 const html = document.getElementById("element-to-download-as-pdf");
                 console.log(html);
-                const exporter = new Html2Pdf(html, {
-                    filename: 'archive.pdf'
-                });
+                const exporter = new Html2Pdf(html, opt);
                 exporter.getPdf(true);
             }
         },
@@ -122,7 +130,11 @@ function ArchiveByDate(props) {
         const response = await dispatch(getArchiveDateinfo(Archiveinfo));
         if (response) {
             setDiaryinf(response.payload.archiveReturnData)
+            fileName = `archive${alldates[value]._id.startDate}-${alldates[value]._id.endDate}.pdf`
+            console.log('fileName', fileName)
+
         }
+
 
     }
 
