@@ -64,9 +64,15 @@ const authSlice = createSlice({
         );
       })
       .addCase(login.rejected, (state, action) => {
+        const errMessage = action.payload
+        console.log('errMessage', errMessage)
+        const message =
+          action.payload === 'Request failed with status code 401' || action.payload === 'Request failed with status code 404' ?
+            'Unauthorized, please double check your email and password' : 'An error has accurred during login, please try again'
+
         state.isRefreshing = false;
         toast.error(
-          'Unauthorized, please double check your email and password',
+          message,
           {
             position: 'top-right',
             autoClose: 3000,
