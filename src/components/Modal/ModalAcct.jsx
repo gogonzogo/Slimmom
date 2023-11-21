@@ -98,9 +98,6 @@ const ModalAcct = props => {
                         const getUserInfoResultAction = await dispatch(
                             getUserInfo(calendarDate)
                         );
-                        console.log('getUserInfoResultAction', getUserInfoResultAction)
-                        console.log('getUserInfo.rejected.match(getUserInfoResultAction)', getUserInfo.rejected.match(getUserInfoResultAction))
-
                         if (getUserInfo.rejected.match(getUserInfoResultAction)) {
                             dispatch(clearCalculator());
                             nav('/calculator');

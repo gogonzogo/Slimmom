@@ -416,13 +416,10 @@ export const userSlice = createSlice({
         console.log('Error');
       })
       .addCase(getGraphData.pending, state => {
-        console.log('pending')
         state.diary.isLoading = true;
 
       })
       .addCase(getGraphData.fulfilled, (state, action) => {
-        console.log('fulfilled')
-
         state.diary.isLoading = false;
       })
       .addCase(getGraphData.rejected, (state, action) => {
