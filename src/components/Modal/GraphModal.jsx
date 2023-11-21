@@ -10,6 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Slide from '@mui/material/Slide';
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { useState } from 'react';
 
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -26,6 +27,9 @@ const GraphModal = props => {
     const grapCalcData = modalState.data.payload.graphCalcData
     const grapDairyhData = modalState.data.payload.grapDairyhData
     const graphDiaryDates = modalState.data.payload.graphDiaryDates
+    const [showDiary] = useState(grapDairyhData.length > 0)
+    const [showCalc] = useState(grapCalcData.length > 0)
+
 
 
 
@@ -55,7 +59,7 @@ const GraphModal = props => {
                     <DialogContentText id="alert-dialog-slide-description">
                         <div style={{ height: "100%", width: '100%' }}>
 
-                            <BarChart
+                            {showDiary && <BarChart
                                 xAxis={[
                                     {
                                         id: 'barCategories',
@@ -71,7 +75,8 @@ const GraphModal = props => {
                                 width={500}
                                 height={300}
                             />
-                            <LineChart
+                            }
+                            {showCalc && <LineChart
 
                                 series={[
                                     {
@@ -84,6 +89,7 @@ const GraphModal = props => {
                                 width={500}
                                 height={300}
                             />
+                            }
                         </div>
 
                     </DialogContentText>

@@ -29,7 +29,6 @@ function ArchiveByDate(props) {
     const printRef = useRef();
     let holdMode
     let fileName = `archive${diaryinf[0].startDate}-${diaryinf[0].endDate}.pdf`
-    console.log('fileName', fileName)
 
 
     useEffect(() => {
@@ -96,7 +95,6 @@ function ArchiveByDate(props) {
             };
             if (document) {
                 const html = document.getElementById("element-to-download-as-pdf");
-                console.log(html);
                 const exporter = new Html2Pdf(html, opt);
                 exporter.getPdf(true);
             }
@@ -131,7 +129,6 @@ function ArchiveByDate(props) {
         if (response) {
             setDiaryinf(response.payload.archiveReturnData)
             fileName = `archive${alldates[value]._id.startDate}-${alldates[value]._id.endDate}.pdf`
-            console.log('fileName', fileName)
 
         }
 

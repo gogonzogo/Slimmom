@@ -5,7 +5,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 //internal
 import generateDefaultAvatarCode from 'redux/avatar/avatarOperations';
 
-
 axios.defaults.baseURL = 'https://slimmom-9d5b6b1b5aa9.herokuapp.com/api';
 // axios.defaults.baseURL = 'http://localhost:3030/api';
 
