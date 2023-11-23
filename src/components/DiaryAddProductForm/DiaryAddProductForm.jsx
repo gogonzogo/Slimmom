@@ -11,6 +11,8 @@ import { throttle } from 'lodash';
 import { clearAllFoodsSearchList, setDiaryBackBtn } from 'redux/user/userSlice';
 import useViewPort from 'hooks/useViewport';
 import DiaryAddButton from 'components/DiaryAddButton/DiaryAddButton';
+import { toast } from 'react-toastify';
+
 export default function DiaryAddProduct({ diaryBackBtn }) {
   const [productName, setProductName] = useState('');
   const [grams, setGrams] = useState('');
@@ -33,8 +35,18 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   };
   const bloodTypeIndex = userBloodTypeIndex();
   const handleGramsChange = e => {
-    setGrams(e.target.value);
+    if (e.target.value > 0 || e.target.value === '') {
+      setGrams(e.target.value);
+
+    } else {
+      toast.warn('Grams can not be negative number or letters', {
+        position: 'top-right',
+        autoClose: 3000,
+        className: 'error-toast ',
+      });
+    }
   };
+
   const handleInputChange = e => {
     if (e && e.target) {
       const userInput = e.target.value || '';
