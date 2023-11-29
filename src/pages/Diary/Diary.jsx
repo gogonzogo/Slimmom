@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import Container from 'components/Container/Container';
@@ -32,6 +32,34 @@ function Diary() {
     open: false,
     source: 'diary',
   });
+  const refContainer = useRef();
+  const [dimensions, setDimensions] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    if (!refContainer.current) return;
+    const resizeObserver = new ResizeObserver(() => {
+      setDimensions({
+        width: refContainer.current.offsetWidth,
+        height: refContainer.current.offsetHeight,
+      });
+    });
+    resizeObserver.observe(refContainer.current);
+    return () => resizeObserver.disconnect(); // clean up 
+  }, []);
+
+
+
+  // useEffect(() => {
+  //   if (refContainer.current) {
+  //     setDimensions({
+  //       width: refContainer.current.offsetWidth,
+  //       height: refContainer.current.offsetHeight,
+  //     });
+  //   }
+  // }, []);
 
   function handleClick() {
     dispatch(setDiaryBackBtn(!diaryBackBtn));
@@ -72,18 +100,19 @@ function Diary() {
         display: 'flex',
         flexDirection: 'column',
       }}
+      ref={refContainer}
     >
-      
+
       {calculatorIsLoading || refreshing ? (
         <Loader />
       ) : (
-          <>
+        <>
           <section className="top-bottom">
             <Container className="left-right">
               {width > 767 ? (
                 <>
                   <Box className={style.formContainer}>
-                    <Heading heading="Create a new diary entry, add foods you ate today"/>
+                    <Heading heading="Create a new diary entry, add foods you ate today" />
                     <DiaryCalendar />
                     <DiaryAddProductForm />
                     <DiaryList />
@@ -95,7 +124,7 @@ function Diary() {
                     <DiaryAddProductForm diaryBackBtn={diaryBackBtn} />
                   </div>
                   <Box style={{ display: `${calendarDisplay}` }} className={style.formContainer}>
-                    <Heading heading="Create a new diary entry, add foods you ate today"/>
+                    <Heading heading="Create a new diary entry, add foods you ate today" />
                     <DiaryCalendar />
                     <DiaryList />
                     <DiaryAddButton onClick={handleClick} />
@@ -107,9 +136,8 @@ function Diary() {
           <section className="no-bottom">
             <Container className="no-left-right">
               <Paper
-                className={`${s.sidebarBox} ${
-                  themeMode === 'dark' ? s.darkMode : s.lightMode
-                }`}
+                className={`${s.sidebarBox} ${themeMode === 'dark' ? s.darkMode : s.lightMode
+                  }`} style={{ height: `${dimensions.height + 184}px` }} ref={refContainer}
               />
               <RightSideBar>
                 <SummaryContainer />
