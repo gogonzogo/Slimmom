@@ -7,10 +7,11 @@ function Register() {
     <div className=" background mainBackground">
       <section className="top-bottom">
         <Container className="left-right">
-          <RegistrationForm/>
+          <RegistrationForm />
         </Container>
       </section>
-     
+      <div className='footer-margin'></div>
+
     </div>
   )
 }

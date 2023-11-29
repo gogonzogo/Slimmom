@@ -50,17 +50,6 @@ function Diary() {
     return () => resizeObserver.disconnect(); // clean up 
   }, []);
 
-
-
-  // useEffect(() => {
-  //   if (refContainer.current) {
-  //     setDimensions({
-  //       width: refContainer.current.offsetWidth,
-  //       height: refContainer.current.offsetHeight,
-  //     });
-  //   }
-  // }, []);
-
   function handleClick() {
     dispatch(setDiaryBackBtn(!diaryBackBtn));
   }
@@ -137,7 +126,7 @@ function Diary() {
             <Container className="no-left-right">
               <Paper
                 className={`${s.sidebarBox} ${themeMode === 'dark' ? s.darkMode : s.lightMode
-                  }`} style={{ height: `${dimensions.height + 184}px` }} ref={refContainer}
+                  }`} style={{ height: `${dimensions.height + 184}px` }}
               />
               <RightSideBar>
                 <SummaryContainer />
