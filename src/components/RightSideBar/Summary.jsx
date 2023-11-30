@@ -81,10 +81,12 @@ const Summary = ({ date, summary, searchInputChange, searchResults }) => {
         <p className={s.sideBarTitle}>Food not recommended</p>
         <div>
           <Input placeholder="type here.." onChange={searchInputChange} />
-          <ListWithScroll
-            array={searchResults}
-            style={{ height: isLargeScreen ? 400 : 150 }}
-          />
+          {searchResults.length > 0 &&
+            <ListWithScroll
+              array={searchResults}
+              style={{ height: isLargeScreen ? 400 : 150 }}
+            />
+          }
         </div>
       </div>
 
