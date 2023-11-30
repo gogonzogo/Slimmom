@@ -11,15 +11,15 @@ import Container from 'components/Container/Container';
 // const Register = lazy(() => import('../Register/Register'));
 // const Login = lazy(() => import('../Login/Login'));
 function Home() {
-  
+
   return (
-    
+
     <div className={`background mainBackground `}>
       <section className="top-bottom">
         <Container className="left-right">
           <CaloriesCalc />
           {/* <Outlet /> */}
-            {/* <Suspense fallback={<Loader />}>
+          {/* <Suspense fallback={<Loader />}>
               <Routes>
                 <Route path="register" element={<Register />} />
                 <Route path="login" element={<Login />} />
@@ -27,6 +27,7 @@ function Home() {
             </Suspense> */}
         </Container>
       </section>
+      <div className='footer-margin'></div>
     </div>
   );
 };

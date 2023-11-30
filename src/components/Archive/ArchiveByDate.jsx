@@ -293,6 +293,7 @@ function ArchiveByDate(props) {
                     </div>
                 </div>
             </div>
+            <div style={{ height: '70px' }}></div>
         </>
     )
 }

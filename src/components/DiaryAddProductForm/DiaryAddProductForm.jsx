@@ -19,7 +19,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
   const { calendarDate, allFoodsSearchList, calculator } = useUser();
   const dispatch = useDispatch();
   const autoCompleteFoodsList = allFoodsSearchList || [];
-  const autoCompleteFoodsData = autoCompleteFoodsList.map(food => ({
+
+  const autoCompleteFoodsData = autoCompleteFoodsList.map((food, index) => ({
+    key: index,
     title: food.title,
     groupBloodNotAllowed: food.groupBloodNotAllowed,
   }));
@@ -130,8 +132,9 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               renderOption={(props, option) => {
                 const notRecommended =
                   option.groupBloodNotAllowed[bloodTypeIndex];
+                console.log('option', option)
                 return (
-                  <li {...props}>
+                  <li key={option.key}>
                     <div>
                       {notRecommended && (
                         <p className={css.notAllowedFood}>Not Recommended</p>

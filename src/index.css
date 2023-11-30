@@ -1,4 +1,6 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
+
+/* bring in normalize.css styles */
 :root {
   --primary-background-color: #ffffff;
   --secondary-background-color: #e0e0e0;
@@ -19,7 +21,7 @@
   --hover-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   /* --light-mode-box-shadow: 0 3px 6px rgba(250, 233, 167, 0.788), 0 3px 6px rgba(250, 233, 167, 0.788);
   --dark-mode-box-shadow: 0 3px 6px #b2d1fa90, 0 3px 6px #b2d1fa90; */
-/*   --transition-time-function: cubic-bezier(0.4, 0, 0.8, 0.5); */
+  /*   --transition-time-function: cubic-bezier(0.4, 0, 0.8, 0.5); */
 
 }
 
@@ -84,6 +86,10 @@ a {
   color: var(--accent-bright-color);
 } */
 
+.footer-margin {
+  height: 45px;
+}
+
 @media screen and (min-width: 768px) {
   .mainBackground {
     background-image: url(./images/tablet-leaves.png),
@@ -103,8 +109,8 @@ a {
   }
 
   @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     .mainBackground {
       background-image: url(./images/tablet-leaves@2x.png),
         url(./images/tablet-babana@2x.png),
@@ -143,8 +149,8 @@ a {
   }
 
   @media (min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi),
-    (min-resolution: 2dppx) {
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
     .mainBackground {
       background-image: url(./images/desktop-leaves@2x.png),
         url(./images/desktop-banana@2x.png),
@@ -231,7 +237,7 @@ a {
   background-color: white;
   border: 2px solid #66bb6a;
   color: #66bb6a;
-  
+
 }
 
 /* Custom styles for the info toast */
@@ -239,5 +245,5 @@ a {
   background-color: white;
   border: 2px solid #6aa6b6;
   color: #6aa6b6;
- 
+
 }
