@@ -46,7 +46,8 @@ function Calculator() {
       <section className="no-bottom">
         <Container className="no-left-right">
           <Paper className={`${s.sidebarBox} ${themeMode === 'dark' ? s.darkMode : s.lightMode}`}
-            style={{ height: `${dimensions.height + 184}px` }} />
+
+            style={{ height: dimensions.width > 1279 ? `${dimensions.height + 184}px` : '275px' }} />
           <RightSideBar>
             <StatsContainer />
           </RightSideBar>
