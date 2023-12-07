@@ -17,7 +17,17 @@ import { setDiaryBackBtn } from 'redux/user/userSlice';
 import DiaryBackButton from 'components/DiaryBackButton/DiaryBackButton';
 import { resetState } from 'redux/resetState';
 import AvatarImg from 'components/Avatar/AvatarImg';
-
+import {
+  validateHeightFeet,
+  validateHeightInch,
+  validateCurrentLbs,
+  validateDesiredLbs,
+  validateHeight,
+  validateAge,
+  validateCurrent,
+  validateDesired,
+  validateBlood,
+} from '../../redux/validation/calculateCalsSlice';
 const UserToolBar = () => {
   const { user } = useAuth();
   const { diaryBackBtn } = useUser();
@@ -30,7 +40,7 @@ const UserToolBar = () => {
   return (
     <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end' }}>
       {diaryBackBtn && <DiaryBackButton onClick={handleClick} />}
-      <AvatarImg/>
+      <AvatarImg />
       <Typography>{user}</Typography>
       <Divider
         orientation="vertical"
@@ -47,6 +57,16 @@ const UserToolBar = () => {
         onClick={() => {
           dispatch(logOut());
           resetState(dispatch);
+          dispatch(validateHeight({ fieldValue: '' }));
+          dispatch(validateHeightFeet({ fieldValue: '' }));
+          dispatch(validateHeightInch({ fieldValue: '' }));
+          dispatch(validateAge({ fieldValue: '' }));
+          dispatch(validateCurrent({ fieldValue: '' }));
+          dispatch(validateCurrentLbs({ fieldValue: '' }));
+          dispatch(validateDesired({ fieldValue: '' }));
+          dispatch(validateDesiredLbs({ fieldValue: '' }));
+          dispatch(validateBlood({ fieldValue: '' }));
+
         }}
         aria-label="logout"
         aria-describedby="logout-label"
@@ -61,7 +81,7 @@ const UserToolBar = () => {
           "Bye!"
         </span>
       </IconButton>
-      
+
     </Toolbar>
   );
 };
