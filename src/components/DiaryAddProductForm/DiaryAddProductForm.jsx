@@ -132,7 +132,6 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               renderOption={(props, option) => {
                 const notRecommended =
                   option.groupBloodNotAllowed[bloodTypeIndex];
-                console.log('props', props)
                 return (
                   // <li key={option.key}>
 

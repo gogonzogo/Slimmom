@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 export const getUserInfo = createAsyncThunk(
   'user/getUserInfo',
@@ -75,6 +76,10 @@ export const searchFoods = createAsyncThunk(
       );
       return response.data.data;
     } catch (error) {
+      if (error.response && error.response.status === 404) {
+        console.clear();
+      }
+      toast.error(error.response.data.data.message);
       return rejectWithValue(error.message);
     }
   }
@@ -90,6 +95,12 @@ export const searchNotAllowedFood = createAsyncThunk(
       );
       return response.data.data;
     } catch (err) {
+      if (err.response && err.response.status === 404) {
+        console.clear();
+        toast.error(`No foods found for ${data.title}`);
+
+      }
+
       return rejectWithValue(err.message);
     }
   }
