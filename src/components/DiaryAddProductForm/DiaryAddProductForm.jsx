@@ -132,13 +132,15 @@ export default function DiaryAddProduct({ diaryBackBtn }) {
               renderOption={(props, option) => {
                 const notRecommended =
                   option.groupBloodNotAllowed[bloodTypeIndex];
-                console.log('option', option)
                 return (
-                  <li key={option.key}>
+                  // <li key={option.key}>
+
+                  <li {...props} key={option.key}>
                     <div>
                       {notRecommended && (
                         <p className={css.notAllowedFood}>Not Recommended</p>
                       )}
+
                       {option.title}
                     </div>
                   </li>

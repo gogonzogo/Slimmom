@@ -79,11 +79,11 @@ const CaloriesCalc = () => {
   );
   const isStandardFormValid =
     validHeightFeet &&
-    validHeightInch &&
-    validAge &&
-    validcurrentLbs &&
-    validDesiredLbs &&
-    validBlood
+      validHeightInch &&
+      validAge &&
+      validcurrentLbs &&
+      validDesiredLbs &&
+      validBlood
       ? true
       : false;
 
@@ -150,7 +150,12 @@ const CaloriesCalc = () => {
     });
     setTimeout(() => {
       // fixing effect, when during closing modal you see 0 kcal recommended daily calorie intake
-      setModalState({ open: false, dailyRate: null, foodNotToEat: [] });
+      setModalState({
+        open: false,
+        dailyRate: null,
+        foodNotToEat: [],
+        source: 'calculator',
+      });
     }, 250);
   };
 
@@ -312,10 +317,10 @@ const CaloriesCalc = () => {
         <div className={css.section}>
           <div className={css.calcWrapper}>
             {!loggedIn ? <><h1 className={css.heading}>Calculate your daily calorie</h1>
-            <h1 className={css.heading}>intake right now</h1></>
-          : <><h1 className={css.heading}>Input your stats, calculate</h1>
-            <h1 className={css.heading}>your caloric intake</h1></>
-          }
+              <h1 className={css.heading}>intake right now</h1></>
+              : <><h1 className={css.heading}>Input your stats, calculate</h1>
+                <h1 className={css.heading}>your caloric intake</h1></>
+            }
 
             <div className={css.tabs}>
               <Tabs
@@ -402,7 +407,7 @@ const CaloriesCalc = () => {
                     name="height"
                     onFocus={() => setFocusedField('height')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'height' && !validHeight}
+                  //  error={focusedField === 'height' && !validHeight}
                   />
                   {focusedField === 'height' && renderValidationPopup()}
                   <TextField
@@ -439,7 +444,7 @@ const CaloriesCalc = () => {
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && renderValidationPopup()}
                   <TextField
@@ -476,7 +481,7 @@ const CaloriesCalc = () => {
                     name="currentWeight"
                     onFocus={() => setFocusedField('currentWeight')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'currentWeight' && !validcurrent}
+                  //  error={focusedField === 'currentWeight' && !validcurrent}
                   />
                   {focusedField === 'currentWeight' && renderValidationPopup()}
                 </div>
@@ -507,7 +512,7 @@ const CaloriesCalc = () => {
                     name="desiredWeight"
                     onFocus={() => setFocusedField('desiredWeight')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'desiredWeight' && !validDesired}
+                  //  error={focusedField === 'desiredWeight' && !validDesired}
                   />
                   {focusedField === 'desiredWeight' && renderValidationPopup()}
                   <FormLabel
@@ -631,7 +636,7 @@ const CaloriesCalc = () => {
                     name="heightFeet"
                     onFocus={() => setFocusedField('heightFeet')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'heightFeet' && !validHeightFeet}
+                  //  error={focusedField === 'heightFeet' && !validHeightFeet}
                   />
                   {focusedField === 'heightFeet' && renderValidationPopup()}
                   <TextField
@@ -668,7 +673,7 @@ const CaloriesCalc = () => {
                     name="heightInch"
                     onFocus={() => setFocusedField('heightInch')}
                     onBlur={() => setFocusedField(null)}
-                    // error={focusedField === 'heightInch' && !validHeightInch}
+                  // error={focusedField === 'heightInch' && !validHeightInch}
                   />
                   {focusedField === 'heightInch' && renderValidationPopup()}
                   <TextField
@@ -705,7 +710,7 @@ const CaloriesCalc = () => {
                     name="age"
                     onFocus={() => setFocusedField('age')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'age' && !validAge}
+                  //  error={focusedField === 'age' && !validAge}
                   />
                   {focusedField === 'age' && renderValidationPopup()}
                 </div>
@@ -744,7 +749,7 @@ const CaloriesCalc = () => {
                     name="currentWeightLbs"
                     onFocus={() => setFocusedField('currentWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
+                  //  error={focusedField === 'currentWeightLbs' && !validcurrentLbs}
                   />
                   {focusedField === 'currentWeightLbs' &&
                     renderValidationPopup()}
@@ -774,7 +779,7 @@ const CaloriesCalc = () => {
                     name="desiredWeightLbs"
                     onFocus={() => setFocusedField('desiredWeightLbs')}
                     onBlur={() => setFocusedField(null)}
-                    //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
+                  //  error={focusedField === 'desiredWeightLbs' && !validDesiredLbs}
                   />
                   {focusedField === 'desiredWeightLbs' &&
                     renderValidationPopup()}

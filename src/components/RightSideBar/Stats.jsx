@@ -59,7 +59,7 @@ export const Stats = ({ calculator, progressData }) => {
                 <p>
                   {calculator.height
                     ? `${calculator.height} cm`
-                    : calculator.heightFeet && calculator.heightInch
+                    : calculator.heightFeet
                       ? `${calculator.heightFeet} ft ${calculator.heightInch} in`
                       : 'Height data not available'}
                 </p>
