@@ -15,7 +15,7 @@ import { CssBaseline } from '@mui/material';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
-      <BrowserRouter basename='Final-Team-Project'>
+      <BrowserRouter basename='Slimmom'>
         <Provider store={store}>
           <ThemeWrapper>
             <CssBaseline />
